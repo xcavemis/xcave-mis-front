@@ -1,0 +1,73 @@
+body, html {
+	@include set-size(100%, 100%);
+	font-size: 100%;
+	-webkit-font-smoothing: initial;
+	-moz-osx-font-smoothing: grayscale;
+	text-rendering: optimizeLegibility;
+	-webkit-tap-highlight-color: rgba(0,0,0,0);
+	-webkit-tap-highlight-color: transparent;
+	background-color: $bg-color;
+	font-family: 'Avenir', Helvetica, Arial, sans-serif;
+	font-family: $regular;
+	margin: 0;
+	user-select: none;
+	
+	@include maxWidth(1023) {
+		min-width: 100%;
+	}
+}
+
+.user-action-none {
+	touch-action: none;
+	-webkit-user-select: none;
+	-webkit-touch-callout: none;
+	-webkit-user-drag: none;
+}
+
+.center-content {
+	width: $wrapper-width;
+   	@include center(absolute);
+}
+
+
+.text-mask {
+	overflow: hidden;
+
+	.text-masked {
+		display: inline-block;
+		transform: translateX(-130%);
+
+		.font-light {
+			// font-family: $light;
+		}
+	}
+}
+
+*, *:before, *:after {
+	box-sizing: border-box;
+}
+
+ol, ul {
+	list-style: none;
+}
+
+.box-justify{
+	display: flex;
+  	justify-content: space-between;
+}
+
+a {
+	text-decoration: none;
+}
+
+.text-warning{
+  color: #ff123e;
+}
+
+b, strong{
+	// font-family: $bold;
+}
+
+.clear {
+	clear: both;
+}

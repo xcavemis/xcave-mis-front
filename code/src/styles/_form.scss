@@ -1,0 +1,246 @@
+.form-field {
+	@include set-size(84.5%, 10.6vw);
+	margin: 0 auto 15px auto;
+	// display: flex;
+	// flex-flow: column-reverse;
+	text-align: left;
+	border: 1px #5a5b5d solid;
+	border-radius: 6px;
+	background-color: $bt-bg-color;
+	position: relative;	
+
+	@include minWidth($min-width) {
+		height: 40px;
+	}
+
+	.error-message {
+		color: $warning-color;
+		font-family: $regular;
+		@include font-size(10);
+		background-color: $bg-color;
+		position: absolute;
+		bottom: -7px;
+		left: 2.7vw;
+		padding: 0 0.325rem;
+
+		@include minWidth($min-width) {
+			left: 12px;
+		}
+	}
+
+	label, input { 
+		transition: all 0.4s;
+		touch-action: manipulation;
+	}
+	label {
+		margin-left: 2.7vw;
+		color: $bt-text-color;
+		font-family: $regular;
+		@include font-size(10);
+		// margin-bottom: 0.525rem;
+		@include center-y(absolute);
+
+		@include maxWidth(360){
+			@include font-size(9);
+		}
+		
+		@include minWidth($min-width) {
+			margin-left: 12px;
+		}
+	}
+	input {
+		@include set-size(calc(100% - (2px + 2.7vw)), 100%);
+		background-color: transparent;
+		border: none;
+		color: $font-color;
+		font-family: $regular;
+		@include font-size(10);
+		padding-left: 2.7vw;
+		outline: 0;
+		-webkit-appearance: none;
+
+		@include minWidth($min-width) {
+			padding-left: 12px;
+		}
+	}
+
+	&.error-field {
+		border: 1px solid $warning-color;
+
+		label, input {
+			color: $warning-color;
+		}
+	}
+
+	input:focus {
+		outline: 0;
+	}
+
+	label {
+		text-transform: uppercase;
+		background-color: $bg-color;
+		padding: 0.025rem;
+		display: block;
+	}
+
+	input:placeholder-shown + label {
+		max-width: 66.66%;
+		padding: 0 0.4rem;
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		transform-origin: left bottom;
+	}
+
+	::-webkit-input-placeholder {
+		opacity: 0;
+		transition: inherit;
+		color: $bt-text-color;
+	}
+
+	input:focus::-webkit-input-placeholder {
+		opacity: 1;
+	}
+
+	input:not(:placeholder-shown) + label,
+	input:focus + label {
+		max-width: 66.66%;
+		padding: 0 0.4rem;
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		transform-origin: left bottom;
+		transform: translate(0, -200%);
+		// font-size: 9px;
+	}
+	input:-webkit-autofill,
+	input:-webkit-autofill:hover, 
+	input:-webkit-autofill:focus {
+		background-color: transparent;
+		border: none;
+		-webkit-text-fill-color: $font-color;
+		box-shadow: 0 0 0px 1000px $bt-bg-color inset;
+		margin-top: 2%;
+		height: 60%;
+		// width: auto;
+	}
+}
+
+.form-filed__half {
+	@include set-size(87%, 10.6vw);
+	display: flex;
+	align-items: baseline;
+	justify-content: space-between;
+	margin: 0 auto;
+
+	.form-field {
+		width: 46.5%;
+
+		input {
+			margin-top: 0;
+		}
+	}
+
+	@include minWidth($min-width) {
+		height: 40px;
+	}
+}
+
+.styled-checkbox {
+	position: absolute;
+	opacity: 0;
+	text-align: left;
+  
+	& + label {
+	  position: relative;
+	  cursor: pointer;
+	  padding: 0;
+	  color: $font-color;
+	  font-family: $regular;
+	  @include font-size(13);
+	  margin-bottom: 7px;
+	  margin-left: 30px;
+	  display: block;
+	  a {
+		color: $font-color;
+		text-decoration: underline;
+	  }
+  
+	  @include maxHeight(640) {
+		@include font-size(12);
+	  }
+
+	  @include maxWidth(360) {
+		@include font-size(10);
+	  }
+
+	  @include minWidth($min-width) {
+		@include font-size(11);
+		margin-bottom: 20px;
+	  }
+	}
+  
+	// Box.
+	& + label:before {
+	  content: '';
+	  display: inline-block;
+	  vertical-align: text-top;
+	  width: 20px;
+	  height: 20px;
+	  background: transparent;
+	  border-radius: 50%;
+	  border: none;
+	  border: 1px #5a5b5d solid;
+	  transition: all 0.4s;
+	  position: absolute;
+	  left: -30px;
+	}
+  
+	// Box hover
+	&:hover + label:before {
+	  // background: #000000;
+	  background: transparent;
+	}
+	
+	// Box focus
+	&:focus + label:before {
+	  box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.12);
+	}
+  
+	// Box checked
+	&:checked + label:before {
+	  background: #000000;
+	  border: 1px #5a5b5d solid;
+	}
+	
+	// Disabled state label.
+	&:disabled + label {
+	  color: #b8b8b8;
+	  cursor: auto;
+	}
+  
+	// Disabled box.
+	&:disabled + label:before {
+	  box-shadow: none;
+	  background: #ddd;
+	}
+  
+	// Checkmark. Could be replaced with an image
+	&:checked + label:after {
+	  content: '';
+	  position: absolute;
+	  left: -25px;
+	  top: 9px;
+	  background: #e8cb5a;
+	  width: 2px;
+	  height: 2px;
+	  box-shadow: 
+		2px 0 0 #e8cb5a,
+		4px 0 0 #e8cb5a,
+		4px -2px 0 #e8cb5a,
+		4px -4px 0 #e8cb5a,
+		4px -6px 0 #e8cb5a,
+		4px -8px 0 #e8cb5a;
+	  transform: rotate(45deg);
+	}
+}

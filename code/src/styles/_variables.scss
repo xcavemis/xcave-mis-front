@@ -1,0 +1,47 @@
+//APP SIZES
+$min-width: 1024;
+$max-width: 1170px;
+$max-ctr-width: 1590px;
+$wrapper-width: 80%;
+$wrapper-desk: 444px;
+
+//EASING
+$cubic-sine: cubic-bezier(0.645, 0.045, 0.355, 1.000);
+$cubic-arc: cubic-bezier(0.445, 0, 0.760, 0.380);
+$cubic-in-out: cubic-bezier(0.565, 0.005, 1.000, 1);
+$sine-in-out: cubic-bezier(0.445, 0.050, 0.550, 0.950);
+$cubic-out: cubic-bezier(0.000, 0.000, 0.580, 1.000);
+$expo-out: cubic-bezier(0.190, 1.000, 0.220, 1.000);
+$ease: cubic-bezier(0.250, 0.100, 0.250, 1.000);
+$ease-in: cubic-bezier(0.420, 0.000, 1.000, 1.000);
+$ease-out: cubic-bezier(0.000, 0.000, 0.580, 1.000);
+$ease-out-back: cubic-bezier(0.175, 0.885, 0, 1.330);
+$ease-out-back-2: cubic-bezier(0.34,1.36,0.79,3);
+$ease-in-back: cubic-bezier(0.155, -0.500, 0.825, 0.980);
+$ease-out-quad: cubic-bezier(0.250, 0.460, 0.450, 0.940);
+$ease-in-out: cubic-bezier(0.420, 0.000, 0.580, 1.000);
+$ease-custom: cubic-bezier(0.530, 0.005, 0.325, 0.995);
+$ease-linear: cubic-bezier(0.250, 0.250, 0.750, 0.750);
+$ease-ease: cubic-bezier(0.260, 0.780, 0.675, 0.915);
+
+// COLOR
+$bg-color: #212121;
+$font-color: #cecece;
+$white: #ffffff;
+$black: #000000;
+$bt-bg-color: $bg-color;
+$yellow-text: #e7ca63;
+$yellow-bg: #e7ca63;
+$bt-yellow-text: #212121;
+$dark-text: #212121;
+$bt-text-color: #5a5b5d;
+$warning-color: #FF4E4E;
+
+
+$heading-line-height: 1.4;
+$body-line-height: 1.6;
+
+// FONTS
+$regular: 'Railroad Text Regular';
+$bold: 'Railroad Text Bold';
+

@@ -7,8 +7,13 @@
     "build": "vue-cli-service build"
   },
   "dependencies": {
+    "bowser": "^2.9.0",
     "core-js": "^3.6.5",
+    "gl-matrix": "^3.3.0",
     "gsap": "^3.3.4",
+    "hammerjs": "^2.0.8",
+    "marzipano": "^0.9.1",
+    "minimal-event-emitter": "^1.0.0",
     "panolens": "^0.11.0",
     "three": "^0.118.3",
     "vue": "^2.6.11",

@@ -16,6 +16,15 @@ body, html {
 		min-width: 100%;
 	}
 }
+.interface {
+	-moz-user-select: none;
+	-webkit-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+	-webkit-user-drag: none;
+	-webkit-touch-callout: none;
+	-ms-content-zooming: none;
+  }
 
 .user-action-none {
 	touch-action: none;

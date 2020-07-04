@@ -17,6 +17,7 @@ export const data = {
     "scenes": [
       {
         "id": "art_studio",
+        "type": "image",
         "name": "Art Studio",
         "levels": [
           {
@@ -60,7 +61,7 @@ export const data = {
             "yaw": 0.33404821153175135, 
             "pitch": -0.30187339197764373,
             "rotation": 0,
-            "target": "ballroom"
+            "target": "f1_video"
           },
           {
             "yaw": 0.9302072685327296, 
@@ -80,6 +81,7 @@ export const data = {
       },
       {
         "id": "artist_workshop",
+        "type": "image",
         "name": "Artist Workshop",
         "levels": [
           {
@@ -115,7 +117,7 @@ export const data = {
             "yaw": -2.3152585099587224,
             "pitch": 0.045251205931975846,
             "rotation": 5.497787143782138,
-            "target": "ballroom"
+            "target": "f1_video"
           }
         ],
         "infoHotspots": [
@@ -128,7 +130,58 @@ export const data = {
         ]
       },
       {
+        "id": "f1_video",
+        "type": "video",
+        "name": "F1 Video",
+        "levels": [
+          {
+            "tileSize": 256,
+            "size": 256,
+            "fallbackOnly": true
+          },
+          {
+            "tileSize": 512,
+            "size": 512
+          },
+          {
+            "tileSize": 512,
+            "size": 1024
+          },
+          {
+            "tileSize": 512,
+            "size": 2048
+          },
+          {
+            "tileSize": 512,
+            "size": 4096
+          }
+        ],
+        "faceSize": 4096,
+        "initialViewParameters": {
+          "pitch": 0,
+          "yaw": 0,
+          "fov": 1.5707963267948966
+        },
+        "linkHotspots": [
+          {
+            "yaw": -0.07411246347264111, 
+            "pitch": 0.018431331669281903,
+            "rotation": 0,
+            "target": "ballroom"
+          }
+        ],
+        "infoHotspots": [
+          {
+            "yaw": 0.5350080558065997,
+            "pitch": 0.24525106321929435,
+            "title": "Jerónimos Monastery",
+            "text": "The Jerónimos Monastery cloister is a pleasant and serene place intended to foster monks’ prayers and meditation. Its manuelin decoration features decorative religious, nautical and royal elements, as well as vegetal motifs. Since 1985, the tomb of the poet Fernando Pessoa rests in the north wing of the cloister’s ground floor."
+          }
+        ]
+      },
+      {
         "id": "ballroom",
+        "type": "image",
         "name": "Ballroom",
         "levels": [
           {
@@ -178,6 +231,7 @@ export const data = {
       },
       {
         "id": "small_cathedral",
+        "type": "image",
         "name": "Small Cathedral",
         "levels": [
           {
@@ -227,6 +281,7 @@ export const data = {
       },
       {
         "id": "tv_studio",
+        "type": "image",
         "name": "TV Studio",
         "levels": [
           {

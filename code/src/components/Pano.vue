@@ -7,6 +7,7 @@
 <script>
 const Marzipano = require('marzipano');
 const bowser = require('bowser');
+import { VideoAsset } from '@/components/pano/VideoAsset';
 // Detect desktop or mobile mode.
 if (window.matchMedia) {
   const setMode = function() {
@@ -44,6 +45,8 @@ export default {
   props: {},
   data: () => ({
     viewer: null,
+    videoStarted: false,
+    VideoAsset: null,
   }),
   mounted(){
     this.$nextTick(this.initPano)
@@ -52,6 +55,7 @@ export default {
     initPano(){
       // Viewer options.
       let viewerOpts = {
+        stageType: 'webgl',
         controls: {
           mouseViewMode: data.settings.mouseViewMode
         }
@@ -81,15 +85,29 @@ export default {
     },
     buildScenes(){
       return data.scenes.map((data) => {
-        let urlPrefix = "/img/scenes";
-        let source = Marzipano.ImageUrlSource.fromString(
-          urlPrefix + "/" + data.id + ".jpg"
-        );
+        let isImage = data.type == 'image'
+        let urlPrefix = isImage ? "/img/scenes" : "/img/scenes/video";
+        let ext = isImage ? `${window.innerWidth < 1280 ? '_mob' : ''}.jpg` : `.mp4`
+        let source = null
+        if (isImage) {
+          source = Marzipano.ImageUrlSource.fromString(
+            `${urlPrefix}/${data.id}${ext}`
+          );
+        } else {
+          this.videoAsset = new VideoAsset();
+          source = new Marzipano.SingleAssetSource(this.videoAsset)
+        }
         // let geometry = new Marzipano.CubeGeometry(data.levels);
-        let geometry = new Marzipano.EquirectGeometry([{ width: 4000 }]);;
+        let geometry = new Marzipano.EquirectGeometry([{ width: isImage ? 4000 : 1 }]);;
 
-        const limiter = Marzipano.RectilinearView.limit.traditional(data.faceSize, 100*Math.PI/180);
-        const view = new Marzipano.RectilinearView(data.initialViewParameters, limiter);
+
+        const limiter = isImage ? 
+          Marzipano.RectilinearView.limit.traditional(data.faceSize, 100*Math.PI/180) :
+          Marzipano.RectilinearView.limit.vfov(90*Math.PI/180, 90*Math.PI/180);
+
+        const view = isImage ? 
+          new Marzipano.RectilinearView(data.initialViewParameters, limiter) :
+          new Marzipano.RectilinearView({ fov: Math.PI/2 }, limiter);
 
         let scene = this.viewer.createScene({
           source: source,
@@ -97,6 +115,13 @@ export default {
           view: view,
           pinFirstLevel: true
         });
+
+        
+
+        if (!isImage) {
+          document.body.addEventListener('click', this.playVideo);
+          document.body.addEventListener('touchstart', this.playVideo);
+        }
 
         // Create link hotspots.
         data.linkHotspots.forEach((hotspot) => {
@@ -117,7 +142,43 @@ export default {
         };
       });
     },
+    playVideo(){
+      if (this.videoStarted) {
+        return;
+      }
+      this.videoStarted = true;
+
+      var video = document.createElement('video');
+      video.src = '//www.marzipano.net/media/video/mercedes-f1-1280x640.mp4';
+      video.crossOrigin = 'anonymous';
+
+
+      video.autoplay = true;
+      video.loop = true;
+      video.muted = true;
+
+      // Prevent the video from going full screen on iOS.
+      video.playsInline = true;
+      video.webkitPlaysInline = true;
+
+      video.play();
+
+      // this.waitForReadyState(video, video.HAVE_METADATA, 100, () => {
+        this.waitForReadyState(video, video.HAVE_ENOUGH_DATA, 100, () => {
+          this.videoAsset.setVideo(video);
+        });
+      // });
+    },
+    waitForReadyState(element, readyState, interval, done) {
+      let timer = setInterval(() => {
+        if (element.readyState >= readyState) {
+          clearInterval(timer);
+          done(null, true);
+        }
+      }, interval);
+    },
     switchScene(scene) {
+      this.videoStarted = false
       scene.view.setParameters(scene.data.initialViewParameters);
       scene.scene.switchTo();
     },
@@ -263,7 +324,7 @@ export default {
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped lang="scss">
+<style lang="scss">
 .experience {
   @include set-size(100%, 100%);
   -webkit-box-sizing: border-box;
@@ -291,9 +352,9 @@ export default {
   height: 100%;
   overflow: hidden;
 
-  canvas {
-    top: 0;
-    left: 0;
-  }
+}
+canvas {
+  top: 0;
+  left: 0;
 }
 </style>

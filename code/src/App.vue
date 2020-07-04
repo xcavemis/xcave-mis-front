@@ -1,15 +1,26 @@
 <template>
   <div id="app">
+    <Header />
     <div id="nav">
       <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
+      <router-link to="/experience">Experience</router-link>
     </div>
     <router-view/>
+    <Footer />
   </div>
 </template>
 
+<script>
+import Header from '@/components/Header';
+import Footer from '@/components/Footer';
+
+export default {
+  components: { Header, Footer }
+}
+</script>
 <style lang="scss">
 #app {
+  @include set-size(100%, 100%);
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;

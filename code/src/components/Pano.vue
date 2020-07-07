@@ -53,7 +53,6 @@ export default {
   },
   methods: {
     initPano(){
-      // Viewer options.
       let viewerOpts = {
         stageType: 'webgl',
         controls: {
@@ -66,20 +65,12 @@ export default {
       console.log(this.viewer)
 
       this.$refs.panoElement.addEventListener("click", (e) => {
-
-        // // http://www.marzipano.net/reference/Viewer.html#view dapat dari view di index.js
         var view = this.viewer.view();
         var loc  = view.screenToCoordinates({x : e.clientX, y: e.clientY});
         var position = { yaw: loc.yaw, pitch: loc.pitch};
         console.log(position)
-        // // http://www.marzipano.net/reference/Viewer.html#scene dapat dari scene
-        // console.log(view.screenToCoordinates({x : e.clientX, y: e.clientY}));
-        // console.log(view._yaw + " - " + view._pitch);
-        // var sceness = viewer.scene();
-        // sceness.hotspotContainer().createHotspot(imgHotspot, position);
       })
 
-      // Create scenes.
       this.scenes = this.buildScenes()
       this.switchScene(this.scenes[0])
     },
@@ -97,7 +88,6 @@ export default {
           this.videoAsset = new VideoAsset();
           source = new Marzipano.SingleAssetSource(this.videoAsset)
         }
-        // let geometry = new Marzipano.CubeGeometry(data.levels);
         let geometry = new Marzipano.EquirectGeometry([{ width: isImage ? 4000 : 1 }]);;
 
 
@@ -115,8 +105,6 @@ export default {
           view: view,
           pinFirstLevel: true
         });
-
-        
 
         if (!isImage) {
           document.body.addEventListener('click', this.playVideo);
@@ -157,17 +145,14 @@ export default {
       video.loop = true;
       video.muted = true;
 
-      // Prevent the video from going full screen on iOS.
       video.playsInline = true;
       video.webkitPlaysInline = true;
 
       video.play();
 
-      // this.waitForReadyState(video, video.HAVE_METADATA, 100, () => {
-        this.waitForReadyState(video, video.HAVE_ENOUGH_DATA, 100, () => {
-          this.videoAsset.setVideo(video);
-        });
-      // });
+      this.waitForReadyState(video, video.HAVE_ENOUGH_DATA, 100, () => {
+        this.videoAsset.setVideo(video);
+      });
     },
     waitForReadyState(element, readyState, interval, done) {
       let timer = setInterval(() => {
@@ -183,34 +168,26 @@ export default {
       scene.scene.switchTo();
     },
     createLinkHotspotElement(hotspot) {
-
-      // Create wrapper element to hold icon and tooltip.
       let wrapper = document.createElement('div');
       wrapper.classList.add('hotspot');
       wrapper.classList.add('link-hotspot');
 
-      // Create image element.
       let icon = document.createElement('img');
       icon.src = 'img/link.png';
       icon.classList.add('link-hotspot-icon');
 
-      // Set rotation transform.
       let transformProperties = [ '-ms-transform', '-webkit-transform', 'transform' ];
       for (let i = 0; i < transformProperties.length; i++) {
         let property = transformProperties[i];
         icon.style[property] = 'rotate(' + hotspot.rotation + 'rad)';
       }
 
-      // Add click event handler.
       wrapper.addEventListener('click', () => {
         this.switchScene(this.findSceneById(hotspot.target));
       });
 
-      // Prevent touch and scroll events from reaching the parent element.
-      // This prevents the view control logic from interfering with the hotspot.
       this.stopTouchAndScrollEventPropagation(wrapper);
 
-      // Create tooltip element.
       let tooltip = document.createElement('div');
       tooltip.classList.add('hotspot-tooltip');
       tooltip.classList.add('link-hotspot-tooltip');
@@ -276,9 +253,9 @@ export default {
       modal.classList.add('info-hotspot-modal');
       document.body.appendChild(modal);
 
-      let toggle = function() {
-        wrapper.classList.toggle('visible');
-        modal.classList.toggle('visible');
+      let toggle = () => {
+        // wrapper.classList.toggle('visible');
+        // modal.classList.toggle('visible');
       };
 
       // Show content when hotspot is clicked.

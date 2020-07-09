@@ -24,7 +24,50 @@ export const codices = {
             pitch: 0.014985751462495145,
             title: "D-101",
             text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien elit, fermentum aliquet malesuada tempus, aliquet sodales magna. Phasellus ultrices mattis bibendum."
-          }
+          },
+          {
+            yaw: 0.2757996600982686, 
+            pitch: 0.06345114306117594,
+            title: "D-102",
+            text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien elit, fermentum aliquet malesuada tempus, aliquet sodales magna. Phasellus ultrices mattis bibendum."
+          },
+          {
+            yaw: 0.576081217936455, 
+            pitch: 0.07045655930984474,
+            title: "D-103",
+            text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien elit, fermentum aliquet malesuada tempus, aliquet sodales magna. Phasellus ultrices mattis bibendum."
+          },
+          {
+            yaw: 0.8849575471042197, 
+            pitch: 0.07979893301003749,
+            title: "D-104",
+            text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien elit, fermentum aliquet malesuada tempus, aliquet sodales magna. Phasellus ultrices mattis bibendum."
+          },
+          {
+            yaw: 0.9180215931716091, pitch: 0.32723636952815127,
+            title: "D-105",
+            text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien elit, fermentum aliquet malesuada tempus, aliquet sodales magna. Phasellus ultrices mattis bibendum."
+          },
+          {
+            yaw: 0.29748530158726716, pitch: 0.30555073324390136,
+            title: "D-106",
+            text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien elit, fermentum aliquet malesuada tempus, aliquet sodales magna. Phasellus ultrices mattis bibendum."
+          },
+          {
+            yaw: 0.6097214060098004, pitch: 0.30341539220273894,
+            title: "D-107",
+            text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien elit, fermentum aliquet malesuada tempus, aliquet sodales magna. Phasellus ultrices mattis bibendum."
+          },
+          {
+            yaw: -0.003138256718886012, pitch: 0.2530653449708016,
+            title: "D-108",
+            text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien elit, fermentum aliquet malesuada tempus, aliquet sodales magna. Phasellus ultrices mattis bibendum."
+          },
+          {
+            yaw: 0.4994506403547092, pitch: -0.19376127628628126,
+            title: "D-109",
+            text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien elit, fermentum aliquet malesuada tempus, aliquet sodales magna. Phasellus ultrices mattis bibendum."
+          },
         ]
       },
       {

@@ -32,7 +32,7 @@ export default {
   components: {},
   methods: {
     goTo() {
-
+      this.$router.push('/experience')
     }
   }
 }

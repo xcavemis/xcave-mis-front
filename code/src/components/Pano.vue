@@ -59,10 +59,8 @@ export default {
           mouseViewMode: data.settings.mouseViewMode
         }
       };
-      console.log(this.$refs)
-      // Initialize viewer.
+
       this.viewer = new Marzipano.Viewer(this.$refs.panoElement, viewerOpts);
-      console.log(this.viewer)
 
       this.$refs.panoElement.addEventListener("click", (e) => {
         var view = this.viewer.view();
@@ -75,6 +73,7 @@ export default {
       this.switchScene(this.scenes[0])
     },
     buildScenes(){
+      console.log(data.scenes.length)
       return data.scenes.map((data) => {
         let isImage = data.type == 'image'
         let urlPrefix = isImage ? "/img/scenes" : "/img/scenes/video";
@@ -82,7 +81,8 @@ export default {
         let source = null
         if (isImage) {
           source = Marzipano.ImageUrlSource.fromString(
-            `${urlPrefix}/${data.id}${ext}`
+            `${urlPrefix}/artist_workshop${ext}`
+            // `${urlPrefix}/${data.id}${ext}`
           );
         } else {
           this.videoAsset = new VideoAsset();

@@ -6,38 +6,8 @@
 
 <script>
 const Marzipano = require('marzipano');
-const bowser = require('bowser');
 import { VideoAsset } from '@/components/pano/VideoAsset';
-// Detect desktop or mobile mode.
-if (window.matchMedia) {
-  const setMode = function() {
-    if (mql.matches) {
-      document.body.classList.remove('desktop');
-      document.body.classList.add('mobile');
-    } else {
-      document.body.classList.remove('mobile');
-      document.body.classList.add('desktop');
-    }
-  };
-  const mql = matchMedia("(max-width: 500px), (max-height: 500px)");
-  setMode();
-  mql.addListener(setMode);
-} else {
-  document.body.classList.add('desktop');
-}
-
-// Detect whether we are on a touch device.
-document.body.classList.add('no-touch');
-window.addEventListener('touchstart', function() {
-  document.body.classList.remove('no-touch');
-  document.body.classList.add('touch');
-});
-
-// Use tooltip fallback mode on IE < 11.
-if (bowser.msie && parseFloat(bowser.version) < 11) {
-  document.body.classList.add('tooltip-fallback');
-}
-
+require('@/components/pano/detect.js');
 import { data } from '@/data/scenes.js'
 
 export default {
@@ -70,7 +40,9 @@ export default {
       })
 
       this.scenes = this.buildScenes()
-      this.switchScene(this.scenes[0])
+      const startScene = this.scenes[0]
+      console.log(this.scenes[0])
+      this.switchScene(startScene, startScene.data.initialViewParameters)
     },
     buildScenes(){
       console.log(data.scenes.length)
@@ -162,9 +134,10 @@ export default {
         }
       }, interval);
     },
-    switchScene(scene) {
+    switchScene(scene, direction) {
       this.videoStarted = false
-      scene.view.setParameters(scene.data.initialViewParameters);
+      // scene.view.setParameters(scene.data.initialViewParameters);
+      scene.view.setParameters(direction);
       scene.scene.switchTo();
     },
     createLinkHotspotElement(hotspot) {
@@ -183,7 +156,7 @@ export default {
       }
 
       wrapper.addEventListener('click', () => {
-        this.switchScene(this.findSceneById(hotspot.target));
+        this.switchScene(this.findSceneById(hotspot.target), hotspot.direction);
       });
 
       this.stopTouchAndScrollEventPropagation(wrapper);

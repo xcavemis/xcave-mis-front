@@ -15,7 +15,12 @@ export const codices = {
             yaw: -1.4347521584966376, 
             pitch: -0.38390294269113845,
             rotation: 0,
-            target: "codices102"
+            target: "codices102",
+            direction: {
+              pitch: 0,
+              yaw: -1.7076801368573218, 
+              pitch: 0.0352634057628638
+            },
           },
         ],
         infoHotspots: [
@@ -85,13 +90,23 @@ export const codices = {
             yaw: -1.988217430070156, 
             pitch: 0.037928391202687095,
             rotation: 0,
-            target: "codices101"
+            target: "codices101",
+            direction: {
+              pitch: 0,
+              yaw: 0,
+              fov: 1.5707963267948966
+            },
           },
           {
             yaw: -1.4347521584966376, 
             pitch: -0.38390294269113845,
             rotation: 0,
-            target: "codices103"
+            target: "codices103",
+            direction: {
+              pitch: 0,
+              yaw: 0,
+              fov: 1.5707963267948966
+            },
           },
         ],
         infoHotspots: [
@@ -124,7 +139,12 @@ export const codices = {
             yaw: -1.928586997218538, 
             pitch: -0.38390294269113845,
             rotation: 0,
-            target: "civil201"
+            target: "civil201",
+            direction: {
+              pitch: 0,
+              yaw: 0,
+              fov: 1.5707963267948966
+            },
           },
         ],
         infoHotspots: []

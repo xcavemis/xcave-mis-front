@@ -15,13 +15,23 @@ export const mixedGallery = {
                 yaw: -0.4780019045501902, 
                 pitch: 0.45293315737883333,
                 rotation: 0,
-                target: "mixed-gallery302"
+                target: "mixed-gallery302",
+                direction: {
+                  pitch: 0,
+                  yaw: 0,
+                  fov: 1.5707963267948966
+                },
             },
             {
                 yaw: -1.4347521584966376, 
                 pitch: -0.38390294269113845,
                 rotation: 0,
-                target: "mixed-gallery303"
+                target: "mixed-gallery303",
+                direction: {
+                  pitch: 0,
+                  yaw: 0,
+                  fov: 1.5707963267948966
+                },
             },
         ],
         infoHotspots: [
@@ -54,13 +64,23 @@ export const mixedGallery = {
             yaw: -1.4347521584966376, 
             pitch: -0.38390294269113845,
             rotation: 0,
-            target: "mixed-gallery301"
+            target: "mixed-gallery301",
+            direction: {
+              pitch: 0,
+              yaw: 0,
+              fov: 1.5707963267948966
+            },
           },
           {
             yaw: 2.7272376506945806, 
             pitch: 0.32403734171909804,
             rotation: 0,
-            target: "mixed-gallery303"
+            target: "mixed-gallery303",
+            direction: {
+              pitch: 0,
+              yaw: 0,
+              fov: 1.5707963267948966
+            },
           },
         ],
         infoHotspots: [
@@ -93,19 +113,34 @@ export const mixedGallery = {
                 yaw: -0.4780019045501902, 
                 pitch: 0.45293315737883333,
                 rotation: 0,
-                target: "mixed-gallery301"
+                target: "mixed-gallery301",
+                direction: {
+                  pitch: 0,
+                  yaw: 0,
+                  fov: 1.5707963267948966
+                },
             },
             {
                 yaw: -1.4347521584966376, 
                 pitch: -0.38390294269113845,
                 rotation: 0,
-                target: "mixed-gallery302"
+                target: "mixed-gallery302",
+                direction: {
+                  pitch: 0,
+                  yaw: 0,
+                  fov: 1.5707963267948966
+                },
             },
             {
                 yaw: 2.7272376506945806, 
                 pitch: 0.32403734171909804,
                 rotation: 0,
-                target: "mixed-gallery304"
+                target: "mixed-gallery304",
+                direction: {
+                  pitch: 0,
+                  yaw: 0,
+                  fov: 1.5707963267948966
+                },
             },
         ],
         infoHotspots: [
@@ -132,13 +167,23 @@ export const mixedGallery = {
                 yaw: -1.4347521584966376, 
                 pitch: -0.38390294269113845,
                 rotation: 0,
-                target: "mixed-gallery305"
+                target: "mixed-gallery305",
+                direction: {
+                  pitch: 0,
+                  yaw: 0,
+                  fov: 1.5707963267948966
+                },
             },
             {
                 yaw: 2.7272376506945806, 
                 pitch: 0.32403734171909804,
                 rotation: 0,
-                target: "mixed-gallery310"
+                target: "mixed-gallery310",
+                direction: {
+                  pitch: 0,
+                  yaw: 0,
+                  fov: 1.5707963267948966
+                },
             },
         ],
         infoHotspots: [
@@ -171,19 +216,34 @@ export const mixedGallery = {
                 yaw: -1.4347521584966376, 
                 pitch: -0.38390294269113845,
                 rotation: 0,
-                target: "mixed-gallery304"
+                target: "mixed-gallery304",
+                direction: {
+                  pitch: 0,
+                  yaw: 0,
+                  fov: 1.5707963267948966
+                },
             },
             {
                 yaw: 1.1614840724080224, 
                 pitch: -0.03187549457778971,
                 rotation: 0,
-                target: "mixed-gallery310"
+                target: "mixed-gallery310",
+                direction: {
+                  pitch: 0,
+                  yaw: 0,
+                  fov: 1.5707963267948966
+                },
             },
             {
                 yaw: 2.7272376506945806, 
                 pitch: 0.32403734171909804,
                 rotation: 0,
-                target: "mixed-gallery306"
+                target: "mixed-gallery306",
+                direction: {
+                  pitch: 0,
+                  yaw: 0,
+                  fov: 1.5707963267948966
+                },
             },
         ],
         infoHotspots: [
@@ -216,19 +276,34 @@ export const mixedGallery = {
                 yaw: -1.4347521584966376, 
                 pitch: -0.38390294269113845,
                 rotation: 0,
-                target: "mixed-gallery305"
+                target: "mixed-gallery305",
+                direction: {
+                  pitch: 0,
+                  yaw: 0,
+                  fov: 1.5707963267948966
+                },
             },
             {
                 yaw: 1.1614840724080224, 
                 pitch: -0.03187549457778971,
                 rotation: 0,
-                target: "mixed-gallery310"
+                target: "mixed-gallery310",
+                direction: {
+                  pitch: 0,
+                  yaw: 0,
+                  fov: 1.5707963267948966
+                },
             },
             {
                 yaw: 2.7272376506945806, 
                 pitch: 0.32403734171909804,
                 rotation: 0,
-                target: "mixed-gallery307"
+                target: "mixed-gallery307",
+                direction: {
+                  pitch: 0,
+                  yaw: 0,
+                  fov: 1.5707963267948966
+                },
             },
         ],
         infoHotspots: [
@@ -261,13 +336,23 @@ export const mixedGallery = {
                 yaw: -1.4347521584966376, 
                 pitch: -0.38390294269113845,
                 rotation: 0,
-                target: "mixed-gallery306"
+                target: "mixed-gallery306",
+                direction: {
+                  pitch: 0,
+                  yaw: 0,
+                  fov: 1.5707963267948966
+                },
             },
             {
                 yaw: 1.1614840724080224, 
                 pitch: -0.03187549457778971,
                 rotation: 0,
-                target: "mixed-gallery308"
+                target: "mixed-gallery308",
+                direction: {
+                  pitch: 0,
+                  yaw: 0,
+                  fov: 1.5707963267948966
+                },
             },
         ],
         infoHotspots: [
@@ -312,13 +397,23 @@ export const mixedGallery = {
                 yaw: -1.4347521584966376, 
                 pitch: -0.38390294269113845,
                 rotation: 0,
-                target: "mixed-gallery307"
+                target: "mixed-gallery307",
+                direction: {
+                  pitch: 0,
+                  yaw: 0,
+                  fov: 1.5707963267948966
+                },
             },
             {
                 yaw: 1.1614840724080224, 
                 pitch: -0.03187549457778971,
                 rotation: 0,
-                target: "mixed-gallery309"
+                target: "mixed-gallery309",
+                direction: {
+                  pitch: 0,
+                  yaw: 0,
+                  fov: 1.5707963267948966
+                },
             },
         ],
         infoHotspots: [
@@ -357,13 +452,23 @@ export const mixedGallery = {
                 yaw: -1.4347521584966376, 
                 pitch: -0.38390294269113845,
                 rotation: 0,
-                target: "mixed-gallery308"
+                target: "mixed-gallery308",
+                direction: {
+                  pitch: 0,
+                  yaw: 0,
+                  fov: 1.5707963267948966
+                },
             },
             {
                 yaw: 1.1614840724080224, 
                 pitch: -0.03187549457778971,
                 rotation: 0,
-                target: "mixed-gallery310"
+                target: "mixed-gallery310",
+                direction: {
+                  pitch: 0,
+                  yaw: 0,
+                  fov: 1.5707963267948966
+                },
             },
         ],
         infoHotspots: [
@@ -408,19 +513,34 @@ export const mixedGallery = {
                 yaw: -1.4347521584966376, 
                 pitch: -0.38390294269113845,
                 rotation: 0,
-                target: "mixed-gallery309"
+                target: "mixed-gallery309",
+                direction: {
+                  pitch: 0,
+                  yaw: 0,
+                  fov: 1.5707963267948966
+                },
             },
             {
                 yaw: 1.1614840724080224, 
                 pitch: -0.03187549457778971,
                 rotation: 0,
-                target: "mixed-gallery311"
+                target: "mixed-gallery311",
+                direction: {
+                  pitch: 0,
+                  yaw: 0,
+                  fov: 1.5707963267948966
+                },
             },
             {
                 yaw: 2.7272376506945806, 
                 pitch: 0.32403734171909804,
                 rotation: 0,
-                target: "mixed-gallery305"
+                target: "mixed-gallery305",
+                direction: {
+                  pitch: 0,
+                  yaw: 0,
+                  fov: 1.5707963267948966
+                },
             },
         ],
         infoHotspots: [
@@ -459,19 +579,34 @@ export const mixedGallery = {
                 yaw: -1.4347521584966376, 
                 pitch: -0.38390294269113845,
                 rotation: 0,
-                target: "anatomy401"
+                target: "anatomy401",
+                direction: {
+                  pitch: 0,
+                  yaw: 0,
+                  fov: 1.5707963267948966
+                },
             },
             {
                 yaw: 1.1614840724080224, 
                 pitch: -0.03187549457778971,
                 rotation: 0,
-                target: "mixed-gallery309"
+                target: "mixed-gallery309",
+                direction: {
+                  pitch: 0,
+                  yaw: 0,
+                  fov: 1.5707963267948966
+                },
             },
             {
                 yaw: 2.7272376506945806, 
                 pitch: 0.32403734171909804,
                 rotation: 0,
-                target: "mixed-gallery310"
+                target: "mixed-gallery310",
+                direction: {
+                  pitch: 0,
+                  yaw: 0,
+                  fov: 1.5707963267948966
+                },
             },
         ],
         infoHotspots: [

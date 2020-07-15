@@ -3,6 +3,7 @@
     <section class="home-step first-step">
       <div class="first-step__center-content">
         <h1 class="first-step__center-content__title">Bem vindo à experiência Digital MIS <br>LEONARDO DA VINCI – 500 ANOS DE UM GÊNIO</h1>
+        <Auth />
         <a class="first-step__center-content__button" href="javascript:void(0)" @click="goTo">INICIAR EXPERIÊNCIA</a>
       </div>
     </section>
@@ -26,10 +27,10 @@
 </template>
 
 <script>
-// @ is an alias to /src
+import Auth from '@/components/Auth'
 export default {
   name: 'Home',
-  components: {},
+  components: { Auth },
   methods: {
     goTo() {
       this.$router.push('/experience')

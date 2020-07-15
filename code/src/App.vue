@@ -11,7 +11,25 @@ import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 
 export default {
-  components: { Header, Footer }
+  components: { Header, Footer },
+  methods: {
+    onLogout() {
+      this.$store.dispatch("logout");
+    }
+  },
+  computed: {
+    auth() {
+      return this.$store.getters.isAuthenticated;
+    },
+    user(){
+      return this.$store.getters.user
+    }
+  },
+  created() {
+    this.$store.dispatch("autoLogin").then(res => {
+      console.log('auto login: ', res)
+    });
+  }
 }
 </script>
 <style lang="scss">

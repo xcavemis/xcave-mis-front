@@ -1,7 +1,7 @@
 <template>
-  <div>
+  <div class="auth">
     <form class @submit.prevent="onSubmit">
-      <div class :class="{invalid: $v.email.$error}">
+      <div :class="{invalid: $v.email.$error}">
         <h6 v-if="!$v.email.email">Por favor forneça um emial válido.</h6>
         <input
           type="email"
@@ -12,7 +12,7 @@
         />
       </div>
 
-      <div class :class="{invalid: $v.password.$error}">
+      <div :class="{invalid: $v.password.$error}">
         <input
           type="password"
           placeholder="senha"
@@ -66,7 +66,11 @@ export default {
 };
 </script>>
 
-<style lang="css" scoped>
+<style lang="scss">
+.auth {
+    @include set-size(85vh, 85vh);
+    background: $white;
+}
 .input.invalid input {
   border: 1px solid red;
 }

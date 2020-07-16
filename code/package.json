@@ -16,11 +16,13 @@
     "marzipano": "^0.9.1",
     "minimal-event-emitter": "^1.0.0",
     "panolens": "^0.11.0",
+    "sass": "^1.26.10",
     "three": "^0.118.3",
     "vue": "^2.6.11",
     "vue-cli-plugin-s3-deploy": "^4.0.0-rc4",
     "vue-router": "^3.2.0",
     "vuelidate": "^0.7.5",
+    "vuetify": "^2.3.4",
     "vuex": "^3.4.0"
   },
   "devDependencies": {
@@ -28,8 +30,10 @@
     "@vue/cli-plugin-router": "^4.4.0",
     "@vue/cli-plugin-vuex": "^4.4.0",
     "@vue/cli-service": "^4.4.0",
+    "deepmerge": "^4.2.2",
+    "fibers": "^5.0.0",
     "node-sass": "^4.12.0",
-    "sass-loader": "^7.0.0",
+    "sass-loader": "^8.0.2",
     "vue-template-compiler": "^2.6.11"
   },
   "browserslist": [

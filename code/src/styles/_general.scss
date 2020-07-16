@@ -1,6 +1,6 @@
 body, html {
 	@include set-size(100%, 100%);
-	font-size: 100%;
+	// font-size: 100%;
 	-webkit-font-smoothing: initial;
 	-moz-osx-font-smoothing: grayscale;
 	text-rendering: optimizeLegibility;
@@ -8,7 +8,7 @@ body, html {
 	-webkit-tap-highlight-color: transparent;
 	background-color: $bg-color;
 	font-family: 'Avenir', Helvetica, Arial, sans-serif;
-	font-family: $regular;
+	font-family: $rob-regular;
 	margin: 0;
 	user-select: none;
 	
@@ -24,7 +24,7 @@ body, html {
 	-webkit-user-drag: none;
 	-webkit-touch-callout: none;
 	-ms-content-zooming: none;
-  }
+}
 
 .user-action-none {
 	touch-action: none;
@@ -36,6 +36,26 @@ body, html {
 .center-content {
 	width: $wrapper-width;
    	@include center(absolute);
+}
+
+.default-button {
+	text-align: center;
+	@include font-size(11);
+	font-family: $rob-regular;
+	padding: 16px;
+	border-radius: 4px;
+	display: inline-block;
+	letter-spacing: 0.05em;
+
+	&.black {
+		background-color: $bt-bg-color;
+		color: $white;
+	}
+	
+	&.white {
+		background-color: $white;
+		color: $bt-bg-color;
+	}
 }
 
 

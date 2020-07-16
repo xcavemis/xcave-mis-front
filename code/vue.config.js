@@ -2,7 +2,7 @@ module.exports = {
   configureWebpack: {
     output: {
       filename: '[name].[hash].js'
-    }
+    },
   },
   devServer: {
     https: false,
@@ -10,8 +10,8 @@ module.exports = {
   publicPath: ".",
   css: {
     loaderOptions: {
-      sass: {
-        data: `@import "@/styles/index.scss";`
+      scss: {
+        prependData: `@import "@/styles/index.scss";`
       }
     }
   },

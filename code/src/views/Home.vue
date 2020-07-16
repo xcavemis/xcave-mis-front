@@ -2,8 +2,17 @@
   <article class="home">
     <section class="home-step first-step">
       <div class="first-step__center-content">
-        <h1 class="first-step__center-content__title">Bem vindo à experiência Digital MIS <br>LEONARDO DA VINCI – 500 ANOS DE UM GÊNIO</h1>
-        <a class="first-step__center-content__button" href="javascript:void(0)" @click="goTo">INICIAR EXPERIÊNCIA</a>
+        <img class="first-step__center-content__title" src="~@/assets/images/logo-da-vinci.png" alt="LEONARDO DA VINCI – 500 ANOS DE UM GÊNIO" />
+        <p class="first-step__center-content__description">
+          Leonardo da Vinci - 500 Anos de um Gênio traz ainda os Segredos de Mona Lisa – uma análise da<br>
+          pintura mais famosa do mundo, realizada no Museu do Louvre por Pascal Cotte,<br>
+          renomado engenheiro, pesquisador e fotógrafo de obras de arte.
+        </p>
+        <div class="first-step__center-content__buttons">
+          <a class="default-button first-step__center-content__button white" href="javascript:void(0)" @click="goTo">INICIAR EXPERIÊNCIA</a>
+          <a class="default-button first-step__center-content__button black" href="https://www.sympla.com.br/" target="_blank">COMPRAR INGRESSO</a>
+
+        </div>
       </div>
     </section>
     <section class="home-step second-step">
@@ -22,7 +31,7 @@
         <a class="banner__center-content__button" href="https://www.sympla.com.br/" target="_blank">COMPRAR INGRESSO</a>
       </div>
     </section>
-    <Auth ref="authComp" />
+    <Auth ref="authComp" v-if="authShow" />
   </article>
 </template>
 
@@ -31,9 +40,17 @@ import Auth from '@/components/Auth'
 export default {
   name: 'Home',
   components: { Auth },
+  data: () => ({
+    authShow: false
+  }),
   methods: {
     goTo() {
-      this.$router.push('/experience')
+      // this.$router.push('/experience')
+      console.log( this.$refs)
+      this.authShow = true
+      this.$nextTick(()=>{
+        this.$refs.authComp.show()
+      })
     }
   }
 }
@@ -72,24 +89,29 @@ export default {
     width: 80vw;
 
     .first-step__center-content__title {
+      width: 35.1vw;
+      margin: 0 auto 40px auto;
+    }
+    .first-step__center-content__description {
+      @include font-size(14);
+      // line-height: 48px;
+      font-family: $rob-regular;
       text-align: center;
-      @include font-size(40);
-      line-height: 48px;
       color: $white;
       margin: 0;
       text-shadow: 0px 0px 4px #000000;
     }
 
-    .first-step__center-content__button {
-      text-align: center;
-      @include font-size(20);
-      color: $white;
-      padding: 15px 30px;
-      margin: 50px auto 0 auto;
-      background-color: #e0e20c;
-      color: $black;
-      display: inline-block;
-      border-radius: 8px;
+    .first-step__center-content__buttons {
+      width: 328px;
+      margin: 40px auto 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      .first-step__center-content__button {
+
+      }
     }
 
     @include maxWidth(1024) {

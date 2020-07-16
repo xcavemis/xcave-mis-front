@@ -3,6 +3,7 @@
     <Header />
     <router-view/>
     <Loading v-if="$store.getters.loadingShow" />
+    <Warning v-if="$store.getters.warningShow.show" :text="$store.getters.warningShow.text" />
     <Footer />
   </div>
 </template>
@@ -11,9 +12,10 @@
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import Loading from '@/components/Loading'
+import Warning from '@/components/Warning'
 
 export default {
-  components: { Header, Footer, Loading },
+  components: { Header, Footer, Loading, Warning },
   methods: {
     onLogout() {
       this.$store.dispatch("logout");
@@ -28,6 +30,7 @@ export default {
     }
   },
   created() {
+    console.log(this.$store.getters.warning)
     this.$store.dispatch("autoLogin").then(res => {
       console.log('auto login: ', res)
     });
@@ -42,6 +45,13 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
+
+  .governo-top {
+    width: 100vw;
+    position: fixed;
+    top: 0;
+    left: 0;
+  }
 }
 
 #nav {

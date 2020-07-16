@@ -16,6 +16,7 @@ export default new Vuex.Store({
     hasHoursAvaliable: null,
     endTime: null,
     loadingShow: false,
+    warningShow: { show: false, text: '' },
   },
   mutations: {
     authUser(state, { token, user, hasHoursAvaliable, endTime }) {
@@ -32,6 +33,9 @@ export default new Vuex.Store({
     },
     loadingShow(state, bool) {
       state.loadingShow = bool;
+    },
+    warningShow(state, obj) {
+      state.warningShow = obj;
     },
   },
   actions: {
@@ -59,12 +63,51 @@ export default new Vuex.Store({
           endTime,
         });
         return {
-          user, endTime
+          response: {
+            status: res.status,
+            user, 
+            endTime
+          }
         }
       } catch (error) {
         // console.log(error?.response);
         return {
-          error: error?.response
+          response: error?.response
+        }
+      }
+    },
+    async create({ commit }, authData) {
+      const uri = "/users";
+
+      try {
+        const res = await api.post(uri, authData);
+        const {
+          user,
+          access_token: token,
+          hasHoursAvaliable,
+          endTime,
+        } = res.data;
+
+        console.log('create user:', res)
+
+        localStorage.setItem("user", JSON.stringify(user));
+        localStorage.setItem("token", token);
+
+        commit("authUser", {
+          token,
+          user,
+          hasHoursAvaliable,
+          endTime,
+        });
+        return {
+          response: {
+            user, endTime
+          }
+        }
+      } catch (error) {
+        // console.log(error?.response);
+        return {
+          response: error?.response
         }
       }
     },
@@ -79,6 +122,10 @@ export default new Vuex.Store({
     },
     loading({ commit }, bool) {
       commit("loadingShow", bool);
+      
+    },
+    warning({ commit }, obj) {
+      commit("warningShow", obj);
       
     },
     autoLogin({ commit }) {
@@ -128,6 +175,9 @@ export default new Vuex.Store({
     },
     loadingShow(state) {
       return state.loadingShow;
+    },
+    warningShow(state) {
+      return state.warningShow;
     },
   },
   modules: {},

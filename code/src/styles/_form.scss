@@ -1,5 +1,5 @@
 .form-field {
-	@include set-size(84.5%, 10.6vw);
+	@include set-size(100%, 33px);
 	margin: 0 auto 12px auto;
 	// display: flex;
 	// flex-flow: column-reverse;
@@ -156,14 +156,15 @@
 }
 
 .form-filed__half {
-	@include set-size(87%, 10.6vw);
+	@include set-size(100%, 32px);
 	display: flex;
 	align-items: flex-start;
 	justify-content: space-between;
 	margin: 0 auto 12px auto;
 
 	.form-field {
-		width: 46.5%;
+		width: 48.5%;
+		margin: 0;
 
 		input:-webkit-autofill,
 		input:-webkit-autofill:hover, 
@@ -174,10 +175,6 @@
 		input {
 			margin-top: 0;
 		}
-	}
-
-	@include minWidth($min-width) {
-		height: 32px;
 	}
 }
 

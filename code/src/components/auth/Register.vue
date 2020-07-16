@@ -2,7 +2,7 @@
     <div class="register-comp">
         <h3 class="auth__title">ESTAMOS QUASE LÁ.</h3>
         <h4 class="auth__subtitle">Para ter acesso à experiência preencha<br>seus dados e clique em continuar.</h4>
-        <form>
+        <form class="register-comp__form">
             <div class="form-field" :class="{'error-field': nameError.length > 0}">
                 <input
                 id="name"
@@ -222,15 +222,15 @@ export default {
             const splittingSubtitle = Splitting({ target: this.$el.querySelector('.auth__subtitle'), by: 'words' })
 
             window.scrollTo(0,0);
-            TweenMax.staggerFromTo('.form-field', 0.4, { autoAlpha: 0 }, { autoAlpha: 1, ease: Quad.easeInOut, delay: 0.6 }, 0.02)
-            TweenMax.staggerFromTo([splittingTitle[0].words, splittingSubtitle[0].words], 0.3, { scale: 0.8, autoAlpha: 0 }, { scale: 1, autoAlpha: 1, ease: Quad.easeInOut, delay: 0.6 }, 0.01)
-            TweenMax.fromTo('.register-comp__begin-bt', 0.6, { y: '150%' }, { y: '0%', ease: Quad.easeInOut, delay: 0.6 })
+            TweenMax.staggerFromTo('.form-field', 0.4, { autoAlpha: 0 }, { autoAlpha: 1, ease: Quad.easeInOut, delay: 0.8 }, 0.02)
+            TweenMax.staggerFromTo([splittingTitle[0].words, splittingSubtitle[0].words], 0.3, { scale: 0.8, autoAlpha: 0 }, { scale: 1, autoAlpha: 1, ease: Quad.easeInOut, delay: 0.8 }, 0.01)
+            TweenMax.fromTo('.register-comp__begin-bt', 0.6, { y: '300%' }, { y: '0%', ease: Quad.easeInOut, delay: 0.8 })
         },
         sendData(e){
             this.$store.dispatch("loading", true)
             e.preventDefault();
             const birthStrToDate = this.formData.birth.substring(4,8) + "/" + this.formData.birth.substring(2,4) + "/" + this.formData.birth.substring(0,2)
-            const user = {
+            const formData = {
                 name: this.formData.name,
                 age: 0,
                 email: this.formData.email,
@@ -242,7 +242,25 @@ export default {
                 state: this.formData.state,
                 role:"USER",
             };
-            console.log('sendData', user)
+            this.$store.dispatch("create", formData).then(e => {
+                console.log('create success', e)
+                const { status, data } = e?.response;
+                if (status == 200) {
+                    this.$store.dispatch("loading", false)
+                } else {
+                    let message = data.message
+                    if (status == 409) {
+                        message = `O e-mail ${this.formData.email} já está em uso.`
+                    }
+                    this.$store.dispatch("warning", {
+                        show: true,
+                        text: message
+                    })
+                    this.$store.dispatch("loading", false)
+                    
+                }
+                
+            });
 
         },
         checkForm(type) {
@@ -296,7 +314,7 @@ export default {
             }
 
             if (type == 'city') {
-                if (!this.formData.name) {
+                if (!this.formData.city) {
                     this.errors.push('A cidade é obrigatória.');
                     this.cityError = '*A cidade é obrigatória.'
                     this.cityValid = false
@@ -511,8 +529,9 @@ export default {
   overflow: hidden;
   position: relative !important;
 
-  form {
+  .register-comp__form {
     padding-bottom: 40px;
+    overflow: hidden;
   }
   
   .register-comp__begin-bt{

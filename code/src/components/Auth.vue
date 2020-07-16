@@ -4,22 +4,27 @@
         <header class="auth-header">
             <nav class="auth-header__nav">
                 <ul class="auth-header__nav-list">
-                    <li class="auth-header__nav-list__item">CADASTRO</li>
-                    <li class="auth-header__nav-list__item">LOGIN</li>
-                    <li class="auth-header__nav-list__item">TICKET</li>
+                    <li class="auth-header__nav-list__item" :class="{'selected': currStep == 0, 'register-show': isRegister}">CADASTRO</li>
+                    <li class="auth-header__nav-list__item" :class="{'selected': currStep == 1}">LOGIN</li>
+                    <li class="auth-header__nav-list__item" :class="{'selected': currStep == 2}">TICKET</li>
                 </ul>
             </nav>
         </header>
         <div class="auth-container">
-            <div class="auth-container__block">
+            <div class="auth-container__block" v-if="currStep == 0">
                 <Register />
+            </div>
+            <div class="auth-container__block" v-if="currStep == 1">
+                <Login v-on:go-register="goToRegister" />
+            </div>
+            <div class="auth-container__block" v-if="currStep == 2">
+                <Ticket />
             </div>
         </div>
     </div>
 </template>
 
 <script>
-import { required, email, minLength } from "vuelidate/lib/validators";
 import { TweenMax, Quad } from 'gsap';
 import Register from '@/components/auth/Register';
 import Login from '@/components/auth/Login';
@@ -31,16 +36,23 @@ export default {
         Login,
         Ticket,
     },
-    data() {
-        return {};
-    },
+    data: () => ({
+        currStep: 1,
+        isRegister: false
+    }),
     methods: {
         show(){
             TweenMax.fromTo('.auth-bg', 0.6, { y: '100%' }, { y: '0%', ease: Quad.easeInOut })
+            TweenMax.fromTo('.auth-header__nav', 0.6, { y: '-100%' }, { y: '0%', ease: Quad.easeInOut, delay: 0.4 })
         },
         hide(){
 
         },
+        goToRegister(){
+            console.log('goToRegister')
+            this.currStep = 0
+            this.isRegister = true
+        }
     }
 }
 </script>>
@@ -65,12 +77,16 @@ export default {
     }
 
     .auth-header {
-        @include set-size(100%, 100px);
+        @include set-size(100%, auto);
         display: block;
-        margin: 0 auto;
+        margin: 40px auto 0 auto;
         position: relative;
+        overflow: hidden;
 
         .auth-header__nav {
+            background: transparent;
+            box-shadow: none;
+            
             .auth-header__nav-list {
                 display: flex;
                 align-items: baseline;
@@ -78,7 +94,26 @@ export default {
                 margin: 0 11px;
 
                 .auth-header__nav-list__item {
+                    @include set-size(140px, 54px);
+                    font-family: $rob-bold;
+                    @include font-size(10);
+                    line-height: 54px;
+                    color: $gray;
+                    border-bottom: 2px solid $gray;
+                    animation: border-bottom 0.6s $ease-in-out;
+                    margin: 0 4px;
 
+                    &:first-child{
+                        display: none;
+                    }
+
+                    &.register-show {
+                        display: inline;
+                    }
+
+                    &.selected {
+                        border-bottom: 2px solid $orange;
+                    }
                 }
             }
         }

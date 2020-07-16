@@ -17,10 +17,12 @@
     "minimal-event-emitter": "^1.0.0",
     "panolens": "^0.11.0",
     "sass": "^1.26.10",
+    "splitting": "^1.0.6",
     "three": "^0.118.3",
     "vue": "^2.6.11",
     "vue-cli-plugin-s3-deploy": "^4.0.0-rc4",
     "vue-router": "^3.2.0",
+    "vue-the-mask": "^0.11.1",
     "vuelidate": "^0.7.5",
     "vuetify": "^2.3.4",
     "vuex": "^3.4.0"

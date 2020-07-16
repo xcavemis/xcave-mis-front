@@ -15,6 +15,7 @@ export default new Vuex.Store({
     user: null,
     hasHoursAvaliable: null,
     endTime: null,
+    loadingShow: false,
   },
   mutations: {
     authUser(state, { token, user, hasHoursAvaliable, endTime }) {
@@ -28,6 +29,9 @@ export default new Vuex.Store({
       state.user = null;
       state.hasHoursAvaliable = null;
       state.endTime = null;
+    },
+    loadingShow(state, bool) {
+      state.loadingShow = bool;
     },
   },
   actions: {
@@ -73,6 +77,10 @@ export default new Vuex.Store({
 
       router.replace("/");
     },
+    loading({ commit }, bool) {
+      commit("loadingShow", bool);
+      
+    },
     autoLogin({ commit }) {
       const token = localStorage.getItem("token");
       const userStr = localStorage.getItem("user");
@@ -117,6 +125,9 @@ export default new Vuex.Store({
     },
     authorizationHeader(state) {
       return state.token ? { Authorization: `Bearer ${state.token}` } : null;
+    },
+    loadingShow(state) {
+      return state.loadingShow;
     },
   },
   modules: {},

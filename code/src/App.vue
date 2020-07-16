@@ -2,6 +2,7 @@
   <div id="app">
     <Header />
     <router-view/>
+    <Loading v-if="$store.getters.loadingShow" />
     <Footer />
   </div>
 </template>
@@ -9,9 +10,10 @@
 <script>
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
+import Loading from '@/components/Loading'
 
 export default {
-  components: { Header, Footer },
+  components: { Header, Footer, Loading },
   methods: {
     onLogout() {
       this.$store.dispatch("logout");

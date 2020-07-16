@@ -1,6 +1,6 @@
 <template>
     <div class="ticket-comp">
-
+        <h1>Ticket comp</h1>
     </div>
 </template>
 

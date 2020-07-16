@@ -1,77 +1,48 @@
 <template>
-  <div class="auth">
-      <div class="auth-bg"></div>
-    <form class="" @submit.prevent="onSubmit">
-      <div :class="{invalid: $v.email.$error}">
-        <h6 v-if="!$v.email.email">Por favor forneça um emial válido.</h6>
-        <input
-          type="email"
-          placeholder="email"
-          id="email"
-          @blur="$v.email.$touch()"
-          v-model="email"
-        />
-      </div>
-
-      <div :class="{invalid: $v.password.$error}">
-        <input
-          type="password"
-          placeholder="senha"
-          id="password"
-          @blur="$v.password.$touch()"
-          v-model="password"
-        />
-      </div>
-
-      <div>
-        <button type="submit" :disabled="$v.$invalid">login</button>
-      </div>
-    </form>
-  </div>
+    <div class="auth">
+        <div class="auth-bg"></div>
+        <header class="auth-header">
+            <nav class="auth-header__nav">
+                <ul class="auth-header__nav-list">
+                    <li class="auth-header__nav-list__item">CADASTRO</li>
+                    <li class="auth-header__nav-list__item">LOGIN</li>
+                    <li class="auth-header__nav-list__item">TICKET</li>
+                </ul>
+            </nav>
+        </header>
+        <div class="auth-container">
+            <div class="auth-container__block">
+                <Register />
+            </div>
+        </div>
+    </div>
 </template>
 
 <script>
 import { required, email, minLength } from "vuelidate/lib/validators";
 import { TweenMax, Quad } from 'gsap';
+import Register from '@/components/auth/Register';
+import Login from '@/components/auth/Login';
+import Ticket from '@/components/auth/Ticket';
 export default {
-  name: "Login",
-  data() {
-    return {
-      email: null,
-      password: null
-    };
-  },
-  validations: {
-    email: {
-      required,
-      email
+    name: "Auth",
+    components: {
+        Register,
+        Login,
+        Ticket,
     },
-    password: {
-      required,
-      minLen: minLength(6)
-    }
-  },
-  methods: {
+    data() {
+        return {};
+    },
+    methods: {
         show(){
             TweenMax.fromTo('.auth-bg', 0.6, { y: '100%' }, { y: '0%', ease: Quad.easeInOut })
         },
         hide(){
 
         },
-        onSubmit: function() {
-        {
-            const { email, password } = this;
-            const formData = {
-                email,
-                password
-            };
-            this.$store.dispatch("login", formData).then(response => {
-                console.log('login success', response)
-            });
-        }
     }
-  }
-};
+}
 </script>>
 
 <style lang="scss">
@@ -87,10 +58,58 @@ export default {
         background-image: url(~@/assets/images/bg-login.jpg);
         background-repeat: no-repeat;
         background-size: cover;
+        position: absolute;
+        top: 0;
+        left: 0;
         transform: translateY(100%);
     }
-}
-.input.invalid input {
-  border: 1px solid red;
+
+    .auth-header {
+        @include set-size(100%, 100px);
+        display: block;
+        margin: 0 auto;
+        position: relative;
+
+        .auth-header__nav {
+            .auth-header__nav-list {
+                display: flex;
+                align-items: baseline;
+                justify-content: center;
+                margin: 0 11px;
+
+                .auth-header__nav-list__item {
+
+                }
+            }
+        }
+    }
+    .auth-container {
+        @include set-size(100%, calc(100% - 100px));
+        display: block;
+        position: relative;
+        .auth-container__block {
+            width: 68%;
+            @include center(absolute);
+        }
+    }
+
+    .auth__title{
+        color: $black;
+        font-family: $gar-bold;
+        @include font-size(32);
+        margin: 0 auto 18px auto;    
+        span {
+            font-family: $gar-bold;
+        }
+    }
+    .auth__subtitle{
+        color: $black;
+        font-family: $got-medium;
+        @include font-size(14);
+        margin: 0 auto 32px auto;    
+        span {
+            font-family: $got-medium;
+        }
+    }
 }
 </style>

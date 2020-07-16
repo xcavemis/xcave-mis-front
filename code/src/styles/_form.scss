@@ -1,71 +1,97 @@
 .form-field {
 	@include set-size(84.5%, 10.6vw);
-	margin: 0 auto 15px auto;
+	margin: 0 auto 12px auto;
 	// display: flex;
 	// flex-flow: column-reverse;
 	text-align: left;
-	border: 1px #5a5b5d solid;
+	border: none;
 	border-radius: 6px;
-	background-color: $bt-bg-color;
+	background-color: $white;
 	position: relative;	
 
 	@include minWidth($min-width) {
-		height: 40px;
+		height: 32px;
 	}
 
 	.error-message {
 		color: $warning-color;
 		font-family: $rob-regular;
-		@include font-size(10);
-		background-color: $bg-color;
+		@include font-size(9);
+		background-color: transparent;
 		position: absolute;
-		bottom: -7px;
-		left: 2.7vw;
-		padding: 0 0.325rem;
+		bottom: -11px;
+		left: 11px;
+		// padding: 0 0.325rem;
 
 		@include minWidth($min-width) {
 			left: 12px;
 		}
 	}
 
-	label, input { 
+	label, input, select { 
 		transition: all 0.4s;
 		touch-action: manipulation;
+		border-bottom: none;
 	}
 	label {
-		margin-left: 2.7vw;
+		margin-left: 11px;
 		color: $bt-text-color;
 		font-family: $rob-regular;
-		@include font-size(10);
-		// margin-bottom: 0.525rem;
+		@include font-size(9);
 		@include center-y(absolute);
 
-		@include maxWidth(360){
-			@include font-size(9);
-		}
-		
-		@include minWidth($min-width) {
-			margin-left: 12px;
-		}
 	}
-	input {
-		@include set-size(calc(100% - (2px + 2.7vw)), 100%);
+	input, select {
+		@include set-size(calc(100% - 11px), 100%);
 		background-color: transparent;
 		border: none;
-		color: $font-color;
+		color: $black;
 		font-family: $rob-regular;
 		@include font-size(10);
-		padding-left: 2.7vw;
+		padding-left: 11px;
 		outline: 0;
 		-webkit-appearance: none;
+	}
 
-		@include minWidth($min-width) {
-			padding-left: 12px;
-		}
+	input[type=date]:not(.browser-default), 
+	input[type=datetime-local]:not(.browser-default), 
+	input[type=datetime]:not(.browser-default), 
+	input[type=email]:not(.browser-default), 
+	input[type=number]:not(.browser-default), 
+	input[type=password]:not(.browser-default), 
+	input[type=search]:not(.browser-default), 
+	input[type=tel]:not(.browser-default), 
+	input[type=text]:not(.browser-default), 
+	input[type=time]:not(.browser-default), 
+	input[type=url]:not(.browser-default), 
+	textarea.materialize-textarea {
+		border: none !important;
+		padding-left: 11px;
+		font-size: 9px;
+		color: $black;
+		font-family: $rob-regular;
+		height: 32px;
+	}
+
+	input:not([type]):focus:not([readonly]), 
+	input[type=date]:not(.browser-default):focus:not([readonly]), 
+	input[type=datetime-local]:not(.browser-default):focus:not([readonly]), 
+	input[type=datetime]:not(.browser-default):focus:not([readonly]), 
+	input[type=email]:not(.browser-default):focus:not([readonly]), 
+	input[type=number]:not(.browser-default):focus:not([readonly]), 
+	input[type=password]:not(.browser-default):focus:not([readonly]), 
+	input[type=search]:not(.browser-default):focus:not([readonly]), 
+	input[type=tel]:not(.browser-default):focus:not([readonly]), 
+	input[type=text]:not(.browser-default):focus:not([readonly]), 
+	input[type=time]:not(.browser-default):focus:not([readonly]), 
+	input[type=url]:not(.browser-default):focus:not([readonly]), 
+	textarea.materialize-textarea:focus:not([readonly]) {
+		border: none;
+		box-shadow: 0 1px 0 0 transparent;
 	}
 
 	&.error-field {
-		border: 1px solid $warning-color;
+		border: none;
 
 		label, input {
 			color: $warning-color;
@@ -78,14 +104,14 @@
 
 	label {
 		text-transform: uppercase;
-		background-color: $bg-color;
+		background-color: $white;
 		padding: 0.025rem;
 		display: block;
 	}
 
 	input:placeholder-shown + label {
 		max-width: 66.66%;
-		padding: 0 0.4rem;
+		// padding: 0 0.4rem;
 		white-space: nowrap;
 		overflow: hidden;
 		text-overflow: ellipsis;
@@ -105,36 +131,45 @@
 	input:not(:placeholder-shown) + label,
 	input:focus + label {
 		max-width: 66.66%;
-		padding: 0 0.4rem;
+		padding: 0;
 		white-space: nowrap;
 		overflow: hidden;
 		text-overflow: ellipsis;
 		transform-origin: left bottom;
-		transform: translate(0, -200%);
-		// font-size: 9px;
+		transform: translate(0, -150%);
+		color: $black;
+		outline: none;
+		font-size: 6px;
 	}
 	input:-webkit-autofill,
 	input:-webkit-autofill:hover, 
 	input:-webkit-autofill:focus {
-		background-color: transparent;
-		border: none;
-		-webkit-text-fill-color: $font-color;
-		box-shadow: 0 0 0px 1000px $bt-bg-color inset;
-		margin-top: 2%;
-		height: 60%;
-		// width: auto;
+		background-color: transparent !important;
+		border: none !important;
+		-webkit-text-fill-color: #000000 !important;
+		box-shadow: 0 0 0px 1000px #ffffff inset !important;
+		margin-top: 2% !important;
+		width: 90% !important;
+		height: 70% !important;
+		font-family: $rob-regular !important;
 	}
 }
 
 .form-filed__half {
 	@include set-size(87%, 10.6vw);
 	display: flex;
-	align-items: baseline;
+	align-items: flex-start;
 	justify-content: space-between;
-	margin: 0 auto;
+	margin: 0 auto 12px auto;
 
 	.form-field {
 		width: 46.5%;
+
+		input:-webkit-autofill,
+		input:-webkit-autofill:hover, 
+		input:-webkit-autofill:focus {
+			margin-top: 4% !important;
+		}
 
 		input {
 			margin-top: 0;
@@ -142,7 +177,7 @@
 	}
 
 	@include minWidth($min-width) {
-		height: 40px;
+		height: 32px;
 	}
 }
 
@@ -155,14 +190,14 @@
 	  position: relative;
 	  cursor: pointer;
 	  padding: 0;
-	  color: $font-color;
+	  color: $black;
 	  font-family: $rob-regular;
 	  @include font-size(13);
 	  margin-bottom: 7px;
 	  margin-left: 30px;
 	  display: block;
 	  a {
-		color: $font-color;
+		color: $black;
 		text-decoration: underline;
 	  }
   
@@ -209,7 +244,7 @@
   
 	// Box checked
 	&:checked + label:before {
-	  background: #000000;
+	  background: transparent;
 	  border: 1px #5a5b5d solid;
 	}
 	
@@ -243,4 +278,77 @@
 		4px -8px 0 #e8cb5a;
 	  transform: rotate(45deg);
 	}
+}
+
+/*the container must be positioned relative:*/
+.custom-select {
+	@include set-size(100%, 100%);
+	position: relative;
+	font-family: $rob-regular;
+	@include font-size(9);
+	color: $black;
+}
+
+.custom-select select {
+	display: none; /*hide original SELECT element:*/
+}
+
+.select-selected {
+	background-color: $white;
+	border: none;
+}
+
+/*style the arrow inside the select element:*/
+.select-selected:after {
+	position: absolute;
+	content: "";
+	top: 14px;
+	right: 10px;
+	width: 0;
+	height: 0;
+	border: 6px solid transparent;
+	border-radius: 4px;
+	border-color: $black transparent transparent transparent;
+}
+
+/*point the arrow upwards when the select box is open (active):*/
+.select-selected.select-arrow-active:after {
+	border-color: transparent transparent $black transparent;
+	top: 7px;
+}
+
+/*style the items (options), including the selected item:*/
+.select-items div, .select-selected {
+	color: $black;
+	padding: 11px;
+	border: 1px solid transparent;
+	border-color: transparent transparent rgba(0, 0, 0, 0.1) transparent;
+	cursor: pointer;
+	user-select: none;
+	border-radius: 4px;
+}
+
+.select-selected {
+	border: none;
+}
+
+/*style items (options):*/
+.select-items {
+	position: absolute;
+	background-color: $white;
+	top: 100%;
+	left: 0;
+	right: 0;
+	z-index: 99;
+	max-height: 96px;
+    overflow-y: scroll;
+}
+
+/*hide the items when the select box is closed:*/
+.select-hide {
+	display: none;
+}
+
+.select-items div:hover, .same-as-selected {
+	background-color: rgba(0, 0, 0, 0.1);
 }

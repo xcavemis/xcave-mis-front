@@ -110,7 +110,7 @@ export default {
       align-items: center;
 
       .first-step__center-content__button {
-
+        min-width: 150px;
       }
     }
 

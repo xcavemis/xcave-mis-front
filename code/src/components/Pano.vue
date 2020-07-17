@@ -1,6 +1,7 @@
 <template>
-  <div class="experience">
+  <div class="pano-comp">
     <div id="pano" ref="panoElement"></div>
+    <!-- <div class="pano-comp-overlay" v-if="!sceneLoaded"></div> -->
   </div>
 </template>
 
@@ -9,7 +10,7 @@ const Marzipano = require('marzipano');
 import { VideoAsset } from '@/components/pano/VideoAsset';
 require('@/components/pano/detect.js');
 import { data } from '@/data/scenes.js'
-
+const hotspotInfo = require('@/assets/images/icons/hotspot-info.png')
 export default {
   name: 'Pano',
   props: {},
@@ -17,35 +18,52 @@ export default {
     viewer: null,
     videoStarted: false,
     VideoAsset: null,
+    sceneLoaded: false,
   }),
   mounted(){
-    this.$nextTick(this.initPano)
+    this.$nextTick(()=>{
+      this.initPano()
+    })
   },
   methods: {
     initPano(){
       let viewerOpts = {
         stageType: 'webgl',
+        antialias: true,
         controls: {
           mouseViewMode: data.settings.mouseViewMode
         }
       };
+      if (this.$refs.panoElement) {
+        this.viewer = new Marzipano.Viewer(this.$refs.panoElement, viewerOpts);
+        // console.log('this.viewer', this.viewer.stage())
+        if ( this.viewer) {
 
-      this.viewer = new Marzipano.Viewer(this.$refs.panoElement, viewerOpts);
-
-      this.$refs.panoElement.addEventListener("click", (e) => {
-        var view = this.viewer.view();
-        var loc  = view.screenToCoordinates({x : e.clientX, y: e.clientY});
-        var position = { yaw: loc.yaw, pitch: loc.pitch};
-        console.log(position)
-      })
-
-      this.scenes = this.buildScenes()
-      const startScene = this.scenes[0]
-      console.log(this.scenes[0])
-      this.switchScene(startScene, startScene.data.initialViewParameters)
+          this.viewer.stage().addEventListener('renderInvalid', (bool)=>{
+            if (bool) {
+              console.log('renderComplete', bool)
+            }
+          })
+          this.viewer.stage().addEventListener('renderComplete', (bool)=>{
+            if (bool) {
+              console.log('renderComplete', bool)
+              this.sceneLoaded = bool
+            }
+          })
+          this.$refs.panoElement.addEventListener("click", (e) => {
+            var view = this.viewer.view();
+            var loc  = view.screenToCoordinates({x : e.clientX, y: e.clientY});
+            var position = { yaw: loc.yaw, pitch: loc.pitch};
+            console.log(position)
+          })
+    
+          this.scenes = this.buildScenes()
+          const startScene = this.scenes[0]
+          this.switchScene(startScene, startScene.data.initialViewParameters)
+        }
+      }
     },
     buildScenes(){
-      console.log(data.scenes.length)
       return data.scenes.map((data) => {
         let isImage = data.type == 'image'
         let urlPrefix = isImage ? "/img/scenes" : "/img/scenes/video";
@@ -85,13 +103,13 @@ export default {
 
         // Create link hotspots.
         data.linkHotspots.forEach((hotspot) => {
-          let element = this.createLinkHotspotElement(hotspot);
+          let element = this.createLinkHotspot(hotspot);
           scene.hotspotContainer().createHotspot(element, { yaw: hotspot.yaw, pitch: hotspot.pitch });
         });
 
         // Create info hotspots.
         data.infoHotspots.forEach((hotspot) => {
-          let element = this.createInfoHotspotElement(hotspot);
+          let element = this.createInfoHotspot(hotspot);
           scene.hotspotContainer().createHotspot(element, { yaw: hotspot.yaw, pitch: hotspot.pitch });
         });
 
@@ -140,7 +158,7 @@ export default {
       scene.view.setParameters(direction);
       scene.scene.switchTo();
     },
-    createLinkHotspotElement(hotspot) {
+    createLinkHotspot(hotspot) {
       let wrapper = document.createElement('div');
       wrapper.classList.add('hotspot');
       wrapper.classList.add('link-hotspot');
@@ -171,7 +189,7 @@ export default {
 
       return wrapper;
     },
-    createInfoHotspotElement(hotspot) {
+    createInfoHotspot(hotspot) {
 
       // Create wrapper element to hold icon and tooltip.
       let wrapper = document.createElement('div');
@@ -186,7 +204,7 @@ export default {
       let iconWrapper = document.createElement('div');
       iconWrapper.classList.add('info-hotspot-icon-wrapper');
       let icon = document.createElement('img');
-      icon.src = 'img/info.png';
+      icon.src = hotspotInfo;
       icon.classList.add('info-hotspot-icon');
       iconWrapper.appendChild(icon);
 
@@ -275,7 +293,7 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss">
-.experience {
+.pano-comp {
   @include set-size(100%, 100%);
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
@@ -292,6 +310,14 @@ export default {
   -webkit-touch-callout: none;
   -ms-content-zooming: none;
   -webkit-tap-highlight-color: rgba(0,0,0,0);
+
+  .experience-overlay {
+    @include set-size(100%, 100%);
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: #000;
+  }
 }
 
 #pano {

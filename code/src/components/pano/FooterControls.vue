@@ -12,6 +12,7 @@ export default {
 
 <style lang="scss">
 .footer-controls {
-    
+    @include set-size(100%, 70px);
+    background-color: $black;
 }
 </style>

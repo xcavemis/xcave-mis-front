@@ -92,6 +92,8 @@ export default new Vuex.Store({
 
         localStorage.setItem("user", JSON.stringify(user));
         localStorage.setItem("token", token);
+        localStorage.setItem("hasHoursAvaliable", hasHoursAvaliable);
+        localStorage.setItem("endTime", endTime);
 
         commit("authUser", {
           token,
@@ -101,11 +103,121 @@ export default new Vuex.Store({
         });
         return {
           response: {
-            user, endTime
+            user, 
+            endTime, 
+            status: res.status,
           }
         }
       } catch (error) {
         // console.log(error?.response);
+        return {
+          response: error?.response
+        }
+      }
+    },
+    async checkIn({ commit }, ticketData) {
+      const uri = "/checkins/ticketNumber";
+
+      try {
+        const res = await api.post(uri, ticketData);
+        const {
+          group,
+          access_token: token,
+          user,
+          hasHoursAvaliable,
+          endTime,
+        } = res.data;
+
+        console.log('checkIn user:', res)
+
+        localStorage.setItem("user", JSON.stringify(user));
+        localStorage.setItem("token", token);
+        localStorage.setItem("hasHoursAvaliable", hasHoursAvaliable);
+        localStorage.setItem("endTime", endTime);
+
+        commit("authUser", {
+          token,
+          user,
+          hasHoursAvaliable,
+          endTime,
+        });
+        return {
+          response: {
+            user, 
+            endTime, 
+            group, 
+            hasHoursAvaliable, 
+            status: res.status,
+          }
+        }
+      } catch (error) {
+        // console.log(error?.response);
+        return {
+          response: error?.response
+        }
+      }
+    },
+    async tokenCheck({ commit, dispatch, state }) {
+      const uri = "/auth/check";
+      try {
+        const res = await api.get(uri, { 
+          headers: { Authorization: `Bearer ${state.token}` } 
+        });
+        const {
+          user,
+          access_token: token,
+          hasHoursAvaliable,
+          endTime,
+        } = res.data;
+
+        localStorage.setItem("user", JSON.stringify(user));
+        localStorage.setItem("token", token);
+        localStorage.setItem("hasHoursAvaliable", hasHoursAvaliable);
+        localStorage.setItem("endTime", endTime);
+
+        commit("authUser", {
+          token,
+          user,
+          hasHoursAvaliable,
+          endTime,
+        });
+
+        return {
+          endTime,
+          status: res.status,
+        }
+      } catch (error) {
+        dispatch('logout')
+        return {
+          response: error?.response
+        }
+      }
+    },
+    autoLogin({ commit, dispatch }) {
+      const token = localStorage.getItem("token");
+      const userStr = localStorage.getItem("user");
+      if (!token || !userStr) {
+        return;
+      }
+      try {
+        const hasHoursAvaliable = localStorage.getItem("hasHoursAvaliable");
+        const endTime = localStorage.getItem("endTime");
+        
+        const user = JSON.parse(userStr);
+        
+        commit("authUser", {
+          token,
+          user,
+          hasHoursAvaliable,
+          endTime,
+        });
+        
+        return {
+          user,
+          endTime
+        }
+      } catch (error) {
+        dispatch('logout')
         return {
           response: error?.response
         }
@@ -117,8 +229,6 @@ export default new Vuex.Store({
       localStorage.removeItem("user");
       localStorage.removeItem("hasHoursAvaliable");
       localStorage.removeItem("endTime");
-
-      router.replace("/");
     },
     loading({ commit }, bool) {
       commit("loadingShow", bool);
@@ -127,29 +237,6 @@ export default new Vuex.Store({
     warning({ commit }, obj) {
       commit("warningShow", obj);
       
-    },
-    autoLogin({ commit }) {
-      const token = localStorage.getItem("token");
-      const userStr = localStorage.getItem("user");
-      if (!token || !userStr) {
-        return;
-      }
-      const hasHoursAvaliable = localStorage.getItem("hasHoursAvaliable");
-      const endTime = localStorage.getItem("endTime");
-
-      const user = JSON.parse(userStr);
-
-      commit("authUser", {
-        token,
-        user,
-        hasHoursAvaliable,
-        endTime,
-      });
-
-      return {
-        user,
-        endTime
-      }
     },
   },
   getters: {

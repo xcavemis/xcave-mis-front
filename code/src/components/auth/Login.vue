@@ -76,6 +76,7 @@ export default {
       TweenMax.staggerFromTo('.form-field', 0.4, { autoAlpha: 0 }, { autoAlpha: 1, ease: Quad.easeInOut, delay: 0.8 }, 0.02)
       TweenMax.staggerFromTo([splittingTitle[0].words, splittingSubtitle[0].words], 0.6, { scale: 1.6, autoAlpha: 0 }, { scale: 1, autoAlpha: 1, ease: Quad.easeInOut, delay: 0.8 }, 0.01)
       TweenMax.fromTo('.login-comp__begin-bt', 0.6, { y: '300%' }, { y: '0%', ease: Quad.easeInOut, delay: 0.8 })
+      TweenMax.fromTo('.login-comp__register-disclaimer', 0.6, { y: '300%' }, { y: '0%', ease: Quad.easeInOut, delay: 0.8 })
     },
     hide(){
 
@@ -127,8 +128,13 @@ export default {
       };
       this.$store.dispatch("login", formData).then(e => {
         console.log('login success', e)
-        const { status, data } = e?.response;
+        const { status, data, endTime } = e?.response;
         if (status == 200 || status == 201) {
+          if (this.validateTime(endTime)) {
+            this.$router.push('/experience')
+          } else {
+            this.$emit('go-ticket')
+          }
           this.$store.dispatch("loading", false)
         } else {
           let message = data.message
@@ -149,6 +155,9 @@ export default {
         }
         
       });
+    },
+    validateTime(date){
+      return new Date(date) - new Date() > 0
     },
     validEmail(email) {
         let re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;

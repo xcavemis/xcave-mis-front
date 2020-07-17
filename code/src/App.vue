@@ -30,7 +30,6 @@ export default {
     }
   },
   created() {
-    console.log(this.$store.getters.warning)
     this.$store.dispatch("autoLogin").then(res => {
       console.log('auto login: ', res)
     });

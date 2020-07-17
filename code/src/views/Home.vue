@@ -46,12 +46,20 @@ export default {
   methods: {
     goTo() {
       // this.$router.push('/experience')
-      console.log( this.$refs)
-      this.authShow = true
-      this.$nextTick(()=>{
-        this.$refs.authComp.show()
-      })
-    }
+      this.$store.dispatch("tokenCheck").then(res => {
+        console.log('tokenCheck: ', res)
+        if (res && res.status == 200 && this.validateTime(res.endTime)) {this.$router.push('/experience')
+        } else {
+          this.authShow = true
+          this.$nextTick(()=>{
+            this.$refs.authComp.show()
+          })
+        }
+      });
+    },
+    validateTime(date){
+      return (new Date(date) - new Date()) > 0
+    },
   }
 }
 </script>

@@ -4,9 +4,9 @@
         <header class="auth-header">
             <nav class="auth-header__nav">
                 <ul class="auth-header__nav-list">
-                    <li class="auth-header__nav-list__item" :class="{'selected': currStep == 0, 'register-show': isRegister}">CADASTRO</li>
-                    <li class="auth-header__nav-list__item" :class="{'selected': currStep == 1}">LOGIN</li>
-                    <li class="auth-header__nav-list__item" :class="{'selected': currStep == 2}">TICKET</li>
+                    <li class="auth-header__nav-list__item" @click="goToTab(0)" :class="{'selected': currStep == 0, 'register-show': isRegister}">CADASTRO</li>
+                    <li class="auth-header__nav-list__item" @click="goToTab(1)" :class="{'selected': currStep == 1}">LOGIN</li>
+                    <li class="auth-header__nav-list__item" @click="goToTab(2)" :class="{'selected': currStep == 2}">TICKET</li>
                 </ul>
             </nav>
         </header>
@@ -15,7 +15,7 @@
                 <Register />
             </div>
             <div class="auth-container__block" v-if="currStep == 1">
-                <Login v-on:go-register="goToRegister" />
+                <Login v-on:go-register="goToRegister" v-on:go-ticket="goToTicket" />
             </div>
             <div class="auth-container__block" v-if="currStep == 2">
                 <Ticket />
@@ -40,6 +40,9 @@ export default {
         currStep: 1,
         isRegister: false
     }),
+    mounted(){
+        this.currStep = this.$store.getters.user ? 2 : 1
+    },
     methods: {
         show(){
             TweenMax.fromTo('.auth-bg', 0.6, { y: '100%' }, { y: '0%', ease: Quad.easeInOut })
@@ -48,8 +51,17 @@ export default {
         hide(){
 
         },
+        goToTab(id){
+            console.log(this.$store.getters.user)
+            if (id == 1 && this.$store.getters.user) return
+            if (id == 2 && !this.$store.getters.user) return
+
+            this.currStep = id
+        },
+        goToTicket(){
+            this.currStep = 2
+        },
         goToRegister(){
-            console.log('goToRegister')
             this.currStep = 0
             this.isRegister = true
         }
@@ -102,6 +114,7 @@ export default {
                     border-bottom: 2px solid $gray;
                     animation: border-bottom 0.6s $ease-in-out;
                     margin: 0 4px;
+                    letter-spacing: 0.05rem;
 
                     &:first-child{
                         display: none;
@@ -132,6 +145,7 @@ export default {
         color: $black;
         font-family: $gar-bold;
         @include font-size(32);
+        letter-spacing: 0.05rem;
         margin: 0 auto 18px auto;    
         span {
             font-family: $gar-bold;
@@ -141,9 +155,18 @@ export default {
         color: $black;
         font-family: $got-medium;
         @include font-size(14);
+        letter-spacing: 0.05rem;
         margin: 0 auto 32px auto;    
         span {
             font-family: $got-medium;
+        }
+
+        strong{
+            font-family: $got-black;
+
+            .word {
+                font-family: $got-black;
+            }
         }
     }
 }

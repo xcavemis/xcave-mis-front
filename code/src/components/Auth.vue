@@ -4,15 +4,15 @@
         <header class="auth-header">
             <nav class="auth-header__nav">
                 <ul class="auth-header__nav-list">
-                    <li class="auth-header__nav-list__item" @click="goToTab(0)" :class="{'selected': currStep == 0, 'register-show': isRegister}">CADASTRO</li>
-                    <li class="auth-header__nav-list__item" @click="goToTab(1)" :class="{'selected': currStep == 1}">LOGIN</li>
+                    <li class="auth-header__nav-list__item" @click="goToTab(0)" :class="{'selected': currStep == 0 || user, 'register-show': isRegister}">CADASTRO</li>
+                    <li class="auth-header__nav-list__item" @click="goToTab(1)" :class="{'selected': currStep == 1 || user}">LOGIN</li>
                     <li class="auth-header__nav-list__item" @click="goToTab(2)" :class="{'selected': currStep == 2}">TICKET</li>
                 </ul>
             </nav>
         </header>
         <div class="auth-container">
             <div class="auth-container__block" v-if="currStep == 0">
-                <Register />
+                <Register  v-on:go-ticket="goToTicket" />
             </div>
             <div class="auth-container__block" v-if="currStep == 1">
                 <Login v-on:go-register="goToRegister" v-on:go-ticket="goToTicket" />
@@ -41,7 +41,8 @@ export default {
         isRegister: false
     }),
     mounted(){
-        this.currStep = this.$store.getters.user ? 2 : 1
+        this.currStep = this.auth ? 2 : 1
+        console.log('user', this.$store)
     },
     methods: {
         show(){
@@ -53,7 +54,7 @@ export default {
         },
         goToTab(id){
             console.log(this.$store.getters.user)
-            if (id == 1 && this.$store.getters.user) return
+            if ((id == 0 || id == 1) && this.$store.getters.user) return
             if (id == 2 && !this.$store.getters.user) return
 
             this.currStep = id
@@ -64,6 +65,14 @@ export default {
         goToRegister(){
             this.currStep = 0
             this.isRegister = true
+        }
+    },
+    computed: {
+        auth() {
+            return this.$store.getters.isAuthenticated;
+        },
+        user() {
+            return this.$store.getters.user
         }
     }
 }
@@ -167,6 +176,28 @@ export default {
             .word {
                 font-family: $got-black;
             }
+        }
+    }
+
+    @include maxWidth(1024) {
+        @include set-size(95vw, calc(100vh - 90px));
+        z-index: 1000;
+        .auth-header {
+            margin: 10px auto 0 auto;
+        }
+
+        .auth-container {
+            .auth-container__block {
+                width: 90%;
+            }
+        }
+
+         .auth__title{
+            @include font-size(24);
+        }
+        .auth__subtitle{
+            @include font-size(12);
+            margin-bottom: 15px;
         }
     }
 }

@@ -21,6 +21,15 @@ export default {
       this.$store.dispatch("logout");
     }
   },
+  watch: {
+    $route(to, from) {
+      if (to !== from) {
+        if (!this.auth && to.name != 'Home') {
+          this.$router.push('/')
+        }
+      }
+    }
+  },
   computed: {
     auth() {
       return this.$store.getters.isAuthenticated;
@@ -32,7 +41,22 @@ export default {
   created() {
     this.$store.dispatch("autoLogin").then(res => {
       console.log('auto login: ', res)
+      if (!this.auth && this.$route.name != 'Home') {
+        this.$router.push('/')
+      }
     });
+    // this.$router.beforeEach((to, from, next) => {
+    //   window.scrollTo(0, 0);
+      // let transitionName = to.meta.transition || from.meta.transition;
+      // if (transitionName === "slide") {
+      //   const toDepth = to.meta.depth;
+      //   const fromDepth = from.meta.depth;
+      //   transitionName = toDepth < fromDepth ? "prev" : "next";
+      // }
+
+      // this.transitionName = transitionName || "fade";
+    // });
+    // this.$store.dispatch("logout")
   }
 }
 </script>

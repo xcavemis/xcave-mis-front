@@ -232,7 +232,6 @@ export default {
             const birthStrToDate = this.formData.birth.substring(4,8) + "/" + this.formData.birth.substring(2,4) + "/" + this.formData.birth.substring(0,2)
             const formData = {
                 name: this.formData.name,
-                age: 0,
                 email: this.formData.email,
                 cellphone: this.formData.phone,
                 gender: this.formData.gender,
@@ -245,8 +244,9 @@ export default {
             this.$store.dispatch("create", formData).then(e => {
                 console.log('create success', e)
                 const { status, data } = e?.response;
-                if (status == 200) {
+                if (status >= 200 && status <= 204) {
                     this.$store.dispatch("loading", false)
+                    this.$emit('go-ticket')
                 } else {
                     let message = data.message
                     if (status == 409) {
@@ -558,6 +558,10 @@ export default {
       // line-height: 15px;
     }
   }
+
+    @include maxWidth(1024) {
+        padding-top: 40px;
+    }
 }
 
 </style>

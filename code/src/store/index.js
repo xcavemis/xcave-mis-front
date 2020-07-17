@@ -20,6 +20,7 @@ export default new Vuex.Store({
   },
   mutations: {
     authUser(state, { token, user, hasHoursAvaliable, endTime }) {
+      console.log('authUser user', user)
       state.token = token;
       state.user = user;
       state.hasHoursAvaliable = hasHoursAvaliable;
@@ -169,18 +170,19 @@ export default new Vuex.Store({
           hasHoursAvaliable,
           endTime,
         } = res.data;
-
-        localStorage.setItem("user", JSON.stringify(user));
-        localStorage.setItem("token", token);
-        localStorage.setItem("hasHoursAvaliable", hasHoursAvaliable);
-        localStorage.setItem("endTime", endTime);
-
-        commit("authUser", {
-          token,
-          user,
-          hasHoursAvaliable,
-          endTime,
-        });
+        if (user && user != undefined) {
+          localStorage.setItem("user", JSON.stringify(user));
+          localStorage.setItem("token", token);
+          localStorage.setItem("hasHoursAvaliable", hasHoursAvaliable);
+          localStorage.setItem("endTime", endTime);
+          console.log('tokenCheck user', user)
+          commit("authUser", {
+            token,
+            user,
+            hasHoursAvaliable,
+            endTime,
+          });
+        }
 
         return {
           endTime,
@@ -194,8 +196,8 @@ export default new Vuex.Store({
       }
     },
     autoLogin({ commit, dispatch }) {
-      const token = localStorage.getItem("token");
-      const userStr = localStorage.getItem("user");
+      const token = localStorage.getItem("token")??null;
+      const userStr = localStorage.getItem("user")??null;
       if (!token || !userStr) {
         return;
       }
@@ -204,7 +206,7 @@ export default new Vuex.Store({
         const endTime = localStorage.getItem("endTime");
         
         const user = JSON.parse(userStr);
-        
+        console.log('autoLogin user', user)
         commit("authUser", {
           token,
           user,

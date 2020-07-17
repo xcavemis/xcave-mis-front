@@ -47,8 +47,8 @@ export default {
     goTo() {
       // this.$router.push('/experience')
       this.$store.dispatch("tokenCheck").then(res => {
-        console.log('tokenCheck: ', res)
-        if (res && res.status == 200 && this.validateTime(res.endTime)) {this.$router.push('/experience')
+        if (res && (res.status >= 200 && res.status <= 204) && this.validateTime(res.endTime)) {
+          this.$router.push('/experience')
         } else {
           this.authShow = true
           this.$nextTick(()=>{
@@ -125,13 +125,30 @@ export default {
     @include maxWidth(1024) {
       width: 95vw;
       .first-step__center-content__title {
+        width: 80%;
         @include font-size(15);
         line-height: 19px;
       }
 
-      .first-step__center-content__button {
+      .first-step__center-content__description {
+        width: 90%;
+        margin: 0 auto;
         @include font-size(14);
-        padding: 15px 30px;
+        br {
+          display: none;
+        }
+      }
+
+      .first-step__center-content__buttons {
+        display: block;
+        .first-step__center-content__button {
+          min-width: 0;
+          width: 60%;
+          @include font-size(12);
+          padding: 15px 30px;
+          display: block;
+          margin: 0 auto 15px auto;
+        }
       }
     }
   }

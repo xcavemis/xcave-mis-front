@@ -129,7 +129,7 @@ export default {
       this.$store.dispatch("login", formData).then(e => {
         console.log('login success', e)
         const { status, data, endTime } = e?.response;
-        if (status == 200 || status == 201) {
+         if (status >= 200 && status <= 204) {
           if (this.validateTime(endTime)) {
             this.$router.push('/experience')
           } else {
@@ -192,19 +192,34 @@ export default {
         font-family: $got-medium;
     }
   }
-
   
   .login-comp__begin-bt{
-        width: 150px;
-        display: block;
-        margin: 40px auto 20px auto;
-        border: 0;
-        outline: none;
+    width: 150px;
+    display: block;
+    margin: 40px auto 20px auto;
+    border: 0;
+    outline: none;
 
-        &:disabled {
-            background-color: rgba(255,255,255,0.8) !important;
-            color: #b8b8b8;
-        }
+    &:disabled {
+      background-color: rgba(255,255,255,0.8) !important;
+      color: #b8b8b8;
+    }
+  }
+
+  @include maxWidth(1024) {
+    .login-comp__register-disclaimer {
+      display: block;
+      width: 100%;
+
+
+      > .default-button{
+        margin-top: 15px;
+      }
+    }
+
+    .login-comp__begin-bt{
+      margin-top: 15px;
+    }
   }
     
 }

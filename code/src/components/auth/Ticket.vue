@@ -1,6 +1,6 @@
 <template>
     <div class="ticket-comp">
-        <h3 class="auth__subtitle auth__subtitle-name">Olá, <strong>{{$store.getters.user.name}}</strong></h3>
+        <h3 class="auth__subtitle auth__subtitle-name">Olá, <strong>{{user.name}}</strong></h3>
         <h3 class="auth__title">VALIDE SEU TICKET SYMPLA</h3>
         <h4 class="auth__subtitle auth__subtitle-desc">Digite o número do seu código de acesso</h4>
         <form class="ticket-comp__form">
@@ -60,7 +60,7 @@ export default {
 
       window.scrollTo(0,0);
       TweenMax.staggerFromTo('.form-field', 0.4, { autoAlpha: 0 }, { autoAlpha: 1, ease: Quad.easeInOut, delay: 0.8 }, 0.02)
-      TweenMax.staggerFromTo([splittingTitle[0].words, splittingSubtitle[0].words, splittingSubtitleName[0].wordsv], 0.6, { scale: 1.6, autoAlpha: 0 }, { scale: 1, autoAlpha: 1, ease: Quad.easeInOut, delay: 0.8 }, 0.01)
+      TweenMax.staggerFromTo([splittingTitle[0].words, splittingSubtitle[0].words, splittingSubtitleName[0].words], 0.6, { scale: 1.6, autoAlpha: 0 }, { scale: 1, autoAlpha: 1, ease: Quad.easeInOut, delay: 0.8 }, 0.01)
       TweenMax.fromTo('.ticket-comp__begin-bt', 0.6, { y: '300%' }, { y: '0%', ease: Quad.easeInOut, delay: 0.8 })
       TweenMax.fromTo('.ticket-comp__register-disclaimer', 0.6, { y: '300%' }, { y: '0%', ease: Quad.easeInOut, delay: 0.8 })
     },
@@ -94,13 +94,13 @@ export default {
       this.$store.dispatch("loading", true)
       e.preventDefault();
       const formData = {
-        userId: this.$store.getters.user.id,
+        userId: this.user.id,
         ticketNumber: this.formData.code
       };
       this.$store.dispatch("checkIn", formData).then(e => {
         console.log('login success', e)
         const { status, data } = e?.response;
-        if (status == 200 || status == 201) {
+         if (status >= 200 && status <= 204) {
           this.$store.dispatch("loading", false)
         } else {
           let message = data.message
@@ -116,7 +116,15 @@ export default {
         
       });
     },
-  }
+  },
+    computed: {
+        auth() {
+            return this.$store.getters.isAuthenticated;
+        },
+        user() {
+            return this.$store.getters.user
+        }
+    }
 };
 </script>>
 
@@ -148,16 +156,32 @@ export default {
 
   
   .ticket-comp__begin-bt{
-        width: 150px;
-        display: block;
-        margin: 40px auto 20px auto;
-        border: 0;
-        outline: none;
+    width: 150px;
+    display: block;
+    margin: 40px auto 20px auto;
+    border: 0;
+    outline: none;
 
-        &:disabled {
-            background-color: rgba(255,255,255,0.8) !important;
-            color: #b8b8b8;
-        }
+    &:disabled {
+        background-color: rgba(255,255,255,0.8) !important;
+        color: #b8b8b8;
+    }
+  }
+
+  @include maxWidth(1023) {
+    .ticket-comp__register-disclaimer {
+      display: block;
+      width: 100%;
+
+
+      > .default-button{
+        margin-top: 15px;
+      }
+    }
+
+    .ticket-comp__begin-bt{
+      margin-top: 15px;
+    }
   }
     
 }

@@ -70,21 +70,40 @@ export default {
         },
         toggleMusic(){  
             this.musicPlaying = !this.musicPlaying
+            this.$emit('action', {
+                type: 'music',
+                value: this.musicPlaying,
+            })
         },
         goLive(){
-            console.log('goLive')
+            this.$emit('action', {
+                type: 'live',
+                value: 'show',
+            })
         },
         navigateTo(direction){
-            console.log('navigateTo', direction)
+            this.$emit('action', {
+                type: 'navigate',
+                value: direction,
+            })
         },
         moveTo(direction){
-            console.log('moveTo', direction)
+             this.$emit('action', {
+                type: 'move',
+                value: direction,
+            })
         },
         goToMap(){
-            console.log('goToMap')
+            this.$emit('action', {
+                type: 'map',
+                value: 'show',
+            })
         },
         onZoom(direction){
-            console.log('onZoom', direction)
+            this.$emit('action', {
+                type: 'zoom',
+                value: direction,
+            })
         },
         toggleFooter(){
             const y = window.innerWidth < 1441 ? 460 : 'max'

@@ -144,6 +144,9 @@ export default {
         this.videoAsset.setVideo(video);
       });
     },
+    showInfoHotspotLayer(e, content) {
+      this.$emit('info-layer', content)
+    },
     waitForReadyState(element, readyState, interval, done) {
       let timer = setInterval(() => {
         if (element.readyState >= readyState) {
@@ -190,17 +193,13 @@ export default {
       return wrapper;
     },
     createInfoHotspot(hotspot) {
-
-      // Create wrapper element to hold icon and tooltip.
       let wrapper = document.createElement('div');
       wrapper.classList.add('hotspot');
       wrapper.classList.add('info-hotspot');
 
-      // Create hotspot/tooltip header.
       let header = document.createElement('div');
       header.classList.add('info-hotspot-header');
 
-      // Create image element.
       let iconWrapper = document.createElement('div');
       iconWrapper.classList.add('info-hotspot-icon-wrapper');
       let icon = document.createElement('img');
@@ -208,7 +207,6 @@ export default {
       icon.classList.add('info-hotspot-icon');
       iconWrapper.appendChild(icon);
 
-      // Create title element.
       let titleWrapper = document.createElement('div');
       titleWrapper.classList.add('info-hotspot-title-wrapper');
       let title = document.createElement('div');
@@ -216,48 +214,21 @@ export default {
       title.innerHTML = hotspot.title;
       titleWrapper.appendChild(title);
 
-      // Create close element.
-      let closeWrapper = document.createElement('div');
-      closeWrapper.classList.add('info-hotspot-close-wrapper');
-      let closeIcon = document.createElement('img');
-      closeIcon.src = 'img/close.png';
-      closeIcon.classList.add('info-hotspot-close-icon');
-      closeWrapper.appendChild(closeIcon);
-
-      // Construct header element.
       header.appendChild(iconWrapper);
       header.appendChild(titleWrapper);
-      header.appendChild(closeWrapper);
 
-      // Create text element.
       let text = document.createElement('div');
       text.classList.add('info-hotspot-text');
       text.innerHTML = hotspot.text;
 
-      // Place header and text into wrapper element.
       wrapper.appendChild(header);
       wrapper.appendChild(text);
 
-      // Create a modal for the hotspot content to appear on mobile mode.
-      let modal = document.createElement('div');
-      modal.innerHTML = wrapper.innerHTML;
-      modal.classList.add('info-hotspot-modal');
-      document.body.appendChild(modal);
+      wrapper.querySelector('.info-hotspot-header').addEventListener('click', (e) => {
+        this.showInfoHotspotLayer(e, hotspot)
+      }, false);
 
-      let toggle = () => {
-        // wrapper.classList.toggle('visible');
-        // modal.classList.toggle('visible');
-      };
-
-      // Show content when hotspot is clicked.
-      wrapper.querySelector('.info-hotspot-header').addEventListener('click', toggle);
-
-      // Hide content when close icon is clicked.
-      modal.querySelector('.info-hotspot-close-wrapper').addEventListener('click', toggle);
-
-      // Prevent touch and scroll events from reaching the parent element.
-      // This prevents the view control logic from interfering with the hotspot.
-      this.stopTouchAndScrollEventPropagation(wrapper);
+     this.stopTouchAndScrollEventPropagation(wrapper);
 
       return wrapper;
     },

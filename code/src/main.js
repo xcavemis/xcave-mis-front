@@ -2,6 +2,10 @@ import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
 import store from './store'
+import { gsap } from "gsap";
+import { ScrollToPlugin } from "gsap/ScrollToPlugin.js";
+
+gsap.registerPlugin(ScrollToPlugin);
 
 Vue.config.productionTip = false
 

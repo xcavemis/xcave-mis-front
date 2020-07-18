@@ -91,17 +91,17 @@ export const codices = {
           fov: 1.5707963267948966
         },
         linkHotspots: [
-          {
-            yaw: -1.928586997218538, 
-            pitch: -0.38390294269113845,
-            rotation: 0,
-            target: "civil201",
-            direction: {
-              pitch: 0,
-              yaw: 0,
-              fov: 1.5707963267948966
-            },
-          },
+          // {
+          //   yaw: -1.928586997218538, 
+          //   pitch: -0.38390294269113845,
+          //   rotation: 0,
+          //   target: "civil201",
+          //   direction: {
+          //     pitch: 0,
+          //     yaw: 0,
+          //     fov: 1.5707963267948966
+          //   },
+          // },
         ],
         infoHotspots: []
       },

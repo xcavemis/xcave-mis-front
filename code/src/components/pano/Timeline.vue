@@ -1,31 +1,43 @@
 <template>
     <div class="timeline-comp">
-        <div class="timeline-comp__marker">
+        <div class="timeline-comp__marker"
+            :class="{'current': $store.getters.navigationStatus.codices == 'current', 'visited': $store.getters.navigationStatus.codices == 'visited'}"
+        >
             <div class="timeline-comp__marker-icon"></div>
             <p class="timeline-comp__marker-label">Códices</p>
         </div>
         <div class="timeline-comp__divide"></div>
-        <div class="timeline-comp__marker">
+        <div class="timeline-comp__marker"
+            :class="{'current': $store.getters.navigationStatus.civil == 'current', 'visited': $store.getters.navigationStatus.civil == 'visited'}"
+        >
             <div class="timeline-comp__marker-icon"></div>
             <p class="timeline-comp__marker-label">Civil</p>
         </div>
         <div class="timeline-comp__divide"></div>
-        <div class="timeline-comp__marker">
+        <div class="timeline-comp__marker"
+            :class="{'current': $store.getters.navigationStatus.mixed == 'current', 'visited': $store.getters.navigationStatus.mixed == 'visited'}"
+        >
             <div class="timeline-comp__marker-icon"></div>
             <p class="timeline-comp__marker-label">Galeria Mista</p>
         </div>
         <div class="timeline-comp__divide"></div>
-        <div class="timeline-comp__marker">
+        <div class="timeline-comp__marker"
+            :class="{'current': $store.getters.navigationStatus.sensorial == 'current', 'visited': $store.getters.navigationStatus.sensorial == 'visited'}"
+        >
             <div class="timeline-comp__marker-icon"></div>
             <p class="timeline-comp__marker-label">Sensorial</p>
         </div>
         <div class="timeline-comp__divide"></div>
-        <div class="timeline-comp__marker">
+        <div class="timeline-comp__marker"
+            :class="{'current': $store.getters.navigationStatus.militar == 'current', 'visited': $store.getters.navigationStatus.militar == 'visited'}"
+        >
             <div class="timeline-comp__marker-icon"></div>
             <p class="timeline-comp__marker-label">Militar</p>
         </div>
         <div class="timeline-comp__divide"></div>
-        <div class="timeline-comp__marker">
+        <div class="timeline-comp__marker"
+            :class="{'current': $store.getters.navigationStatus.monalisa == 'current', 'visited': $store.getters.navigationStatus.monalisa == 'visited'}"
+        >
             <div class="timeline-comp__marker-icon"></div>
             <p class="timeline-comp__marker-label">Monalisa </p>
         </div>

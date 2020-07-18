@@ -17,6 +17,14 @@ export default new Vuex.Store({
     endTime: null,
     loadingShow: false,
     warningShow: { show: false, text: '' },
+    navigationStatus: { 
+      codices: 'visited',
+      civil: 'visited',
+      mixed: 'current',
+      sensorial: 'pending',
+      militar: 'pending',
+      monalisa: 'pending',
+    },
   },
   mutations: {
     authUser(state, { token, user, hasHoursAvaliable, endTime }) {
@@ -37,6 +45,9 @@ export default new Vuex.Store({
     },
     warningShow(state, obj) {
       state.warningShow = obj;
+    },
+    navigationStatus(state, obj) {
+      state.navigationStatus[obj.room] = obj.status;
     },
   },
   actions: {
@@ -238,7 +249,9 @@ export default new Vuex.Store({
     },
     warning({ commit }, obj) {
       commit("warningShow", obj);
-      
+    },
+    navigation_status({ commit }, obj) {
+      commit("navigationStatus", obj);
     },
   },
   getters: {
@@ -267,6 +280,9 @@ export default new Vuex.Store({
     },
     warningShow(state) {
       return state.warningShow;
+    },
+    navigationStatus(state) {
+      return state.navigationStatus;
     },
   },
   modules: {},

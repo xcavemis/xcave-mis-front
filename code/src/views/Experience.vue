@@ -18,6 +18,12 @@ export default {
     Pano,
     FooterControls,
     HeaderControls,
+  },
+  mounted(){
+    this.$store.dispatch('navigation_status', {
+      room: 'militar',
+      status: 'visited',
+    })
   }
 }
 </script>

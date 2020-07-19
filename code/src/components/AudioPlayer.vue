@@ -8,7 +8,8 @@ export default {
     data: () => ({
         default: '/media/audio/main/default',
         mainSound: null,
-        dynamicSound: null
+        dynamicSound: null,
+        stopTimer: 0,
     }),
     mounted(){
         this.mainSound = new Howl({
@@ -19,7 +20,6 @@ export default {
             onend: this.onEnded,
         });
         this.mainSound?.seek(30)
-        console.log(this.mainSound)
     },
     methods: {
         play(){
@@ -28,20 +28,32 @@ export default {
         pause(){
             this.dynamicSound?.pause();
         },
+        stop(){ 
+            this.dynamicSound?.fade(1, 0, 1000)
+            clearTimeout(this.stopTimer)
+            this.stopTimer = setTimeout(()=>{
+                this.dynamicSound?.unload()
+            }, 1500)
+        },
         seekTo(){
 
         },
         playTo(path){
+            this.mute()
             this.dynamicSound?.unload()
-            this.dynamicSound = new Howl({
-                src: [`${path}.mp3`, `${path}.ogg`],
-                autoplay: true,
-                loop: false,
-                volume: 0.5,
-            });
-            this.dynamicSound?.once('load', () => {
-                this.sound?.play();
-            });
+            this.$nextTick(()=>{
+                this.dynamicSound = new Howl({
+                    src: [`${path}.mp3`, `${path}.ogg`],
+                    autoplay: true,
+                    volume: 1,
+                });
+                
+                this.dynamicSound?.play();
+                console.log('playTo', this.dynamicSound, path)
+                this.dynamicSound?.on('load', () => {
+                    console.log('dynamicSOund load')
+                });
+            })
         },
         onEnded(){
 

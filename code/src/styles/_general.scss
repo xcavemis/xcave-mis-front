@@ -11,6 +11,27 @@ body, html {
 	font-family: $rob-regular;
 	margin: 0;
 	user-select: none;
+
+	/* width */
+	&::-webkit-scrollbar {
+	width: 3px;
+	}
+
+	/* Track */
+	&::-webkit-scrollbar-track {
+		background: $black; 
+		border-left: 1px solid #cccccc;
+	}
+	
+	/* Handle */
+	&::-webkit-scrollbar-thumb {
+		background: #cccccc; 
+	}
+
+	/* Handle on hover */
+	&::-webkit-scrollbar-thumb:hover {
+		background: #e4e4e4; 
+	}
 	
 	@include maxWidth(1023) {
 		min-width: 100%;

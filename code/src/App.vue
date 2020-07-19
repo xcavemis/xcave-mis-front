@@ -75,6 +75,26 @@ export default {
     top: 0;
     left: 0;
   }
+
+   /* width */
+    &::-webkit-scrollbar {
+      width: 3px;
+    }
+
+    /* Track */
+    &::-webkit-scrollbar-track {
+        background: transparent; 
+    }
+    
+    /* Handle */
+    &::-webkit-scrollbar-thumb {
+        background: #cccccc; 
+    }
+
+    /* Handle on hover */
+    &::-webkit-scrollbar-thumb:hover {
+        background: #e4e4e4; 
+    }
 }
 
 #nav {

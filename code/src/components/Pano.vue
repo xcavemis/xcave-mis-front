@@ -87,6 +87,16 @@ export default {
       controls.registerMethod('rightElement', new Marzipano.ElementPressControlMethod(viewRightElement,  'x',  velocity, friction), true);
       controls.registerMethod('inElement',    new Marzipano.ElementPressControlMethod(viewInElement,  'zoom', -velocity, friction), true);
       controls.registerMethod('outElement',   new Marzipano.ElementPressControlMethod(viewOutElement, 'zoom',  velocity, friction), true);
+      controls.registerMethod('leftArrowK',   new Marzipano.KeyControlMethod(37, 'x', -velocity, friction), true);
+      controls.registerMethod('rightArrowK',  new Marzipano.KeyControlMethod(39, 'x', velocity, friction), true);
+      controls.registerMethod('upArrowK',     new Marzipano.KeyControlMethod(38, 'y', -velocity, friction), true);
+      controls.registerMethod('ddownArrowK',  new Marzipano.KeyControlMethod(40, 'y', velocity, friction), true);
+      controls.registerMethod('plusK',        new Marzipano.KeyControlMethod(107, 'zoom', -velocity, friction), true);
+      controls.registerMethod('minusK',       new Marzipano.KeyControlMethod(109, 'zoom', velocity, friction), true);
+      controls.registerMethod('wK',           new Marzipano.KeyControlMethod(87, 'y', -velocity, friction), true);
+      controls.registerMethod('aK',           new Marzipano.KeyControlMethod(65, 'x', -velocity, friction), true);
+      controls.registerMethod('sK',           new Marzipano.KeyControlMethod(83, 'y', velocity, friction), true);
+      controls.registerMethod('dK',           new Marzipano.KeyControlMethod(68, 'x', velocity, friction), true);
 
       viewNextElement.addEventListener('click', this.nextScene, true)
       viewPrevElement.addEventListener('click', this.prevScene, true)

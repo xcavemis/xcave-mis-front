@@ -48,7 +48,7 @@ export default {
   },
   methods: {
     onFooterAction(params) {
-      console.log('onFooterAction', params)
+      // console.log('onFooterAction', params)
       if (params.type == 'live') {
         this.isVideoLive = true
         this.$nextTick(()=>{

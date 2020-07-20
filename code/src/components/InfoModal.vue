@@ -3,8 +3,12 @@
         <div class="info-modal__crop">
             <section class="info-modal__block">
                 <div class="info-modal__preview">
-                    <!-- <img class="info-modal__preview-image" :src="`media/images/${content.image}`" v-if="content.image" :alt="content.title"> -->
-                    <canvas id="canvas-drag" class="info-modal__preview-image"></canvas>
+                    <img class="info-modal__preview-image" :src="`media/images/${content.image}`" v-if="content.image" :alt="content.title">
+                    <!-- <canvas id="canvas-drag" class="info-modal__preview-image"></canvas> -->
+                    <div class="info-modal__preview-instructions">
+                        <img class="info-modal__preview-icon" src="~@/assets/images/icons/hand.png" @click="hide" alt="CLIQUE E ARRASTE PARA VISUALIZAR">
+                        <p class="info-modal__preview-text">CLIQUE E ARRASTE<br>PARA VISUALIZAR</p>
+                    </div>
                 </div>
                 <div class="info-modal__content">
                     <img class="info-modal__close" src="~@/assets/images/icons/close-info.png" @click="hide" alt="Fechar o conteúdo.">
@@ -19,18 +23,76 @@
 
 <script>
 import { TweenMax, Quad } from 'gsap';
+// import { dragAndZoom } from '@/components/pano/DragAndZoom';
+import { view } from '@/components/pano/DragAndZoom';
+    // require('@/components/pano/DragAndZoom')
 
 export default {
     props: ['content'],
     data: () => ({
-        isPlaying: false
+        isPlaying: false,
+        mouse: {x: 0, y: 0, oldX: 0, oldY: 0, button: false},
+        zoomEl: null,
+        previewElm: null,
     }),
     mounted(){
         this.$nextTick(()=>{
-            require('@/components/pano/DragAndZoom')
+            this.previewElm = this.$el.querySelector('.info-modal__preview')
+            // const _canvas = this.$el.querySelector('#canvas-drag')
+            // dragAndZoom(
+            //     _canvas, 
+            //     {
+            //         w: previewElm.offsetWidth,
+            //         h: previewElm.offsetHeight
+            //     },
+            //     `media/images/${this.content.image}`
+            // )
+            this.zoomEl = this.$el.querySelector('.info-modal__preview-image')
+            this.previewElm.addEventListener('mouseover', this.onOverPreview, false)
+            this.previewElm.addEventListener('mouseout', this.onOutPreview, false)
+            this.previewElm.addEventListener("mousemove", this.mouseEvent, {passive: false});
+            this.previewElm.addEventListener("mousedown", this.mouseEvent, {passive: false});
+            this.previewElm.addEventListener("mouseup", this.mouseEvent, {passive: false});
+            this.previewElm.addEventListener("mouseout", this.mouseEvent, {passive: false});
+            this.previewElm.addEventListener("wheel", this.mouseWheelEvent, {passive: false});
         })
     },
     methods: {
+        mouseEvent(event) {
+            if (event.type === "mousedown") { this.mouse.button = true }
+            if (event.type === "mouseup" || event.type === "mouseout") { this.mouse.button = false }
+            this.mouse.oldX = this.mouse.x;
+            this.mouse.oldY = this.mouse.y;
+            this.mouse.x = event.pageX;
+            this.mouse.y = event.pageY;
+            if(this.mouse.button) { // pan
+                view.pan({x: this.mouse.x - this.mouse.oldX, y: this.mouse.y - this.mouse.oldY});
+                view.applyTo(this.zoomEl);
+            }
+            event.preventDefault();
+        },
+        mouseWheelEvent(event) {
+            const x = event.offsetX - (this.zoomEl.offsetWidth / 2);
+            const y = event.offsetY - (this.zoomEl.offsetHeight / 2);
+            if (event.deltaY < 0) { 
+                view.scaleAt({x, y}, 1.1, 0.56, 6.5);
+                view.applyTo(this.zoomEl);
+            } else { 
+                view.scaleAt({x, y}, 1 / 1.1, 0.56, 6.5);
+                view.applyTo(this.zoomEl);
+            }
+            
+            event.preventDefault();
+        },
+        onOverPreview(e){
+            TweenMax.to('.info-modal__preview-instructions', 0.6, { autoAlpha: 0, ease: Quad.easeInOut, onComplete: ()=>{
+                TweenMax.set('.info-modal__preview-instructions', { display: 'none' })
+            }})
+        },
+        onOutPreview(e){
+            TweenMax.set('.info-modal__preview-instructions', { display: 'block' })
+            TweenMax.to('.info-modal__preview-instructions', 0.4, { autoAlpha: 1, ease: Quad.easeInOut })
+        },
         show() {
             TweenMax.set('html, body', { overflow: 'hidden' })
             TweenMax.fromTo('.info-modal', 0.6, { autoAlpha: 0 }, { autoAlpha: 1, ease: Quad.easeInOut })
@@ -51,7 +113,19 @@ export default {
             this.$emit(`${this.isPlaying ? 'pause' : 'play'}-audio`)
             this.isPlaying = !this.isPlaying
         },
-    }    
+    },
+    beforeDestroy(){
+        this.mouse = {x: 0, y: 0, oldX: 0, oldY: 0, button: false}
+        this.zoomEl = null
+        view.reset()
+        this.previewElm.removeEventListener('mouseover', this.onOverPreview, false)
+        this.previewElm.removeEventListener('mouseout', this.onOutPreview, false)
+        this.previewElm.removeEventListener("mousemove", this.mouseEvent, {passive: false});
+        this.previewElm.removeEventListener("mousedown", this.mouseEvent, {passive: false});
+        this.previewElm.removeEventListener("mouseup", this.mouseEvent, {passive: false});
+        this.previewElm.removeEventListener("mouseout", this.mouseEvent, {passive: false});
+        this.previewElm.removeEventListener("wheel", this.mouseWheelEvent, {passive: false});
+    }
 }
 </script>
 
@@ -79,7 +153,29 @@ export default {
                 overflow: hidden;
                 position: relative;
                 .info-modal__preview-image {
+                    // @include set-size(100%, 100%);
+                    @include set-size(100%, auto);
+                    // @include center(absolute);
+                    pointer-events: none;
+                }
+
+                .info-modal__preview-instructions{
                     @include center(absolute);
+                    
+                    .info-modal__preview-icon{
+                        @include set-size(40px, auto);
+                        margin: 0 auto;
+                    }
+
+                    .info-modal__preview-text{
+                        font-family: $rob-medium;;
+                        @include font-size(10);
+                        color: $white;
+                        text-align: center;
+                        margin: 12px auto 0 auto;
+                        text-shadow: 0px 0px 4px #000000;
+                    }
+
                 }
             }
             .info-modal__content {

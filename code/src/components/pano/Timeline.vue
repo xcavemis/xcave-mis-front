@@ -80,6 +80,10 @@ export default {
             transition: color 0.6s $ease-in-out;
             bottom: -100%;
             text-shadow: 0px 0px 4px #000000;
+
+            @include minWidth(1680) {
+                margin-bottom: -3px;
+            }
         }
 
         &.current {

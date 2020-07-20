@@ -6,26 +6,24 @@ export const codices = {
         name: "CODICES 101",
         faceSize: 4096,
         initialViewParameters: {
-          pitch: 0,
-          yaw: 0,
+          yaw: 0.031036797240462377, pitch: 0.011708270924472686,
           fov: 1.5707963267948966
         },
         linkHotspots: [
           {
-            yaw: -1.4347521584966376, 
-            pitch: -0.38390294269113845,
+            yaw: 1.5047226100659117, pitch: 0.3066645687128826,
             rotation: 0,
             target: "codices102",
             direction: {
-              pitch: 0,
-              yaw: -1.7076801368573218, 
-              pitch: 0.0352634057628638
+              yaw: 1.864111704778729, 
+              pitch: 0.08421002512558218,
+              fov: 1.5707963267948966,
             },
           },
         ],
         infoHotspots: [
           {
-            yaw: 0.5243370091482458, pitch: 0.20291805685591768,
+            yaw: -0.5278457635004656, pitch: 0.20489117403065293,
             title: "D-101",
             image: "101/la-bele-feroniere.jpg",
             audio: '101/guide',
@@ -45,38 +43,32 @@ export const codices = {
         },
         linkHotspots: [
           {
-            yaw: -1.988217430070156, 
-            pitch: 0.037928391202687095,
+            yaw: -0.870596128525225, pitch: 0.3471781798871092,
             rotation: 0,
             target: "codices101",
             direction: {
               pitch: 0,
-              yaw: 0,
-              fov: 1.5707963267948966
+              yaw: -1.6015670326454412, pitch: 0.025416835807696714
             },
           },
           {
-            yaw: -1.4347521584966376, 
-            pitch: -0.38390294269113845,
+            yaw: 2.2627856015454757, pitch: 0.31963522894558594,
             rotation: 0,
             target: "codices103",
             direction: {
-              pitch: 0,
-              yaw: 0,
+              yaw: 1.254446921890727, pitch: 0.042058331030297325,
               fov: 1.5707963267948966
             },
           },
         ],
         infoHotspots: [
           {
-            yaw: -0.00038049728702915786,
-            pitch: 0.014985751462495145,
+            yaw: -0.5211899160846869, pitch: 0.09777342155119584,
             title: "D-102",
             text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien elit, fermentum aliquet malesuada tempus, aliquet sodales magna. Phasellus ultrices mattis bibendum."
           },
           {
-            yaw: -1.6849472555297336,
-            pitch: 0.31676660031329185,
+            yaw: 0.08455857139717615, pitch: 0.2033815353009274 ,
             title: "D-103",
             text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien elit, fermentum aliquet malesuada tempus, aliquet sodales magna. Phasellus ultrices mattis bibendum."
           }
@@ -93,6 +85,15 @@ export const codices = {
           fov: 1.5707963267948966
         },
         linkHotspots: [
+          {
+            yaw: -2.142884953204561, pitch: 0.37913226327843574,
+            rotation: 0,
+            target: "codices102",
+            direction: {
+              yaw: -0.9883949748664271, pitch: 0.023028254223168787,
+              fov: 1.5707963267948966
+            },
+          },
           // {
           //   yaw: -1.928586997218538, 
           //   pitch: -0.38390294269113845,

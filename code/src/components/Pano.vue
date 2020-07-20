@@ -6,6 +6,7 @@
 </template>
 
 <script>
+// https://compressjpeg.com/
 const Marzipano = require('marzipano');
 import { VideoAsset } from '@/components/pano/VideoAsset';
 require('@/components/pano/detect.js');
@@ -104,13 +105,13 @@ export default {
     buildScenes(){
       return data.scenes.map((data) => {
         let isImage = data.type == 'image'
-        let urlPrefix = isImage ? "/img/scenes" : "/img/scenes/video";
+        let urlPrefix = isImage ? "/media/images" : "/img/scenes/video";
         let ext = isImage ? `${window.innerWidth < 1280 ? '_mob' : ''}.jpg` : `.mp4`
         let source = null
         if (isImage) {
           source = Marzipano.ImageUrlSource.fromString(
-            `${urlPrefix}/artist_workshop${ext}`
-            // `${urlPrefix}/${data.id}${ext}`
+            // `${urlPrefix}/artist_workshop${ext}`
+            `${urlPrefix}/${data.id}${ext}`
           );
         } else {
           this.videoAsset = new VideoAsset();

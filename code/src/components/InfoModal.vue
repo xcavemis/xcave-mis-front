@@ -66,6 +66,7 @@ export default {
             this.mouse.x = event.pageX;
             this.mouse.y = event.pageY;
             if(this.mouse.button) { // pan
+                this.zoomEl.style.transition = `transform 0s linear`;
                 view.pan({x: this.mouse.x - this.mouse.oldX, y: this.mouse.y - this.mouse.oldY});
                 view.applyTo(this.zoomEl);
             }
@@ -74,6 +75,7 @@ export default {
         mouseWheelEvent(event) {
             const x = event.offsetX - (this.zoomEl.offsetWidth / 2);
             const y = event.offsetY - (this.zoomEl.offsetHeight / 2);
+            this.zoomEl.style.transition = `transform 0.2s linear`;
             if (event.deltaY < 0) { 
                 view.scaleAt({x, y}, 1.1, 0.56, 6.5);
                 view.applyTo(this.zoomEl);

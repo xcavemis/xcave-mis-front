@@ -5,39 +5,39 @@ export const view = (() => {
     const pos = { x: 0, y: 0 }; // current position of origin
     var dirty = true;
     const API = {
-      applyTo(el) {
-        if (dirty) { this.update() }
-        el.style.transform = `matrix(${m[0]},${m[1]},${m[2]},${m[3]},${m[4]},${m[5]})`;
-      },
-      update() {
-        dirty = false;
-        m[3] = m[0] = scale;
-        m[2] = m[1] = 0;
-        m[4] = pos.x;
-        m[5] = pos.y;
-      },
-      pan(amount) {
-        if (dirty) { this.update() }
-         pos.x += amount.x;
-         pos.y += amount.y;
-         dirty = true;
-      },
-      scaleAt(at, amount, min = 0.5, max = 10) { // at in screen coords
-        if (dirty) { this.update() }
-        scale *= amount;
-        if (scale < min) scale = min
-        if (scale > max) scale = max
-        pos.x = at.x - (at.x - pos.x) * amount;
-        pos.y = at.y - (at.y - pos.y) * amount;
-        dirty = true;
-      },
-      reset(){
-        m = matrix;
-        scale = 1;
-        pos.x = 0
-        pos.y = 0
-        dirty = true;
-      }
+            applyTo(el) {
+            if (dirty) { this.update() }
+            el.style.transform = `matrix(${m[0]},${m[1]},${m[2]},${m[3]},${m[4]},${m[5]})`;
+        },
+        update() {
+            dirty = false;
+            m[3] = m[0] = scale;
+            m[2] = m[1] = 0;
+            m[4] = pos.x;
+            m[5] = pos.y;
+        },
+        pan(amount) {
+            if (dirty) { this.update() }
+            pos.x += amount.x;
+            pos.y += amount.y;
+            dirty = true;
+            },
+        scaleAt(at, amount, min = 0.5, max = 10) { // at in screen coords
+            if (dirty) { this.update() }
+            scale *= amount;
+            if (scale < min) scale = min
+            if (scale > max) scale = max
+            pos.x = at.x - (at.x - pos.x) * amount;
+            pos.y = at.y - (at.y - pos.y) * amount;
+            dirty = true;
+        },
+        reset(){
+            m = matrix;
+            scale = 1;
+            pos.x = 0
+            pos.y = 0
+            dirty = true;
+        }
     };
     return API;
 })();

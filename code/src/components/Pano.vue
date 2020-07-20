@@ -19,6 +19,7 @@ export default {
     videoStarted: false,
     VideoAsset: null,
     sceneLoaded: false,
+    currentSceneID: 0,
   }),
   mounted(){
     this.$nextTick(()=>{
@@ -56,12 +57,39 @@ export default {
             var position = { yaw: loc.yaw, pitch: loc.pitch};
             console.log(position)
           })
-    
+          
+          this.setupControls()
+
           this.scenes = this.buildScenes()
-          const startScene = this.scenes[0]
+          
+          const startScene = this.scenes[this.currentSceneID]
           this.switchScene(startScene, startScene.data.initialViewParameters)
         }
       }
+    },
+    setupControls(){
+      const viewUpElement = document.querySelector('#viewUp');
+      const viewDownElement = document.querySelector('#viewDown');
+      const viewLeftElement = document.querySelector('#viewLeft');
+      const viewRightElement = document.querySelector('#viewRight');
+      const viewInElement = document.querySelector('#viewIn');
+      const viewOutElement = document.querySelector('#viewOut');
+      const viewPrevElement = document.querySelector('#viewPrev');
+      const viewNextElement = document.querySelector('#viewNext');
+
+      const velocity = 0.3;
+      const friction = 3;
+
+      const controls = this.viewer.controls();
+      controls.registerMethod('upElement',    new Marzipano.ElementPressControlMethod(viewUpElement,     'y', -velocity, friction), true);
+      controls.registerMethod('downElement',  new Marzipano.ElementPressControlMethod(viewDownElement,   'y',  velocity, friction), true);
+      controls.registerMethod('leftElement',  new Marzipano.ElementPressControlMethod(viewLeftElement,   'x', -velocity, friction), true);
+      controls.registerMethod('rightElement', new Marzipano.ElementPressControlMethod(viewRightElement,  'x',  velocity, friction), true);
+      controls.registerMethod('inElement',    new Marzipano.ElementPressControlMethod(viewInElement,  'zoom', -velocity, friction), true);
+      controls.registerMethod('outElement',   new Marzipano.ElementPressControlMethod(viewOutElement, 'zoom',  velocity, friction), true);
+
+      viewNextElement.addEventListener('click', this.nextScene, true)
+      viewPrevElement.addEventListener('click', this.prevScene, true)
     },
     buildScenes(){
       return data.scenes.map((data) => {
@@ -119,6 +147,16 @@ export default {
           view: view
         };
       });
+    },
+    prevScene(){
+      if (this.currentSceneID > 0) this.currentSceneID--
+      const prevScene = this.scenes[this.currentSceneID]
+      this.switchScene(prevScene, prevScene.data.initialViewParameters)
+    },
+    nextScene(){
+      if (this.currentSceneID < this.scenes.length-1) this.currentSceneID++
+      const nextScene = this.scenes[this.currentSceneID]
+      this.switchScene(nextScene, nextScene.data.initialViewParameters)
     },
     playVideo(){
       if (this.videoStarted) {

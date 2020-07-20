@@ -20,26 +20,26 @@
         <div class="footer-controls__center">
             <div class="footer-controls__center-group">
                 <span class="footer-controls__button-label mg-r">Anterior</span>
-                <img class="footer-controls__button-icon" alt="Sala anterior" @click="navigateTo('prev')" src="~@/assets/images/icons/arrow-prev.png"/>
+                <img id="viewPrev" class="footer-controls__button-icon" alt="Sala anterior" @click="navigateTo('prev')" src="~@/assets/images/icons/arrow-prev.png"/>
             </div>  
             <div class="footer-controls__center-group">
                 <span class="footer-controls__button-label mg-l mg-r">Zoom</span>
-                <img class="footer-controls__button-icon mg-r" alt="Aproximar imagem" @click="onZoom('in')" src="~@/assets/images/icons/zoom-in.png"/>
-                <img class="footer-controls__button-icon" alt="Afastar imagem" @click="onZoom('out')" src="~@/assets/images/icons/zoom-out.png"/>
+                <img id="viewIn" class="footer-controls__button-icon mg-r" alt="Aproximar imagem" @click="onZoom('in')" src="~@/assets/images/icons/zoom-in.png"/>
+                <img id="viewOut" class="footer-controls__button-icon" alt="Afastar imagem" @click="onZoom('out')" src="~@/assets/images/icons/zoom-out.png"/>
             </div> 
             <div class="footer-controls__center-group">
                 <span class="footer-controls__button-label mg-l mg-r">Navegação</span>
-                <img class="footer-controls__button-icon mg-r" alt="Mover para a esquerda" @click="moveTo('left')" src="~@/assets/images/icons/arrow-left.png"/>
-                <img class="footer-controls__button-icon mg-r" alt="Mover para cima" @click="moveTo('up')" src="~@/assets/images/icons/arrow-up.png"/>
-                <img class="footer-controls__button-icon mg-r" alt="Mover para direita" @click="moveTo('right')" src="~@/assets/images/icons/arrow-right.png"/>
-                <img class="footer-controls__button-icon" alt="Mover para baixo" @click="moveTo('down')" src="~@/assets/images/icons/arrow-down.png"/>
+                <img id="viewLeft" class="footer-controls__button-icon mg-r" alt="Mover para a esquerda" @click="moveTo('left')" src="~@/assets/images/icons/arrow-left.png"/>
+                <img id="viewUp" class="footer-controls__button-icon mg-r" alt="Mover para cima" @click="moveTo('up')" src="~@/assets/images/icons/arrow-up.png"/>
+                <img id="viewRight" class="footer-controls__button-icon mg-r" alt="Mover para direita" @click="moveTo('right')" src="~@/assets/images/icons/arrow-right.png"/>
+                <img id="viewDown" class="footer-controls__button-icon" alt="Mover para baixo" @click="moveTo('down')" src="~@/assets/images/icons/arrow-down.png"/>
             </div>  
             <div class="footer-controls__center-group">
                 <span class="footer-controls__button-label mg-l mg-r">Mapa</span>
                 <img class="footer-controls__button-icon" alt="Próxima sala" @click="goToMap" src="~@/assets/images/icons/map.png"/>
             </div>  
             <div class="footer-controls__center-group">
-                <img class="footer-controls__button-icon mg-l mg-r" alt="Próxima sala" @click="navigateTo('next')" src="~@/assets/images/icons/arrow-next.png"/>
+                <img id="viewNext" class="footer-controls__button-icon mg-l mg-r" alt="Próxima sala" @click="navigateTo('next')" src="~@/assets/images/icons/arrow-next.png"/>
                 <span class="footer-controls__button-label">Próximo</span>
             </div> 
         </div>

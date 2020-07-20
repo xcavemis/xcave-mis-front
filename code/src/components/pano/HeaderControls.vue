@@ -13,7 +13,8 @@
             </div>
             <div class="header-controls__right-button" @click="goFullscreen">
                 <span class="header-controls__button-label">Tela Cheia</span>
-                <img class="header-controls__button-icon" src="~@/assets/images/icons/fullscreen-enter.png"/>
+                <img v-if="!fullscreen" class="header-controls__button-icon" src="~@/assets/images/icons/fullscreen-enter.png"/>
+                <img v-if="fullscreen" class="header-controls__button-icon" src="~@/assets/images/icons/fullscreen-exit.png"/>
             </div>
         </div>
     </div>
@@ -26,12 +27,48 @@ export default {
     components: {
         Timeline,
     },
+    data: () => ({
+        fullscreen: false
+    }),
+    mounted(){
+        document.addEventListener("fullscreenchange", this.fullscreenChange);
+        document.addEventListener("mozfullscreenchange", this.fullscreenChange);
+        document.addEventListener("webkitfullscreenchange", this.fullscreenChange);
+        document.addEventListener("msfullscreenchange", this.fullscreenChange);    
+    },
     methods: {
         goTutorial(){
             
         },
+        fullscreenChange(e) {
+            this.fullscreen = !this.fullscreen
+        },
         goFullscreen(){
-
+            if (this.fullscreen) {
+                this.closeFullscreen()
+                return
+            }
+            const elem = document.querySelector('#app')
+            if (elem.requestFullscreen) {
+                elem.requestFullscreen();
+            } else if (elem.mozRequestFullScreen) { /* Firefox */
+                elem.mozRequestFullScreen();
+            } else if (elem.webkitRequestFullscreen) { /* Chrome, Safari and Opera */
+                elem.webkitRequestFullscreen();
+            } else if (elem.msRequestFullscreen) { /* IE/Edge */
+                elem.msRequestFullscreen();
+            }
+        },
+        closeFullscreen() {
+            if (document.exitFullscreen) {
+                document.exitFullscreen();
+            } else if (document.mozCancelFullScreen) { /* Firefox */
+                document.mozCancelFullScreen();
+            } else if (document.webkitExitFullscreen) { /* Chrome, Safari and Opera */
+                document.webkitExitFullscreen();
+            } else if (document.msExitFullscreen) { /* IE/Edge */
+                document.msExitFullscreen();
+            }
         }
     }
 }

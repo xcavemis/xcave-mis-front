@@ -1,5 +1,6 @@
 <template>
     <div class="map-comp">
+        <img class="map-comp__close" src="~@/assets/images/icons/close-info.png" @click="close" alt="Fechar o conteúdo.">
         <div class="map-comp__crop" ref="mapCrop">
             <div class="map-comp__content" ref="mapContent">
                 <img src="~@/assets/images/map-bg.jpg" alt="" class="map-comp__bg">
@@ -13,7 +14,8 @@
                             top: mark.y
                         }"
                     >
-                        <img class="map-comp__marker--icon" src="~@/assets/images/icons/map-marker-light.png" :alt="mark.title">
+                        <img v-if="mark.type == 'dark'" class="map-comp__marker--icon" src="~@/assets/images/icons/map-marker-dark.png" :alt="mark.title">
+                        <img v-if="mark.type == 'light'" class="map-comp__marker--icon" src="~@/assets/images/icons/map-marker-light.png" :alt="mark.title">
                         <span class="map-comp__marker--title">{{mark.title}}</span>
                     </div>
                 </div>
@@ -28,7 +30,13 @@ import { TweenMax, Quad } from 'gsap';
 export default {
     props: ['text'],
     data: () => ({
-        mouse: {x: 0, y: 0, oldX: 0, oldY: 0, button: false},
+        mouse: {
+            x:  0, 
+            y:  0, 
+            oldX: 0, 
+            oldY: 0, 
+            button: false
+        },
         zoomEl: null,
         previewElm: null,
         markers: [],
@@ -36,22 +44,34 @@ export default {
     mounted(){
         this.markers = mapData.markers
         this.$nextTick(()=>{
-            this.$refs?.mapCrop?.addEventListener('mouseover', this.onOverPreview, false)
-            this.$refs?.mapCrop?.addEventListener('mouseout', this.onOutPreview, false)
-            this.$refs?.mapCrop?.addEventListener("mousemove", this.mouseEvent, {passive: false});
-            this.$refs?.mapCrop?.addEventListener("mousedown", this.mouseEvent, {passive: false});
-            this.$refs?.mapCrop?.addEventListener("mouseup", this.mouseEvent, {passive: false});
-            this.$refs?.mapCrop?.addEventListener("mouseout", this.mouseEvent, {passive: false});
-            this.$refs?.mapCrop?.addEventListener("wheel", this.mouseWheelEvent, {passive: false});
+            this.mouse = {
+                x: this.$refs?.mapCrop?.offsetWidth * 0.5, 
+                y: this.$refs?.mapCrop?.offsetHeight * 0.5, 
+                oldX: 0, 
+                oldY: 0, 
+                button: false
+            }
+            // this.$refs?.mapCrop?.addEventListener('mouseover', this.onOverPreview, false)
+            // this.$refs?.mapCrop?.addEventListener('mouseout', this.onOutPreview, false)
+            // this.$refs?.mapCrop?.addEventListener("mousemove", this.mouseEvent, {passive: false});
+            // this.$refs?.mapCrop?.addEventListener("mousedown", this.mouseEvent, {passive: false});
+            // this.$refs?.mapCrop?.addEventListener("mouseup", this.mouseEvent, {passive: false});
+            // this.$refs?.mapCrop?.addEventListener("mouseout", this.mouseEvent, {passive: false});
+            // this.$refs?.mapCrop?.addEventListener("wheel", this.mouseWheelEvent, {passive: false});
         })
     },
     methods: {
         show(){
-           TweenMax.to(this.$el, 0.6, { autoAlpha: 1, ease: Quad.easeInOut } )  
+            TweenMax.set('html, body', { overflow: 'hidden' })
+            TweenMax.to(this.$el, 0.6, { autoAlpha: 1, ease: Quad.easeInOut } )  
+            TweenMax.fromTo(this.$refs.mapContent, 0.6, { y: '100%' }, { y: '0%', ease: Quad.easeInOut, delay: 0.3 } )  
         },
         hide(){
-           TweenMax.to(this.$el, 0.6, { autoAlpha: 0, ease: Quad.easeInOut } )
-           this.$emit('map-close')
+            TweenMax.fromTo(this.$refs.mapContent, 0.6, { y: '0%' }, { y: '100%', ease: Quad.easeInOut } )  
+            TweenMax.to(this.$el, 0.6, { autoAlpha: 0, ease: Quad.easeInOut, onComplete: ()=>{
+                this.$emit('map-close')
+                TweenMax.set('html, body', { overflow: 'inherit' })
+            }})
         },
         goTo(id) {
             this.$emit('navigate-to', id)
@@ -88,6 +108,22 @@ export default {
         close(){
             this.hide()
         }
+    },
+    beforeDestroy(){
+        this.mouse = {
+            x: this.$refs?.mapCrop?.offsetWidth * 0.5, 
+            y: this.$refs?.mapCrop?.offsetHeight * 0.5, 
+            oldX: 0, 
+            oldY: 0, 
+            button: false
+        }
+        // this.$refs?.mapCrop?.removeEventListener('mouseover', this.onOverPreview, false)
+        // this.$refs?.mapCrop?.removeEventListener('mouseout', this.onOutPreview, false)
+        // this.$refs?.mapCrop?.removeEventListener("mousemove", this.mouseEvent, {passive: false});
+        // this.$refs?.mapCrop?.removeEventListener("mousedown", this.mouseEvent, {passive: false});
+        // this.$refs?.mapCrop?.removeEventListener("mouseup", this.mouseEvent, {passive: false});
+        // this.$refs?.mapCrop?.removeEventListener("mouseout", this.mouseEvent, {passive: false});
+        // this.$refs?.mapCrop?.removeEventListener("wheel", this.mouseWheelEvent, {passive: false});
     }
 }
 </script>
@@ -100,18 +136,54 @@ export default {
     background-color: rgba(0,0,0,0.9);
     z-index: 1000;
 
+    .map-comp__close {
+        @include set-size(32px, 32px);
+        position: fixed;
+        top: 18.5vh;
+        right: 12vw;
+        z-index: 10;
+        cursor: pointer;
+        padding: 5px;
+        background-color: rgba(0, 0, 0, 1);
+        border-radius: 50%;
+        border: 2px solid $gray;
+    }
+
     .map-comp__crop {
         @include set-size(65.8vw, 62.5vh);
         @include center(absolute);
         overflow: hidden;
         border: 1px solid $gray;
+        overflow-x: hidden;
+        overflow-y: scroll;
+
+        /* width */
+        &::-webkit-scrollbar {
+            width: 3px;
+        }
+
+        /* Track */
+        &::-webkit-scrollbar-track {
+            background: transparent; 
+        }
+        
+        /* Handle */
+        &::-webkit-scrollbar-thumb {
+            background: #cccccc; 
+        }
+
+        /* Handle on hover */
+        &::-webkit-scrollbar-thumb:hover {
+            background: #e4e4e4; 
+        }
     }
     .map-comp__content {
         position: absolute;
         top: 0;
         left: 0;
+        transform: translateY(100%);
         .map-comp__bg {
-            // @include set-size(100%, auto);
+            @include set-size(100%, auto);
         }
 
         .map-comp__markers {
@@ -120,13 +192,22 @@ export default {
             top: 0;
             left: 0;
             .map-comp__marker {
+                @include set-size(30px, 30px);
                 position: absolute;
+                transform: translateX(-50%) translateY(-50%);
                 cursor: pointer;
                 .map-comp__marker--title {
                     opacity: 0;
+                    color: $white;
+                    font-family: $rob-medium;
+                    background-color: rgba(0,0,0,0.5);
+                    padding: 5px;
+                    transition: opacity 0.4s $ease-in-out;
                 }
 
                 .map-comp__marker--icon {
+                    width: 100%;
+                    margin: 0 auto;
                     box-shadow: 0px 0px 33px #000;
                     border-radius: 50%;
                 }

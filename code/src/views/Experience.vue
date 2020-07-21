@@ -13,6 +13,11 @@
       v-on:stop-audio="onStopAudio" 
       v-on:pause-audio="onPauseAudio" 
       v-on:play-audio="onPlayAudio"/>
+      <Map ref="map" 
+        v-if="isMap"
+        v-on:navigate-to="panoGoTo"
+        v-on:map-close="mapClosed"
+      />
   </div>
 </template>
 
@@ -21,6 +26,7 @@
 import Pano from '@/components/Pano.vue'
 import FooterControls from '@/components/pano/FooterControls.vue'
 import HeaderControls from '@/components/pano/HeaderControls.vue'
+import Map from '@/components/pano/Map.vue'
 import VideoLive from '@/components/VideoLive.vue'
 import AudioPlayer from '@/components/AudioPlayer.vue'
 import InfoModal from '@/components/InfoModal.vue'
@@ -34,10 +40,12 @@ export default {
     VideoLive,
     AudioPlayer,
     InfoModal,
+    Map,
   },
   data: () =>({
     isVideoLive: false,
     isInfoModal: false,
+    isMap: false,
     infoModalContent: null,
   }),
   mounted(){
@@ -47,6 +55,13 @@ export default {
     })
   },
   methods: {
+    panoGoTo(id) {
+      console.log('panoGoTo', id)
+      this.$refs?.pano?.goToScene(id)
+    },
+    mapClosed(){
+      this.isMap = false
+    },
     onFooterAction(params) {
       // console.log('onFooterAction', params)
       if (params.type == 'live') {
@@ -57,6 +72,11 @@ export default {
         })
       } else if (params.type == 'music') {
         this.$refs?.audioPlayer[params.value ? 'unmute' : 'mute']()
+      } else if (params.type == 'map') {
+        this.isMap = true
+        this.$nextTick(()=>{
+          this.$refs?.map[params.value]()
+        })
       }
     },
     videoLiveClosed() {

@@ -12,6 +12,7 @@ import { VideoAsset } from '@/components/pano/VideoAsset';
 require('@/components/pano/detect.js');
 import { data } from '@/data/scenes.js'
 const hotspotInfo = require('@/assets/images/icons/hotspot-info.png')
+const hotspotLink = require('@/assets/images/icons/hotspot-link.png')
 export default {
   name: 'Pano',
   props: {},
@@ -159,6 +160,10 @@ export default {
         };
       });
     },
+    goToScene(id){
+      const _scene = this.findSceneById(id)
+      if (_scene) this.switchScene(_scene, _scene.data.initialViewParameters);
+    },
     prevScene(){
       if (this.currentSceneID > 0) this.currentSceneID--
       const prevScene = this.scenes[this.currentSceneID]
@@ -216,7 +221,7 @@ export default {
       wrapper.classList.add('link-hotspot');
 
       let icon = document.createElement('img');
-      icon.src = 'img/link.png';
+      icon.src = hotspotLink;
       icon.classList.add('link-hotspot-icon');
 
       let transformProperties = [ '-ms-transform', '-webkit-transform', 'transform' ];

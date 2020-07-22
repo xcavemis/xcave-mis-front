@@ -192,7 +192,7 @@ export default {
             top: 0;
             left: 0;
             .map-comp__marker {
-                @include set-size(30px, 30px);
+                @include set-size(24px, 24px);
                 position: absolute;
                 transform: translateX(-50%) translateY(-50%);
                 cursor: pointer;
@@ -208,7 +208,7 @@ export default {
                 .map-comp__marker--icon {
                     width: 100%;
                     margin: 0 auto;
-                    box-shadow: 0px 0px 33px #000;
+                    box-shadow: 0px 0px 33px rgba(0, 0, 0, 0.7);
                     border-radius: 50%;
                 }
 

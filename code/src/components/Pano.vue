@@ -12,6 +12,7 @@ import { VideoAsset } from '@/components/pano/VideoAsset';
 require('@/components/pano/detect.js');
 import { data } from '@/data/scenes.js'
 const hotspotInfo = require('@/assets/images/icons/hotspot-info.png')
+const hotspotAr = require('@/assets/images/icons/hotspot-ar.png')
 const hotspotLink = require('@/assets/images/icons/hotspot-link.png')
 export default {
   name: 'Pano',
@@ -48,10 +49,7 @@ export default {
             }
           })
           this.viewer.stage().addEventListener('renderComplete', (bool)=>{
-            if (bool) {
-              console.log('renderComplete', bool)
-              this.sceneLoaded = bool
-            }
+            if (bool) this.sceneLoaded = bool
           })
           this.$refs.panoElement.addEventListener("click", (e) => {
             var view = this.viewer.view();
@@ -109,6 +107,9 @@ export default {
         let urlPrefix = isImage ? "/media/images" : "/img/scenes/video";
         let ext = isImage ? `${window.innerWidth < 1280 ? '_mob' : ''}.jpg` : `.mp4`
         let source = null
+        let opts = [
+            { width: 6144 },
+          ]
         if (isImage) {
           source = Marzipano.ImageUrlSource.fromString(
             // `${urlPrefix}/artist_workshop${ext}`
@@ -117,8 +118,11 @@ export default {
         } else {
           this.videoAsset = new VideoAsset();
           source = new Marzipano.SingleAssetSource(this.videoAsset)
+          opts = [
+            { width: 1 }
+          ]
         }
-        let geometry = new Marzipano.EquirectGeometry([{ width: isImage ? 4000 : 1 }]);;
+        let geometry = new Marzipano.EquirectGeometry(opts);
 
 
         const limiter = isImage ? 
@@ -250,6 +254,7 @@ export default {
       let wrapper = document.createElement('div');
       wrapper.classList.add('hotspot');
       wrapper.classList.add('info-hotspot');
+      if (hotspot.type == 'ar') wrapper.classList.add('info-hotspot-ar');
 
       let header = document.createElement('div');
       header.classList.add('info-hotspot-header');
@@ -257,7 +262,7 @@ export default {
       let iconWrapper = document.createElement('div');
       iconWrapper.classList.add('info-hotspot-icon-wrapper');
       let icon = document.createElement('img');
-      icon.src = hotspotInfo;
+      icon.src = hotspot.type == 'content' ? hotspotInfo : hotspotAr;
       icon.classList.add('info-hotspot-icon');
       iconWrapper.appendChild(icon);
 
@@ -271,12 +276,7 @@ export default {
       header.appendChild(iconWrapper);
       header.appendChild(titleWrapper);
 
-      let text = document.createElement('div');
-      text.classList.add('info-hotspot-text');
-      text.innerHTML = hotspot.text;
-
       wrapper.appendChild(header);
-      wrapper.appendChild(text);
 
       wrapper.querySelector('.info-hotspot-header').addEventListener('click', (e) => {
         this.showInfoHotspotLayer(e, hotspot)

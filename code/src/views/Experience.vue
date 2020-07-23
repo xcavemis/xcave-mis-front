@@ -18,6 +18,10 @@
         v-on:navigate-to="panoGoTo"
         v-on:map-close="mapClosed"
       />
+      <Ar 
+        ref="arModal"
+        v-if="isArModal" 
+      />
   </div>
 </template>
 
@@ -30,6 +34,7 @@ import Map from '@/components/pano/Map.vue'
 import VideoLive from '@/components/VideoLive.vue'
 import AudioPlayer from '@/components/AudioPlayer.vue'
 import InfoModal from '@/components/InfoModal.vue'
+import Ar from '@/components/Ar.vue'
 
 export default {
   name: 'experience',
@@ -41,10 +46,12 @@ export default {
     AudioPlayer,
     InfoModal,
     Map,
+    Ar,
   },
   data: () =>({
     isVideoLive: false,
     isInfoModal: false,
+    isArModal: false,
     isMap: false,
     infoModalContent: null,
   }),
@@ -55,6 +62,9 @@ export default {
     })
   },
   methods: {
+    showAr(id){
+      console.log('showAr')
+    },
     panoGoTo(id) {
       console.log('panoGoTo', id)
       this.$refs?.pano?.goToScene(id)
@@ -89,12 +99,20 @@ export default {
     },
     onInfoLayer(params) {
       console.log('onInfoLayer: ', params)
-      this.infoModalContent = params
-      this.isInfoModal = true
-      this.$nextTick(()=>{
-        if (this.$refs?.footerControls?.musicPlaying) this.$refs?.audioPlayer?.mute()
-        this.$refs?.infoModal?.show()
-      })
+      if (params.type == 'content') {
+        this.infoModalContent = params
+        this.isInfoModal = true
+        this.$nextTick(()=>{
+          if (this.$refs?.footerControls?.musicPlaying) this.$refs?.audioPlayer?.mute()
+          this.$refs?.infoModal?.show()
+        })
+      } else if (params.type == 'ar') {
+        this.infoModalContent = params
+        this.isArModal = true
+        this.$nextTick(()=>{
+          this.$refs?.arModal?.show()
+        })
+      }
     },
     onStopAudio(){
       this.infoModalContent.audioLoaded = null

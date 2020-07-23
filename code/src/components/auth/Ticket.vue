@@ -101,6 +101,7 @@ export default {
         console.log('login success', e)
         const { status, data } = e?.response;
          if (status >= 200 && status <= 204) {
+           this.$router.push('/experience')
           this.$store.dispatch("loading", false)
         } else {
           let message = data.message

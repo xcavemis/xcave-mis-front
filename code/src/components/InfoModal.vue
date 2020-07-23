@@ -34,6 +34,8 @@ export default {
         mouse: {x: 0, y: 0, oldX: 0, oldY: 0, button: false},
         zoomEl: null,
         previewElm: null,
+        isMobile: navigator.userAgent.toLowerCase().match(/mobile/i),
+        isIOS: /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream,
     }),
     mounted(){
         this.$nextTick(()=>{
@@ -48,13 +50,17 @@ export default {
             //     `media/images/${this.content.image}`
             // )
             this.zoomEl = this.$el.querySelector('.info-modal__preview-image')
-            this.previewElm.addEventListener('mouseover', this.onOverPreview, false)
-            this.previewElm.addEventListener('mouseout', this.onOutPreview, false)
-            this.previewElm.addEventListener("mousemove", this.mouseEvent, {passive: false});
-            this.previewElm.addEventListener("mousedown", this.mouseEvent, {passive: false});
-            this.previewElm.addEventListener("mouseup", this.mouseEvent, {passive: false});
-            this.previewElm.addEventListener("mouseout", this.mouseEvent, {passive: false});
-            this.previewElm.addEventListener("wheel", this.mouseWheelEvent, {passive: false});
+            if (!this.isMobile) {
+                this.previewElm.addEventListener('mouseover', this.onOverPreview, false)
+                this.previewElm.addEventListener('mouseout', this.onOutPreview, false)
+                this.previewElm.addEventListener("mousemove", this.mouseEvent, {passive: false});
+                this.previewElm.addEventListener("mousedown", this.mouseEvent, {passive: false});
+                this.previewElm.addEventListener("mouseup", this.mouseEvent, {passive: false});
+                this.previewElm.addEventListener("mouseout", this.mouseEvent, {passive: false});
+                this.previewElm.addEventListener("wheel", this.mouseWheelEvent, {passive: false});
+            } else {
+                
+            }
         })
     },
     methods: {
@@ -142,6 +148,8 @@ export default {
         @include set-size(65.8vw, 62.5vh);
         @include center(absolute);
         overflow: hidden;
+
+
         .info-modal__block {
             @include set-size(100%, 100%);
             display: flex;
@@ -252,6 +260,29 @@ export default {
                     right: 15px;
                     z-index: 10;
                     cursor: pointer;
+                }
+            }
+        }
+
+        @include maxWidth(1024) {
+            @include set-size(95vw, 70vh);
+
+            .info-modal__block {
+                justify-content: space-around;
+                 align-items: flex-start;
+                 flex-wrap: wrap;
+                 overflow-y: scroll;
+                .info-modal__preview {
+                    width: 100%;
+                }
+
+                .info-modal__content {
+                    width: 100%;
+                    padding: 5vw;
+
+                    .info-modal__close {
+                        position: fixed;
+                    }
                 }
             }
         }

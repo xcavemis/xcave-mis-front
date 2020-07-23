@@ -107,15 +107,16 @@ export default {
       return data.scenes.map((data) => {
         let isImage = data.type == 'image'
         let urlPrefix = isImage ? `/media/images/${this.isMobile ? '/mob' : ''}` : "/img/scenes/video";
-        let ext = isImage ? `${this.isMobile ? '_mob' : ''}.jpg` : `.mp4`
+        let ext = isImage ? `.jpg` : `.mp4`
         let source = null
         let opts = [
             { width: this.isMobile ? 4096 : 16344 },
           ]
         if (isImage) {
+          let imageName = data.id.substring(data.id.length - 3, data.id.length)
           source = Marzipano.ImageUrlSource.fromString(
-            // `${urlPrefix}/artist_workshop${ext}`
             `${urlPrefix}/${data.id}${ext}`
+            // this.$store.getters.assets[imageName].image.currentSrc
           );
         } else {
           this.videoAsset = new VideoAsset();

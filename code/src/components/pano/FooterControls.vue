@@ -12,7 +12,7 @@
                 </div>
                 <span class="footer-controls__button-label">Música de Fundo</span>
             </div>
-            <div class="footer-controls__left-button" @click="goLive">
+            <div class="footer-controls__left-button live-button" @click="goLive">
                 <img class="footer-controls__button-icon" src="~@/assets/images/icons/play-small.png"/>
                 <span class="footer-controls__button-label">Live</span>
             </div>
@@ -213,6 +213,25 @@ export default {
                     }
                 }
             }
+        }
+    }
+
+    @include maxWidth(1024) {
+        
+        .footer-controls__center {
+            display: none;
+        }
+        .footer-controls__left,
+        .footer-controls__right {
+            width: 50%;
+
+            .live-button {
+                display: none;   
+            }
+        }
+
+        .footer-controls__left {
+            margin-left: 2.5vw;
         }
     }
 }

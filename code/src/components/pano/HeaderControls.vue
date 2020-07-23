@@ -78,7 +78,7 @@ export default {
 .header-controls {
     @include set-size(100%, 100px);
     background: rgb(0,0,0);
-    background: linear-gradient(180deg, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.7) 42%, rgba(0, 212, 255, 0) 100%);
+    background: linear-gradient(180deg, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.7) 42%, rgba(0, 0, 0, 0) 100%);
     display: flex;
     justify-content: space-around;
     align-items: flex-start;
@@ -120,6 +120,18 @@ export default {
                 margin-right: 15px;
             }
         }
+    }
+    @include maxWidth(1024) {
+        justify-content: flex-start;
+        align-items: flex-start;
+        .header-controls__left {
+            width: 45%;
+            margin-left: 2.5vw;
+        }
+        .header-controls__center,        
+        .header-controls__right {
+            display: none;
+        }        
     }
 }
 </style>

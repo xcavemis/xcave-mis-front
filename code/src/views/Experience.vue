@@ -1,6 +1,6 @@
 <template>
   <div class="experience">
-    <Pano ref="pano" v-on:info-layer="onInfoLayer" />
+    <Pano ref="pano" v-if="queueLoaded" v-on:info-layer="onInfoLayer" />
     <HeaderControls ref="headerControls" />
     <FooterControls ref="footerControls" v-on:action="onFooterAction"/>
     <VideoLive v-if="isVideoLive" video-id="c8dFQbj20dg" v-on:close="videoLiveClosed" ref="videoLive" />
@@ -27,6 +27,7 @@
 
 <script>
 // @ is an alias to /src
+import { Preloader } from '@/utils/loaders/Preloader';
 import Pano from '@/components/Pano.vue'
 import FooterControls from '@/components/pano/FooterControls.vue'
 import HeaderControls from '@/components/pano/HeaderControls.vue'
@@ -54,16 +55,41 @@ export default {
     isArModal: false,
     isMap: false,
     infoModalContent: null,
+    preloader: null,
+    queueLoaded: false,
   }),
   mounted(){
+    this.setupQueue()
     this.$store.dispatch('navigation_status', {
       room: 'militar',
       status: 'visited',
     })
   },
   methods: {
-    showAr(id){
-      console.log('showAr')
+    setupQueue(){
+      this.preloader = new Preloader()
+      this.preloader.debug = false
+      this.preloader.addListener('onComplete', this.loadComplete);
+      this.preloader.addListener('onProgress', this.loadProgress);
+      this.preloader.queue([
+        // models
+        { name: 'teste', url: 'models/scene.gltf', type: 'gltf' },
+        // textures
+        { name: '101', url: '/media/images/codices101.jpg', type: 'texture' },
+        { name: '102', url: '/media/images/codices102.jpg', type: 'texture' },
+        { name: '103', url: '/media/images/codices103.jpg', type: 'texture' },
+      ]);
+    },
+    loadProgress(details){  
+      console.log('Preloader loadProgress: ', details);
+      // this.$store.dispatch('loading_progress', details.data * 100)
+      // this.$store.dispatch('loaded', true)
+    },
+    loadComplete(details){  
+      console.log('Preloader complete: ', details);
+      this.queueLoaded = true
+      this.$store.dispatch('assets', details.data)
+      // this.$store.dispatch('loaded', true)
     },
     panoGoTo(id) {
       console.log('panoGoTo', id)

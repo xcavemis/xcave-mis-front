@@ -16,6 +16,8 @@ export default new Vuex.Store({
     hasHoursAvaliable: null,
     endTime: null,
     loadingShow: false,
+    assets: {},
+    xr_registered: false,
     warningShow: { show: false, text: '' },
     navigationStatus: { 
       codices: 'visited',
@@ -42,6 +44,12 @@ export default new Vuex.Store({
     },
     loadingShow(state, bool) {
       state.loadingShow = bool;
+    },
+    xr_registered(state, bool) {
+      state.xr_registered = bool;
+    },
+    assets(state, obj) {
+      state.assets = obj;
     },
     warningShow(state, obj) {
       state.warningShow = obj;
@@ -247,6 +255,12 @@ export default new Vuex.Store({
       commit("loadingShow", bool);
       
     },
+    xr_registered({ commit }, bool) {
+      commit("xr_registered", bool);
+    },
+    assets({ commit }, obj) {
+      commit("assets", obj);
+    },
     warning({ commit }, obj) {
       commit("warningShow", obj);
     },
@@ -280,6 +294,12 @@ export default new Vuex.Store({
     },
     warningShow(state) {
       return state.warningShow;
+    },
+    assets(state) {
+      return state.assets;
+    },
+    xr_registered(state) {
+      return state.xr_registered;
     },
     navigationStatus(state) {
       return state.navigationStatus;

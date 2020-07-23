@@ -42,7 +42,7 @@ export const codices = {
         id: "codices102",
         type: "image",
         name: "CODICES 102",
-        faceSize: 4096,
+        faceSize: 6144,
         initialViewParameters: {
           pitch: 0,
           yaw: 0,
@@ -91,7 +91,7 @@ export const codices = {
         id: "codices103",
         type: "image",
         name: "CODICES 103",
-        faceSize: 4096,
+        faceSize: 6144,
         initialViewParameters: {
           pitch: 0,
           yaw: 0,

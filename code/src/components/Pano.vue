@@ -23,6 +23,8 @@ export default {
     VideoAsset: null,
     sceneLoaded: false,
     currentSceneID: 0,
+    isMobile: navigator.userAgent.toLowerCase().match(/mobile/i),
+    isIOS: /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream,
   }),
   mounted(){
     this.$nextTick(()=>{
@@ -104,11 +106,11 @@ export default {
     buildScenes(){
       return data.scenes.map((data) => {
         let isImage = data.type == 'image'
-        let urlPrefix = isImage ? "/media/images" : "/img/scenes/video";
-        let ext = isImage ? `${window.innerWidth < 1280 ? '_mob' : ''}.jpg` : `.mp4`
+        let urlPrefix = isImage ? `/media/images/${this.isMobile ? '/mob' : ''}` : "/img/scenes/video";
+        let ext = isImage ? `${this.isMobile ? '_mob' : ''}.jpg` : `.mp4`
         let source = null
         let opts = [
-            { width: 6144 },
+            { width: this.isMobile ? 4096 : 16344 },
           ]
         if (isImage) {
           source = Marzipano.ImageUrlSource.fromString(

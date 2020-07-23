@@ -5,7 +5,9 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "deploy": "vue-cli-service s3-deploy --mode production"
+    "deploy:hml": "yarn build --mode hml && vue-cli-service s3-deploy --mode hml && yarn deploy:cleanup --mode hml",
+    "deploy:prod": "yarn build --mode production && vue-cli-service s3-deploy --mode production && yarn deploy:cleanup --mode production",
+    "deploy:cleanup": "vue-cli-service s3-deploy-cleanup"
   },
   "dependencies": {
     "axios": "^0.19.2",
@@ -37,6 +39,7 @@
     "fibers": "^5.0.0",
     "node-sass": "^4.12.0",
     "sass-loader": "^8.0.2",
+    "vue-cli-plugin-s3-deploy-cleanup": "^1.0.2",
     "vue-template-compiler": "^2.6.11"
   },
   "browserslist": [

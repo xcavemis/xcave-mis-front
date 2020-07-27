@@ -6,50 +6,27 @@ export const projection = {
         src: 'mercedes-f1-1280x640',
         type: "video",
         name: "projection 501 VIDEO",
-        faceSize: 6144,
         initialViewParameters: {
-          yaw: -1.0466256635223559, pitch: 0.02441289226320542,
-          fov: 1.5707963267948966
+          vec3: [4836.37, 7.33, 1241.36]
         },
-        linkHotspots: [
+        infoHotspots: [
           {
-            yaw: 0.9314757271747585, pitch: 0.4024228867281252,
-            rotation: 0,
+            vec3: [-4849.31, -720.53, -954.74],
             target: "anatomy405",
+            type: 'link',
             direction: {
-              yaw: -1.435661418086159, pitch: -0.0011860279789779327,
-              fov: 1.5707963267948966,
+              vec3: [3965.38, -424.08, 3006.92],
             },
           },
-          // {
-          //   yaw: 2.7879146688196395, pitch: 0.6028420260412517,
-          //   rotation: 0,
-          //   target: "projection503",
-          //   direction: {
-          //     yaw: 3.065203447794607, pitch: -0.054666325205939614,
-          //     fov: 1.5707963267948966,
-          //   },
-          // },
           {
-            yaw: 2.7879146688196395, pitch: 0.6028420260412517,
-            rotation: 0,
+            vec3: [4739.42, -1037.13, 1171.10],
             target: "projection502Video",
+            type: 'link',
             direction: {
-              yaw: 3.065203447794607, pitch: -0.054666325205939614,
-              fov: 1.5707963267948966,
+              vec3: [4184.00, 22.68, -2723.38],
             },
           },
-          // {
-          //   yaw: 2.7879146688196395, pitch: 0.6028420260412517,
-          //   rotation: 0,
-          //   target: "projection502",
-          //   direction: {
-          //     yaw: 3.065203447794607, pitch: -0.054666325205939614,
-          //     fov: 1.5707963267948966,
-          //   },
-          // },
-        ],
-        infoHotspots: []
+        ]
       },
       {
         id: "projection501",
@@ -57,35 +34,29 @@ export const projection = {
         src: 'projection-501',
         type: "image",
         name: "projection 501",
-        faceSize: 6144,
         initialViewParameters: {
-          yaw: -1.0466256635223559, pitch: 0.02441289226320542,
-          fov: 1.5707963267948966
+          vec3: [-4920.03, 654.81, 557.84]
         },
-        linkHotspots: [
-          {
-            yaw: 0.9314757271747585, pitch: 0.4024228867281252,
-            rotation: 0,
-            target: "anatomy405",
-            direction: {
-              yaw: 1.5358998252103762, pitch: 0.03038155458975389,
-              fov: 1.5707963267948966,
-            },
-          },
-          {
-            yaw: 2.7879146688196395, pitch: 0.6028420260412517,
-            rotation: 0,
-            target: "projection503",
-            direction: {
-              yaw: 3.065203447794607, pitch: -0.054666325205939614,
-              fov: 1.5707963267948966,
-            },
-          },
-        ],
         infoHotspots: [
           {
-            yaw: -0.8231056180548961, pitch: -0.04273978330956574,
-            title: "D-401",
+            vec3: [2298.14, -1203.51, -4266.67],
+            target: "anatomy405",
+            type: 'link',
+            direction: {
+              vec3: [3965.38, -424.08, 3006.92],
+            },
+          },
+          {
+            vec3: [346.03, -1033.80, 4870.26],
+            target: "projection503",
+            type: 'link',
+            direction: {
+              vec3: [4184.00, 22.68, -2723.38],
+            },
+          },
+          {
+            vec3: [4844.48, -248.70, 1174.49],
+            title: "D-501",
             type: 'content',
             image: "101/la-bele-feroniere.jpg",
             audio: '101/guide',
@@ -102,39 +73,34 @@ export const projection = {
         name: "projection 502 VIDEO",
         faceSize: 6144,
         initialViewParameters: {
-          yaw: -1.0466256635223559, pitch: 0.02441289226320542,
-          fov: 1.5707963267948966
+          vec3: [-4849.31, -720.53, -954.74]
         },
-        linkHotspots: [
+        infoHotspots: [
           {
-            yaw: 0.9314757271747585, pitch: 0.4024228867281252,
-            rotation: 0,
-            target: "projection501Video",
+            vec3: [2298.14, -1203.51, -4266.67],
+            target: "anatomy405",
+            type: 'link',
             direction: {
-              yaw: -1.435661418086159, pitch: -0.0011860279789779327,
-              fov: 1.5707963267948966,
+              vec3: [3965.38, -424.08, 3006.92],
             },
           },
           {
-            yaw: 2.7879146688196395, pitch: 0.6028420260412517,
-            rotation: 0,
+            vec3: [346.03, -1033.80, 4870.26],
             target: "projection503",
+            type: 'link',
             direction: {
-              yaw: 3.065203447794607, pitch: -0.054666325205939614,
-              fov: 1.5707963267948966,
+              vec3: [4184.00, 22.68, -2723.38],
             },
           },
-          // {
-          //   yaw: 2.7879146688196395, pitch: 0.6028420260412517,
-          //   rotation: 0,
-          //   target: "projection502",
-          //   direction: {
-          //     yaw: 3.065203447794607, pitch: -0.054666325205939614,
-          //     fov: 1.5707963267948966,
-          //   },
-          // },
-        ],
-        infoHotspots: []
+          {
+            vec3: [4844.48, -248.70, 1174.49],
+            title: "D-501",
+            type: 'content',
+            image: "101/la-bele-feroniere.jpg",
+            audio: '101/guide',
+            text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien elit, fermentum aliquet malesuada tempus, aliquet sodales magna. Phasellus ultrices mattis bibendum.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien elit, fermentum aliquet malesuada tempus, aliquet sodales magna. Phasellus ultrices mattis bibendum.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien elit, fermentum aliquet malesuada tempus, aliquet sodales magna. Phasellus ultrices mattis bibendum.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien elit, fermentum aliquet malesuada tempus, aliquet sodales magna. Phasellus ultrices mattis bibendum.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien elit, fermentum aliquet malesuada tempus, aliquet sodales magna. Phasellus ultrices mattis bibendum."
+          },
+        ]
       },
       {
         id: "projection503",
@@ -144,23 +110,27 @@ export const projection = {
         name: "projection 503",
         faceSize: 6144,
         initialViewParameters: {
-          yaw: -1.0466256635223559, pitch: 0.02441289226320542,
-          fov: 1.5707963267948966
+          vec3: []
         },
-        linkHotspots: [
-          {
-            yaw: 0.9314757271747585, pitch: 0.4024228867281252,
-            rotation: 0,
-            target: "military601",
-            direction: {
-              yaw: 1.5358998252103762, pitch: 0.03038155458975389,
-              fov: 1.5707963267948966,
-            },
-          },
-        ],
         infoHotspots: [
           {
-            yaw: -0.8231056180548961, pitch: -0.04273978330956574,
+            vec3: [-2073.68, -881.96, 4456.11],
+            target: "projection501",
+            type: 'link',
+            direction: {
+              vec3: [4184.00, 22.68, -2723.38],
+            },
+          },
+          {
+            vec3: [-2603.56, -1338.82, -4040.75],
+            target: "military601",
+            type: 'link',
+            direction: {
+              vec3: [4184.00, 22.68, -2723.38],
+            },
+          },
+          {
+            vec3:[3434.69, -223.46, 3614.29],
             title: "D-502",
             type: 'content',
             image: "101/la-bele-feroniere.jpg",

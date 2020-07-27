@@ -176,43 +176,36 @@ export const anatomy = {
         src: 'ANATOMY-405',
         type: "image",
         name: "anatomy 405",
-        faceSize: 6144,
         initialViewParameters: {
-          yaw: 0.003102047909834482, pitch: -0.0033941117471769644,
-          fov: 1.5707963267948966
+          vec3: [4978.86, -434.59, -13.68]
         },
-        linkHotspots: [
-          {
-            yaw: -3.095648494864168, pitch: 0.5137383072650614,
-            rotation: 0,
-            target: "anatomy404",
-            direction: {
-              yaw: -1.7995656738145414, pitch: -0.02872854860971863,
-              fov: 1.5707963267948966,
-            },
-          },
-          {
-            yaw: 1.469993033442587, pitch: 0.28751051540573513,
-            rotation: 0,
-            target: "projection501",
-            direction: {
-              yaw: 0.8810738939273115, pitch: 0.31527944443365286,
-              fov: 1.5707963267948966,
-            },
-          },
-          {
-            yaw: 1.2774972347517064, pitch: 0.27201564745636375,
-            rotation: 0,
-            target: "projection501Video",
-            direction: {
-              yaw: 0.8810738939273115, pitch: 0.31527944443365286,
-              fov: 1.5707963267948966,
-            },
-          },
-        ],
         infoHotspots: [
           {
-            yaw: -1.069967979666929, pitch: -0.17931242670266911,
+            vec3: [-4622.24, -1900.15, 39.08],
+            target: "anatomy404",
+            type: 'link',
+            direction: {
+              vec3: [4184.00, 22.68, -2723.38],
+            },
+          },
+          {
+            vec3: [497.50, -1612.23, -4704.12],
+            target: "projection501",
+            type: 'link',
+            direction: {
+              vec3: [-2528.08, 81.07, 4308.10],
+            },
+          },
+          {
+            vec3: [1502.05, -1525.15, -4516.05],
+            target: "projection501Video",
+            type: 'link',
+            direction: {
+              vec3: [4184.00, 22.68, -2723.38],
+            },
+          },
+          {
+            vec3: [2385.79, 688.14, 4331.80],
             title: "D-405",
             type: 'content',
             image: "101/la-bele-feroniere.jpg",
@@ -220,7 +213,7 @@ export const anatomy = {
             text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien elit, fermentum aliquet malesuada tempus, aliquet sodales magna. Phasellus ultrices mattis bibendum.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien elit, fermentum aliquet malesuada tempus, aliquet sodales magna. Phasellus ultrices mattis bibendum.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien elit, fermentum aliquet malesuada tempus, aliquet sodales magna. Phasellus ultrices mattis bibendum.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien elit, fermentum aliquet malesuada tempus, aliquet sodales magna. Phasellus ultrices mattis bibendum.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien elit, fermentum aliquet malesuada tempus, aliquet sodales magna. Phasellus ultrices mattis bibendum."
           },
           {
-            yaw: 0.3327417774619885, pitch: -0.09493524818651089,
+            vec3: [4646.77, 661.52, -1696.01],
             title: "D-406",
             type: 'content',
             image: "101/la-bele-feroniere.jpg",

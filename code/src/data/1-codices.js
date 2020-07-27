@@ -54,8 +54,9 @@ export const codices = {
       },
       infoHotspots: [
         {
-          vec3: [2637.35, -1741.83, 3863.11],
+          vec3: [2189.97, -2126.87, 3951.23],
           target: "codices101",
+          title: "CODICES 101",
           type: 'link',
           direction: {
             vec3: [-521.59, 82.72, 4969.41],
@@ -64,6 +65,7 @@ export const codices = {
         {
           vec3: [-3612.58, -1979.30, -2820.87],
           target: "codices103",
+          title: "CODICES 103",
           type: 'link',
           direction: {
             vec3: [1065.19, -113.25, -4879.27],
@@ -100,6 +102,7 @@ export const codices = {
         {
           vec3: [-2954.47, -1892.33, 3553.42],
           target: "codices102",
+          title: "CODICES 102",
           type: 'link',
           direction: {
             vec3: [2882.42, 97.62, 4077.21],
@@ -108,6 +111,7 @@ export const codices = {
         {
           vec3: [4249.04, -2569.08, -542.77],
           target: "civil201",
+          title: "CIVIL 201",
           type: 'link',
           direction: {
             vec3: [4105.53, -302.79, -2824.04],

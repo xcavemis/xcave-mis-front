@@ -6764,7 +6764,7 @@
 
 	            // scope.dollyOut();
 	            scope.object.fov = ( scope.object.fov < scope.maxFov ) 
-	                ? scope.object.fov + 1
+	                ? scope.object.fov + 2
 	                : scope.maxFov;
 	            scope.object.updateProjectionMatrix();
 
@@ -6772,7 +6772,7 @@
 
 	            // scope.dollyIn();
 	            scope.object.fov = ( scope.object.fov > scope.minFov ) 
-	                ? scope.object.fov - 1
+	                ? scope.object.fov - 2
 	                : scope.minFov;
 	            scope.object.updateProjectionMatrix();
 

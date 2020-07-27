@@ -26,6 +26,7 @@ export default {
     currentPano: null, 
   }),
   mounted(){
+    // this.$store.dispatch("loading", true)
     this.$nextTick(()=>{
       this.initPano()
     })
@@ -43,37 +44,49 @@ export default {
       //     console.log(event)
       //   }
       // }
+      this.buildScene('codices101', [4979.33, -341.24, -138.51])
       // this.buildScenes()
       // this.buildLinks()
 
-      this.buildScene('codices101', [4979.33, -341.24, -138.51])
-
-      // this.panos.map((pano, index) => {
-      //   if (index < this.panos.length - 1) {
-      //     console.log(pano)
-      //     pano.link( this.panos[index + 1], new THREE.Vector3(1203.85, -1355.19, -4649.08));
-      //     if (index > 0) {
-
-      //       pano.link( this.panos[index - 1], new THREE.Vector3( 1278.27, 732.65, 4769.19 ));
+      // data.scenes.map((data) => {
+      //   data.infoHotspots.map((spot, index) => {
+      //     if (spot.type == 'link') {
+      //       console.log(this.panos[data.id], data.id)
+      //       this.panos[data.id].link( this.panos[spot.target], spot.vec3 ? new THREE.Vector3(spot.vec3[0], spot.vec3[1], spot.vec3[2]) : new THREE.Vector3(1203.85, -1355.19, -4649.08), 400, require('@/assets/images/icons/hotspot-link.png'));
+      //       this.panos[data.id].addEventListener( 'enter-fade-start', ()=>{
+        
+      //         // let dir;
+      //         // if (direction == null) {
+      //         //   dir = new THREE.Vector3(scene.initialViewParameters.vec3[0], scene.initialViewParameters.vec3[1], scene.initialViewParameters.vec3[2])
+      //         // } else {
+      //         //   }
+      //         let dir = new THREE.Vector3(data.initialViewParameters.vec3[0], data.initialViewParameters.vec3[1], data.initialViewParameters.vec3[2])
+      //         this.viewer.tweenControlCenter(dir, 0 );
+      //         this.$store.dispatch("loading", false)
+      //       })
       //     }
-      //   }
+      //   })
       // })
+      console.log(this.panos)
     },
     buildScene(key, direction){
+      this.$store.dispatch("loading", true)
       if (this.currentPano) this.disposePanorama(this.currentPano)
       this.panos = {}
       const scene = this.findSceneDataById(key)
       let isImage = scene.type == 'image'
-      let urlPrefix = isImage ? `/media/images/${this.isMobile ? '/mob' : ''}` : "/media/videos";
-      // let urlPrefix = isImage ? `https://hml.exposicaodavinci500anos.com.br/assets${this.isMobile ? '/mob' : ''}` : "/img/scenes/video";
+      // let urlPrefix = isImage ? `/media/images/${this.isMobile ? '/mob' : ''}` : "/media/videos";
+      let urlPrefix = isImage ? `https://hml.exposicaodavinci500anos.com.br/assets${this.isMobile ? '/mob' : ''}` : "https://hml.exposicaodavinci500anos.com.br/assets/videos";
       let ext = isImage ? `.jpg` : `.mp4`
       let id = scene.id.substring(scene.id.length - 3, scene.id.length)
       // console.log(`${urlPrefix}/${scene.src}${ext}`)
+      console.log(this.$store.getters.assets[id])
       let currentPano = isImage ? 
-        new PANOLENS.ImagePanorama(  this.$store.getters.assets[id] ? this.$store.getters.assets[id].image : `${urlPrefix}/${scene.src}${ext}` ) : 
+        new PANOLENS.ImagePanorama(  this.$store.getters.assets[id] ? this.$store.getters.assets[id].image : `${urlPrefix}/${scene.src}${ext}` ) :
         new PANOLENS.VideoPanorama(  `${urlPrefix}/${scene.src}${ext}`, { autoplay: true } );
 
       currentPano.addEventListener( 'enter-fade-start', ()=>{
+        
         let dir;
         if (direction == null) {
           dir = new THREE.Vector3(scene.initialViewParameters.vec3[0], scene.initialViewParameters.vec3[1], scene.initialViewParameters.vec3[2])
@@ -90,7 +103,7 @@ export default {
 
       scene.infoHotspots?.map(info => {
         let pos = info.vec3 ? new THREE.Vector3(info.vec3[0], info.vec3[1], info.vec3[2]) : new THREE.Vector3(Math.random() * 1000, -1355.19, -4649.08)
-        const infoSpot = new PANOLENS.Infospot(300, info.type == 'content' ? require('@/assets/images/icons/hotspot-info.png') : require('@/assets/images/icons/hotspot-link.png'))
+        const infoSpot = new PANOLENS.Infospot(info.type == 'content' ? 150 : 400, info.type == 'content' ? require('@/assets/images/icons/hotspot-info.png') : require('@/assets/images/icons/hotspot-link.png'))
         infoSpot.addHoverText(info.title)
         infoSpot.position.copy( pos );
         infoSpot.addEventListener('click', (e) => {

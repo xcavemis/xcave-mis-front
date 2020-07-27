@@ -42,7 +42,7 @@ import VideoLive from '@/components/VideoLive.vue'
 import AudioPlayer from '@/components/AudioPlayer.vue'
 import InfoModal from '@/components/InfoModal.vue'
 import Ar from '@/components/Ar.vue'
-
+import { data } from '@/data/scenes.js';
 export default {
   name: 'experience',
   components: {
@@ -65,6 +65,8 @@ export default {
     preloader: null,
     queueLoaded: false,
     videoEnded: false,
+    isMobile: navigator.userAgent.toLowerCase().match(/mobile/i),
+    isIOS: /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream,
   }),
   mounted(){
     this.setupQueue()
@@ -78,23 +80,32 @@ export default {
       this.preloader.debug = false
       this.preloader.addListener('onComplete', this.loadComplete);
       this.preloader.addListener('onProgress', this.loadProgress);
-      this.preloader.queue([
-        // models
-        { name: 'teste', url: 'models/scene.gltf', type: 'gltf' },
-        // textures
-        { name: '101', url: '/media/images/CODICES-101.jpg', type: 'texture' },
-        { name: '102', url: '/media/images/CODICES-102.jpg', type: 'texture' },
-        { name: '103', url: '/media/images/CODICES-103.jpg', type: 'texture' },
-      ]);
+      const assetsToLoad = [{ name: 'teste', url: 'models/scene.gltf', type: 'gltf' }]
+      data.scenes.map((scene, index) => {
+        let isImage = scene.type == 'image'
+        let urlPrefix = `https://hml.exposicaodavinci500anos.com.br/assets${this.isMobile ? '/mob' : ''}`
+        let ext = isImage ? `.jpg` : `.mp4`
+        let id = scene.id.substring(scene.id.length - 3, scene.id.length)
+        if (index < 6) {
+          assetsToLoad.push(
+            { 
+              name: id, 
+              url: `${urlPrefix}/${scene.src}${ext}`, 
+              type: 'texture' 
+            },
+          )
+        }
+      })
+      this.preloader.queue(assetsToLoad);
     },
     loadProgress(details){  
       console.log('Preloader loadProgress: ', details);
+      if (details.data > 0.05) this.queueLoaded = true
       // this.$store.dispatch('loading_progress', details.data * 100)
       // this.$store.dispatch('loaded', true)
     },
     loadComplete(details){  
       console.log('Preloader complete: ', details);
-      this.queueLoaded = true
       this.$store.dispatch('assets', details.data)
       // this.$store.dispatch('loaded', true)
     },

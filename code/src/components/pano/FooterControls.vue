@@ -24,15 +24,15 @@
             </div>  
             <div class="footer-controls__center-group">
                 <span class="footer-controls__button-label mg-l mg-r">Zoom</span>
-                <img id="viewIn" class="footer-controls__button-icon mg-r" alt="Aproximar imagem" @click="onZoom('in')" src="~@/assets/images/icons/zoom-in.png"/>
-                <img id="viewOut" class="footer-controls__button-icon" alt="Afastar imagem" @click="onZoom('out')" src="~@/assets/images/icons/zoom-out.png"/>
+                <img id="viewIn" class="footer-controls__button-icon mg-r" alt="Aproximar imagem" @mouseleave="onZoom($event, 'zoomIn')" @mousedown="onZoom($event, 'zoomIn')" @mouseup="onZoom($event, 'zoomIn')" src="~@/assets/images/icons/zoom-in.png"/>
+                <img id="viewOut" class="footer-controls__button-icon" alt="Afastar imagem" @mouseleave="onZoom($event, 'zoomOut')" @mousedown="onZoom($event, 'zoomOut')" @mouseup="onZoom($event, 'zoomOut')" src="~@/assets/images/icons/zoom-out.png"/>
             </div> 
             <div class="footer-controls__center-group">
                 <span class="footer-controls__button-label mg-l mg-r">Navegação</span>
-                <img id="viewLeft" class="footer-controls__button-icon mg-r" alt="Mover para a esquerda" @click="moveTo('left')" src="~@/assets/images/icons/arrow-left.png"/>
-                <img id="viewUp" class="footer-controls__button-icon mg-r" alt="Mover para cima" @click="moveTo('up')" src="~@/assets/images/icons/arrow-up.png"/>
-                <img id="viewRight" class="footer-controls__button-icon mg-r" alt="Mover para direita" @click="moveTo('right')" src="~@/assets/images/icons/arrow-right.png"/>
-                <img id="viewDown" class="footer-controls__button-icon" alt="Mover para baixo" @click="moveTo('down')" src="~@/assets/images/icons/arrow-down.png"/>
+                <img id="viewLeft" class="footer-controls__button-icon mg-r" alt="Mover para a esquerda" @mouseleave="moveTo($event, 'left')" @mousedown="moveTo($event, 'left')" @mouseup="moveTo($event, 'left')" src="~@/assets/images/icons/arrow-left.png"/>
+                <img id="viewUp" class="footer-controls__button-icon mg-r" alt="Mover para cima" @mouseleave="moveTo($event, 'up')" @mousedown="moveTo($event, 'up')" @mouseup="moveTo($event, 'up')" src="~@/assets/images/icons/arrow-up.png"/>
+                <img id="viewRight" class="footer-controls__button-icon mg-r" alt="Mover para direita" @mouseleave="moveTo($event, 'right')" @mousedown="moveTo($event, 'right')" @mouseup="moveTo($event, 'right')" src="~@/assets/images/icons/arrow-right.png"/>
+                <img id="viewDown" class="footer-controls__button-icon" alt="Mover para baixo" @mouseleave="moveTo($event, 'down')" @mousedown="moveTo($event, 'down')" @mouseup="moveTo($event, 'down')" src="~@/assets/images/icons/arrow-down.png"/>
             </div>  
             <div class="footer-controls__center-group">
                 <span class="footer-controls__button-label mg-l mg-r">Mapa</span>
@@ -59,13 +59,13 @@ export default {
     data: () => ({
         musicPlaying: true,
         openFooter: false,
+        pressedTimer: 0,
     }),
     mounted(){
         window.addEventListener('scroll', this.onScroll)
     },
     methods: {
         onScroll(e) {
-            console.log(window.scrollY)
             this.openFooter = window.scrollY > 100
         },
         toggleMusic(){  
@@ -87,11 +87,18 @@ export default {
                 value: direction,
             })
         },
-        moveTo(direction){
-             this.$emit('action', {
-                type: 'move',
-                value: direction,
-            })
+        moveTo(e, direction){
+            if (e.type == 'mousedown') {
+                clearInterval(this.pressedTimer)
+                this.pressedTimer = setInterval(()=>{
+                    this.$emit('action', {
+                       type: 'move',
+                       value: direction,
+                   })
+                })
+            } else {
+                clearInterval(this.pressedTimer)
+            }
         },
         goToMap(){
             this.$emit('action', {
@@ -99,11 +106,18 @@ export default {
                 value: 'show',
             })
         },
-        onZoom(direction){
-            this.$emit('action', {
-                type: 'zoom',
-                value: direction,
-            })
+        onZoom(e, direction){
+            if (e.type == 'mousedown') {
+                clearInterval(this.pressedTimer)
+                this.pressedTimer = setInterval(()=>{
+                    this.$emit('action', {
+                        type: 'zoom',
+                        value: direction,
+                    })
+                })
+            } else {
+                clearInterval(this.pressedTimer)
+            }
         },
         toggleFooter(){
             const y = window.innerWidth < 1441 ? 460 : 'max'

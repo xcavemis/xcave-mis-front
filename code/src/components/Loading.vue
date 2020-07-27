@@ -1,7 +1,7 @@
 <template>
     <div class="loading-comp">
         <div class="loading-comp__content">
-            <svg class="loading-comp__content-icon" xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 80 80">
+            <!-- <svg class="loading-comp__content-icon" xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 80 80">
                 <g id="Group_22" data-name="Group 22" transform="translate(-11253 -786)">
                     <rect id="Rectangle_21" data-name="Rectangle 21" width="80" height="80" transform="translate(11253 786)" fill="none"/>
                     <circle id="Ellipse_7" data-name="Ellipse 7" cx="10" cy="10" r="10" transform="translate(11283 786)" fill="#dca036"/>
@@ -9,9 +9,9 @@
                     <circle id="Ellipse_9" data-name="Ellipse 9" cx="10" cy="10" r="10" transform="translate(11253 816)" fill="#dca036"/>
                     <circle id="Ellipse_10" data-name="Ellipse 10" cx="10" cy="10" r="10" transform="translate(11283 846)" fill="#dca036"/>
                 </g>
-            </svg>    
+            </svg>     -->
             <p class="loading-comp__content-text">
-                <!-- <strong>AGUARDE</strong><br>ESTAMOS SALVANDO SUA FOTO -->
+                <strong>CARREGANDO</strong><br>
             </p>  
         </div>
     </div>
@@ -58,16 +58,16 @@
                 }
             }
         }
-        // .loading-comp__content-text {
-        //     font-family: $bold;
-        //     color: $font-color;
-        //     font-size: 12px;
-        //     strong {
-        //         color: $yellow-text;
-        //         font-size: 18px;
-        //         line-height: 20px;
-        //     }
-        // }
+        .loading-comp__content-text {
+            font-family: $got-black;
+            color: $orange;
+            font-size: 16px;
+            // strong {
+            //     color: $yellow-text;
+            //     font-size: 18px;
+            //     line-height: 20px;
+            // }
+        }
     }
 }
 </style>

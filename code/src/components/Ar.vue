@@ -26,7 +26,7 @@ export default {
     Renderer,
   },
   watch: {
-    '$store.getters.xr_registered': (val, old) => {
+    '$store.getters.xr_registered': function(val, old) {
       if (val != old) {
         this.$refs?.rendererRef?.show()
       }

@@ -1,42 +1,42 @@
 <template>
     <div class="timeline-comp">
         <div class="timeline-comp__marker"
-            :class="{'current': $store.getters.navigationStatus.codices == 'current', 'visited': $store.getters.navigationStatus.codices == 'visited'}"
+            :class="{'current': $store.getters.navigationStatus.codices == 'current', 'visited': $store.getters.navigationStatus.codices == 'visited', 'visited-current': $store.getters.navigationStatus.codices == 'visited-current'}"
         >
             <div class="timeline-comp__marker-icon"></div>
             <p class="timeline-comp__marker-label">Códices</p>
         </div>
         <div class="timeline-comp__divide"></div>
         <div class="timeline-comp__marker"
-            :class="{'current': $store.getters.navigationStatus.civil == 'current', 'visited': $store.getters.navigationStatus.civil == 'visited'}"
+            :class="{'current': $store.getters.navigationStatus.civil == 'current', 'visited': $store.getters.navigationStatus.civil == 'visited', 'visited-current': $store.getters.navigationStatus.civil == 'visited-current'}"
         >
             <div class="timeline-comp__marker-icon"></div>
             <p class="timeline-comp__marker-label">Civil</p>
         </div>
         <div class="timeline-comp__divide"></div>
         <div class="timeline-comp__marker"
-            :class="{'current': $store.getters.navigationStatus.mixed == 'current', 'visited': $store.getters.navigationStatus.mixed == 'visited'}"
+            :class="{'current': $store.getters.navigationStatus.mixed == 'current', 'visited': $store.getters.navigationStatus.mixed == 'visited', 'visited-current': $store.getters.navigationStatus.mixed == 'visited-current'}"
         >
             <div class="timeline-comp__marker-icon"></div>
             <p class="timeline-comp__marker-label">Galeria Mista</p>
         </div>
         <div class="timeline-comp__divide"></div>
         <div class="timeline-comp__marker"
-            :class="{'current': $store.getters.navigationStatus.sensorial == 'current', 'visited': $store.getters.navigationStatus.sensorial == 'visited'}"
+            :class="{'current': $store.getters.navigationStatus.sensorial == 'current', 'visited': $store.getters.navigationStatus.sensorial == 'visited', 'visited-current': $store.getters.navigationStatus.sensorial == 'visited-current'}"
         >
             <div class="timeline-comp__marker-icon"></div>
             <p class="timeline-comp__marker-label">Sensorial</p>
         </div>
         <div class="timeline-comp__divide"></div>
         <div class="timeline-comp__marker"
-            :class="{'current': $store.getters.navigationStatus.militar == 'current', 'visited': $store.getters.navigationStatus.militar == 'visited'}"
+            :class="{'current': $store.getters.navigationStatus.militar == 'current', 'visited': $store.getters.navigationStatus.militar == 'visited', 'visited-current': $store.getters.navigationStatus.militar == 'visited-current'}"
         >
             <div class="timeline-comp__marker-icon"></div>
             <p class="timeline-comp__marker-label">Militar</p>
         </div>
         <div class="timeline-comp__divide"></div>
         <div class="timeline-comp__marker"
-            :class="{'current': $store.getters.navigationStatus.monalisa == 'current', 'visited': $store.getters.navigationStatus.monalisa == 'visited'}"
+            :class="{'current': $store.getters.navigationStatus.monalisa == 'current', 'visited': $store.getters.navigationStatus.monalisa == 'visited', 'visited-current': $store.getters.navigationStatus.monalisa == 'visited-current'}"
         >
             <div class="timeline-comp__marker-icon"></div>
             <p class="timeline-comp__marker-label">Monalisa </p>
@@ -109,6 +109,22 @@ export default {
 
             .timeline-comp__marker-label {
                 color: $white;
+            }
+        }
+
+        &.visited-current {
+            .timeline-comp__marker-icon {
+                background-color: transparent;
+                border-radius: 0;
+                transform: rotate(45deg) translateX(-100%) translateY(-20%);
+                height: 8px;
+                width: 5px;
+                border-bottom: 2px solid $orange;
+                border-right: 2px solid $orange;
+            }
+
+            .timeline-comp__marker-label {
+                color: $orange;
             }
         }
     }

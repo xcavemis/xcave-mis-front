@@ -9,6 +9,7 @@ const THREE = require("three");
 import Stats from 'three/examples/jsm/libs/stats.module.js';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 import { DeviceOrientationControls } from 'three/examples/jsm/controls/DeviceOrientationControls.js';
+import { ShadowMesh } from 'three/examples/jsm/objects/ShadowMesh.js'
 // import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer.js';
 // import { RenderPass } from 'three/examples/jsm/postprocessing/RenderPass.js';
 // import { ShaderPass } from 'three/examples/jsm/postprocessing/ShaderPass.js';
@@ -52,17 +53,24 @@ export default {
     hide() {
     },
     setupScene() {
+        // SCENE
         this.scene = new THREE.Scene();
+        // scene.background = new THREE.Color( 0x59472b );
         this.scene.fog = new THREE.FogExp2( 0xcccccc, 0.002 );
 
+        // RENDERER
         this.renderer = new THREE.WebGLRenderer( { antialias: true, alpha: true } );
         this.renderer.setPixelRatio( window.devicePixelRatio );
         this.renderer.setSize( this.$el.offsetWidth, this.$el.offsetHeight );
         this.$el.appendChild( this.renderer.domElement );
+        this.renderer.shadowMap.enabled = true;
+        // this.renderer.shadowMap.type = THREE.PCFSoftShadowMapping;
+
+        // CAMERA
         this.camera = new THREE.PerspectiveCamera( 60, this.$el.offsetWidth / this.$el.offsetHeight, 1, 1000 );
         this.camera.position.set( 0, this.isMobile ? 60 : 25, this.isMobile ? 40 : 15 );
-
-        // controls
+        
+        // CONTROLS
         if (!this.isMobile) {
             this.controls = new OrbitControls(this.camera, this.renderer.domElement );
             this.controls.enableDamping = true;
@@ -75,27 +83,61 @@ export default {
             this.controls = new DeviceOrientationControls(this.camera)
         }
 
-        const dirLight1 = new THREE.DirectionalLight( 0xffffff, 2 );
-        dirLight1.position.set( 1, 1, 1 );
-        this.scene.add( dirLight1 );
-
-        const dirLight2 = new THREE.DirectionalLight( 0x002288, 2 );
-        dirLight2.position.set( - 1, - 1, - 1 );
-        this.scene.add( dirLight2 );
-
-        const ambLight = new THREE.AmbientLight( 0x222222, 1 );
-        this.scene.add( ambLight );
+        this.clock = new THREE.Clock()
 
 
+        // MODEL
         this.model = this.$store.getters.assets.teste.scene
         this.model.rotation.set(0,-0.7,0)
+        this.model.traverse(child => {
+            if (child.isMesh) { 
+                child.receiveShadow = true
+                child.castShadow = true
+            }
+        })
         this.scene.add(this.model)
+
+        //  SHADOW
+        var light = new THREE.SpotLight( 0xffffff, 1.5 );
+        light.position.set( 0, 1500, 0 );
+        light.angle = Math.PI * 0.2;
+        light.castShadow = true;
+        light.shadow.camera.near = 200;
+        light.shadow.camera.far = 2000;
+        light.shadow.bias = - 0.000222;
+        light.shadow.mapSize.width = 1024;
+        light.shadow.mapSize.height = 1024;
+        this.scene.add( light );
+
+        var planeGeometry = new THREE.PlaneBufferGeometry( 2000, 2000 );
+        planeGeometry.rotateX( - Math.PI / 2 );
+        var planeMaterial = new THREE.ShadowMaterial( { opacity: 1 } );
+
+        var plane = new THREE.Mesh( planeGeometry, planeMaterial );
+        // plane.position.y = 0;
+        plane.receiveShadow = true;
+        this.scene.add( plane );
+
+
+        // ANIMATIONS
+        const animations = this.$store.getters.assets.teste.animations
+        this.mixer = new THREE.AnimationMixer( this.model );
+        this.mixer.clipAction( animations[ 0 ] ).play();
+        
 
         window.addEventListener( 'resize', this.onResizeWindow, false );
 
         this.stats = new Stats()
         this.$el.appendChild(this.stats.domElement)
+
+        this.setupLights()
         this.animate()
+    },
+    setupLights(){
+        const ambLight = new THREE.AmbientLight( 0xf0f0f0 )
+        this.scene.add( ambLight );
+
+        
     },
     setupGestures(){
 
@@ -190,6 +232,10 @@ export default {
     
     animate() {
         requestAnimationFrame(this.animate);
+
+        let delta = this.clock.getDelta();
+
+        this.mixer.update( delta );
 
         this.controls?.update()
         

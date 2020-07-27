@@ -1,126 +1,119 @@
 export const codices = {
-    scenes: [
-      {
-        id: "codices101",
-        type: "image",
-        name: "CODICES 101",
-        faceSize: 6144,
-        initialViewParameters: {
-          yaw: 0.031036797240462377, pitch: 0.011708270924472686,
-          fov: 1.5707963267948966
-        },
-        linkHotspots: [
-          // {
-          //   yaw: 1.5047226100659117, pitch: 0.3066645687128826,
-          //   rotation: 0,
-          //   target: "codices102",
-          //   direction: {
-          //     yaw: 1.864111704778729, 
-          //     pitch: 0.08421002512558218,
-          //     fov: 1.5707963267948966,
-          //   },
-          // },
-        ],
-        infoHotspots: [
-          {
-            yaw: -0.5278457635004656, pitch: 0.20489117403065293,
-            title: "D-101",
-            type: 'content',
-            image: "101/la-bele-feroniere.jpg",
-            audio: '101/guide',
-            text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien elit, fermentum aliquet malesuada tempus, aliquet sodales magna. Phasellus ultrices mattis bibendum.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien elit, fermentum aliquet malesuada tempus, aliquet sodales magna. Phasellus ultrices mattis bibendum.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien elit, fermentum aliquet malesuada tempus, aliquet sodales magna. Phasellus ultrices mattis bibendum.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien elit, fermentum aliquet malesuada tempus, aliquet sodales magna. Phasellus ultrices mattis bibendum.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien elit, fermentum aliquet malesuada tempus, aliquet sodales magna. Phasellus ultrices mattis bibendum."
-          },
-          {
-            yaw: -0.1158860785837117, pitch: 0.1134721887779726,
-            title: "Realidade Aumentada",
-            type: 'ar',
-            model: '',
-          },
-        ]
+  scenes: [
+    {
+      id: "codices101",
+      groupId: 'codices',
+      src: 'CODICES-101',
+      type: "image",
+      name: "CODICES 101",
+      initialViewParameters: {
+        vec3: [4979.33, -341.24, -138.51],
       },
-      // {
-      //   id: "codices102",
-      //   type: "image",
-      //   name: "CODICES 102",
-      //   faceSize: 6144,
-      //   initialViewParameters: {
-      //     pitch: 0,
-      //     yaw: 0,
-      //     fov: 1.5707963267948966
-      //   },
-      //   linkHotspots: [
-      //     {
-      //       yaw: -0.870596128525225, pitch: 0.3471781798871092,
-      //       rotation: 0,
-      //       target: "codices101",
-      //       direction: {
-      //         pitch: 0,
-      //         yaw: -1.6015670326454412, pitch: 0.025416835807696714
-      //       },
-      //     },
-      //     {
-      //       yaw: 2.2627856015454757, pitch: 0.31963522894558594,
-      //       rotation: 0,
-      //       target: "codices103",
-      //       direction: {
-      //         yaw: 1.254446921890727, pitch: 0.042058331030297325,
-      //         fov: 1.5707963267948966
-      //       },
-      //     },
-      //   ],
-      //   infoHotspots: [
-      //     {
-      //       yaw: -0.5211899160846869, pitch: 0.09777342155119584,
-      //       title: "D-102",
-      //       type: 'content',
-      //       image: "101/la-bele-feroniere.jpg",
-      //       audio: '101/guide',
-      //       text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien elit, fermentum aliquet malesuada tempus, aliquet sodales magna. Phasellus ultrices mattis bibendum.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien elit, fermentum aliquet malesuada tempus, aliquet sodales magna. Phasellus ultrices mattis bibendum.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien elit, fermentum aliquet malesuada tempus, aliquet sodales magna. Phasellus ultrices mattis bibendum.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien elit, fermentum aliquet malesuada tempus, aliquet sodales magna. Phasellus ultrices mattis bibendum.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien elit, fermentum aliquet malesuada tempus, aliquet sodales magna. Phasellus ultrices mattis bibendum."
-      //     },
-      //     {
-      //       yaw: 0.08455857139717615, pitch: 0.2033815353009274 ,
-      //       title: "D-103",
-      //       type: 'content',
-      //       image: "101/la-bele-feroniere.jpg",
-      //       audio: '101/guide',
-      //       text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien elit, fermentum aliquet malesuada tempus, aliquet sodales magna. Phasellus ultrices mattis bibendum.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien elit, fermentum aliquet malesuada tempus, aliquet sodales magna. Phasellus ultrices mattis bibendum.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien elit, fermentum aliquet malesuada tempus, aliquet sodales magna. Phasellus ultrices mattis bibendum.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien elit, fermentum aliquet malesuada tempus, aliquet sodales magna. Phasellus ultrices mattis bibendum.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien elit, fermentum aliquet malesuada tempus, aliquet sodales magna. Phasellus ultrices mattis bibendum.<br>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien elit, fermentum aliquet malesuada tempus, aliquet sodales magna. Phasellus ultrices mattis bibendum.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien elit, fermentum aliquet malesuada tempus, aliquet sodales magna. Phasellus ultrices mattis bibendum.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien elit, fermentum aliquet malesuada tempus, aliquet sodales magna. Phasellus ultrices mattis bibendum.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien elit, fermentum aliquet malesuada tempus, aliquet sodales magna. Phasellus ultrices mattis bibendum.Lorem ipsum dolor sit amet, consectetur adipiscing elit."
-      //     }
-      //   ]
-      // },
-      // {
-      //   id: "codices103",
-      //   type: "image",
-      //   name: "CODICES 103",
-      //   faceSize: 6144,
-      //   initialViewParameters: {
-      //     pitch: 0,
-      //     yaw: 0,
-      //     fov: 1.5707963267948966
-      //   },
-      //   linkHotspots: [
-      //     {
-      //       yaw: -2.142884953204561, pitch: 0.37913226327843574,
-      //       rotation: 0,
-      //       target: "codices102",
-      //       direction: {
-      //         yaw: -0.9883949748664271, pitch: 0.023028254223168787,
-      //         fov: 1.5707963267948966
-      //       },
-      //     },
-      //     // {
-      //     //   yaw: -1.928586997218538, 
-      //     //   pitch: -0.38390294269113845,
-      //     //   rotation: 0,
-      //     //   target: "civil201",
-      //     //   direction: {
-      //     //     pitch: 0,
-      //     //     yaw: 0,
-      //     //     fov: 1.5707963267948966
-      //     //   },
-      //     // },
-      //   ],
-      //   infoHotspots: []
-      // },
-    ],
-  };
-  
+      infoHotspots: [
+        {
+          vec3: [699.84, -1624.78, -4667.39],
+          title: "CODICES 102",
+          type: 'link',
+          target: "codices102",
+          direction: {
+            vec3: [-1454.25, -356.19, -4765.15],
+          }
+        },
+        {
+          vec3: [4215.97, -1007.56, 2480.71],
+          title: "D-101",
+          type: 'content',
+          image: "101/la-bele-feroniere.jpg",
+          audio: '101/guide',
+          text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien elit, fermentum aliquet malesuada tempus, aliquet sodales magna. Phasellus ultrices mattis bibendum.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien elit, fermentum aliquet malesuada tempus, aliquet sodales magna. Phasellus ultrices mattis bibendum.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien elit, fermentum aliquet malesuada tempus, aliquet sodales magna. Phasellus ultrices mattis bibendum.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien elit, fermentum aliquet malesuada tempus, aliquet sodales magna. Phasellus ultrices mattis bibendum.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien elit, fermentum aliquet malesuada tempus, aliquet sodales magna. Phasellus ultrices mattis bibendum."
+        },
+        {
+          vec3: [4270.51, -1008.56, -2382.54],
+          title: "D-102",
+          type: 'content',
+          image: "101/la-bele-feroniere.jpg",
+          audio: '101/guide',
+          text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien elit, fermentum aliquet malesuada tempus, aliquet sodales magna. Phasellus ultrices mattis bibendum.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien elit, fermentum aliquet malesuada tempus, aliquet sodales magna. Phasellus ultrices mattis bibendum.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien elit, fermentum aliquet malesuada tempus, aliquet sodales magna. Phasellus ultrices mattis bibendum.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien elit, fermentum aliquet malesuada tempus, aliquet sodales magna. Phasellus ultrices mattis bibendum.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien elit, fermentum aliquet malesuada tempus, aliquet sodales magna. Phasellus ultrices mattis bibendum."
+        },
+        // {
+        //   yaw: -0.1158860785837117, pitch: 0.1134721887779726,
+        //   title: "Realidade Aumentada",
+        //   type: 'ar',
+        //   model: '',
+        // },
+      ]
+    },
+    {
+      id: "codices102",
+      groupId: 'codices',
+      src: 'CODICES-102',
+      type: "image",
+      name: "CODICES 102",
+      initialViewParameters: {
+        vec3: [-858.69, -220.42, -4910.63],
+      },
+      infoHotspots: [
+        {
+          vec3: [2637.35, -1741.83, 3863.11],
+          target: "codices101",
+          type: 'link',
+          direction: {
+            vec3: [-521.59, 82.72, 4969.41],
+          },
+        },
+        {
+          vec3: [-3612.58, -1979.30, -2820.87],
+          target: "codices103",
+          type: 'link',
+          direction: {
+            vec3: [1065.19, -113.25, -4879.27],
+          },
+        },
+        {
+          vec3: [4309.04, -498.81, 2479.75],
+          title: "D-102",
+          type: 'content',
+          image: "101/la-bele-feroniere.jpg",
+          audio: '101/guide',
+          text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien elit, fermentum aliquet malesuada tempus, aliquet sodales magna. Phasellus ultrices mattis bibendum.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien elit, fermentum aliquet malesuada tempus, aliquet sodales magna. Phasellus ultrices mattis bibendum.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien elit, fermentum aliquet malesuada tempus, aliquet sodales magna. Phasellus ultrices mattis bibendum.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien elit, fermentum aliquet malesuada tempus, aliquet sodales magna. Phasellus ultrices mattis bibendum.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien elit, fermentum aliquet malesuada tempus, aliquet sodales magna. Phasellus ultrices mattis bibendum."
+        },
+        {
+          vec3: [4869.28, -1018.04, -424.46],
+          title: "D-103",
+          type: 'content',
+          image: "101/la-bele-feroniere.jpg",
+          audio: '101/guide',
+          text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien elit, fermentum aliquet malesuada tempus, aliquet sodales magna. Phasellus ultrices mattis bibendum.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien elit, fermentum aliquet malesuada tempus, aliquet sodales magna. Phasellus ultrices mattis bibendum.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien elit, fermentum aliquet malesuada tempus, aliquet sodales magna. Phasellus ultrices mattis bibendum.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien elit, fermentum aliquet malesuada tempus, aliquet sodales magna. Phasellus ultrices mattis bibendum.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien elit, fermentum aliquet malesuada tempus, aliquet sodales magna. Phasellus ultrices mattis bibendum.<br>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien elit, fermentum aliquet malesuada tempus, aliquet sodales magna. Phasellus ultrices mattis bibendum.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien elit, fermentum aliquet malesuada tempus, aliquet sodales magna. Phasellus ultrices mattis bibendum.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien elit, fermentum aliquet malesuada tempus, aliquet sodales magna. Phasellus ultrices mattis bibendum.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien elit, fermentum aliquet malesuada tempus, aliquet sodales magna. Phasellus ultrices mattis bibendum.Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+        }
+      ]
+    },
+    {
+      id: "codices103",
+      groupId: 'codices',
+      src: 'CODICES-103',
+      type: "image",
+      name: "CODICES 103",
+      initialViewParameters: {
+        vec3: [108.42, 327.03, -4981.47],
+      },
+      infoHotspots: [
+        {
+          vec3: [-2954.47, -1892.33, 3553.42],
+          target: "codices102",
+          type: 'link',
+          direction: {
+            vec3: [2882.42, 97.62, 4077.21],
+          },
+        },
+        {
+          vec3: [4249.04, -2569.08, -542.77],
+          target: "civil201",
+          type: 'link',
+          direction: {
+            vec3: [4105.53, -302.79, -2824.04],
+          },
+        },
+      ]
+    },
+  ],
+};

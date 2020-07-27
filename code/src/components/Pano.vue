@@ -1,16 +1,23 @@
 <template>
   <div class="pano-comp">
+    <video v-if="currentVideo == 'projection501Video'" ref="projection501Video" autoplay="true" playsinline="true" webkitplaysinline="true" muted="muted" crossorigin="anonymous" loop="true">
+      <source src="media/videos/mercedes-f1-1280x640.mp4">
+    </video>
+    <video v-if="currentVideo == 'projection502Video'" ref="projection502Video" autoplay="true" playsinline="true" webkitplaysinline="true" muted="muted" crossorigin="anonymous" loop="true">
+      <source src="media/videos/rua.mp4">
+    </video>
     <div id="pano" ref="panoElement"></div>
     <!-- <div class="pano-comp-overlay" v-if="!sceneLoaded"></div> -->
   </div>
 </template>
 
 <script>
-// https://compressjpeg.com/
 const Marzipano = require('marzipano');
 import { VideoAsset } from '@/components/pano/VideoAsset';
 require('@/components/pano/detect.js');
-import { data } from '@/data/scenes.js'
+import { data } from '@/data/scenes.js';
+import { transitionFunctions } from '@/components/pano/transitionFunctions';
+import { easings } from '@/components/pano/easing';
 const hotspotInfo = require('@/assets/images/icons/hotspot-info.png')
 const hotspotAr = require('@/assets/images/icons/hotspot-ar.png')
 const hotspotLink = require('@/assets/images/icons/hotspot-link.png')
@@ -23,6 +30,7 @@ export default {
     VideoAsset: null,
     sceneLoaded: false,
     currentSceneID: 0,
+    currentVideo: '',
     isMobile: navigator.userAgent.toLowerCase().match(/mobile/i),
     isIOS: /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream,
   }),
@@ -63,6 +71,7 @@ export default {
           this.setupControls()
 
           this.scenes = this.buildScenes()
+          console.log(this.scenes)
           
           const startScene = this.scenes[this.currentSceneID]
           this.switchScene(startScene, startScene.data.initialViewParameters)
@@ -107,15 +116,16 @@ export default {
       return data.scenes.map((data) => {
         let isImage = data.type == 'image'
         let urlPrefix = isImage ? `/media/images/${this.isMobile ? '/mob' : ''}` : "/img/scenes/video";
+        // let urlPrefix = isImage ? `https://hml.exposicaodavinci500anos.com.br/assets${this.isMobile ? '/mob' : ''}` : "/img/scenes/video";
         let ext = isImage ? `.jpg` : `.mp4`
         let source = null
         let opts = [
-            { width: this.isMobile ? 4096 : 16344 },
+            { width: this.isMobile ? 2048 : 16344 },
           ]
         if (isImage) {
           let imageName = data.id.substring(data.id.length - 3, data.id.length)
           source = Marzipano.ImageUrlSource.fromString(
-            `${urlPrefix}/${data.id}${ext}`
+            `${urlPrefix}/${data.src}${ext}`
             // this.$store.getters.assets[imageName].image.currentSrc
           );
         } else {
@@ -140,13 +150,15 @@ export default {
           source: source,
           geometry: geometry,
           view: view,
-          pinFirstLevel: true
+          pinFirstLevel: false
         });
 
-        if (!isImage) {
-          document.body.addEventListener('click', this.playVideo);
-          document.body.addEventListener('touchstart', this.playVideo);
-        }
+        // if (!isImage) {
+        //   document.body.addEventListener('click', () => { this.playVideo(data) }, true);
+        //   document.body.addEventListener('touchstart', () => { this.playVideo(data) }, true);
+          // document.body.addEventListener('click', () => { this.playVideo(`${urlPrefix}/${data.src}${ext}`) }, true);
+          // document.body.addEventListener('touchstart', () => { this.playVideo(`${urlPrefix}/${data.src}${ext}`) }, true);
+        // }
 
         // Create link hotspots.
         data.linkHotspots.forEach((hotspot) => {
@@ -181,24 +193,24 @@ export default {
       const nextScene = this.scenes[this.currentSceneID]
       this.switchScene(nextScene, nextScene.data.initialViewParameters)
     },
-    playVideo(){
+    playVideo(src){
       if (this.videoStarted) {
         return;
       }
       this.videoStarted = true;
 
       var video = document.createElement('video');
-      video.src = '//www.marzipano.net/media/video/mercedes-f1-1280x640.mp4';
+      video.src = data;
+      // video.src = '//www.marzipano.net/media/video/mercedes-f1-1280x640.mp4';
       video.crossOrigin = 'anonymous';
-
 
       video.autoplay = true;
       video.loop = true;
-      video.muted = true;
+      video.muted =  true;
 
       video.playsInline = true;
       video.webkitPlaysInline = true;
-
+      video.currentTime = 0
       video.play();
 
       this.waitForReadyState(video, video.HAVE_ENOUGH_DATA, 100, () => {
@@ -220,7 +232,49 @@ export default {
       this.videoStarted = false
       // scene.view.setParameters(scene.data.initialViewParameters);
       scene.view.setParameters(direction);
+      console.log('scene', scene)
+      // scene.scene.switchTo({
+      //   transitionDuration: 1000,
+      //   transitionUpdate: transitionFunctions.opacity(easings.easeInOutQuad)
+      // });
       scene.scene.switchTo();
+      this.updateMenuNavigation(scene)
+      setTimeout(()=>{
+        this.$store.dispatch("loading", false)
+      }, 1500)
+    },
+    updateMenuNavigation(scene) {
+      let sceneName = scene.data.groupId
+      const currScene = this.$store.getters.visitedScenes[sceneName]
+      const currSceneList = currScene.arr
+      if (currSceneList.indexOf(scene.data.id) < 0) {
+        currSceneList.push(scene.data.id)
+        this.$store.dispatch('visited_scenes', {
+          room: sceneName,
+          arr: currSceneList
+        })
+      }
+      Object.keys(this.$store.getters.navigationStatus).forEach(room => {
+        let scn = this.$store.getters.visitedScenes[room]
+
+        if (sceneName == room && scn.arr.length == scn.len) {
+          this.$store.dispatch('navigation_status', {
+            room: sceneName,
+            status: 'visited-current',
+          })
+        } else if (sceneName != room && scn.arr.length == scn.len) {
+          this.$store.dispatch('navigation_status', {
+            room: sceneName,
+            status: 'visited',
+          })
+        } else if (sceneName == room && scn.arr.length < scn.len) {
+          this.$store.dispatch('navigation_status', {
+            room: sceneName,
+            status: 'current',
+          })
+        } 
+      })
+
     },
     createLinkHotspot(hotspot) {
       let wrapper = document.createElement('div');
@@ -237,12 +291,9 @@ export default {
         icon.style[property] = 'rotate(' + hotspot.rotation + 'rad)';
       }
 
-      wrapper.addEventListener('click', () => {
-        this.switchScene(this.findSceneById(hotspot.target), hotspot.direction);
-      });
+      wrapper.addEventListener('click', (e)=> { this.onSwitchScene(e, hotspot) });
 
       this.stopTouchAndScrollEventPropagation(wrapper);
-
       let tooltip = document.createElement('div');
       tooltip.classList.add('hotspot-tooltip');
       tooltip.classList.add('link-hotspot-tooltip');
@@ -252,6 +303,36 @@ export default {
       wrapper.appendChild(tooltip);
 
       return wrapper;
+    },
+    onSwitchScene(e, hotspot){
+      this.$store.dispatch("loading", true)
+      this.currentVideo = ''
+      console.log('hotspot', hotspot)
+      if (hotspot.target.indexOf('Video') > -1){
+        if (this.videoStarted) {
+          return;
+        }
+        this.videoStarted = true;
+        this.currentVideo = hotspot.target
+        this.$nextTick(()=>{
+          const video = this.$refs[this.currentVideo]
+          video.crossOrigin = 'anonymous';
+          video.autoplay = true;
+          video.loop = true;
+          video.muted =  true;
+          video.playsInline = true;
+          video.webkitPlaysInline = true;
+          // video.currentTime = 0
+          console.log(video)
+          video.play()
+          this.waitForReadyState(video, video.HAVE_ENOUGH_DATA, 100, () => {
+            this.videoAsset.setVideo(video);
+            console.log('video ready')
+          });
+        })
+      }
+      this.switchScene(this.findSceneById(hotspot.target), hotspot.direction);
+      e.preventDefault()
     },
     createInfoHotspot(hotspot) {
       let wrapper = document.createElement('div');
@@ -338,6 +419,7 @@ export default {
   -webkit-touch-callout: none;
   -ms-content-zooming: none;
   -webkit-tap-highlight-color: rgba(0,0,0,0);
+  background-color: $black;
 
   .experience-overlay {
     @include set-size(100%, 100%);
@@ -355,6 +437,7 @@ export default {
   width: 100%;
   height: 100%;
   overflow: hidden;
+  background-color: #000;
 
 }
 canvas {

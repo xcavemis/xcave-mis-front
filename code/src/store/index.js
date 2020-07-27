@@ -20,17 +20,24 @@ export default new Vuex.Store({
     xr_registered: false,
     warningShow: { show: false, text: '' },
     navigationStatus: { 
-      codices: 'visited',
-      civil: 'visited',
-      mixed: 'current',
+      codices: 'pending',
+      civil: 'pending',
+      mixed: 'pending',
       sensorial: 'pending',
       militar: 'pending',
       monalisa: 'pending',
     },
+    visitedScenes: { 
+      codices: { arr: [], len: 3 },
+      civil: { arr: [], len: 5 },
+      mixed: { arr: [], len: 16 },
+      sensorial: { arr: [], len: 8 },
+      militar: { arr: [], len: 5 },
+      monalisa: { arr: [], len: 13 },
+    },
   },
   mutations: {
     authUser(state, { token, user, hasHoursAvaliable, endTime }) {
-      console.log('authUser user', user)
       state.token = token;
       state.user = user;
       state.hasHoursAvaliable = hasHoursAvaliable;
@@ -56,6 +63,9 @@ export default new Vuex.Store({
     },
     navigationStatus(state, obj) {
       state.navigationStatus[obj.room] = obj.status;
+    },
+    visitedScenes(state, obj) {
+      state.visitedScenes[obj.room].arr = obj.arr;
     },
   },
   actions: {
@@ -267,6 +277,9 @@ export default new Vuex.Store({
     navigation_status({ commit }, obj) {
       commit("navigationStatus", obj);
     },
+    visited_scenes({ commit }, obj) {
+      commit("visitedScenes", obj);
+    },
   },
   getters: {
     isAuthenticated(state) {
@@ -303,6 +316,9 @@ export default new Vuex.Store({
     },
     navigationStatus(state) {
       return state.navigationStatus;
+    },
+    visitedScenes(state) {
+      return state.visitedScenes;
     },
   },
   modules: {},

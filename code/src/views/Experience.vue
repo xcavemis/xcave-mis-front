@@ -1,6 +1,7 @@
 <template>
   <div class="experience">
-    <Pano ref="pano" v-if="queueLoaded" v-on:info-layer="onInfoLayer" />
+    <!-- <Pano ref="pano" v-if="queueLoaded" v-on:info-layer="onInfoLayer" /> -->
+    <Panolens ref="pano" v-if="queueLoaded" v-on:info-layer="onInfoLayer"/>
     <HeaderControls ref="headerControls" />
     <FooterControls ref="footerControls" v-on:action="onFooterAction"/>
     <VideoLive v-if="isVideoLive" video-id="c8dFQbj20dg" v-on:close="videoLiveClosed" ref="videoLive" />
@@ -22,13 +23,18 @@
         ref="arModal"
         v-if="isArModal" 
       />
+      <!-- <video v-if="!videoEnded" class="video-intro" autoplay muted ref="videoIntro">
+        <source src="media/videos/da-vinci-intro-small.mp4" type="video/mp4"> -->
+        <!-- <source src="mov_bbb.ogg" type="video/ogg"> -->
+      <!-- </video> -->
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
 import { Preloader } from '@/utils/loaders/Preloader';
-import Pano from '@/components/Pano.vue'
+// import Pano from '@/components/Pano.vue'
+import Panolens from '@/components/Panolens.vue'
 import FooterControls from '@/components/pano/FooterControls.vue'
 import HeaderControls from '@/components/pano/HeaderControls.vue'
 import Map from '@/components/pano/Map.vue'
@@ -40,7 +46,8 @@ import Ar from '@/components/Ar.vue'
 export default {
   name: 'experience',
   components: {
-    Pano,
+    // Pano,
+    Panolens,
     FooterControls,
     HeaderControls,
     VideoLive,
@@ -57,12 +64,12 @@ export default {
     infoModalContent: null,
     preloader: null,
     queueLoaded: false,
+    videoEnded: false,
   }),
   mounted(){
     this.setupQueue()
-    this.$store.dispatch('navigation_status', {
-      room: 'militar',
-      status: 'visited',
+    this.$nextTick(()=>{
+      // this.$refs.videoIntro.addEventListener('ended', this.onVideoIntroEnded, true)
     })
   },
   methods: {
@@ -75,9 +82,9 @@ export default {
         // models
         { name: 'teste', url: 'models/scene.gltf', type: 'gltf' },
         // textures
-        { name: '101', url: '/media/images/codices101.jpg', type: 'texture' },
-        { name: '102', url: '/media/images/codices102.jpg', type: 'texture' },
-        { name: '103', url: '/media/images/codices103.jpg', type: 'texture' },
+        { name: '101', url: '/media/images/CODICES-101.jpg', type: 'texture' },
+        { name: '102', url: '/media/images/CODICES-102.jpg', type: 'texture' },
+        { name: '103', url: '/media/images/CODICES-103.jpg', type: 'texture' },
       ]);
     },
     loadProgress(details){  
@@ -91,6 +98,10 @@ export default {
       this.$store.dispatch('assets', details.data)
       // this.$store.dispatch('loaded', true)
     },
+    onVideoIntroEnded(e){
+      console.log('onVideoIntroEnded', e)
+      this.videoEnded = true
+    },
     panoGoTo(id) {
       console.log('panoGoTo', id)
       this.$refs?.pano?.goToScene(id)
@@ -99,7 +110,7 @@ export default {
       this.isMap = false
     },
     onFooterAction(params) {
-      // console.log('onFooterAction', params)
+      console.log('onFooterAction', params)
       if (params.type == 'live') {
         this.isVideoLive = true
         this.$nextTick(()=>{
@@ -113,6 +124,12 @@ export default {
         this.$nextTick(()=>{
           this.$refs?.map[params.value]()
         })
+      } else if (params.type == 'navigate') {
+        this.$refs?.pano[params.value]()
+      } else if (params.type == 'zoom') {
+        this.$refs?.pano[params.value]()
+      } else if (params.type == 'move') {
+        this.$refs?.pano[params.value]()
       }
     },
     videoLiveClosed() {
@@ -124,7 +141,6 @@ export default {
       if (this.$refs?.footerControls?.musicPlaying) this.$refs?.audioPlayer?.unmute()
     },
     onInfoLayer(params) {
-      console.log('onInfoLayer: ', params)
       if (params.type == 'content') {
         this.infoModalContent = params
         this.isInfoModal = true
@@ -166,6 +182,13 @@ export default {
 .experience {
   @include set-size(100%, 100%);
   position: relative;
+
+  .video-intro {
+    @include set-size(100%, 100%);
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
 
   .footer-controls {
     position: absolute;

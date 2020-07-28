@@ -43,7 +43,7 @@ export default {
             this.dynamicSound?.unload()
             this.$nextTick(()=>{
                 this.dynamicSound = new Howl({
-                    src: [`${path}.mp3`, `${path}.ogg`],
+                    src: [`${path}`, `${path}`],
                     autoplay: true,
                     volume: 1,
                 });

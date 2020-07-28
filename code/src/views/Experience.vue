@@ -1,7 +1,7 @@
 <template>
   <div class="experience">
     <!-- <Pano ref="pano" v-if="queueLoaded" v-on:info-layer="onInfoLayer" /> -->
-    <Panolens ref="pano" v-if="queueLoaded" v-on:info-layer="onInfoLayer"/>
+    <Panolens ref="pano" v-on:info-layer="onInfoLayer"/>
     <HeaderControls ref="headerControls" />
     <FooterControls ref="footerControls" v-on:action="onFooterAction"/>
     <VideoLive v-if="isVideoLive" video-id="c8dFQbj20dg" v-on:close="videoLiveClosed" ref="videoLive" />
@@ -69,8 +69,9 @@ export default {
     isIOS: /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream,
   }),
   mounted(){
-    this.setupQueue()
+    
     this.$nextTick(()=>{
+      // this.setupQueue()
       // this.$refs.videoIntro.addEventListener('ended', this.onVideoIntroEnded, true)
     })
   },
@@ -86,7 +87,7 @@ export default {
         let urlPrefix = `https://hml.exposicaodavinci500anos.com.br/assets${this.isMobile ? '/mob' : ''}`
         let ext = isImage ? `.jpg` : `.mp4`
         let id = scene.id.substring(scene.id.length - 3, scene.id.length)
-        if (index < 6) {
+        if (scene.type == 'image') {
           assetsToLoad.push(
             { 
               name: id, 
@@ -96,7 +97,7 @@ export default {
           )
         }
       })
-      // this.preloader.queue(assetsToLoad);
+      this.preloader.queue(assetsToLoad);
     },
     loadProgress(details){  
       console.log('Preloader loadProgress: ', details);
@@ -179,7 +180,7 @@ export default {
     },
     onPlayAudio(){
       if (!this.infoModalContent.audioLoaded) {
-        this.$refs?.audioPlayer?.playTo(`media/audio/guides/${this.infoModalContent?.audio}`)
+        this.$refs?.audioPlayer?.playTo(`https://hml.exposicaodavinci500anos.com.br/assets/obras/${this.infoModalContent?.audio}`)
       } else {
         this.$refs?.audioPlayer?.play()
       }

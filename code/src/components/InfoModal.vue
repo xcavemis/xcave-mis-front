@@ -3,12 +3,15 @@
         <div class="info-modal__crop">
             <section class="info-modal__block">
                 <div class="info-modal__preview">
-                    <img class="info-modal__preview-image" :src="`media/images/${content.image}`" v-if="content.image" :alt="content.title">
+                    <img class="info-modal__preview-image" ref="imageToDrag" :src="`https://hml.exposicaodavinci500anos.com.br/assets/obras/${imgSrc}`" v-if="imgSrc" :alt="content.title">
                     <!-- <canvas id="canvas-drag" class="info-modal__preview-image"></canvas> -->
                     <div class="info-modal__preview-instructions">
                         <img class="info-modal__preview-icon" src="~@/assets/images/icons/hand.png" @click="hide" alt="CLIQUE E ARRASTE PARA VISUALIZAR">
                         <p class="info-modal__preview-text">CLIQUE E ARRASTE<br>PARA VISUALIZAR</p>
                     </div>
+                    <ul v-if="content.image && content.image.length > 1" class="info-modal__preview-buttons">
+                        <li class="info-modal__preview-button" v-for="idx of content.image.length" :key="idx" @click="changeImage(idx)"></li>
+                    </ul>
                 </div>
                 <div class="info-modal__content">
                     <img class="info-modal__close" src="~@/assets/images/icons/close-info.png" @click="hide" alt="Fechar o conteúdo.">
@@ -34,11 +37,15 @@ export default {
         mouse: {x: 0, y: 0, oldX: 0, oldY: 0, button: false},
         zoomEl: null,
         previewElm: null,
+        imgSrc: null,
         isMobile: navigator.userAgent.toLowerCase().match(/mobile/i),
         isIOS: /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream,
     }),
     mounted(){
+        console.log(this.content.image)
+        this.imgSrc = this.content.image[0]
         this.$nextTick(()=>{
+            this.$refs.imageToDrag.addEventListener('load', this.setInitialSize)
             this.previewElm = this.$el.querySelector('.info-modal__preview')
             // const _canvas = this.$el.querySelector('#canvas-drag')
             // dragAndZoom(
@@ -64,6 +71,21 @@ export default {
         })
     },
     methods: {
+        changeImage(id) {
+            this.imgSrc = this.content.image[id-1]
+            this.$nextTick(()=>{
+                this.$refs.imageToDrag?.addEventListener('load', this.setInitialSize)
+            })
+        },
+        setInitialSize(){
+            if (this.$refs.imageToDrag.offsetWidth > this.$refs.imageToDrag.offsetHeight) {
+                this.$refs.imageToDrag.style.width = 'auto'
+                this.$refs.imageToDrag.style.height = '130%'
+            } else if (this.$refs.imageToDrag.offsetWidth < this.$refs.imageToDrag.offsetHeight) {
+                this.$refs.imageToDrag.style.width = '130%'
+                this.$refs.imageToDrag.style.height = 'auto'
+            }
+        },
         mouseEvent(event) {
             if (event.type === "mousedown") { this.mouse.button = true }
             if (event.type === "mouseup" || event.type === "mouseout") { this.mouse.button = false }
@@ -163,8 +185,8 @@ export default {
                 overflow: hidden;
                 position: relative;
                 .info-modal__preview-image {
-                    // @include set-size(100%, 100%);
-                    @include set-size(100%, auto);
+                    @include set-size(auto, auto);
+                    // @include set-size(100%, auto);
                     // @include center(absolute);
                     pointer-events: none;
                 }
@@ -187,6 +209,34 @@ export default {
                     }
 
                 }
+
+                .info-modal__preview-buttons{
+                    margin: 0;
+                    padding: 0;
+                    width: 100%;
+                    height: 50px;
+                    background-color: rgba(0,0,0,0.2);
+                    position: absolute;
+                    left: 0;
+                    bottom: 0;
+                    display: flex;
+                    justify-content: center;
+                    align-content: center;
+                    .info-modal__preview-button{
+                        width: 20px;
+                        height: 20px;
+                        background-color: $orange;
+                        border-radius: 50%;
+                        margin: 15px 5px;
+                        cursor: pointer;
+                        transition: opacity 0.4s $ease-in-out;
+                        opacity: 1;
+                        &:hover {
+                            opacity: 0.7;
+                        }
+                    }
+                    
+                }
             }
             .info-modal__content {
                 @include set-size(33.3%, 100%);
@@ -208,6 +258,11 @@ export default {
                     overflow-x: hidden;
                     overflow-y: scroll;
                     padding-right: 30px;
+
+                    h2 {
+                        margin: 0;
+                        font-size: 16px;
+                    }
 
                     /* width */
                     &::-webkit-scrollbar {

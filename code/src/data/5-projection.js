@@ -3,7 +3,7 @@ export const projection = {
       {
         id: "projection501Video",
         groupId: 'sensorial',
-        src: 'mercedes-f1-1280x640',
+        src: 'PROJECTION-501',
         type: "video",
         name: "projection 501 VIDEO",
         initialViewParameters: {
@@ -11,8 +11,18 @@ export const projection = {
         },
         infoHotspots: [
           {
-            vec3: [-4849.31, -720.53, -954.74],
+            vec3: [302.98, -1398.12, 4780.85],
             target: "anatomy405",
+            title: 'ANATOMY 405',
+            type: 'link',
+            direction: {
+              vec3: [3965.38, -424.08, 3006.92],
+            },
+          },
+          {
+            vec3: [-4849.31, -720.53, -954.74],
+            target: "projection503",
+            title: 'PROJECTION 503',
             type: 'link',
             direction: {
               vec3: [3965.38, -424.08, 3006.92],
@@ -21,6 +31,7 @@ export const projection = {
           {
             vec3: [4739.42, -1037.13, 1171.10],
             target: "projection502Video",
+            title: 'PROJECTION 502 VIDEO',
             type: 'link',
             direction: {
               vec3: [4184.00, 22.68, -2723.38],
@@ -41,6 +52,7 @@ export const projection = {
           {
             vec3: [2298.14, -1203.51, -4266.67],
             target: "anatomy405",
+            title: 'ANATOMY 405',
             type: 'link',
             direction: {
               vec3: [3965.38, -424.08, 3006.92],
@@ -49,6 +61,7 @@ export const projection = {
           {
             vec3: [346.03, -1033.80, 4870.26],
             target: "projection503",
+            title: 'PROJECTION 503',
             type: 'link',
             direction: {
               vec3: [4184.00, 22.68, -2723.38],
@@ -79,6 +92,7 @@ export const projection = {
           {
             vec3: [2298.14, -1203.51, -4266.67],
             target: "anatomy405",
+            title: 'ANATOMY 405',
             type: 'link',
             direction: {
               vec3: [3965.38, -424.08, 3006.92],
@@ -86,6 +100,7 @@ export const projection = {
           },
           {
             vec3: [346.03, -1033.80, 4870.26],
+            title: 'PROJECTION 503',
             target: "projection503",
             type: 'link',
             direction: {
@@ -116,6 +131,7 @@ export const projection = {
           {
             vec3: [-2073.68, -881.96, 4456.11],
             target: "projection501",
+            title: 'PROJECTION 501 VIDEO',
             type: 'link',
             direction: {
               vec3: [4184.00, 22.68, -2723.38],
@@ -124,6 +140,7 @@ export const projection = {
           {
             vec3: [-2603.56, -1338.82, -4040.75],
             target: "military601",
+            title: 'MILITARY 601',
             type: 'link',
             direction: {
               vec3: [4184.00, 22.68, -2723.38],

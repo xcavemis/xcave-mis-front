@@ -33,7 +33,7 @@ module.exports = {
       pwaFiles: "Comma-separated list of files to treat as PWA files",
       enableCloudfront: true,
       cloudfrontId: process.env.VUE_APP_CLOUDFRONT_ID,
-      cloudfrontMatchers: "/*",
+      cloudfrontMatchers: "/index.html",
       uploadConcurrency: 5,
       gzip: true,
       gzipFilePattern:

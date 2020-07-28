@@ -184,6 +184,7 @@ export const anatomy = {
             vec3: [-4622.24, -1900.15, 39.08],
             target: "anatomy404",
             type: 'link',
+            title: 'ANATOMY 404',
             direction: {
               vec3: [4184.00, 22.68, -2723.38],
             },
@@ -192,6 +193,7 @@ export const anatomy = {
             vec3: [497.50, -1612.23, -4704.12],
             target: "projection501",
             type: 'link',
+            title: 'PROJECTION 501',
             direction: {
               vec3: [-2528.08, 81.07, 4308.10],
             },
@@ -199,6 +201,7 @@ export const anatomy = {
           {
             vec3: [1502.05, -1525.15, -4516.05],
             target: "projection501Video",
+            title: 'PROJECTION 501 VIDEO',
             type: 'link',
             direction: {
               vec3: [4184.00, 22.68, -2723.38],

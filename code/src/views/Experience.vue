@@ -63,7 +63,7 @@ export default {
     isMap: false,
     infoModalContent: null,
     preloader: null,
-    queueLoaded: false,
+    queueLoaded: true,
     videoEnded: false,
     isMobile: navigator.userAgent.toLowerCase().match(/mobile/i),
     isIOS: /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream,
@@ -96,17 +96,17 @@ export default {
           )
         }
       })
-      this.preloader.queue(assetsToLoad);
+      // this.preloader.queue(assetsToLoad);
     },
     loadProgress(details){  
       console.log('Preloader loadProgress: ', details);
-      if (details.data > 0.05) this.queueLoaded = true
       // this.$store.dispatch('loading_progress', details.data * 100)
       // this.$store.dispatch('loaded', true)
     },
     loadComplete(details){  
       console.log('Preloader complete: ', details);
       this.$store.dispatch('assets', details.data)
+      // this.queueLoaded = true
       // this.$store.dispatch('loaded', true)
     },
     onVideoIntroEnded(e){

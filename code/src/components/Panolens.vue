@@ -36,6 +36,8 @@ export default {
       this.viewer = new PANOLENS.Viewer({
         container: this.$el.querySelector('.panolens-container'),
         output: 'console',
+        controlButtons: ['video'],
+        autoHideInfospot: false
       })
       this.viewer.getControl().minFov = 20
       this.viewer.getControl().maxFov = 70
@@ -75,7 +77,7 @@ export default {
       this.panos = {}
       const scene = this.findSceneDataById(key)
       let isImage = scene.type == 'image'
-      // let urlPrefix = isImage ? `/media/images/${this.isMobile ? '/mob' : ''}` : "/media/videos";
+      // let urlPrefix = isImage ? `https://hml.exposicaodavinci500anos.com.br/assets${this.isMobile ? '/mob' : ''}` : "/media/videos";
       let urlPrefix = isImage ? `https://hml.exposicaodavinci500anos.com.br/assets${this.isMobile ? '/mob' : ''}` : "https://hml.exposicaodavinci500anos.com.br/assets/videos";
       let ext = isImage ? `.jpg` : `.mp4`
       let id = scene.id.substring(scene.id.length - 3, scene.id.length)
@@ -83,10 +85,11 @@ export default {
       console.log(this.$store.getters.assets[id])
       let currentPano = isImage ? 
         new PANOLENS.ImagePanorama(  this.$store.getters.assets[id] ? this.$store.getters.assets[id].image : `${urlPrefix}/${scene.src}${ext}` ) :
-        new PANOLENS.VideoPanorama(  `${urlPrefix}/${scene.src}${ext}`, { autoplay: true } );
+        new PANOLENS.VideoPanorama(  `${urlPrefix}/${scene.src}${ext}`, { autoplay: true, muted: true} );
 
       currentPano.addEventListener( 'enter-fade-start', ()=>{
-        
+        this.viewer.getControl().object.fov = 50
+        this.viewer.getControl().object.updateProjectionMatrix();
         let dir;
         if (direction == null) {
           dir = new THREE.Vector3(scene.initialViewParameters.vec3[0], scene.initialViewParameters.vec3[1], scene.initialViewParameters.vec3[2])
@@ -349,7 +352,7 @@ export default {
   top: 0;
   left: 0;
   width: 100%;
-  height: 100%;
+  height: calc(100vh - 70px);
   overflow: hidden;
   background-color: #000;
 

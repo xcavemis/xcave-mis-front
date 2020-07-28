@@ -8,35 +8,32 @@ export const anatomy = {
         name: "anatomy 401",
         faceSize: 6144,
         initialViewParameters: {
-          yaw: -1.0466256635223559, pitch: 0.02441289226320542,
-          fov: 1.5707963267948966
+          vec3: [2753.78, -65.61, 4162.25],
         },
-        linkHotspots: [
-          {
-            yaw: 0.9314757271747585, pitch: 0.4024228867281252,
-            rotation: 0,
-            target: "mixed316",
-            direction: {
-              yaw: 1.5358998252103762, pitch: 0.03038155458975389,
-              fov: 1.5707963267948966,
-            },
-          },
-          {
-            yaw: 2.7879146688196395, pitch: 0.6028420260412517,
-            rotation: 0,
-            target: "anatomy402",
-            direction: {
-              yaw: 3.065203447794607, pitch: -0.054666325205939614,
-              fov: 1.5707963267948966,
-            },
-          },
-        ],
         infoHotspots: [
           {
-            yaw: -0.8231056180548961, pitch: -0.04273978330956574,
+            vec3: [2743.94, -1607.57, -3852.87],
+            target: "mixed316",
+            title: "GALERIA MISTA 316",
+            type: 'link',
+            direction: {
+              vec3: [573.28, -59.49, -4962.23],
+            },
+          },
+          {
+            vec3: [-1050.38, -2670.70, -4085.88],
+            target: "anatomy402",
+            title: "ANATOMY 402",
+            type: 'link',
+            direction: {
+              vec3: [187.27, -31.62, -4988.94],
+            },
+          },
+          {
+            vec3: [3299.05, -1050.82, 3599.92],
             title: "D-401",
             type: 'content',
-            image: "101/la-bele-feroniere.jpg",
+            image: ["101/la-bele-feroniere.jpg"],
             audio: '101/guide',
             text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien elit, fermentum aliquet malesuada tempus, aliquet sodales magna. Phasellus ultrices mattis bibendum.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien elit, fermentum aliquet malesuada tempus, aliquet sodales magna. Phasellus ultrices mattis bibendum.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien elit, fermentum aliquet malesuada tempus, aliquet sodales magna. Phasellus ultrices mattis bibendum.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien elit, fermentum aliquet malesuada tempus, aliquet sodales magna. Phasellus ultrices mattis bibendum.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien elit, fermentum aliquet malesuada tempus, aliquet sodales magna. Phasellus ultrices mattis bibendum."
           },
@@ -51,35 +48,40 @@ export const anatomy = {
         name: "anatomy 402",
         faceSize: 6144,
         initialViewParameters: {
-          yaw: 1.6571373744723648, pitch: 0.009262727015208583,
-          fov: 1.5707963267948966
+          vec3: [369.58, -133.05, -4975.40],
         },
-        linkHotspots: [
-          {
-            yaw: -0.614147237890375, pitch: 0.47444164248169685,
-            rotation: 0,
-            target: "anatomy401",
-            direction: {
-              yaw: -1.0603079527844663, pitch: 0.06596340816781066,
-              fov: 1.5707963267948966,
-            },
-          },
-          {
-            yaw: -2.439176190425547, pitch: 0.5105842753171839,
-            rotation: 0,
-            target: "anatomy403",
-            direction: {
-              yaw: -1.859167821372525, pitch: -0.000990600456720614,
-              fov: 1.5707963267948966,
-            },
-          },
-        ],
         infoHotspots: [
           {
-            yaw: 1.1046917604279205, pitch: -0.13135322316533227,
+            vec3: [3596.36, -2208.85, 2672.98],
+            target: "anatomy401",
+            title: "ANATOMY 401",
+            type: 'link',
+            direction: {
+              vec3: [2753.78, -65.61, 4162.25],
+            },
+          },
+          {
+            vec3: [-533.19, -1888.67, 4595.35],
+            target: "anatomy403",
+            title: "ANATOMY 403",
+            type: 'link',
+            direction: {
+              vec3: [2050.17, -75.21, 4556.01],
+            },
+          },
+          {
+            vec3: [3003.78, -1124.82, -3825.88],
             title: "D-402",
             type: 'content',
-            image: "101/la-bele-feroniere.jpg",
+            image: ["101/la-bele-feroniere.jpg"],
+            audio: '101/guide',
+            text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien elit, fermentum aliquet malesuada tempus, aliquet sodales magna. Phasellus ultrices mattis bibendum.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien elit, fermentum aliquet malesuada tempus, aliquet sodales magna. Phasellus ultrices mattis bibendum.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien elit, fermentum aliquet malesuada tempus, aliquet sodales magna. Phasellus ultrices mattis bibendum.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien elit, fermentum aliquet malesuada tempus, aliquet sodales magna. Phasellus ultrices mattis bibendum.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien elit, fermentum aliquet malesuada tempus, aliquet sodales magna. Phasellus ultrices mattis bibendum."
+          },
+          {
+            vec3: [-4185.68, -2281.22, -1492.74],
+            title: "D-403",
+            type: 'content',
+            image: ["101/la-bele-feroniere.jpg"],
             audio: '101/guide',
             text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien elit, fermentum aliquet malesuada tempus, aliquet sodales magna. Phasellus ultrices mattis bibendum.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien elit, fermentum aliquet malesuada tempus, aliquet sodales magna. Phasellus ultrices mattis bibendum.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien elit, fermentum aliquet malesuada tempus, aliquet sodales magna. Phasellus ultrices mattis bibendum.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien elit, fermentum aliquet malesuada tempus, aliquet sodales magna. Phasellus ultrices mattis bibendum.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien elit, fermentum aliquet malesuada tempus, aliquet sodales magna. Phasellus ultrices mattis bibendum."
           },
@@ -94,30 +96,28 @@ export const anatomy = {
         name: "anatomy 403",
         faceSize: 6144,
         initialViewParameters: {
-          yaw: -1.143310242328086, pitch: 0.010192809813455384,
-          fov: 1.5707963267948966
+          vec3: [2056.33, -61.89, 4553.46],
         },
-        linkHotspots: [
+        infoHotspots: [
           {
-            yaw: 1.8340332755417812, pitch: 0.5090823874592196,
-            rotation: 0,
+            vec3: [-932.71, -2334.97, -4318.31],
             target: "anatomy402",
+            title: "ANATOMY 402",
+            type: 'link',
             direction: {
-              yaw: 1.1450163480997357, pitch: -0.05422921884550291,
-              fov: 1.5707963267948966,
+              vec3: [369.58, -133.05, -4975.40],
             },
           },
           {
-            yaw: 2.937811788904649, pitch: 0.36372350646591833,
-            rotation: 0,
+            vec3: [-4587.25, -1648.35, -1080.97],
             target: "anatomy404",
+            title: "ANATOMY 404",
+            type: 'link',
             direction: {
-              yaw: 1.4178956457862135, pitch: 0.03239878249429573,
-              fov: 1.5707963267948966,
+              vec3: [680.29, -227.38, -4938.61],
             },
           },
-        ],
-        infoHotspots: []
+        ]
       },
       {
         id: "anatomy404",
@@ -127,47 +127,51 @@ export const anatomy = {
         name: "anatomy 404",
         faceSize: 6144,
         initialViewParameters: {
-          yaw: -0.1895944259605784, pitch: -0.04498210015403359,
-          fov: 1.5707963267948966
+          vec3: [4918.03, 11.49, 864.39],
         },
-        linkHotspots: [
-          {
-            yaw: -1.8260740683239334, pitch: 0.4523133060770199,
-            rotation: 0,
-            target: "anatomy403",
-            direction: {
-              yaw: -0.338530169750733, pitch: -0.043394741122337877,
-              fov: 1.5707963267948966,
-            },
-          },
-          {
-            yaw: 1.4895329347659363, pitch: 0.4303185966805181,
-            rotation: 0,
-            target: "anatomy405",
-            direction: {
-              yaw: 0.003102047909834482, pitch: -0.0033941117471769644,
-              fov: 1.5707963267948966,
-            },
-          },
-        ],
         infoHotspots: [
           {
-            yaw: -0.3638006741159714, pitch: -0.07280144225411789,
-            title: "D-403",
+            vec3: [-1011.79, -1674.25, 4595.91],
+            target: "anatomy403",
+            title: "ANATOMY 403",
+            type: 'link',
+            direction: {
+              vec3: [4727.11, -239.98, 1592.20],
+            },
+          },
+          {
+            vec3: [543.29, -1850.26, -4608.08],
+            target: "anatomy405",
+            title: "ANATOMY 405",
+            type: 'link',
+            direction: {
+              vec3: [4978.86, -434.59, -13.68],
+            },
+          },
+          {
+            vec3: [4695.90, 104.90, 1688.29],
+            title: "D-404",
             type: 'content',
-            image: "101/la-bele-feroniere.jpg",
+            image: ["101/la-bele-feroniere.jpg"],
             audio: '101/guide',
             text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien elit, fermentum aliquet malesuada tempus, aliquet sodales magna. Phasellus ultrices mattis bibendum.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien elit, fermentum aliquet malesuada tempus, aliquet sodales magna. Phasellus ultrices mattis bibendum.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien elit, fermentum aliquet malesuada tempus, aliquet sodales magna. Phasellus ultrices mattis bibendum.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien elit, fermentum aliquet malesuada tempus, aliquet sodales magna. Phasellus ultrices mattis bibendum.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien elit, fermentum aliquet malesuada tempus, aliquet sodales magna. Phasellus ultrices mattis bibendum."
           },
           {
-            yaw: 0.3653643001943827, pitch: -0.0631236667169972,
-            title: "D-404",
+            vec3: [4645.13, 60.26, -1825.44],
+            title: "D-405",
             type: 'content',
-            image: "101/la-bele-feroniere.jpg",
+            image: ["101/la-bele-feroniere.jpg"],
             audio: '101/guide',
             text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien elit, fermentum aliquet malesuada tempus, aliquet sodales magna. Phasellus ultrices mattis bibendum.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien elit, fermentum aliquet malesuada tempus, aliquet sodales magna. Phasellus ultrices mattis bibendum.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien elit, fermentum aliquet malesuada tempus, aliquet sodales magna. Phasellus ultrices mattis bibendum.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien elit, fermentum aliquet malesuada tempus, aliquet sodales magna. Phasellus ultrices mattis bibendum.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien elit, fermentum aliquet malesuada tempus, aliquet sodales magna. Phasellus ultrices mattis bibendum."
           },
-          
+          {
+            vec3: [-4623.47, -857.81, -1674.99],
+            title: "D-406",
+            type: 'content',
+            image: ["101/la-bele-feroniere.jpg"],
+            audio: '101/guide',
+            text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien elit, fermentum aliquet malesuada tempus, aliquet sodales magna. Phasellus ultrices mattis bibendum.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien elit, fermentum aliquet malesuada tempus, aliquet sodales magna. Phasellus ultrices mattis bibendum.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien elit, fermentum aliquet malesuada tempus, aliquet sodales magna. Phasellus ultrices mattis bibendum.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien elit, fermentum aliquet malesuada tempus, aliquet sodales magna. Phasellus ultrices mattis bibendum.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien elit, fermentum aliquet malesuada tempus, aliquet sodales magna. Phasellus ultrices mattis bibendum."
+          },
         ]
       },
       {
@@ -204,26 +208,9 @@ export const anatomy = {
             title: 'PROJECTION 501 VIDEO',
             type: 'link',
             direction: {
-              vec3: [4184.00, 22.68, -2723.38],
+              vec3: [4501.77, 225.07, 2143.68],
             },
           },
-          {
-            vec3: [2385.79, 688.14, 4331.80],
-            title: "D-405",
-            type: 'content',
-            image: "101/la-bele-feroniere.jpg",
-            audio: '101/guide',
-            text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien elit, fermentum aliquet malesuada tempus, aliquet sodales magna. Phasellus ultrices mattis bibendum.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien elit, fermentum aliquet malesuada tempus, aliquet sodales magna. Phasellus ultrices mattis bibendum.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien elit, fermentum aliquet malesuada tempus, aliquet sodales magna. Phasellus ultrices mattis bibendum.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien elit, fermentum aliquet malesuada tempus, aliquet sodales magna. Phasellus ultrices mattis bibendum.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien elit, fermentum aliquet malesuada tempus, aliquet sodales magna. Phasellus ultrices mattis bibendum."
-          },
-          {
-            vec3: [4646.77, 661.52, -1696.01],
-            title: "D-406",
-            type: 'content',
-            image: "101/la-bele-feroniere.jpg",
-            audio: '101/guide',
-            text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien elit, fermentum aliquet malesuada tempus, aliquet sodales magna. Phasellus ultrices mattis bibendum.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien elit, fermentum aliquet malesuada tempus, aliquet sodales magna. Phasellus ultrices mattis bibendum.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien elit, fermentum aliquet malesuada tempus, aliquet sodales magna. Phasellus ultrices mattis bibendum.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien elit, fermentum aliquet malesuada tempus, aliquet sodales magna. Phasellus ultrices mattis bibendum.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien elit, fermentum aliquet malesuada tempus, aliquet sodales magna. Phasellus ultrices mattis bibendum."
-          },
-          
         ]
       },
     ],

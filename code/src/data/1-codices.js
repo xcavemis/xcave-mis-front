@@ -12,7 +12,7 @@ export const codices = {
       infoHotspots: [
         {
           vec3: [699.84, -1624.78, -4667.39],
-          title: "CODICES 102",
+          title: "CÓDICES 102",
           type: 'link',
           target: "codices102",
           direction: {
@@ -23,9 +23,13 @@ export const codices = {
           vec3: [4930.12, -367.29, 698.80],
           title: "D-101",
           type: 'content',
-          image: "101/la-bele-feroniere.jpg",
+          image: ["101/la-bele-feroniere.jpg"],
           audio: '101/guide',
-          text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien elit, fermentum aliquet malesuada tempus, aliquet sodales magna. Phasellus ultrices mattis bibendum.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien elit, fermentum aliquet malesuada tempus, aliquet sodales magna. Phasellus ultrices mattis bibendum.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien elit, fermentum aliquet malesuada tempus, aliquet sodales magna. Phasellus ultrices mattis bibendum.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien elit, fermentum aliquet malesuada tempus, aliquet sodales magna. Phasellus ultrices mattis bibendum.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien elit, fermentum aliquet malesuada tempus, aliquet sodales magna. Phasellus ultrices mattis bibendum."
+          text:  `<h2>C&Oacute;DICES</h2>
+          <p>As observa&ccedil;&otilde;es cient&iacute;ficas e t&eacute;cnicas de Leonardo podem ser encontradas em suas anota&ccedil;&otilde;es e esbo&ccedil;os, dos quais cerca de 6.000 p&aacute;ginas ainda existem. Muitas delas foram reunidas em "c&oacute;dices" (antigos manuscritos em forma de livro).</p>
+          <p>Em 1630 Pompeo Leoni, um escultor da corte espanhola, obteve muitas das p&aacute;ginas remanescentes. Ele tentou organiz&aacute;-las por assunto - uma tarefa consider&aacute;vel, mas que resultou apenas na desorganiza&ccedil;&atilde;o da ordem original das p&aacute;ginas, o que poderia ter sido fundamental para entendermos o processo mental de Leonardo. Cada um dos novos livros criados por esse processo &eacute; agora conhecido como c&oacute;dice.</p>
+          <p><strong>C&oacute;dice Arundel</strong><br />Essa cole&ccedil;&atilde;o, composta de um manuscrito de papel atado por couro marroquino, se encontra na Biblioteca Brit&acirc;nica, em Londres. Cont&eacute;m 238 p&aacute;ginas de tamanhos variados, que foram cortadas ou removidas de outros manuscritos. A maioria de suas p&aacute;ginas data do per&iacute;odo entre 1480 e 1518. As anota&ccedil;&otilde;es tratam de diferentes temas, incluindo geometria, pesos e arquitetura. Entre elas, h&aacute; notas sobre a resid&ecirc;ncia real de Francisco I em Romorantin, na Fran&ccedil;a.</p>
+          <p><strong>C&oacute;dice Forster (I-III)</strong><br />Esses tr&ecirc;s manuscritos atados com papel-pergaminho est&atilde;o em Londres, no Museu Vit&oacute;ria e Alberto. Eles s&atilde;o conhecidos como Forster I (duas partes, uma escrita entre 1487 - 1490 e outra de 1505), Forster II (1495-1497) e Forster III (1490-1496). Incluem estudos sobre geometria, pesos e m&aacute;quinas hidr&aacute;ulicas.</p>.`
         },
         // {
         //   yaw: -0.1158860785837117, pitch: 0.1134721887779726,
@@ -67,7 +71,7 @@ export const codices = {
           vec3: [4129.81, -403.57, -2777.75],
           title: "D-102",
           type: 'content',
-          image: "101/la-bele-feroniere.jpg",
+          image: ["101/la-bele-feroniere.jpg"],
           audio: '101/guide',
           text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien elit, fermentum aliquet malesuada tempus, aliquet sodales magna. Phasellus ultrices mattis bibendum.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien elit, fermentum aliquet malesuada tempus, aliquet sodales magna. Phasellus ultrices mattis bibendum.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien elit, fermentum aliquet malesuada tempus, aliquet sodales magna. Phasellus ultrices mattis bibendum.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien elit, fermentum aliquet malesuada tempus, aliquet sodales magna. Phasellus ultrices mattis bibendum.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien elit, fermentum aliquet malesuada tempus, aliquet sodales magna. Phasellus ultrices mattis bibendum."
         },
@@ -75,7 +79,7 @@ export const codices = {
           vec3: [1768.74, -421.07, -4649.30],
           title: "D-103",
           type: 'content',
-          image: "101/la-bele-feroniere.jpg",
+          image: ["101/la-bele-feroniere.jpg"],
           audio: '101/guide',
           text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien elit, fermentum aliquet malesuada tempus, aliquet sodales magna. Phasellus ultrices mattis bibendum.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien elit, fermentum aliquet malesuada tempus, aliquet sodales magna. Phasellus ultrices mattis bibendum.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien elit, fermentum aliquet malesuada tempus, aliquet sodales magna. Phasellus ultrices mattis bibendum.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien elit, fermentum aliquet malesuada tempus, aliquet sodales magna. Phasellus ultrices mattis bibendum.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien elit, fermentum aliquet malesuada tempus, aliquet sodales magna. Phasellus ultrices mattis bibendum.<br>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien elit, fermentum aliquet malesuada tempus, aliquet sodales magna. Phasellus ultrices mattis bibendum.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien elit, fermentum aliquet malesuada tempus, aliquet sodales magna. Phasellus ultrices mattis bibendum.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien elit, fermentum aliquet malesuada tempus, aliquet sodales magna. Phasellus ultrices mattis bibendum.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien elit, fermentum aliquet malesuada tempus, aliquet sodales magna. Phasellus ultrices mattis bibendum.Lorem ipsum dolor sit amet, consectetur adipiscing elit."
         },
@@ -83,7 +87,7 @@ export const codices = {
           vec3: [-2341.86, -468.72, -4383.29],
           title: "D-104",
           type: 'content',
-          image: "101/la-bele-feroniere.jpg",
+          image: ["101/la-bele-feroniere.jpg"],
           audio: '101/guide',
           text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien elit, fermentum aliquet malesuada tempus, aliquet sodales magna. Phasellus ultrices mattis bibendum.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien elit, fermentum aliquet malesuada tempus, aliquet sodales magna. Phasellus ultrices mattis bibendum.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien elit, fermentum aliquet malesuada tempus, aliquet sodales magna. Phasellus ultrices mattis bibendum.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien elit, fermentum aliquet malesuada tempus, aliquet sodales magna. Phasellus ultrices mattis bibendum.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien elit, fermentum aliquet malesuada tempus, aliquet sodales magna. Phasellus ultrices mattis bibendum.<br>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien elit, fermentum aliquet malesuada tempus, aliquet sodales magna. Phasellus ultrices mattis bibendum.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien elit, fermentum aliquet malesuada tempus, aliquet sodales magna. Phasellus ultrices mattis bibendum.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien elit, fermentum aliquet malesuada tempus, aliquet sodales magna. Phasellus ultrices mattis bibendum.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien elit, fermentum aliquet malesuada tempus, aliquet sodales magna. Phasellus ultrices mattis bibendum.Lorem ipsum dolor sit amet, consectetur adipiscing elit."
         },
@@ -91,7 +95,7 @@ export const codices = {
           vec3: [578.16, 4292.65, -2491.67],
           title: "D-105",
           type: 'content',
-          image: "101/la-bele-feroniere.jpg",
+          image: ["101/la-bele-feroniere.jpg"],
           audio: '101/guide',
           text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien elit, fermentum aliquet malesuada tempus, aliquet sodales magna. Phasellus ultrices mattis bibendum.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien elit, fermentum aliquet malesuada tempus, aliquet sodales magna. Phasellus ultrices mattis bibendum.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien elit, fermentum aliquet malesuada tempus, aliquet sodales magna. Phasellus ultrices mattis bibendum.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien elit, fermentum aliquet malesuada tempus, aliquet sodales magna. Phasellus ultrices mattis bibendum.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien elit, fermentum aliquet malesuada tempus, aliquet sodales magna. Phasellus ultrices mattis bibendum.<br>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien elit, fermentum aliquet malesuada tempus, aliquet sodales magna. Phasellus ultrices mattis bibendum.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien elit, fermentum aliquet malesuada tempus, aliquet sodales magna. Phasellus ultrices mattis bibendum.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien elit, fermentum aliquet malesuada tempus, aliquet sodales magna. Phasellus ultrices mattis bibendum.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien elit, fermentum aliquet malesuada tempus, aliquet sodales magna. Phasellus ultrices mattis bibendum.Lorem ipsum dolor sit amet, consectetur adipiscing elit."
         }

@@ -6,44 +6,39 @@ export const monalisaLayers = {
         src: 'MONA-LISA-LAYERS-801',
         type: "image",
         name: "monalisa-layers 801",
-        faceSize: 6144,
         initialViewParameters: {
-          yaw: -2.3446164332266264, pitch: 0.006668262092995647,
-          fov: 1.5707963267948966
+          vec3: [3112.14, -157.26, 3896.88],
         },
-        linkHotspots: [
-          {
-            yaw: 2.441032195267165, pitch: 0.36900764884262216,
-            rotation: 0,
-            target: "monalisa-colors705",
-            direction: {
-              yaw: 0.6139986849180303, pitch: 0.007368291862967169,
-              fov: 1.5707963267948966,
-            },
-          },
-          {
-            yaw: -0.7960726282609141, pitch: 0.4391662804158649,
-            rotation: 0,
-            target: "monalisa-layers802",
-            direction: {
-              yaw: -2.30466158460821, pitch: -0.059141425238998124,
-              fov: 1.5707963267948966,
-            },
-          },
-          {
-            yaw: 0.9955519776114663, pitch: 0.38773298810148127,
-            rotation: 0,
-            target: "monalisa-layers803",
-            direction: {
-              yaw: -1.7317188532925325, pitch: -0.053751090965480586,
-              fov: 1.5707963267948966,
-            },
-          },
-        ],
         infoHotspots: [
           {
-            yaw: -2.441376856159879, pitch: -0.0602882628024215,
+            vec3: [-3469.00, -1341.30, -3327.93],
+            target: "monalisa-colors705",
+            title: "MONA LISA COLORS 705",
+            type: 'link',
+            direction: {
+              vec3: [1284.19, -132.58, -4819.80],
+            },
+          },
+          {
+            vec3: [1429.45, -1629.17, -4501.19],
+            target: "monalisa-layers802",
+            title: "MONA LISA LAYERS 802",
+            type: 'link',
+            direction: {
+              vec3: [2149.81, -346.33, 4493.31],
+            },
+          },
+          {
+            vec3: [-3751.84, -50.88, 3297.88],
             title: "D-801",
+            type: 'content',
+            image: "101/la-bele-feroniere.jpg",
+            audio: '101/guide',
+            text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien elit, fermentum aliquet malesuada tempus, aliquet sodales magna. Phasellus ultrices mattis bibendum.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien elit, fermentum aliquet malesuada tempus, aliquet sodales magna. Phasellus ultrices mattis bibendum.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien elit, fermentum aliquet malesuada tempus, aliquet sodales magna. Phasellus ultrices mattis bibendum.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien elit, fermentum aliquet malesuada tempus, aliquet sodales magna. Phasellus ultrices mattis bibendum.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien elit, fermentum aliquet malesuada tempus, aliquet sodales magna. Phasellus ultrices mattis bibendum."
+          },
+          {
+            vec3: [4690.53, 25.42, 1710.97],
+            title: "D-802",
             type: 'content',
             image: "101/la-bele-feroniere.jpg",
             audio: '101/guide',
@@ -57,35 +52,47 @@ export const monalisaLayers = {
         src: 'MONA-LISA-LAYERS-802',
         type: "image",
         name: "monalisa-layers 802",
-        faceSize: 6144,
         initialViewParameters: {
-          yaw: -2.3446164332266264, pitch: 0.006668262092995647,
-          fov: 1.5707963267948966
+          vec3: [2667.06, -271.18, 4208.95],
         },
-        linkHotspots: [
-          {
-            yaw: 1.4945836621655957, pitch: 0.6794586795803195,
-            rotation: 0,
-            target: "monalisa-layers801",
-            direction: {
-              yaw: 2.9644755427198, pitch: 0.03469443150717311,
-              fov: 1.5707963267948966,
-            },
-          },
-          {
-            yaw: -0.24497345498414091, pitch: 0.42185939544616957,
-            rotation: 0,
-            target: "monalisa-layers803",
-            direction: {
-              yaw: 1.7523355092856194, pitch: 0.02077224832924962,
-              fov: 1.5707963267948966,
-            },
-          },
-        ],
         infoHotspots: [
           {
-            yaw: -2.2276624015807283, pitch: -0.30177569549819694,
-            title: "D-802",
+            vec3: [543.29, -1850.26, -4608.08],
+            target: "monalisa-layers801",
+            title: "MONA LISA LAYERS 801",
+            type: 'link',
+            direction: {
+              vec3: [-3581.02, -335.73, 3461.73],
+            },
+          },
+          {
+            vec3: [-3778.16, -1502.09, -2899.47],
+            target: "monalisa-layers803",
+            title: "MONA LISA LAYERS 803",
+            type: 'link',
+            direction: {
+              vec3: [4021.88, -343.41, -2946.18],
+            },
+          },
+          {
+            vec3: [4880.39, 327.93, -1022.62],
+            title: "D-805",
+            type: 'content',
+            image: "101/la-bele-feroniere.jpg",
+            audio: '101/guide',
+            text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien elit, fermentum aliquet malesuada tempus, aliquet sodales magna. Phasellus ultrices mattis bibendum.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien elit, fermentum aliquet malesuada tempus, aliquet sodales magna. Phasellus ultrices mattis bibendum.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien elit, fermentum aliquet malesuada tempus, aliquet sodales magna. Phasellus ultrices mattis bibendum.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien elit, fermentum aliquet malesuada tempus, aliquet sodales magna. Phasellus ultrices mattis bibendum.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien elit, fermentum aliquet malesuada tempus, aliquet sodales magna. Phasellus ultrices mattis bibendum."
+          },
+          {
+            vec3: [2802.81, 552.05, 4092.61],
+            title: "D-806",
+            type: 'content',
+            image: "101/la-bele-feroniere.jpg",
+            audio: '101/guide',
+            text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien elit, fermentum aliquet malesuada tempus, aliquet sodales magna. Phasellus ultrices mattis bibendum.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien elit, fermentum aliquet malesuada tempus, aliquet sodales magna. Phasellus ultrices mattis bibendum.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien elit, fermentum aliquet malesuada tempus, aliquet sodales magna. Phasellus ultrices mattis bibendum.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien elit, fermentum aliquet malesuada tempus, aliquet sodales magna. Phasellus ultrices mattis bibendum.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien elit, fermentum aliquet malesuada tempus, aliquet sodales magna. Phasellus ultrices mattis bibendum."
+          },
+          {
+            vec3: [-1143.73, 635.39, 4817.14],
+            title: "D-807",
             type: 'content',
             image: "101/la-bele-feroniere.jpg",
             audio: '101/guide',
@@ -99,43 +106,30 @@ export const monalisaLayers = {
         src: 'MONA-LISA-LAYERS-803',
         type: "image",
         name: "monalisa-layers 803",
-        faceSize: 6144,
         initialViewParameters: {
-          yaw: -1.7150608891795827, pitch: -0.03946217746387504,
-          fov: 1.5707963267948966
+          vec3: [4116.54, -353.12, -2803.46],
         },
-        linkHotspots: [
-          {
-            yaw: 1.5826382929725415, pitch: 0.4560223157478518,
-            rotation: 0,
-            target: "monalisa-layers801",
-            direction: {
-              yaw: -2.3446164332266264, pitch: 0.006668262092995647,
-              fov: 1.5707963267948966,
-            },
-          },
-          {
-            yaw: 2.060943950902389, pitch: 0.38946903372586306,
-            rotation: 0,
-            target: "monalisa-layers802",
-            direction: {
-              yaw: 3.080322959446466, pitch: -0.06331717231309675,
-              fov: 1.5707963267948966,
-            },
-          },
-          {
-            yaw: 2.62503446816698, pitch: 0.4101085643982447,
-            rotation: 0,
-            target: "monalisa-layers804",
-            direction: {
-              yaw: 0.5163077955604685, pitch: -0.025883529384193693,
-              fov: 1.5707963267948966,
-            },
-          },
-        ],
         infoHotspots: [
           {
-            yaw: -0.19081237242965265, pitch: -0.1960140510451467,
+            vec3: [-3178.10, -1312.37, 3621.28],
+            target: "monalisa-layers802",
+            title: "MONA LISA LAYERS 802",
+            type: 'link',
+            direction: {
+              vec3: [2725.60, -460.11, 4155.71],
+            },
+          },
+          {
+            vec3: [-3918.93, -1819.62, -2498.77],
+            target: "monalisa-layers804",
+            title: "MONA LISA LAYERS 804",
+            type: 'link',
+            direction: {
+              vec3: [3846.57, -403.72, -3157.47],
+            },
+          },
+          {
+            vec3: [4724.61, 100.65, 1613.96],
             title: "D-803",
             type: 'content',
             image: "101/la-bele-feroniere.jpg",
@@ -143,7 +137,7 @@ export const monalisaLayers = {
             text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien elit, fermentum aliquet malesuada tempus, aliquet sodales magna. Phasellus ultrices mattis bibendum.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien elit, fermentum aliquet malesuada tempus, aliquet sodales magna. Phasellus ultrices mattis bibendum.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien elit, fermentum aliquet malesuada tempus, aliquet sodales magna. Phasellus ultrices mattis bibendum.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien elit, fermentum aliquet malesuada tempus, aliquet sodales magna. Phasellus ultrices mattis bibendum.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien elit, fermentum aliquet malesuada tempus, aliquet sodales magna. Phasellus ultrices mattis bibendum."
           },
           {
-            yaw: -1.8293264497960173, pitch: -0.16372187793794346,
+            vec3: [4886.16, 310.94, -990.49],
             title: "D-804",
             type: 'content',
             image: "101/la-bele-feroniere.jpg",
@@ -158,32 +152,37 @@ export const monalisaLayers = {
         src: 'MONA-LISA-LAYERS-804',
         type: "image",
         name: "monalisa-layers 804",
-        faceSize: 6144,
         initialViewParameters: {
-          yaw: 0.4678416885477006, pitch: 0.0025104987021897784,
-          fov: 1.5707963267948966
+          vec3: [-683.57, -289.20, -4935.63],
         },
-        linkHotspots: [
+        infoHotspots: [
           {
-            yaw: -2.2286830978833407, pitch: 0.37636185980393044,
-            rotation: 0,
+            vec3: [-3190.70, -1794.48, 3395.12],
             target: "monalisa-layers803",
+            title: "MONA LISA LAYERS 803",
+            type: 'link',
             direction: {
-              yaw: -1.0465034361201937, pitch: -0.003997631616218911,
-              fov: 1.5707963267948966,
+              vec3: [4060.63, -468.32, 2870.23],
             },
           },
           {
-            yaw: 2.6170127809315966, pitch: 0.41535845892898493,
-            rotation: 0,
+            vec3: [885.97, -1883.14, 4541.54],
             target: "monalisa-layers805",
+            title: "MONA LISA LAYERS 805",
+            type: 'link',
             direction: {
-              yaw: 1.3347262374280238, pitch: 0.007369838174657417,
-              fov: 1.5707963267948966,
+              vec3: [3189.99, -403.91, 3820.21],
             },
           },
-        ],
-        infoHotspots: []
+          {
+            vec3: [-1583.13, 220.95, -4731.39],
+            title: "D-808",
+            type: 'content',
+            image: "101/la-bele-feroniere.jpg",
+            audio: '101/guide',
+            text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien elit, fermentum aliquet malesuada tempus, aliquet sodales magna. Phasellus ultrices mattis bibendum.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien elit, fermentum aliquet malesuada tempus, aliquet sodales magna. Phasellus ultrices mattis bibendum.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien elit, fermentum aliquet malesuada tempus, aliquet sodales magna. Phasellus ultrices mattis bibendum.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien elit, fermentum aliquet malesuada tempus, aliquet sodales magna. Phasellus ultrices mattis bibendum.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien elit, fermentum aliquet malesuada tempus, aliquet sodales magna. Phasellus ultrices mattis bibendum."
+          },
+        ]
       },
       {
         id: "monalisa-layers805",
@@ -191,35 +190,31 @@ export const monalisaLayers = {
         src: 'MONA-LISA-LAYERS-805',
         type: "image",
         name: "monalisa-layers 805",
-        faceSize: 6144,
         initialViewParameters: {
-          yaw: 1.3347262374280238, pitch: 0.007369838174657417,
-          fov: 1.5707963267948966
+          vec3: [543.29, -1850.26, -4608.08],
         },
-        linkHotspots: [
-          {
-            yaw: -2.314311403728203, pitch: 0.42191257108104274,
-            rotation: 0,
-            target: "monalisa-layers804",
-            direction: {
-              yaw: -0.7015471264168731, pitch: 0.023169624937935396,
-              fov: 1.5707963267948966,
-            },
-          },
-          {
-            yaw: -1.1343625410119138, pitch: 0.513141969949082,
-            rotation: 0,
-            target: "monalisa-layers806",
-            direction: {
-              yaw: -0.588405924492875, pitch: 0.11724292066098485,
-              fov: 1.5707963267948966,
-            },
-          },
-        ],
         infoHotspots: [
           {
-            yaw: 1.8512867273361042, pitch: -0.2392606446018526,
-            title: "D-805",
+            vec3: [-3098.08, -2450.08, -3051.19],
+            target: "monalisa-layers804",
+            title: "MONA LISA LAYERS 804",
+            type: 'link',
+            direction: {
+              vec3: [-1571.57, -360.60, -4729.96],
+            },
+          },
+          {
+            vec3: [1068.23, -1885.10, 4500.37],
+            target: "monalisa-layers806",
+            title: "MONA LISA LAYERS 806",
+            type: 'link',
+            direction: {
+              vec3: [1839.62, -458.95, -4617.29],
+            },
+          },
+          {
+            vec3: [3453.37, -511.63, -3566.29],
+            title: "D-809",
             type: 'content',
             image: "101/la-bele-feroniere.jpg",
             audio: '101/guide',
@@ -233,65 +228,20 @@ export const monalisaLayers = {
         src: 'MONA-LISA-LAYERS-806',
         type: "image",
         name: "monalisa-layers 806",
-        faceSize: 6144,
         initialViewParameters: {
-          yaw: 0.17081611894838922, pitch: -0.007294377776336347,
-          fov: 1.5707963267948966
+          vec3: [4471.55, -130.00, -2211.21],
         },
-        linkHotspots: [
-          {
-            yaw: 2.294936784742303, pitch: 0.5821312972170816,
-            rotation: 0,
-            target: "monalisa-layers805",
-            direction: {
-              yaw: 1.8922292341951916, pitch: 0.0377072863089154,
-              fov: 1.5707963267948966,
-            },
-          },
-          {
-            yaw: -1.3342963749998766, pitch: 0.4936994944200688,
-            rotation: 0,
-            target: "monalisa-layers807",
-            direction: {
-              yaw: 2.235963926370964, pitch: 0.014224071252790793,
-              fov: 1.5707963267948966,
-            },
-          },
-        ],
         infoHotspots: [
           {
-            yaw: 0.7667680444237597, pitch: -0.22144801548798476,
-            title: "D-806",
-            type: 'content',
-            image: "101/la-bele-feroniere.jpg",
-            audio: '101/guide',
-            text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien elit, fermentum aliquet malesuada tempus, aliquet sodales magna. Phasellus ultrices mattis bibendum.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien elit, fermentum aliquet malesuada tempus, aliquet sodales magna. Phasellus ultrices mattis bibendum.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien elit, fermentum aliquet malesuada tempus, aliquet sodales magna. Phasellus ultrices mattis bibendum.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien elit, fermentum aliquet malesuada tempus, aliquet sodales magna. Phasellus ultrices mattis bibendum.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien elit, fermentum aliquet malesuada tempus, aliquet sodales magna. Phasellus ultrices mattis bibendum."
-          },
-        ]
-      },
-      {
-        id: "monalisa-layers807",
-        groupId: 'monalisa',
-        src: 'MONA-LISA-LAYERS-807',
-        type: "image",
-        name: "monalisa-layers 807",
-        faceSize: 6144,
-        initialViewParameters: {
-          yaw: 0.44669884670835636, pitch: 0.04038827518200527,
-          fov: 1.5707963267948966
-        },
-        linkHotspots: [
-          {
-            yaw: -1.1691835622752915, pitch: 0.45319992775293017,
-            rotation: 0,
-            target: "monalisa-layers806",
+            vec3: [2050.71, -1891.54, 4141.52],
+            target: "monalisa-layers805",
+            title: "MONA LISA LAYERS 805",
+            type: 'link',
             direction: {
-              yaw: 1.7220662909183133, pitch: -0.0334295526481867,
-              fov: 1.5707963267948966,
+              vec3: [4978.86, -434.59, -13.68],
             },
           },
-        ],
-        infoHotspots: []
+        ]
       },
     ],
   };

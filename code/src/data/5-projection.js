@@ -11,7 +11,7 @@ export const projection = {
         },
         infoHotspots: [
           {
-            vec3: [302.98, -1398.12, 4780.85],
+            vec3: [102.18, -1160.96, 4857.74],
             target: "anatomy405",
             title: 'ANATOMY 405',
             type: 'link',
@@ -20,7 +20,16 @@ export const projection = {
             },
           },
           {
-            vec3: [-4849.31, -720.53, -954.74],
+            vec3: [4626.35, -1085.78, 1541.13],
+            target: "projection502",
+            title: 'PROJECTION 502',
+            type: 'link',
+            direction: {
+              vec3: [3965.38, -424.08, 3006.92],
+            },
+          },
+          {
+            vec3: [3866.73, -1101.87, -2960.58],
             target: "projection503",
             title: 'PROJECTION 503',
             type: 'link',
@@ -29,7 +38,7 @@ export const projection = {
             },
           },
           {
-            vec3: [4739.42, -1037.13, 1171.10],
+            vec3: [4270.46, -1105.82, 2340.09],
             target: "projection502Video",
             title: 'PROJECTION 502 VIDEO',
             type: 'link',
@@ -37,12 +46,20 @@ export const projection = {
               vec3: [4184.00, 22.68, -2723.38],
             },
           },
+          {
+            vec3: [-2223.21, -1602.41, -4173.18],
+            title: "D-501",
+            type: 'content',
+            image: ["101/la-bele-feroniere.jpg"],
+            audio: '101/guide',
+            text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien elit, fermentum aliquet malesuada tempus, aliquet sodales magna. Phasellus ultrices mattis bibendum.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien elit, fermentum aliquet malesuada tempus, aliquet sodales magna. Phasellus ultrices mattis bibendum.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien elit, fermentum aliquet malesuada tempus, aliquet sodales magna. Phasellus ultrices mattis bibendum.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien elit, fermentum aliquet malesuada tempus, aliquet sodales magna. Phasellus ultrices mattis bibendum.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien elit, fermentum aliquet malesuada tempus, aliquet sodales magna. Phasellus ultrices mattis bibendum."
+          },
         ]
       },
       {
         id: "projection501",
         groupId: 'sensorial',
-        src: 'projection-501',
+        src: 'PROJECTION-501',
         type: "image",
         name: "projection 501",
         initialViewParameters: {
@@ -71,7 +88,7 @@ export const projection = {
             vec3: [4844.48, -248.70, 1174.49],
             title: "D-501",
             type: 'content',
-            image: "101/la-bele-feroniere.jpg",
+            image: ["101/la-bele-feroniere.jpg"],
             audio: '101/guide',
             text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien elit, fermentum aliquet malesuada tempus, aliquet sodales magna. Phasellus ultrices mattis bibendum.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien elit, fermentum aliquet malesuada tempus, aliquet sodales magna. Phasellus ultrices mattis bibendum.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien elit, fermentum aliquet malesuada tempus, aliquet sodales magna. Phasellus ultrices mattis bibendum.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien elit, fermentum aliquet malesuada tempus, aliquet sodales magna. Phasellus ultrices mattis bibendum.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien elit, fermentum aliquet malesuada tempus, aliquet sodales magna. Phasellus ultrices mattis bibendum."
           },
@@ -111,7 +128,46 @@ export const projection = {
             vec3: [4844.48, -248.70, 1174.49],
             title: "D-501",
             type: 'content',
-            image: "101/la-bele-feroniere.jpg",
+            image: ["101/la-bele-feroniere.jpg"],
+            audio: '101/guide',
+            text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien elit, fermentum aliquet malesuada tempus, aliquet sodales magna. Phasellus ultrices mattis bibendum.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien elit, fermentum aliquet malesuada tempus, aliquet sodales magna. Phasellus ultrices mattis bibendum.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien elit, fermentum aliquet malesuada tempus, aliquet sodales magna. Phasellus ultrices mattis bibendum.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien elit, fermentum aliquet malesuada tempus, aliquet sodales magna. Phasellus ultrices mattis bibendum.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien elit, fermentum aliquet malesuada tempus, aliquet sodales magna. Phasellus ultrices mattis bibendum."
+          },
+        ]
+      },
+      {
+        id: "projection502",
+        groupId: 'sensorial',
+        src: 'PROJECTION-502',
+        type: "image",
+        name: "projection 502",
+        faceSize: 6144,
+        initialViewParameters: {
+          vec3: [-2073.68, -881.96, 4456.11]
+        },
+        infoHotspots: [
+          {
+            vec3: [-2073.68, -881.96, 4456.11],
+            target: "projection501",
+            title: 'PROJECTION 501',
+            type: 'link',
+            direction: {
+              vec3: [4184.00, 22.68, -2723.38],
+            },
+          },
+          {
+            vec3: [-2073.68, -881.96, 4456.11],
+            target: "projection503",
+            title: 'PROJECTION 503',
+            type: 'link',
+            direction: {
+              vec3: [4184.00, 22.68, -2723.38],
+            },
+          },
+          {
+            vec3:[3434.69, -223.46, 3614.29],
+            title: "D-502",
+            type: 'content',
+            image: ["101/la-bele-feroniere.jpg"],
             audio: '101/guide',
             text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien elit, fermentum aliquet malesuada tempus, aliquet sodales magna. Phasellus ultrices mattis bibendum.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien elit, fermentum aliquet malesuada tempus, aliquet sodales magna. Phasellus ultrices mattis bibendum.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien elit, fermentum aliquet malesuada tempus, aliquet sodales magna. Phasellus ultrices mattis bibendum.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien elit, fermentum aliquet malesuada tempus, aliquet sodales magna. Phasellus ultrices mattis bibendum.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien elit, fermentum aliquet malesuada tempus, aliquet sodales magna. Phasellus ultrices mattis bibendum."
           },
@@ -120,12 +176,12 @@ export const projection = {
       {
         id: "projection503",
         groupId: 'sensorial',
-        src: 'projection-503',
+        src: 'PROJECTION-503',
         type: "image",
         name: "projection 503",
         faceSize: 6144,
         initialViewParameters: {
-          vec3: []
+          vec3: [-2073.68, -881.96, 4456.11]
         },
         infoHotspots: [
           {
@@ -150,7 +206,7 @@ export const projection = {
             vec3:[3434.69, -223.46, 3614.29],
             title: "D-502",
             type: 'content',
-            image: "101/la-bele-feroniere.jpg",
+            image: ["101/la-bele-feroniere.jpg"],
             audio: '101/guide',
             text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien elit, fermentum aliquet malesuada tempus, aliquet sodales magna. Phasellus ultrices mattis bibendum.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien elit, fermentum aliquet malesuada tempus, aliquet sodales magna. Phasellus ultrices mattis bibendum.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien elit, fermentum aliquet malesuada tempus, aliquet sodales magna. Phasellus ultrices mattis bibendum.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien elit, fermentum aliquet malesuada tempus, aliquet sodales magna. Phasellus ultrices mattis bibendum.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien elit, fermentum aliquet malesuada tempus, aliquet sodales magna. Phasellus ultrices mattis bibendum."
           },

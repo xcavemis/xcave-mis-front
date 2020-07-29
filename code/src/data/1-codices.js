@@ -20,6 +20,12 @@ export const codices = {
           }
         },
         {
+          vec3: [4668.54, -930.52, -1517.29],
+          title: "CÓDICES EDUCADOR",
+          target: "pPNo61CiJ_U",
+          type: 'learn',
+        },
+        {
           vec3: [4930.12, -367.29, 698.80],
           title: "CÓDICES",
           type: 'content',

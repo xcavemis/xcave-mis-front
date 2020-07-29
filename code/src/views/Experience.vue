@@ -7,6 +7,7 @@
     <FooterControls ref="footerControls" v-on:action="onFooterAction"/>
     <VideoLive v-if="isVideoLive" video-id="c8dFQbj20dg" v-on:close="videoLiveClosed" ref="videoLive" />
     <Video360 v-if="isVideo360" :video-id="infoModalContent.target" v-on:close="videoLiveClosed" ref="video360" />
+    <VideoLearn v-if="isVideoLearn" :video-id="infoModalContent.target" v-on:close="videoLiveClosed" ref="videoLearn" />
     <AudioPlayer ref="audioPlayer" />
     <InfoModal 
       ref="infoModal" 
@@ -43,6 +44,7 @@ import HeaderControls from '@/components/pano/HeaderControls.vue'
 import Map from '@/components/pano/Map.vue'
 import VideoLive from '@/components/VideoLive.vue'
 import Video360 from '@/components/Video360.vue'
+import VideoLearn from '@/components/VideoLearn.vue'
 import AudioPlayer from '@/components/AudioPlayer.vue'
 import InfoModal from '@/components/InfoModal.vue'
 import Ar from '@/components/Ar.vue'
@@ -58,6 +60,7 @@ export default {
     HeaderControls,
     VideoLive,
     Video360,
+    VideoLearn,
     AudioPlayer,
     InfoModal,
     Map,
@@ -66,6 +69,7 @@ export default {
   data: () =>({
     isVideoLive: false,
     isVideo360: false,
+    isVideoLearn: false,
     isInfoModal: false,
     isArModal: false,
     isMap: false,
@@ -212,6 +216,12 @@ export default {
         this.isVideo360 = true
         this.$nextTick(()=>{
           this.$refs?.video360?.show()
+        })
+      } else if (params.type == 'learn') {
+        this.infoModalContent = params
+        this.isVideoLearn = true
+        this.$nextTick(()=>{
+          this.$refs?.videoLearn?.show()
         })
       }
     },

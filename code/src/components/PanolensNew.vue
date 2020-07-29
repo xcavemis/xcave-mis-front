@@ -102,15 +102,16 @@ export default {
         const infoSpot = new PANOLENS.Infospot(
           info.type == 'content' ? 150 : 400, 
           info.type == 'content' ? 
-          require('@/assets/images/icons/hotspot-info.png') : info.type == 'panorama' ?
+          require('@/assets/images/icons/hotspot-info.png') : info.type == 'learn' ?
+          require('@/assets/images/icons/hotspot-learn.png') : info.type == 'panorama' ?
           require('@/assets/images/icons/hotspot-360.png') :
           require('@/assets/images/icons/hotspot-link.png')
-          )
-        infoSpot.addHoverText(info.title)
+        )
+        infoSpot.addHoverText(info.title, info.type == 'panorama' || info.type == 'learn' ? 80: 50)
         infoSpot.position.copy( pos );
         console.log(info.type)
         infoSpot.addEventListener('click', (e) => {
-          if (info.type == 'content' || info.type == 'panorama') {
+          if (info.type == 'content' || info.type == 'panorama' || info.type == 'learn') {
             this.showInfoHotspotLayer(info)
           } else if (info.type == 'link') {
             this.navigateTo(info)
@@ -226,8 +227,8 @@ export default {
   
           scene.infoHotspots?.map(info => {
             let pos = info.vec3 ? new THREE.Vector3(info.vec3[0], info.vec3[1], info.vec3[2]) : new THREE.Vector3(Math.random() * 1000, -1355.19, -4649.08)
-            const infoSpot = new PANOLENS.Infospot(info.type == 'content' ? 150 : 400, (info.type == 'content' || info.type == 'panorama') ? require('@/assets/images/icons/hotspot-info.png') : require('@/assets/images/icons/hotspot-link.png'))
-            infoSpot.addHoverText(info.title)
+            const infoSpot = new PANOLENS.Infospot(info.type == 'content' ? 200 : 100, (info.type == 'content' || info.type == 'panorama') ? require('@/assets/images/icons/hotspot-info.png') : require('@/assets/images/icons/hotspot-link.png'), false)
+            infoSpot.addHoverText(info.title, 50)
             infoSpot.position.copy( pos );
             infoSpot.addEventListener('click', (e) => {
               if (info.type == 'content' || info.type == 'panorama') {

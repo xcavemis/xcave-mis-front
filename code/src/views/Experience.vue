@@ -5,9 +5,9 @@
     <PanolensNew ref="pano" v-if="queueLoaded" v-on:info-layer="onInfoLayer"/>
     <HeaderControls ref="headerControls" />
     <FooterControls ref="footerControls" v-on:action="onFooterAction"/>
-    <VideoLive v-if="isVideoLive" video-id="c8dFQbj20dg" v-on:close="videoLiveClosed" ref="videoLive" />
-    <Video360 v-if="isVideo360" :video-id="infoModalContent.target" v-on:close="videoLiveClosed" ref="video360" />
-    <VideoLearn v-if="isVideoLearn" :video-id="infoModalContent.target" v-on:close="videoLiveClosed" ref="videoLearn" />
+    <VideoLive v-if="isVideoLive" video-id="c8dFQbj20dg" v-on:close="videoClosed" ref="videoLive" />
+    <Video360 v-if="isVideo360" :video-id="infoModalContent.target" v-on:close="videoClosed" ref="video360" />
+    <VideoLearn v-if="isVideoLearn" :video-id="infoModalContent.target" v-on:close="videoClosed" ref="videoLearn" />
     <AudioPlayer ref="audioPlayer" />
     <InfoModal 
       ref="infoModal" 
@@ -189,8 +189,10 @@ export default {
         this.$refs?.pano[params.value]()
       }
     },
-    videoLiveClosed() {
+    videoClosed() {
       this.isVideoLive = false
+      this.isVideo360 = false
+      this.isVideoLearn = false
       if (this.$refs?.footerControls?.musicPlaying) this.$refs?.audioPlayer?.unmute()
     },
     infoLayerClosed() {
@@ -215,12 +217,14 @@ export default {
         this.infoModalContent = params
         this.isVideo360 = true
         this.$nextTick(()=>{
+          if (this.$refs?.footerControls?.musicPlaying) this.$refs?.audioPlayer?.mute()
           this.$refs?.video360?.show()
         })
       } else if (params.type == 'learn') {
         this.infoModalContent = params
         this.isVideoLearn = true
         this.$nextTick(()=>{
+          if (this.$refs?.footerControls?.musicPlaying) this.$refs?.audioPlayer?.mute()
           this.$refs?.videoLearn?.show()
         })
       }

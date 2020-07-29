@@ -184,6 +184,7 @@ export default {
                 @include set-size(66.6%, 100%);
                 overflow: hidden;
                 position: relative;
+                background-color: #333;
                 .info-modal__preview-image {
                     @include set-size(auto, auto);
                     // @include set-size(100%, auto);

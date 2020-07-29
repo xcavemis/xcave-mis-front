@@ -1,7 +1,7 @@
 <template>
     <div class="video-learn">
         <section class="video-learn__content">
-             <iframe 
+             <iframe
                 class="video-learn__iframe"
                 :src="`//www.youtube.com/embed/${videoId}?autoplay=1&rel=0`"
                 width="1280" 
@@ -25,6 +25,7 @@ export default {
     props: ['videoId'],
     methods: {
         show() {
+            TweenMax.set('.video-learn__iframe', { display: 'block' })
             TweenMax.set('html, body', { overflow: 'hidden' })
             TweenMax.fromTo('.video-learn', 0.6, { autoAlpha: 0 }, { autoAlpha: 1, ease: Quad.easeInOut })
             TweenMax.fromTo('.video-learn__iframe', 0.6, { y: '100%' }, { y: '0%', ease: Quad.easeInOut, delay: 0.3 })
@@ -34,6 +35,7 @@ export default {
             TweenMax.set('html, body', { overflow: 'auto' })
             TweenMax.fromTo('.video-learn__close', 0.4, { scale: 1 }, { scale: 0, ease: Quad.easeInOut })
             TweenMax.fromTo('.video-learn__iframe', 0.6, { y: '0%' }, { y: '100%', ease: Quad.easeInOut, delay: 0.3, onComplete: () => {
+                TweenMax.set('.video-learn__iframe', { display: 'none' })
                 this.$emit('close')
             }})
             TweenMax.fromTo('.video-learn', 0.6, { autoAlpha: 1 }, { autoAlpha: 0, ease: Quad.easeInOut, delay: 0.3 })
@@ -50,15 +52,19 @@ export default {
     top: 0;
     left: 0;
     background-color: rgba(0, 0, 0, 0.8);
+    z-index: 10;
     .video-learn__content {
         // @include set-size(65.8vw, 62.5vh);
-        @include set-size(90vw, 80vh);
+        // @include set-size(90vw, 80vh);
+        @include set-size(100vw, 100vh);
         @include center(absolute);
         overflow: hidden;
         .video-learn__iframe {
-            @include set-size(100%, 100%);
+            @include set-size(90vw, 80vh);
             transform: translateY(100%);
             z-index: 1;
+            margin: 80px auto;
+            
         }
     
         .video-learn__close {
@@ -67,6 +73,7 @@ export default {
             top: 15px;
             right: 15px;
             z-index: 10;
+            cursor: pointer;
         }
     }
 }

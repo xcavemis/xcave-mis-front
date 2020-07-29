@@ -45,20 +45,24 @@ export default {
 
 <style lang="scss">
 .video-pano {
-    @include set-size(100vw, 100vh);
+     @include set-size(100vw, 100vh);
     position: fixed;
     top: 0;
     left: 0;
     background-color: rgba(0, 0, 0, 0.8);
+    z-index: 10;
     .video-pano__content {
         // @include set-size(65.8vw, 62.5vh);
-        @include set-size(90vw, 80vh);
+        // @include set-size(90vw, 80vh);
+        @include set-size(100vw, 100vh);
         @include center(absolute);
         overflow: hidden;
         .video-pano__iframe {
-            @include set-size(100%, 100%);
+            @include set-size(90vw, 80vh);
             transform: translateY(100%);
             z-index: 1;
+            margin: 80px auto;
+            
         }
     
         .video-pano__close {
@@ -67,6 +71,7 @@ export default {
             top: 15px;
             right: 15px;
             z-index: 10;
+            cursor: pointer;
         }
     }
 }

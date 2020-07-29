@@ -1,7 +1,9 @@
 <template>
   <article class="home">
     <section class="home-step first-step">
+      <img class="first-step__logo-mis" src="~@/assets/images/logo-mis-exp.png" alt="MIS - MUSEU DA ARTE E DO SOM EXPERIENCE" />
       <div class="first-step__center-content">
+
         <img class="first-step__center-content__title" src="~@/assets/images/logo-da-vinci.png" alt="LEONARDO DA VINCI – 500 ANOS DE UM GÊNIO" />
         <p class="first-step__center-content__description">
           Leonardo da Vinci - 500 Anos de um Gênio traz ainda os Segredos de Mona Lisa – uma análise da<br>
@@ -10,27 +12,41 @@
         </p>
         <div class="first-step__center-content__buttons">
           <a class="default-button first-step__center-content__button white" href="javascript:void(0)" @click="goTo">INICIAR EXPERIÊNCIA</a>
-          <a class="default-button first-step__center-content__button black" href="https://www.sympla.com.br/" target="_blank">COMPRAR INGRESSO</a>
+          <a class="default-button first-step__center-content__button black" href="https://www.sympla.com.br/teste-mis-davinci-digital-v1__904158" target="_blank">COMPRAR INGRESSO</a>
 
         </div>
       </div>
     </section>
-    <section class="home-step second-step">
-      <div class="second-step__center-content">
-        <h1 class="second-step__center-content__title">UMA EXPERIÊNCIA DIGITAL <br>INÉDITA NO BRASIL</h1>
-        <p class="second-step__center-content__description">Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet.</p>
-        <a class="second-step__center-content__button" href="https://www.sympla.com.br/" target="_blank">COMPRAR INGRESSO</a>
+    <section class="home-step second-step"></section>
+    <section class="home-step third-step">
+      <div class="third-step__center-content">
+        <h1 class="third-step__center-content__title">Leonardo Da Vinci -<br>500 Anos de um Gênio</h1>
+        <p class="third-step__center-content__description">
+          O MIS Experience – criado pelo Governo do Estado de São Paulo, por meio da Secretaria de Cultura e Economia Criativa, e pelo Museu da Imagem e do Som, em parceria com a TV Cultura – inaugura com a exposição Leonardo da Vinci – 500 Anos de um Gênio. Uma experiência imersiva, que possibilitará ao visitante conhecer a vida e o legado de Da Vinci por meio de uma exclusiva galeria com projeções, capaz de promover uma experiência interativa inédita no país. A exposição é patrocinada pelo Bradesco, Cielo, Fiat, Pirelli, Sabesp e Vale.
+          <br>
+          <br>
+          A mostra, considerada a investigação mais completa e detalhada sobre o trabalho de Leonardo da Vinci, apresenta 18 áreas temáticas que conta a trajetória do grande gênio renascentista e traz réplicas de máquinas desenhadas pelo artista italiano. Os visitantes terão uma experiência multissensorial com animações gráficas em alta definição, combinadas com um conteúdo multimídia e narrativa em áudio, o que permitirá ao público uma vivência divertida, educativa e esclarecedora a pessoas de todas as idades e interesses, sejam elas amantes de arte e da história. Os visitantes também terão a oportunidade de conhecer, pela primeira vez, a mente do homem que lançou as bases para algumas das invenções mais notáveis da sociedade moderna, como o helicóptero, o automóvel, o submarino, o paraquedas e a bicicleta.
+          <br>
+          <br>
+          Criada em parceria com o Museo Leonardo da Vinci, em Roma, e contando com a colaboração de diversos especialistas e historiadores da Itália e da França, a exposição é criada pela Grande Exhibitions, empresa sediada em Melbourne, na Austrália, com escritórios no Reino Unido e nos EUA.
+          <br>
+          <br>
+          Leonardo da Vinci - 500 Anos de um Gênio traz ainda os Segredos de Mona Lisa – uma análise da pintura mais famosa do mundo, realizada no Museu do Louvre por Pascal Cotte, renomado engenheiro, pesquisador e fotógrafo de obras de arte.
+
+        </p>
+        <a class="default-button third-step__center-content__button white" href="javascript:void(0)" @click="goTo">INICIAR EXPERIÊNCIA</a>
+        <a class="default-button third-step__center-content__button orange" href="https://www.sympla.com.br/teste-mis-davinci-digital-v1__904158" target="_blank">COMPRAR INGRESSO</a>
       </div>
     </section>
-    <section class="home-step sponsors">
+    <!-- <section class="home-step sponsors">
       <img class="sponsors__image" src="https://www.mis-sp.org.br/images/events/eMus2c3hqybAsMG3ppm7C0oYsUjueHRWzqvhjecj.jpeg" alt="">
-    </section>
-    <section class="home-step banner">
+    </section> -->
+    <!-- <section class="home-step banner">
       <div class="banner__center-content">
         <h1 class="banner__center-content__title">Bem vindo à experiência Digital MIS<br>LEONARDO DA VINCI – 500 ANOS DE UM GÊNIO</h1>
         <a class="banner__center-content__button" href="https://www.sympla.com.br/" target="_blank">COMPRAR INGRESSO</a>
       </div>
-    </section>
+    </section> -->
     <Auth ref="authComp" v-if="authShow" />
   </article>
 </template>
@@ -91,6 +107,16 @@ export default {
   background-image: url(~@/assets/images/bg-home-step1.jpg);
   background-repeat: no-repeat;
   background-size: cover;
+
+  .first-step__logo-mis {
+    position: absolute;
+    top: 97px;
+    left: 103px;
+
+    @include maxWidth(1023) {
+      left: 10%;
+    }
+  }
 
   .first-step__center-content {
     @include center(absolute);
@@ -155,59 +181,65 @@ export default {
 }
 
 .second-step {
+  @include set-size(100%, 25.7vw);
+  background-image: url(~@/assets/images/bg-home-divide.jpg);
+  background-size: cover;
+  background-position: 50% 50%;
+  background-repeat: no-repeat;
+}
+
+.third-step {
   position: relative;
-  .second-step__center-content {
-    @include center(absolute);
+  height: auto;
+  background: #000000;
+  padding: 14.1vh 8.27vw;
+  .third-step__center-content {
+    // @include center(absolute);
     width: 80vw;
     text-align: left;
-    .second-step__center-content__title {
-      @include font-size(62);
-      line-height: 68px;
-      color: $white;
+    .third-step__center-content__title {
+      @include font-size(48);
+      line-height: 38px;
+      font-family: $gar-regular;
+      color: #cd9f3f;
       margin: 0;
     }
     
-    .second-step__center-content__description {
+    .third-step__center-content__description {
       width: 50vw;
       text-align: left;
-      @include font-size(24);
-      line-height: 30px;
+      @include font-scale(1366, 1680, 13, 18);
+      font-family: $rob-regular;
+      // line-height: 30px;
       color: $white;
-      margin: 73px 0;
+      margin: 36px 0;
     }
 
-    .second-step__center-content__button {
-      text-align: left;
-      @include font-size(16);
-      color: $white;
-      padding: 15px 30px;
-      margin: 50px auto 0 auto;
-      background-color: #e0e20c;
-      color: $black;
-      display: inline-block;
-      border-radius: 8px;
+    .third-step__center-content__button {
+      margin-right: 25px;
     }
 
   }
   @include maxWidth(1024) {
     height: auto;
     padding: 30px;
-    .second-step__center-content {
+    .third-step__center-content {
       @include reset-pos;
-      .second-step__center-content__title {
-        @include font-size(20);
-        line-height: 24px;
+      .third-step__center-content__title {
+         @include font-size(36);
+        line-height: 32px;
       }
-      .second-step__center-content__description {
+      .third-step__center-content__description {
+        width: 70vw;
         margin: 50px 0 30px 0;
-        @include font-size(14);
-        line-height: 18px;
+        @include font-size(16);
+        line-height: 20px;
       }
 
-      .second-step__center-content__button {
-        @include font-size(14);
-        padding: 15px 30px;
-        margin: 0;
+      .third-step__center-content__button {
+        // @include font-size(14);
+        // padding: 15px 30px;
+        margin-right: 5px;
       }
     }
   }

@@ -37,7 +37,6 @@ export default {
         container: this.$el.querySelector('.panolens-container'),
         output: 'console',
         controlButtons: ['video'],
-        autoHideInfospot: false
       })
       this.viewer.getControl().minFov = 20
       this.viewer.getControl().maxFov = 70

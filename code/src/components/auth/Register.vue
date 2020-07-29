@@ -229,18 +229,20 @@ export default {
         sendData(e){
             this.$store.dispatch("loading", true)
             e.preventDefault();
-            const birthStrToDate = this.formData.birth.substring(4,8) + "/" + this.formData.birth.substring(2,4) + "/" + this.formData.birth.substring(0,2)
+            const birthStrToDate = this.formData.birth.substring(4,8) + "-" + this.formData.birth.substring(2,4) + "-" + this.formData.birth.substring(0,2)
             const formData = {
                 name: this.formData.name,
                 email: this.formData.email,
                 cellphone: this.formData.phone,
                 gender: this.formData.gender,
                 plainPassword: this.formData.pass,
-                birthDate: new Date(birthStrToDate),
+                // birthDate: new Date(birthStrToDate),
+                birthDate: birthStrToDate,
                 city: this.formData.city,
                 state: this.formData.state,
                 role:"USER",
             };
+
             this.$store.dispatch("create", formData).then(e => {
                 console.log('create success', e)
                 const { status, data } = e?.response;

@@ -46,7 +46,7 @@
         <div class="footer-controls__right">
             <div class="footer-controls__right-group" @click="toggleFooter">
                 <img class="footer-controls__button-icon icon-small mg-l mg-r" :class="{'rotated': !this.openFooter }" alt="Abrir o rodapé" src="~@/assets/images/icons/arrow-down-small.png"/>
-                <img class="footer-controls__button-icon mg-l mg-r" alt="Abrir o rodapé" src="~@/assets/images/logo-mis-exp.jpg"/>
+                <img class="footer-controls__button-icon mg-l mg-r" alt="Abrir o rodapé" src="~@/assets/images/logo-mis-exp.png"/>
             </div> 
         </div>
     </div>

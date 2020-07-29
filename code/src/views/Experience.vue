@@ -1,7 +1,7 @@
 <template>
   <div class="experience">
-    <!-- <Pano ref="pano" v-if="queueLoaded" v-on:info-layer="onInfoLayer" /> -->
-    <Panolens ref="pano" v-on:info-layer="onInfoLayer"/>
+    <Pano ref="pano" v-if="queueLoaded" v-on:info-layer="onInfoLayer" />
+    <!-- <Panolens ref="pano" v-if="queueLoaded" v-on:info-layer="onInfoLayer"/> -->
     <HeaderControls ref="headerControls" />
     <FooterControls ref="footerControls" v-on:action="onFooterAction"/>
     <VideoLive v-if="isVideoLive" video-id="c8dFQbj20dg" v-on:close="videoLiveClosed" ref="videoLive" />
@@ -33,7 +33,7 @@
 <script>
 // @ is an alias to /src
 import { Preloader } from '@/utils/loaders/Preloader';
-// import Pano from '@/components/Pano.vue'
+import Pano from '@/components/Pano.vue'
 import Panolens from '@/components/Panolens.vue'
 import FooterControls from '@/components/pano/FooterControls.vue'
 import HeaderControls from '@/components/pano/HeaderControls.vue'
@@ -46,7 +46,7 @@ import { data } from '@/data/scenes.js';
 export default {
   name: 'experience',
   components: {
-    // Pano,
+    Pano,
     Panolens,
     FooterControls,
     HeaderControls,
@@ -71,6 +71,7 @@ export default {
   mounted(){
     
     this.$nextTick(()=>{
+      // this.$store.dispatch("loading", true)
       // this.setupQueue()
       // this.$refs.videoIntro.addEventListener('ended', this.onVideoIntroEnded, true)
     })
@@ -100,29 +101,33 @@ export default {
       this.preloader.queue(assetsToLoad);
     },
     loadProgress(details){  
-      console.log('Preloader loadProgress: ', details);
+      console.log('Preloader loadProgress: ', details.data);
+      if (details.data > 0.1) {
+        // this.$store.dispatch("loading", false)
+        this.queueLoaded = true
+      }
       // this.$store.dispatch('loading_progress', details.data * 100)
       // this.$store.dispatch('loaded', true)
     },
     loadComplete(details){  
-      console.log('Preloader complete: ', details);
+      // console.log('Preloader complete: ', details);
       this.$store.dispatch('assets', details.data)
       // this.queueLoaded = true
       // this.$store.dispatch('loaded', true)
     },
     onVideoIntroEnded(e){
-      console.log('onVideoIntroEnded', e)
+      // console.log('onVideoIntroEnded', e)
       this.videoEnded = true
     },
     panoGoTo(id) {
-      console.log('panoGoTo', id)
+      // console.log('panoGoTo', id)
       this.$refs?.pano?.goToScene(id)
     },
     mapClosed(){
       this.isMap = false
     },
     onFooterAction(params) {
-      console.log('onFooterAction', params)
+      // console.log('onFooterAction', params)
       if (params.type == 'live') {
         this.isVideoLive = true
         this.$nextTick(()=>{

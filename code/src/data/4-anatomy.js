@@ -12,6 +12,12 @@ export const anatomy = {
       },
       infoHotspots: [
         {
+          vec3: [4399.03, -1531.47, -1801.92],
+          title: "CIVIL V401",
+          target: "Bd43abefC4c",
+          type: 'learn',
+        },
+        {
           vec3: [2743.94, -1607.57, -3852.87],
           target: "mixed316",
           title: "GALERIA MISTA 316",

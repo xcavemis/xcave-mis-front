@@ -11,6 +11,12 @@ export const monalisaLayers = {
         },
         infoHotspots: [
           {
+            vec3: [4978.17, -277.63, -208.43],
+            title: "CIVIL V801",
+            target: "ZslmBjaWYtI",
+            type: 'learn',
+          },
+          {
             vec3: [-3469.00, -1341.30, -3327.93],
             target: "monalisa-colors705",
             title: "MONA LISA COLORS 705",
@@ -56,6 +62,12 @@ export const monalisaLayers = {
           vec3: [2667.06, -271.18, 4208.95],
         },
         infoHotspots: [
+          {
+            vec3: [-4985.05, -348.31, -24.09],
+            title: "CIVIL V801",
+            target: "ZslmBjaWYtI",
+            type: 'learn',
+          },
           {
             vec3: [543.29, -1850.26, -4608.08],
             target: "monalisa-layers801",
@@ -110,6 +122,12 @@ export const monalisaLayers = {
           vec3: [4116.54, -353.12, -2803.46],
         },
         infoHotspots: [
+          {
+            vec3: [-4980.27, -111.34, 293.09],
+            title: "CIVIL V801",
+            target: "ZslmBjaWYtI",
+            type: 'learn',
+          },
           {
             vec3: [-3178.10, -1312.37, 3621.28],
             target: "monalisa-layers802",

@@ -12,6 +12,12 @@ export const mixedGallery = {
       },
       infoHotspots: [
         {
+          vec3: [-4195.16, -2163.86, 1621.94],
+          title: "CIVIL V301",
+          target: "diQ9zNPASpE",
+          type: 'learn',
+        },
+        {
           vec3: [3880.00, -1975.91, -2442.45],
           target: "civil205",
           title: "CIVIL 205",
@@ -82,6 +88,12 @@ export const mixedGallery = {
         vec3:[-2921.54, -380.40, 4038.58]
       },
       infoHotspots: [
+        {
+          vec3: [-4961.26, -426.98, 366.71],
+          title: "CIVIL V301",
+          target: "diQ9zNPASpE",
+          type: 'learn',
+        },
         {
           vec3: [-3869.91, -2042.24, -2401.93],
           target: "mixed301",
@@ -193,6 +205,12 @@ export const mixedGallery = {
       },
       infoHotspots: [
         {
+          vec3: [2054.15, -1882.95, 4143.32],
+          title: "CIVIL V302",
+          target: "-Xy4v_Ox0MQ",
+          type: 'learn',
+        },
+        {
           vec3: [2817.92, -1849.61, -3684.25],
           target: "mixed303",
           title: "GALERIA MISTA 303",
@@ -264,6 +282,12 @@ export const mixedGallery = {
       },
       infoHotspots: [
         {
+          vec3: [1710.46, -40.37, 4690.11],
+          title: "CIVIL V303",
+          target: "INaSiN1pTeo",
+          type: 'learn',
+        },
+        {
           vec3: [-3773.32, -1442.00, -2932.34],
           target: "mixed304",
           title: "GALERIA MISTA 304",
@@ -305,6 +329,15 @@ export const mixedGallery = {
           audio: '3-Gallery/A306.mp3',
           text: "<h2><em>C&oacute;dice ATLANTICUS, f 306. v.-a</em></h2><p>Leonardo inventou tambores mec&acirc;nicos para uso em marchas militares e possivelmente para quando soldados iniciassem um combate.<br />Os tambores marcam ritmos complexos, de acordo com os movimentos do eixo da carruagem. Quando o carrinho &eacute; puxado, as engrenagens giram os dois rolos centrais que, por sua vez, movem as dez baquetas (cinco de cada lado). Os pinos ou cames posicionados nos rolos podem ser colocados em posi&ccedil;&otilde;es diferentes para mudar a batida e o ritmo da m&uacute;sica. <br />O barulho alto criado por v&aacute;rias batidas do &uacute;nico instrumento faria com que o inimigo acreditasse que o ex&eacute;rcito que se aproximava era muito maior em tamanho que em realidade.</p>"
         },
+        {
+          vec3: [-642.54, -2053.36, 4503.57],
+          vec3: [1991.89, -2492.54, -3838.52],
+          title: "Realidade Aumentada",
+          type: 'ar',
+          model: 'Drum.gltf',
+          id: 'drum',
+          ext: 'gltf',
+        },
       ]
     },
     {
@@ -318,6 +351,12 @@ export const mixedGallery = {
         vec3:[-534.50, -90.99, 4967.12]
       },
       infoHotspots: [
+        {
+          vec3: [4410.36, -335.42, -2313.55],
+          title: "CIVIL V304",
+          target: "sWx_du80ojQ",
+          type: 'learn',
+        },
         {
           vec3: [483.66, -1603.99, -4708.20],
           target: "mixed305",
@@ -863,6 +902,14 @@ export const mixedGallery = {
           audio: '',
           text: "<h2><em>C&oacute;dice ATLANTICUS, f 306. v.-a</em></h2><p>Leonardo inventou tambores mec&acirc;nicos para uso em marchas militares e possivelmente para quando soldados iniciassem um combate.<br />Os tambores marcam ritmos complexos, de acordo com os movimentos do eixo da carruagem. Quando o carrinho &eacute; puxado, as engrenagens giram os dois rolos centrais que, por sua vez, movem as dez baquetas (cinco de cada lado). Os pinos ou cames posicionados nos rolos podem ser colocados em posi&ccedil;&otilde;es diferentes para mudar a batida e o ritmo da m&uacute;sica. <br />O barulho alto criado por v&aacute;rias batidas do &uacute;nico instrumento faria com que o inimigo acreditasse que o ex&eacute;rcito que se aproximava era muito maior em tamanho que em realidade.</p>"
         },
+        {
+          vec3: [-642.54, -2053.36, 4503.57],
+          title: "Realidade Aumentada",
+          type: 'ar',
+          model: 'Drum.gltf',
+          id: 'drum',
+          ext: 'gltf',
+        },
       ]
     },
     {
@@ -895,7 +942,13 @@ export const mixedGallery = {
           },
         },
         {
-          vec3: [-2018.21, -47.29, 4571.68],
+          vec3: [4423.50, -1667.32, -1601.81],
+          title: "CIVIL V305",
+          target: "I_0HFtvsQEs",
+          type: 'learn',
+        },
+        {
+          vec3: [-3610.96, -15.56, 3449.55],
           title: "Princípios da Física e da Mecânica",
           type: 'content',
           image: ["3-Gallery/D349.jpg"],

@@ -276,7 +276,7 @@ export const projection = {
         infoHotspots: [
           {
             vec3: [-2073.68, -881.96, 4456.11],
-            target: "projection503",
+            target: "projection502",
             title: 'PROJECTION 502',
             type: 'link',
             direction: {

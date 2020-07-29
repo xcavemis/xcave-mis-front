@@ -127,11 +127,11 @@ export default {
             TweenMax.set('html, body', { overflow: 'hidden' })
             TweenMax.fromTo('.info-modal', 0.6, { autoAlpha: 0 }, { autoAlpha: 1, ease: Quad.easeInOut })
             TweenMax.fromTo('.info-modal__block', 0.6, { y: '100%' }, { y: '0%', ease: Quad.easeInOut, delay: 0.3 })
-            TweenMax.fromTo('.info-modal__close', 0.6, { scale: 0 }, { scale: 1, ease: Quad.easeInOut, delay: 0.8 })
+            TweenMax.fromTo('.info-modal__close', 0.6, { autoAlpha: 0 }, { autoAlpha: 1, ease: Quad.easeInOut, delay: 0.8 })
         },
         hide(){
             this.$emit('stop-audio')
-            TweenMax.fromTo('.info-modal__close', 0.4, { scale: 1 }, { scale: 0, ease: Quad.easeInOut })
+            TweenMax.fromTo('.info-modal__close', 0.4, { autoAlpha: 1 }, { autoAlpha: 0, ease: Quad.easeInOut })
             TweenMax.fromTo('.info-modal__block', 0.6, { y: '0%' }, { y: '100%', ease: Quad.easeInOut, delay: 0.3, onComplete: () => {
                 this.$emit('close')
                 TweenMax.set('html, body', { overflow: 'inherit' })
@@ -268,7 +268,7 @@ export default {
 
                     /* width */
                     &::-webkit-scrollbar {
-                     width: 3px;
+                     width: 10px;
                     }
 
                     /* Track */
@@ -311,12 +311,17 @@ export default {
                 }
 
                 .info-modal__close {
-                    @include set-size(14px, 14px);
+                    @include set-size(20px, 20px);
                     position: absolute;
                     top: 15px;
                     right: 15px;
                     z-index: 10;
                     cursor: pointer;
+                    transition: transform 0.4s $ease-in-out;
+                    
+                    &:hover {
+                        transform: rotate(180deg) !important;
+                    }
                 }
             }
         }

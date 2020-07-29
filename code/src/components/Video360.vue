@@ -2,10 +2,9 @@
     <div class="video-pano">
         <section class="video-pano__content">
             <div class="video-mask">
-                    <!-- :src="`https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0&showinfo=0`" -->
                 <iframe 
                     class="video-pano__iframe"
-                    :src="`https://www.fotografofabionunes.com/3dvista/museu/${videoId}/`"
+                    :src="`https://hml.exposicaodavinci500anos.com.br/assets/videos/${videoId}/`"
                     width="1280" 
                     height="720" 
                     frameborder="0" 
@@ -15,7 +14,6 @@
                     allowfullscreen>
                 </iframe>
             </div>
-            <!-- <iframe class="video-pano__iframe" src="https://www.fotografofabionunes.com/3dvista/museu-1/" title="W3Schools Free Online Web Tutorials"></iframe> -->
             <img class="video-pano__close" src="~@/assets/images/icons/close.png" @click="hide" alt="Fechar o video da live."> 
         </section>
     </div>

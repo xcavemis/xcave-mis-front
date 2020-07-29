@@ -6,6 +6,7 @@
     <HeaderControls ref="headerControls" />
     <FooterControls ref="footerControls" v-on:action="onFooterAction"/>
     <VideoLive v-if="isVideoLive" video-id="c8dFQbj20dg" v-on:close="videoLiveClosed" ref="videoLive" />
+    <Video360 v-if="isVideo360" :video-id="infoModalContent.target" v-on:close="videoLiveClosed" ref="video360" />
     <AudioPlayer ref="audioPlayer" />
     <InfoModal 
       ref="infoModal" 
@@ -41,6 +42,7 @@ import FooterControls from '@/components/pano/FooterControls.vue'
 import HeaderControls from '@/components/pano/HeaderControls.vue'
 import Map from '@/components/pano/Map.vue'
 import VideoLive from '@/components/VideoLive.vue'
+import Video360 from '@/components/Video360.vue'
 import AudioPlayer from '@/components/AudioPlayer.vue'
 import InfoModal from '@/components/InfoModal.vue'
 import Ar from '@/components/Ar.vue'
@@ -55,6 +57,7 @@ export default {
     FooterControls,
     HeaderControls,
     VideoLive,
+    Video360,
     AudioPlayer,
     InfoModal,
     Map,
@@ -62,6 +65,7 @@ export default {
   },
   data: () =>({
     isVideoLive: false,
+    isVideo360: false,
     isInfoModal: false,
     isArModal: false,
     isMap: false,
@@ -202,6 +206,12 @@ export default {
         this.isArModal = true
         this.$nextTick(()=>{
           this.$refs?.arModal?.show()
+        })
+      } else if (params.type == 'panorama') {
+        this.infoModalContent = params
+        this.isVideo360 = true
+        this.$nextTick(()=>{
+          this.$refs?.video360?.show()
         })
       }
     },

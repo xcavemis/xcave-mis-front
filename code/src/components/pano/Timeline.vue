@@ -54,7 +54,7 @@
 export default {
     methods: {
         goTo(id) {
-            // this.$store.commit('navigateToPano', id)
+            this.$store.commit('navigateToPano', id)
         },
     }
 }
@@ -73,6 +73,7 @@ export default {
         border-radius: 50%;
         background-color: rgba(0,0,0,0.2);
         position: relative;
+        cursor: pointer;
 
         .timeline-comp__marker-icon {
             @include set-size(5px, 5px);

@@ -28,6 +28,7 @@ export const projection = {
               vec3: [-2163.50, 36.89, -4499.96],
             },
           },
+          
         ]
       },
       {
@@ -168,6 +169,24 @@ export const projection = {
             },
           },
           {
+            vec3: [-4875.59, -350.40, -1042.97],
+            target: "FYeBDc_ET3k",
+            title: 'PROJECTION 360 501',
+            type: 'panorama',
+            direction: {
+              vec3: [-2163.50, 36.89, -4499.96],
+            },
+          },
+          {
+            vec3: [4458.14, -1491.01, 1679.75],
+            target: "FYeBDc_ET3k",
+            title: 'PROJECTION 360 502',
+            type: 'panorama',
+            direction: {
+              vec3: [-2163.50, 36.89, -4499.96],
+            },
+          },
+          {
             vec3: [4844.48, -248.70, 1174.49],
             title: "D-501",
             type: 'content',
@@ -208,6 +227,33 @@ export const projection = {
             },
           },
           {
+            vec3: [171.34, 249.14, 4981.23],
+            target: "FYeBDc_ET3k",
+            title: 'PROJECTION 360 501',
+            type: 'panorama',
+            direction: {
+              vec3: [-2163.50, 36.89, -4499.96],
+            },
+          },
+          {
+            vec3: [-3960.30, -951.31, -2892.55],
+            target: "FYeBDc_ET3k",
+            title: 'PROJECTION 360 502',
+            type: 'panorama',
+            direction: {
+              vec3: [-2163.50, 36.89, -4499.96],
+            },
+          },
+          {
+            vec3: [3421.06, -1002.67, -3491.44],
+            target: "FYeBDc_ET3k",
+            title: 'PROJECTION 360 503',
+            type: 'panorama',
+            direction: {
+              vec3: [-2163.50, 36.89, -4499.96],
+            },
+          },
+          {
             vec3:[4622.69, -149.22, 1874.16],
             title: "D-502",
             type: 'content',
@@ -230,11 +276,29 @@ export const projection = {
         infoHotspots: [
           {
             vec3: [-2073.68, -881.96, 4456.11],
-            target: "projection502",
+            target: "projection503",
             title: 'PROJECTION 502',
             type: 'link',
             direction: {
               vec3: [-4472.10, -211.12, 2203.12],
+            },
+          },
+          {
+            vec3: [2840.70, 500.59, -4075.26],
+            target: "FYeBDc_ET3k",
+            title: 'PROJECTION 360 504',
+            type: 'panorama',
+            direction: {
+              vec3: [-2163.50, 36.89, -4499.96],
+            },
+          },
+          {
+            vec3: [99.26, 127.26, 4989.80],
+            target: "FYeBDc_ET3k",
+            title: 'PROJECTION 360 503',
+            type: 'panorama',
+            direction: {
+              vec3: [-2163.50, 36.89, -4499.96],
             },
           },
           {

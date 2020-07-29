@@ -71,8 +71,10 @@ export default {
       const scene = this.findSceneDataById(key)
       const _pano = this.panos[scene.id]
       if(_pano) {
-        const { x, y, z } = new THREE.Vector3(direction[0], direction[1], direction[2]).normalize();
-        this.viewer.camera.position.set(x, -y, -z);
+        if (direction) {
+          const { x, y, z } = new THREE.Vector3(direction[0], direction[1], direction[2]).normalize();
+          this.viewer.camera.position.set(x, -y, -z);
+        }
         _pano.fadeIn(200)
         _pano.fadeOut(200)
         this.viewer.setPanorama( _pano )
@@ -97,11 +99,18 @@ export default {
 
       scene.infoHotspots?.map(info => {
         let pos = info.vec3 ? new THREE.Vector3(info.vec3[0], info.vec3[1], info.vec3[2]) : new THREE.Vector3(Math.random() * 1000, -1355.19, -4649.08)
-        const infoSpot = new PANOLENS.Infospot(info.type == 'content' ? 150 : 400, info.type == 'content' ? require('@/assets/images/icons/hotspot-info.png') : require('@/assets/images/icons/hotspot-link.png'))
+        const infoSpot = new PANOLENS.Infospot(
+          info.type == 'content' ? 150 : 400, 
+          info.type == 'content' ? 
+          require('@/assets/images/icons/hotspot-info.png') : info.type == 'panorama' ?
+          require('@/assets/images/icons/hotspot-360.png') :
+          require('@/assets/images/icons/hotspot-link.png')
+          )
         infoSpot.addHoverText(info.title)
         infoSpot.position.copy( pos );
+        console.log(info.type)
         infoSpot.addEventListener('click', (e) => {
-          if (info.type == 'content') {
+          if (info.type == 'content' || info.type == 'panorama') {
             this.showInfoHotspotLayer(info)
           } else if (info.type == 'link') {
             this.navigateTo(info)
@@ -217,11 +226,11 @@ export default {
   
           scene.infoHotspots?.map(info => {
             let pos = info.vec3 ? new THREE.Vector3(info.vec3[0], info.vec3[1], info.vec3[2]) : new THREE.Vector3(Math.random() * 1000, -1355.19, -4649.08)
-            const infoSpot = new PANOLENS.Infospot(info.type == 'content' ? 150 : 400, info.type == 'content' ? require('@/assets/images/icons/hotspot-info.png') : require('@/assets/images/icons/hotspot-link.png'))
+            const infoSpot = new PANOLENS.Infospot(info.type == 'content' ? 150 : 400, (info.type == 'content' || info.type == 'panorama') ? require('@/assets/images/icons/hotspot-info.png') : require('@/assets/images/icons/hotspot-link.png'))
             infoSpot.addHoverText(info.title)
             infoSpot.position.copy( pos );
             infoSpot.addEventListener('click', (e) => {
-              if (info.type == 'content') {
+              if (info.type == 'content' || info.type == 'panorama') {
                 this.showInfoHotspotLayer(info)
               } else if (info.type == 'link') {
                 this.navigateTo(info)

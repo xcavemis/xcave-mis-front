@@ -50,7 +50,8 @@ export default {
     left: 0;
     background-color: rgba(0, 0, 0, 0.8);
     .video-live__content {
-        @include set-size(65.8vw, 62.5vh);
+        // @include set-size(65.8vw, 62.5vh);
+        @include set-size(90vw, 80vh);
         @include center(absolute);
         overflow: hidden;
         .video-live__iframe {

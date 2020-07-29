@@ -202,15 +202,15 @@ export const anatomy = {
             vec3: [-2528.08, 81.07, 4308.10],
           },
         },
-        {
-          vec3: [1502.05, -1525.15, -4516.05],
-          target: "projection501Video",
-          title: 'PROJECTION 501 VIDEO',
-          type: 'link',
-          direction: {
-            vec3: [218.25, -116.98, 4983.97],
-          },
-        },
+        // {
+        //   vec3: [1502.05, -1525.15, -4516.05],
+        //   target: "projection501Video",
+        //   title: 'PROJECTION 501 VIDEO',
+        //   type: 'link',
+        //   direction: {
+        //     vec3: [218.25, -116.98, 4983.97],
+        //   },
+        // },
       ]
     },
   ],

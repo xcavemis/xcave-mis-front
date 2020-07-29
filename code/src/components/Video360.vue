@@ -25,11 +25,13 @@ export default {
     props: ['videoId'],
     methods: {
         show() {
+            TweenMax.set('html, body', { overflow: 'hidden' })
             TweenMax.fromTo('.video-pano', 0.6, { autoAlpha: 0 }, { autoAlpha: 1, ease: Quad.easeInOut })
             TweenMax.fromTo('.video-pano__iframe', 0.6, { y: '100%' }, { y: '0%', ease: Quad.easeInOut, delay: 0.3 })
             TweenMax.fromTo('.video-pano__close', 0.6, { scale: 0 }, { scale: 1, ease: Quad.easeInOut, delay: 0.8 })
         },
         hide(){
+            TweenMax.set('html, body', { overflow: 'auto' })
             TweenMax.fromTo('.video-pano__close', 0.4, { scale: 1 }, { scale: 0, ease: Quad.easeInOut })
             TweenMax.fromTo('.video-pano__iframe', 0.6, { y: '0%' }, { y: '100%', ease: Quad.easeInOut, delay: 0.3, onComplete: () => {
                 this.$emit('close')

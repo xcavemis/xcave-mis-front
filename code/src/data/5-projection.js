@@ -170,7 +170,7 @@ export const projection = {
           },
           {
             vec3: [-4875.59, -350.40, -1042.97],
-            target: "FYeBDc_ET3k",
+            target: "xeUJHzxG240",
             title: 'PROJECTION 360 501',
             type: 'panorama',
             direction: {
@@ -179,7 +179,7 @@ export const projection = {
           },
           {
             vec3: [4458.14, -1491.01, 1679.75],
-            target: "FYeBDc_ET3k",
+            target: "xeUJHzxG240",
             title: 'PROJECTION 360 502',
             type: 'panorama',
             direction: {
@@ -228,7 +228,7 @@ export const projection = {
           },
           {
             vec3: [171.34, 249.14, 4981.23],
-            target: "FYeBDc_ET3k",
+            target: "xeUJHzxG240",
             title: 'PROJECTION 360 501',
             type: 'panorama',
             direction: {
@@ -237,7 +237,7 @@ export const projection = {
           },
           {
             vec3: [-3960.30, -951.31, -2892.55],
-            target: "FYeBDc_ET3k",
+            target: "xeUJHzxG240",
             title: 'PROJECTION 360 502',
             type: 'panorama',
             direction: {
@@ -246,7 +246,7 @@ export const projection = {
           },
           {
             vec3: [3421.06, -1002.67, -3491.44],
-            target: "FYeBDc_ET3k",
+            target: "xeUJHzxG240",
             title: 'PROJECTION 360 503',
             type: 'panorama',
             direction: {
@@ -285,7 +285,7 @@ export const projection = {
           },
           {
             vec3: [2840.70, 500.59, -4075.26],
-            target: "FYeBDc_ET3k",
+            target: "xeUJHzxG240",
             title: 'PROJECTION 360 504',
             type: 'panorama',
             direction: {
@@ -294,7 +294,7 @@ export const projection = {
           },
           {
             vec3: [99.26, 127.26, 4989.80],
-            target: "FYeBDc_ET3k",
+            target: "xeUJHzxG240",
             title: 'PROJECTION 360 503',
             type: 'panorama',
             direction: {

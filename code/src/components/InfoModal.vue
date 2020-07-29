@@ -252,7 +252,8 @@ export default {
 
                 .info-modal__content-description {
                     font-family: $got-medium;
-                    @include font-size(12);
+                    @include font-size(15);
+                    line-height: 17px;;
                     color: $black;
                     height: 52%;
                     overflow-x: hidden;

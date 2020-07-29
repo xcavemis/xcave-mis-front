@@ -1,6 +1,9 @@
 <template>
   <div class="pano-comp">
     <div id="pano" class="panolens-container"></div>
+    <div id="progress">
+      <div ref="bar" id="bar"></div>
+    </div>
   </div>
 </template>
 
@@ -12,6 +15,7 @@ import { data } from '@/data/scenes.js';
 const hotspotInfo = require('@/assets/images/icons/hotspot-info.png')
 const hotspotAr = require('@/assets/images/icons/hotspot-ar.png')
 const hotspotLink = require('@/assets/images/icons/hotspot-link.png')
+import createjs from 'preload-js';
 export default {
   name: 'Pano',
   props: {},
@@ -24,7 +28,16 @@ export default {
     isMobile: navigator.userAgent.toLowerCase().match(/mobile/i),
     isIOS: /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream,
     currentPano: null, 
+    firstSceneLoaded: false,
+    textureLoader: new THREE.TextureLoader(),
   }),
+  watch: {
+    '$store.getters.navigateToPano': function(val, old) {
+      if (val != old) {
+        this.buildScene(val, null)
+      }
+    }
+  },
   mounted(){
     // this.$store.dispatch("loading", true)
     this.$nextTick(()=>{
@@ -36,69 +49,47 @@ export default {
       this.viewer = new PANOLENS.Viewer({
         container: this.$el.querySelector('.panolens-container'),
         output: 'console',
-        controlButtons: ['video'],
         autoHideInfospot: false,
+        controlButtons: []
       })
-      this.viewer.getControl().minFov = 20
-      this.viewer.getControl().maxFov = 70
-      // this.viewer.onTap = (event, type) => {
-      //   if (type == 'click') {
-      //     console.log(event)
-      //   }
-      // }
-      this.buildScene('codices101', [4979.33, -341.24, -138.51])
-      // this.buildScenes()
-      // this.buildLinks()
+      this.controls = this.viewer.getControl()
+      this.controls.enableDamping = true;
+      this.controls.dampingFactor = 0.5;
+      this.controls.screenSpacePanning = true;
+      this.controls.minFov = 18
+      this.controls.maxFov = 70
 
-      // data.scenes.map((data) => {
-      //   data.infoHotspots.map((spot, index) => {
-      //     if (spot.type == 'link') {
-      //       console.log(this.panos[data.id], data.id)
-      //       this.panos[data.id].link( this.panos[spot.target], spot.vec3 ? new THREE.Vector3(spot.vec3[0], spot.vec3[1], spot.vec3[2]) : new THREE.Vector3(1203.85, -1355.19, -4649.08), 400, require('@/assets/images/icons/hotspot-link.png'));
-      //       this.panos[data.id].addEventListener( 'enter-fade-start', ()=>{
-        
-      //         // let dir;
-      //         // if (direction == null) {
-      //         //   dir = new THREE.Vector3(scene.initialViewParameters.vec3[0], scene.initialViewParameters.vec3[1], scene.initialViewParameters.vec3[2])
-      //         // } else {
-      //         //   }
-      //         let dir = new THREE.Vector3(data.initialViewParameters.vec3[0], data.initialViewParameters.vec3[1], data.initialViewParameters.vec3[2])
-      //         this.viewer.tweenControlCenter(dir, 0 );
-      //         this.$store.dispatch("loading", false)
-      //       })
-      //     }
-      //   })
-      // })
-      console.log(this.panos)
+      this.buildScene('codices101', [4979.33, -341.24, -138.51])
+      this.viewer.addUpdateCallback(this.update)
+    },
+    update(){
+      this.controls?.update()
     },
     buildScene(key, direction){
-      this.$store.dispatch("loading", true)
-      if (this.currentPano) this.disposePanorama(this.currentPano)
-      this.panos = {}
+      this.$refs.bar.classList.remove( 'hide' );
+      TweenMax.to('.panolens-infospot', 0.6, { autoAlpha: 0, ease: Quad.easeInOut })
       const scene = this.findSceneDataById(key)
+      const _pano = this.panos[scene.id]
+      if(_pano) {
+        const { x, y, z } = new THREE.Vector3(direction[0], direction[1], direction[2]).normalize();
+        this.viewer.camera.position.set(x, -y, -z);
+        _pano.fadeIn(200)
+        _pano.fadeOut(200)
+        this.viewer.setPanorama( _pano )
+        this.updateMenuNavigation(scene)
+        return
+     }
       let isImage = scene.type == 'image'
-      // let urlPrefix = isImage ? `https://hml.exposicaodavinci500anos.com.br/assets${this.isMobile ? '/mob' : ''}` : "/media/videos";
       let urlPrefix = isImage ? `https://hml.exposicaodavinci500anos.com.br/assets${this.isMobile ? '/mob' : ''}` : "https://hml.exposicaodavinci500anos.com.br/assets/videos";
       let ext = isImage ? `.jpg` : `.mp4`
       let id = scene.id.substring(scene.id.length - 3, scene.id.length)
       // console.log(`${urlPrefix}/${scene.src}${ext}`)
-      console.log(this.$store.getters.assets[id])
+      console.log(this.$store.getters.assets)
       let currentPano = isImage ? 
-        new PANOLENS.ImagePanorama(  this.$store.getters.assets[id] ? this.$store.getters.assets[id].image : `${urlPrefix}/${scene.src}${ext}` ) :
+        new PANOLENS.ImagePanorama(  this.$store.getters.assets[id] ? URL.createObjectURL(this.$store.getters.assets[id].url) : `${urlPrefix}/${scene.src}${ext}` ) :
         new PANOLENS.VideoPanorama(  `${urlPrefix}/${scene.src}${ext}`, { autoplay: true, muted: true} );
 
-      currentPano.addEventListener( 'enter-fade-start', ()=>{
-        this.viewer.getControl().object.fov = 50
-        this.viewer.getControl().object.updateProjectionMatrix();
-        let dir;
-        if (direction == null) {
-          dir = new THREE.Vector3(scene.initialViewParameters.vec3[0], scene.initialViewParameters.vec3[1], scene.initialViewParameters.vec3[2])
-        } else {
-          dir = new THREE.Vector3(direction[0], direction[1], direction[2])
-        }
-        this.viewer.tweenControlCenter(dir, 0 );
-        this.$store.dispatch("loading", false)
-      })
+      currentPano.addEventListener( 'progress', this.onProgressUpdate );
 
       const { edgeLength } = currentPano;
       const radius = edgeLength / 2;
@@ -117,105 +108,135 @@ export default {
           } 
         })
         currentPano.add( infoSpot );
-        // this.panos[data.id].link( this.panos[link.target], dir);
-        
       })
      
       if (!this.panos[scene.id]) {
         this.panos[scene.id] = currentPano
+      } else {
+        this.viewer.setPanorama( this.panos[scene.id] )
+        this.updateMenuNavigation(scene)
+        return
       }
       
-      // this.panos.push(currentPano)
       this.viewer.add(currentPano)
-      this.currentPano = currentPano
-      this.updateMenuNavigation(scene)
-    },
-    buildScenes(){
-      // return
-      this.panos = {}
-      console.log(this.$store.getters.assets)
-      data.scenes.map((data) => {
-        let isImage = data.type == 'image'
-        let urlPrefix = isImage ? `/media/images/${this.isMobile ? '/mob' : ''}` : "/media/videos";
-        // let urlPrefix = isImage ? `https://hml.exposicaodavinci500anos.com.br/assets${this.isMobile ? '/mob' : ''}` : "/img/scenes/video";
-        let ext = isImage ? `.jpg` : `.mp4`
-        let id = data.id.substring(data.id.length - 3, data.id.length)
-        // console.log(`${urlPrefix}/${data.src}${ext}`)
-        let panoSource = isImage ? 
-          new PANOLENS.ImagePanorama(  this.$store.getters.assets[id] ? this.$store.getters.assets[id].image : `${urlPrefix}/${data.src}${ext}` ) : 
-          new PANOLENS.VideoPanorama(  `${urlPrefix}/${data.src}${ext}`, { autoplay: true } );
-
-        panoSource.addEventListener( 'enter', ()=>{
-          console.log('pano fadeIn')
-          this.viewer.tweenControlCenter( new THREE.Vector3(-782.91, -92.86, -4927.70), 1000 );
-          // panoSource.fadeIn()
-
-        })
-
-        // panoSource.onLeave = function () {
-
-	      //   const duration = this.animationDuration;
-
-	      //   this.enterTransition.stop();
-	      //   this.leaveTransition
-        //     .to( {}, duration )
-        //     .onStart( function () {
-
-        //         /**
-        //          * Leave panorama and animation starting event
-        //          * @event Panorama#leave-start
-        //          * @type {object} 
-        //          */
-        //         this.dispatchEvent( { type: 'leave-start' } );
-
-        //         // this.fadeOut( 200 );
-        //         this.toggleInfospotVisibility( false );
-
-        //   }.bind( this ) ).start()
-        // }
-        // panoSource.addEventListener( 'enter-fade-start', ()=>{
-        //   this.viewer.tweenControlCenter( new THREE.Vector3(-782.91, -92.86, -4927.70), 1000 );
-        // })
-        // console.log(panoSource)
-        
-        if (!this.panos[data.id]) {
-          this.panos[data.id] = panoSource
+      this.viewer.setPanorama( currentPano )
+      currentPano.addEventListener('load', (e) => {
+        if (!this.firstSceneLoaded) {
+          // this.loadAllScenes()
+          this.setupQueue()
         }
-        // this.panos.push(panoSource)
-        this.viewer.add(panoSource)
-      });
-    },
-    buildLinks(){
-      console.log(this.panos)
-      data.scenes.map((data) => {
-        data.linkHotspots?.map(link => {
-          let dir = link.vec3 ? new THREE.Vector3(link.vec3[0], link.vec3[1], link.vec3[2]) : new THREE.Vector3(Math.random() * 1000, -1355.19, -4649.08)
-          this.panos[data.id].link( this.panos[link.target], dir);
-          
-        })
-        data.infoHotspots?.map(info => {
-          let pos = info.vec3 ? new THREE.Vector3(info.vec3[0], info.vec3[1], info.vec3[2]) : new THREE.Vector3(Math.random() * 1000, -1355.19, -4649.08)
-          const infoSpot = new PANOLENS.Infospot()
-          infoSpot.addHoverText(info.title)
-          infoSpot.position.copy( pos );
-          infoSpot.addEventListener('click', (e) => {
-            console.log('infoSpot click', info)
-            if (info.type == 'content') {
-              this.showInfoHotspotLayer(info)
-            } else if (info.type == 'link') {
-              this.navigateTo(info)
-            } 
-          })
-          this.panos[data.id].add( infoSpot );
-          // this.panos[data.id].link( this.panos[link.target], dir);
-          
-        })
+        this.viewer.setPanorama( currentPano )
+        this.updateMenuNavigation(scene)
+        this.currentPano = currentPano
+
+        this.firstSceneLoaded = true
       })
     },
-    disposePanorama(panorama) {
-      panorama.dispose();
-      this.viewer.remove( panorama );
-      panorama = null;
+    setupQueue(){
+      // this.preloader = new Preloader()
+      // this.preloader.debug = false
+      // this.preloader.addListener('onComplete', this.loadComplete);
+      // this.preloader.addListener('onProgress', this.loadProgress);
+      const assetsToLoad = []
+      data.scenes.map((scene, index) => {
+        let isImage = scene.type == 'image'
+        let urlPrefix = `https://hml.exposicaodavinci500anos.com.br/assets${this.isMobile ? '/mob' : ''}`
+        let ext = isImage ? `.jpg` : `.mp4`
+        if (index < 6) {
+          if (scene.type == 'image') {
+            assetsToLoad.push(
+              { 
+                id: scene.id, 
+                src: `${urlPrefix}/${scene.src}${ext}`, 
+                type: 'image' 
+              }
+              // { 
+              //   name: id, 
+              //   url: `${urlPrefix}/${scene.src}${ext}`, 
+              //   type: 'texture' 
+              // },
+            )
+          }
+        }
+      })
+      this.queue = new createjs.LoadQueue()
+      this.queue.on('complete', this.onLoadComplete);
+      this.queue.loadManifest(assetsToLoad)
+      this.queue.load()
+      // this.preloader.queue(assetsToLoad);
+    },
+    onLoadComplete(event) {
+      // console.log('onLoadComplete', event);
+        // Get Blob object instead of a formatted result
+        const assetsLoaded = {}
+        data.scenes.map((scene, index) => {
+          if (index < 6) {
+            let blob = this.queue.getResult(scene.id, true);
+            if (!assetsLoaded[scene.id]) {
+              assetsLoaded[scene.id] = {
+                name: scene.id,
+                url: blob,
+                type: 'image'
+              }
+            }
+          }
+        })
+        this.$store.dispatch('assets', assetsLoaded)
+    },
+    onProgressUpdate ( event ) {
+      let percentage = event.progress.loaded/ event.progress.total * 100;
+      console.log('onProgressUpdate', percentage)
+      this.$refs.bar.style.width = percentage + "%";
+      if (percentage >= 100){
+        this.$refs.bar.classList.add( 'hide' );
+        setTimeout(() => {
+          this.$refs.bar.style.width = 0;
+        }, 1000);
+      }
+    },
+    loadAllScenes() {
+      console.log('firstSceneLoaded')
+      data.scenes.map((data) => {
+        const scene = this.findSceneDataById(data.id)
+        console.log('scene', scene)
+        if (scene) {
+          let isImage = scene.type == 'image'
+          let urlPrefix = isImage ? `https://hml.exposicaodavinci500anos.com.br/assets${this.isMobile ? '/mob' : ''}` : "https://hml.exposicaodavinci500anos.com.br/assets/videos";
+          let ext = isImage ? `.jpg` : `.mp4`
+          let id = scene.id.substring(scene.id.length - 3, scene.id.length)
+
+          let currentPano = isImage ? 
+            new PANOLENS.ImagePanorama(  this.$store.getters.assets[id] ? this.$store.getters.assets[id].image : `${urlPrefix}/${scene.src}${ext}` ) :
+            new PANOLENS.VideoPanorama(  `${urlPrefix}/${scene.src}${ext}`, { autoplay: true, muted: true} );
+  
+          currentPano.addEventListener( 'progress', this.onProgressUpdate );
+  
+          const { edgeLength } = currentPano;
+          const radius = edgeLength / 2;
+          const baseScale = 200
+  
+          scene.infoHotspots?.map(info => {
+            let pos = info.vec3 ? new THREE.Vector3(info.vec3[0], info.vec3[1], info.vec3[2]) : new THREE.Vector3(Math.random() * 1000, -1355.19, -4649.08)
+            const infoSpot = new PANOLENS.Infospot(info.type == 'content' ? 150 : 400, info.type == 'content' ? require('@/assets/images/icons/hotspot-info.png') : require('@/assets/images/icons/hotspot-link.png'))
+            infoSpot.addHoverText(info.title)
+            infoSpot.position.copy( pos );
+            infoSpot.addEventListener('click', (e) => {
+              if (info.type == 'content') {
+                this.showInfoHotspotLayer(info)
+              } else if (info.type == 'link') {
+                this.navigateTo(info)
+              } 
+            })
+            currentPano.add( infoSpot );
+          })
+        
+          if (!this.panos[scene.id]) {
+            this.panos[scene.id] = currentPano
+          }           
+          this.viewer.add(currentPano)
+          
+        }
+      })
     },
     navigateTo(info){
       // this.$store.dispatch("loading", true)
@@ -345,6 +366,26 @@ export default {
     left: 0;
     background-color: #000;
   }
+
+  #progress {
+    position: absolute;
+    width: 100%;
+    height: 3px;
+    z-index: 10;
+    top: 70px;
+  }
+
+  #bar {
+    background-color: #fff;
+    height: 100%;
+    transition: width 0.1s ease;
+  }
+
+  #bar.hide {
+    opacity: 0;
+    transition: opacity 1s ease;
+  }
+
 }
 
 #pano {

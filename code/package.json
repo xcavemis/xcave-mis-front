@@ -20,6 +20,7 @@
     "marzipano": "^0.9.1",
     "minimal-event-emitter": "^1.0.0",
     "panolens": "^0.11.0",
+    "preload-js": "^0.6.3",
     "sass": "^1.26.10",
     "splitting": "^1.0.6",
     "three": "^0.118.3",

@@ -1,7 +1,8 @@
 <template>
   <div class="experience">
-    <Pano ref="pano" v-if="queueLoaded" v-on:info-layer="onInfoLayer" />
+    <!-- <Pano ref="pano" v-if="queueLoaded" v-on:info-layer="onInfoLayer" /> -->
     <!-- <Panolens ref="pano" v-if="queueLoaded" v-on:info-layer="onInfoLayer"/> -->
+    <PanolensNew ref="pano" v-if="queueLoaded" v-on:info-layer="onInfoLayer"/>
     <HeaderControls ref="headerControls" />
     <FooterControls ref="footerControls" v-on:action="onFooterAction"/>
     <VideoLive v-if="isVideoLive" video-id="c8dFQbj20dg" v-on:close="videoLiveClosed" ref="videoLive" />
@@ -35,6 +36,7 @@
 import { Preloader } from '@/utils/loaders/Preloader';
 import Pano from '@/components/Pano.vue'
 import Panolens from '@/components/Panolens.vue'
+import PanolensNew from '@/components/PanolensNew.vue'
 import FooterControls from '@/components/pano/FooterControls.vue'
 import HeaderControls from '@/components/pano/HeaderControls.vue'
 import Map from '@/components/pano/Map.vue'
@@ -43,11 +45,13 @@ import AudioPlayer from '@/components/AudioPlayer.vue'
 import InfoModal from '@/components/InfoModal.vue'
 import Ar from '@/components/Ar.vue'
 import { data } from '@/data/scenes.js';
+// import createjs from 'preload-js';
 export default {
   name: 'experience',
   components: {
     Pano,
     Panolens,
+    PanolensNew,
     FooterControls,
     HeaderControls,
     VideoLive,
@@ -70,41 +74,69 @@ export default {
   }),
   mounted(){
     
-    this.$nextTick(()=>{
+    // this.setupQueue()
+    // this.$nextTick(()=>{
       // this.$store.dispatch("loading", true)
-      // this.setupQueue()
+      
       // this.$refs.videoIntro.addEventListener('ended', this.onVideoIntroEnded, true)
-    })
+    // })
   },
   methods: {
-    setupQueue(){
-      this.preloader = new Preloader()
-      this.preloader.debug = false
-      this.preloader.addListener('onComplete', this.loadComplete);
-      this.preloader.addListener('onProgress', this.loadProgress);
-      const assetsToLoad = [{ name: 'teste', url: 'models/scene.gltf', type: 'gltf' }]
-      data.scenes.map((scene, index) => {
-        let isImage = scene.type == 'image'
-        let urlPrefix = `https://hml.exposicaodavinci500anos.com.br/assets${this.isMobile ? '/mob' : ''}`
-        let ext = isImage ? `.jpg` : `.mp4`
-        let id = scene.id.substring(scene.id.length - 3, scene.id.length)
-        if (scene.type == 'image') {
-          assetsToLoad.push(
-            { 
-              name: id, 
-              url: `${urlPrefix}/${scene.src}${ext}`, 
-              type: 'texture' 
-            },
-          )
-        }
-      })
-      this.preloader.queue(assetsToLoad);
-    },
+    // setupQueue(){
+    //   // this.preloader = new Preloader()
+    //   // this.preloader.debug = false
+    //   // this.preloader.addListener('onComplete', this.loadComplete);
+    //   // this.preloader.addListener('onProgress', this.loadProgress);
+    //   const assetsToLoad = []
+    //   data.scenes.map((scene, index) => {
+    //     let isImage = scene.type == 'image'
+    //     let urlPrefix = `https://hml.exposicaodavinci500anos.com.br/assets${this.isMobile ? '/mob' : ''}`
+    //     let ext = isImage ? `.jpg` : `.mp4`
+    //     if (index < 6) {
+    //       if (scene.type == 'image') {
+    //         assetsToLoad.push(
+    //           { 
+    //             id: scene.id, 
+    //             src: `${urlPrefix}/${scene.src}${ext}`, 
+    //             type: 'image' 
+    //           }
+    //           // { 
+    //           //   name: id, 
+    //           //   url: `${urlPrefix}/${scene.src}${ext}`, 
+    //           //   type: 'texture' 
+    //           // },
+    //         )
+    //       }
+    //     }
+    //   })
+    //   this.queue = new createjs.LoadQueue()
+    //   this.queue.on('complete', this.onLoadComplete);
+    //   this.queue.loadManifest(assetsToLoad)
+    //   this.queue.load()
+    //   // this.preloader.queue(assetsToLoad);
+    // },
+    // onLoadComplete(event) {
+    //   // console.log('onLoadComplete', event);
+    //     // Get Blob object instead of a formatted result
+    //     const assetsLoaded = []
+    //     data.scenes.map((scene, index) => {
+    //       if (index < 6) {
+    //         let blob = this.queue.getResult(scene.id, true);
+    //         assetsLoaded.push({
+    //           name: scene.id,
+    //           url: blob,
+    //           type: 'image'
+    //         })
+    //       }
+    //     })
+    //     this.$store.dispatch('assets', assetsLoaded)
+    // },
     loadProgress(details){  
       console.log('Preloader loadProgress: ', details.data);
-      if (details.data > 0.1) {
+      if (details.data > 0.3) {
         // this.$store.dispatch("loading", false)
         this.queueLoaded = true
+        this.$store.dispatch("loading", false)
       }
       // this.$store.dispatch('loading_progress', details.data * 100)
       // this.$store.dispatch('loaded', true)

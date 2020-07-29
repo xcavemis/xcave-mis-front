@@ -4348,7 +4348,7 @@
 
 	        this.fadeOutAnimation.stop();
 	        this.fadeInAnimation
-	            .to( { opacity: 1 }, duration )
+	            .to( { opacity: 1 }, 2000 )
 	            .onUpdate( this.onFadeAnimationUpdate.bind( this ) )
 	            .onComplete( function () {
 
@@ -4377,7 +4377,7 @@
 
 	        this.fadeInAnimation.stop();
 	        this.fadeOutAnimation
-	            .to( { opacity: 0 }, duration )
+	            .to( { opacity: 0 }, 2000 )
 	            .onUpdate( this.onFadeAnimationUpdate.bind( this ) )
 	            .start();
 

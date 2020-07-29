@@ -18,6 +18,7 @@ export default new Vuex.Store({
     loadingShow: false,
     assets: {},
     xr_registered: false,
+    navigateToPano: '',
     warningShow: { show: false, text: '' },
     navigationStatus: { 
       codices: 'pending',
@@ -60,6 +61,9 @@ export default new Vuex.Store({
     },
     warningShow(state, obj) {
       state.warningShow = obj;
+    },
+    navigateToPano(state, id) {
+      state.navigateToPano = id;
     },
     navigationStatus(state, obj) {
       state.navigationStatus[obj.room] = obj.status;
@@ -274,6 +278,9 @@ export default new Vuex.Store({
     warning({ commit }, obj) {
       commit("warningShow", obj);
     },
+    navigateToPano({ commit }, id) {
+      commit("navigateToPano", id);
+    },
     navigation_status({ commit }, obj) {
       commit("navigationStatus", obj);
     },
@@ -307,6 +314,9 @@ export default new Vuex.Store({
     },
     warningShow(state) {
       return state.warningShow;
+    },
+    navigateToPano(state) {
+      return state.navigateToPano;
     },
     assets(state) {
       return state.assets;

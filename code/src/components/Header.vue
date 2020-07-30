@@ -160,10 +160,10 @@
   }
 }
 @media only screen and (max-width: 1200px) {
-  .governo-top {
-    margin-top: 60px;
-    margin-bottom: 70px;
-  }
+  // .governo-top {
+  //   margin-top: 60px;
+  //   margin-bottom: 70px;
+  // }
 }
 @media only screen and (max-width: 992px) {
   .governo-top {

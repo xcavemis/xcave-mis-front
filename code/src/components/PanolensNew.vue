@@ -8,16 +8,16 @@
 </template>
 
 <script>
-const THREE = require('three');
-import { progressiveImageLoader } from '@/utils/loaders/ProgressiveImgLoader';
-import { TweenMax, Quad } from 'gsap';
-const PANOLENS = require('@/utils/panolens/panolens.js');
-import { data } from '@/data/scenes.js';
-import { progressiveData } from '@/data/progressive-data.js'
-const hotspotInfo = require('@/assets/images/icons/hotspot-info.png')
-const hotspotAr = require('@/assets/images/icons/hotspot-ar.png')
-const hotspotLink = require('@/assets/images/icons/hotspot-link.png')
-import createjs from 'preload-js';
+const THREE = require("three");
+import { progressiveImageLoader } from "@/utils/loaders/ProgressiveImgLoader";
+import { TweenMax, Quad } from "gsap";
+const PANOLENS = require("@/utils/panolens/panolens.js");
+import { data } from "@/data/scenes.js";
+import { progressiveData } from "@/data/progressive-data.js";
+const hotspotInfo = require("@/assets/images/icons/hotspot-info.png");
+const hotspotAr = require("@/assets/images/icons/hotspot-ar.png");
+const hotspotLink = require("@/assets/images/icons/hotspot-link.png");
+import createjs from "preload-js";
 export default {
   name: "Pano",
   props: {},
@@ -67,40 +67,46 @@ export default {
     update() {
       this.controls?.update();
     },
-    buildScene(key, direction){
+    buildScene(key, direction) {
       // this.$store.dispatch('loading', true)
-      this.$refs.bar.classList.remove( 'hide' );
+      this.$refs.bar.classList.remove("hide");
       // TweenMax.to('.panolens-infospot', 0.6, { autoAlpha: 0, ease: Quad.easeInOut })
-      const scene = this.findSceneDataById(key)
-      const _pano = this.panos[scene.id]
-      if(_pano) {
+      const scene = this.findSceneDataById(key);
+      const _pano = this.panos[scene.id];
+      if (_pano) {
         // if (direction) {
         //   const { x, y, z } = new THREE.Vector3(direction[0], direction[1], direction[2]).normalize();
         //   this.viewer.camera.position.set(x, -y, -z);
         // }
         _pano.animationDuration = 3500;
-        _pano.toggleInfospotVisibility(true, 0)
-        this.viewer.setPanorama( _pano )
-        this.updateMenuNavigation(scene)
-        return
-     }
-      let isImage = scene.type == 'image'
-      let urlPrefix = isImage ? `https://hml.exposicaodavinci500anos.com.br/assets${this.isMobile ? '/mob' : ''}` : "https://hml.exposicaodavinci500anos.com.br/assets/videos";
-      let ext = isImage ? `.jpg` : `.mp4`
-      let id = scene.id.substring(scene.id.length - 3, scene.id.length)
+        _pano.toggleInfospotVisibility(true, 0);
+        this.viewer.setPanorama(_pano);
+        this.updateMenuNavigation(scene);
+        return;
+      }
+      let isImage = scene.type == "image";
+      let urlPrefix = isImage
+        ? `https://hml.exposicaodavinci500anos.com.br/assets${
+            this.isMobile ? "/mob" : ""
+          }`
+        : "https://hml.exposicaodavinci500anos.com.br/assets/videos";
+      let ext = isImage ? `.jpg` : `.mp4`;
+      let id = scene.id.substring(scene.id.length - 3, scene.id.length);
 
-      
       // console.log(`${urlPrefix}/${scene.src}${ext}`)
       // console.log(this.$store.getters.assets)
-      let imageData = progressiveData[scene.id]
-      let currentPano = isImage ? 
-        new PANOLENS.ImagePanorama( `${urlPrefix}/progressive-images/2k/${scene.src}${ext}` ) :
-        // new PANOLENS.ImagePanorama(  `${urlPrefix}/${scene.src}${ext}` ) :
-        new PANOLENS.VideoPanorama(  `${urlPrefix}/${scene.src}${ext}`, { autoplay: true, muted: true} );
-
+      let imageData = progressiveData[scene.id];
+      let currentPano = isImage
+        ? new PANOLENS.ImagePanorama(
+            `${urlPrefix}/progressive-images/2k/${scene.src}${ext}`
+          )
+        : // new PANOLENS.ImagePanorama(  `${urlPrefix}/${scene.src}${ext}` ) :
+          new PANOLENS.VideoPanorama(`${urlPrefix}/${scene.src}${ext}`, {
+            autoplay: true,
+            muted: true,
+          });
 
       currentPano.animationDuration = 3500;
-      
 
       // currentPano.updateTexture( progressiveTexture)
 
@@ -109,12 +115,12 @@ export default {
         `${urlPrefix}/progressive-images/2k/${scene.src}${ext}`,
         `${urlPrefix}/progressive-images/4k/${scene.src}${ext}`,
         `${urlPrefix}/progressive-images/8k/${scene.src}${ext}`,
-      ]
-      currentPano.addEventListener( 'enter-fade-complete', () => {
-      // const imageURLS = imageData.splice(1, imageData.length)
-        console.log('enter animation complete')
-        progressiveImageLoader.load(imageURLS, currentPano)
-      } );
+      ];
+      currentPano.addEventListener("enter-fade-complete", () => {
+        // const imageURLS = imageData.splice(1, imageData.length)
+        console.log("enter animation complete");
+        progressiveImageLoader.load(imageURLS, currentPano);
+      });
 
       const { edgeLength } = currentPano;
       const radius = edgeLength / 2;
@@ -125,18 +131,21 @@ export default {
           ? new THREE.Vector3(info.vec3[0], info.vec3[1], info.vec3[2])
           : new THREE.Vector3(Math.random() * 1000, -1355.19, -4649.08);
         const infoSpot = new PANOLENS.Infospot(
-          info.type == 'content' ? 150 : 400, 
-          info.type == 'content' ? 
-          require('@/assets/images/icons/hotspot-info.png') : info.type == 'learn' ?
-          require('@/assets/images/icons/hotspot-learn.png') : info.type == 'panorama' ?
-          require('@/assets/images/icons/hotspot-360.png') : info.type == 'ar' ?
-          require('@/assets/images/icons/hotspot-ar.png') : 
-          require('@/assets/images/icons/hotspot-link.png')
-        )
+          info.type == "content" ? 150 : 400,
+          info.type == "content"
+            ? require("@/assets/images/icons/hotspot-info.png")
+            : info.type == "learn"
+            ? require("@/assets/images/icons/hotspot-learn.png")
+            : info.type == "panorama"
+            ? require("@/assets/images/icons/hotspot-360.png")
+            : info.type == "ar"
+            ? require("@/assets/images/icons/hotspot-ar.png")
+            : require("@/assets/images/icons/hotspot-link.png")
+        );
         // infoSpot.addHoverText(info.title, info.type == 'panorama' || info.type == 'learn' ? 80 : 40)
-        infoSpot.addHoverText(info.title)
-        infoSpot.position.copy( pos );
-        infoSpot.addEventListener('click', (e) => {
+        infoSpot.addHoverText(info.title);
+        infoSpot.position.copy(pos);
+        infoSpot.addEventListener("click", (e) => {
           // if (info.type == 'content' || info.type == 'panorama' || info.type == 'learn') {
           if (info.type != "link") {
             this.showInfoHotspotLayer(info);
@@ -148,28 +157,28 @@ export default {
       });
 
       if (!this.panos[scene.id]) {
-        this.panos[scene.id] = currentPano
-      } 
+        this.panos[scene.id] = currentPano;
+      }
       // else {
       //   this.viewer.setPanorama( this.panos[scene.id] )
       //   this.updateMenuNavigation(scene)
       //   return
       // }
-      
-      this.viewer.add(currentPano)
-      this.viewer.setPanorama( currentPano )
-      currentPano.addEventListener('load', (e) => {
-        currentPano.toggleInfospotVisibility(true, 0)
-        this.$store.dispatch('loading', false)
+
+      this.viewer.add(currentPano);
+      this.viewer.setPanorama(currentPano);
+      currentPano.addEventListener("load", (e) => {
+        currentPano.toggleInfospotVisibility(true, 0);
+        this.$store.dispatch("loading", false);
         // console.log('panorama loaded')
-        
+
         if (!this.firstSceneLoaded) {
           // this.loadAllScenes()
           // this.setupQueue()
         }
         // this.viewer.setPanorama( currentPano )
-        this.updateMenuNavigation(scene)
-        this.currentPano = currentPano
+        this.updateMenuNavigation(scene);
+        this.currentPano = currentPano;
 
         this.firstSceneLoaded = true;
       });
@@ -373,6 +382,10 @@ export default {
     height: 5px;
     z-index: 10;
     top: 70px;
+
+    @include maxWidth(1024) {
+      top: 80px;
+    }
   }
 
   #bar {

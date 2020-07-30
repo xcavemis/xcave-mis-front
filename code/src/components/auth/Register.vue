@@ -33,7 +33,7 @@
         </div>
         <div class="form-field" :class="{'error-field': phoneError.length > 0}">
           <the-mask
-            :mask="['(__) ____-____', '(__) _____-____']"
+            :mask="['(##) ####-####', '(##) #####-####']"
             id="phone"
             v-model="formData.phone"
             type="tel"

@@ -4,11 +4,11 @@
       <div class="ar-modal__block">
         <video autoplay="true" muted playsinline width="100%" height="100%" id="video-camera"></video>
         <div class="ar-modal__mask"></div>
-        <Renderer ref="rendererRef" />
+        <Renderer ref="rendererRef" :content="content"/>
       </div>
       <CameraRequestRejection v-if="showRequestWarning"/>
-      <img class="ar-modal__close" src="~@/assets/images/icons/close-info.png" @click="hide" alt="Fechar o conteúdo.">
     </div>
+    <img class="ar-modal__close" src="~@/assets/images/icons/close.png" @click="hide" alt="Fechar o conteúdo.">
     <Loading ref="arLoadingRef" v-if="loading"/>
   </div>
 </template>
@@ -20,6 +20,7 @@ import Loading from '@/components/Loading'
 import Renderer from '@/components/ar/Renderer'
 
 export default {
+  props:['content'],
   components: {
     CameraRequestRejection, 
     Loading, 
@@ -112,10 +113,11 @@ export default {
   position: fixed;
   top: 0;
   left: 0;
-  background-color: rgba(0, 0, 0, 0.8);
+  background-color: rgba(0, 0, 0, 0.95);
+  z-index: 10;
     
   .ar-modal__crop{
-    @include set-size(65.8vw, 62.5vh);
+    @include set-size(90vw, 80vh);
     @include center(absolute);
     overflow: hidden;
     background-color: $black;
@@ -130,14 +132,14 @@ export default {
       background-color: $white;
     }
 
-    .ar-modal__close {
-      @include set-size(14px, 14px);
-      position: absolute;
-      top: 15px;
-      right: 15px;
-      z-index: 10;
-      cursor: pointer;
-    }
+  }
+  .ar-modal__close {
+    @include set-size(50px, 50px);
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    z-index: 10;
+    cursor: pointer;
   }
   #video-camera {
     @include set-size(100%, 100%);

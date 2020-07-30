@@ -127,6 +127,8 @@ export default {
             ? require("@/assets/images/icons/hotspot-learn.png")
             : info.type == "panorama"
             ? require("@/assets/images/icons/hotspot-360.png")
+            : info.type == "ar"
+            ? require("@/assets/images/icons/hotspot-ar.png")
             : require("@/assets/images/icons/hotspot-link.png")
         );
         infoSpot.addHoverText(
@@ -134,13 +136,9 @@ export default {
           info.type == "panorama" || info.type == "learn" ? 80 : 50
         );
         infoSpot.position.copy(pos);
-        console.log(info.type);
         infoSpot.addEventListener("click", (e) => {
-          if (
-            info.type == "content" ||
-            info.type == "panorama" ||
-            info.type == "learn"
-          ) {
+          // if (info.type == 'content' || info.type == 'panorama' || info.type == 'learn') {
+          if (info.type != "link") {
             this.showInfoHotspotLayer(info);
           } else if (info.type == "link") {
             this.navigateTo(info);
@@ -226,7 +224,7 @@ export default {
     },
     onProgressUpdate(event) {
       let percentage = (event.progress.loaded / event.progress.total) * 100;
-      console.log("onProgressUpdate", percentage);
+      // console.log('onProgressUpdate', percentage)
       this.$refs.bar.style.width = percentage + "%";
       if (percentage >= 100) {
         this.$refs.bar.classList.add("hide");
@@ -234,68 +232,6 @@ export default {
           this.$refs.bar.style.width = 0;
         }, 1000);
       }
-    },
-    loadAllScenes() {
-      console.log("firstSceneLoaded");
-      data.scenes.map((data) => {
-        const scene = this.findSceneDataById(data.id);
-        console.log("scene", scene);
-        if (scene) {
-          let isImage = scene.type == "image";
-          let urlPrefix = isImage
-            ? `https://hml.exposicaodavinci500anos.com.br/assets${
-                this.isMobile ? "/mob" : ""
-              }`
-            : "https://hml.exposicaodavinci500anos.com.br/assets/videos";
-          let ext = isImage ? `.jpg` : `.mp4`;
-          let id = scene.id.substring(scene.id.length - 3, scene.id.length);
-
-          let currentPano = isImage
-            ? new PANOLENS.ImagePanorama(
-                this.$store.getters.assets[id]
-                  ? this.$store.getters.assets[id].image
-                  : `${urlPrefix}/${scene.src}${ext}`
-              )
-            : new PANOLENS.VideoPanorama(`${urlPrefix}/${scene.src}${ext}`, {
-                autoplay: true,
-                muted: true,
-              });
-
-          currentPano.addEventListener("progress", this.onProgressUpdate);
-
-          const { edgeLength } = currentPano;
-          const radius = edgeLength / 2;
-          const baseScale = 200;
-
-          scene.infoHotspots?.map((info) => {
-            let pos = info.vec3
-              ? new THREE.Vector3(info.vec3[0], info.vec3[1], info.vec3[2])
-              : new THREE.Vector3(Math.random() * 1000, -1355.19, -4649.08);
-            const infoSpot = new PANOLENS.Infospot(
-              info.type == "content" ? 200 : 100,
-              info.type == "content" || info.type == "panorama"
-                ? require("@/assets/images/icons/hotspot-info.png")
-                : require("@/assets/images/icons/hotspot-link.png"),
-              false
-            );
-            infoSpot.addHoverText(info.title, 50);
-            infoSpot.position.copy(pos);
-            infoSpot.addEventListener("click", (e) => {
-              if (info.type == "content" || info.type == "panorama") {
-                this.showInfoHotspotLayer(info);
-              } else if (info.type == "link") {
-                this.navigateTo(info);
-              }
-            });
-            currentPano.add(infoSpot);
-          });
-
-          if (!this.panos[scene.id]) {
-            this.panos[scene.id] = currentPano;
-          }
-          this.viewer.add(currentPano);
-        }
-      });
     },
     navigateTo(info) {
       // this.$store.dispatch("loading", true)

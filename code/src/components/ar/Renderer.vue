@@ -15,8 +15,9 @@ import { ShadowMesh } from 'three/examples/jsm/objects/ShadowMesh.js'
 // import { ShaderPass } from 'three/examples/jsm/postprocessing/ShaderPass.js';
 // import { FXAAShader } from 'three/examples/jsm/shaders/FXAAShader.js';
 import { TweenMax, Quad } from "gsap";
-
+import { Preloader } from '@/utils/loaders/Preloader';
 export default {
+  props: ['content'],
   components: {},
   data() {
     return {
@@ -42,8 +43,8 @@ export default {
   mounted() {
     this.orientationControlsGranted = true
     this.$nextTick(()=>{
-        this.setupScene();
-        if (this.isMobile) this.setupGestures()
+      this.setupQueue()
+      if (this.isMobile) this.setupGestures()
     })
   },
   methods: {
@@ -52,7 +53,24 @@ export default {
     },
     hide() {
     },
-    setupScene() {
+    setupQueue(){
+      this.preloader = new Preloader()
+      this.preloader.debug = false
+      this.preloader.addListener('onComplete', this.loadComplete);
+      this.preloader.addListener('onProgress', this.loadProgress);
+      this.preloader.queue([
+        // models
+        { name: this.content.id, url: `models/${this.content.model}`, type: this.content.ext },
+      ])
+    },
+    loadProgress(details){  
+      // console.log('Preloader loadProgress: ', details.data);
+    },
+    loadComplete(details){  
+      // console.log('Preloader complete: ', details);
+      this.setupScene(details.data[this.content.id]);
+    },
+    setupScene(_model) {
         // SCENE
         this.scene = new THREE.Scene();
         // scene.background = new THREE.Color( 0x59472b );
@@ -68,8 +86,7 @@ export default {
 
         // CAMERA
         this.camera = new THREE.PerspectiveCamera( 60, this.$el.offsetWidth / this.$el.offsetHeight, 1, 1000 );
-        this.camera.position.set( 0, this.isMobile ? 60 : 25, this.isMobile ? 40 : 15 );
-        
+        this.camera.position.set( this.isMobile ? 0 : -128, this.isMobile ? 60 : 129, this.isMobile ? 40 : -5 );
         // CONTROLS
         if (!this.isMobile) {
             this.controls = new OrbitControls(this.camera, this.renderer.domElement );
@@ -85,10 +102,11 @@ export default {
 
         this.clock = new THREE.Clock()
 
-
         // MODEL
-        this.model = this.$store.getters.assets.teste.scene
+        this.model = _model.scene
         this.model.rotation.set(0,-0.7,0)
+        this.model.position.set(0,-40,0)
+        window.model = this.model
         this.model.traverse(child => {
             if (child.isMesh) { 
                 child.receiveShadow = true
@@ -98,7 +116,7 @@ export default {
         this.scene.add(this.model)
 
         //  SHADOW
-        var light = new THREE.SpotLight( 0xffffff, 1.5 );
+        var light = new THREE.SpotLight( 0xffffff, 1 );
         light.position.set( 0, 1500, 0 );
         light.angle = Math.PI * 0.2;
         light.castShadow = true;
@@ -111,24 +129,25 @@ export default {
 
         var planeGeometry = new THREE.PlaneBufferGeometry( 2000, 2000 );
         planeGeometry.rotateX( - Math.PI / 2 );
-        var planeMaterial = new THREE.ShadowMaterial( { opacity: 1 } );
+        var planeMaterial = new THREE.ShadowMaterial( { opacity: 0.2 } );
 
         var plane = new THREE.Mesh( planeGeometry, planeMaterial );
         // plane.position.y = 0;
         plane.receiveShadow = true;
+        plane.position.set(0,-41,0)
         this.scene.add( plane );
 
 
         // ANIMATIONS
-        const animations = this.$store.getters.assets.teste.animations
+        const animations = _model.animations
         this.mixer = new THREE.AnimationMixer( this.model );
         this.mixer.clipAction( animations[ 0 ] ).play();
         
 
         window.addEventListener( 'resize', this.onResizeWindow, false );
 
-        this.stats = new Stats()
-        this.$el.appendChild(this.stats.domElement)
+        // this.stats = new Stats()
+        // this.$el.appendChild(this.stats.domElement)
 
         this.setupLights()
         this.animate()
@@ -234,6 +253,8 @@ export default {
         requestAnimationFrame(this.animate);
 
         let delta = this.clock.getDelta();
+
+        this.model.rotation.y += delta * 0.05
 
         this.mixer.update( delta );
 

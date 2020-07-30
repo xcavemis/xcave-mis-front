@@ -17,6 +17,7 @@ export default new Vuex.Store({
     endTime: null,
     loadingShow: false,
     assets: {},
+    models: {},
     xr_registered: false,
     navigateToPano: '',
     warningShow: { show: false, text: '' },
@@ -58,6 +59,9 @@ export default new Vuex.Store({
     },
     assets(state, obj) {
       state.assets = obj;
+    },
+    models(state, obj) {
+      state.models = obj;
     },
     warningShow(state, obj) {
       state.warningShow = obj;
@@ -275,6 +279,9 @@ export default new Vuex.Store({
     assets({ commit }, obj) {
       commit("assets", obj);
     },
+    models({ commit }, obj) {
+      commit("models", obj);
+    },
     warning({ commit }, obj) {
       commit("warningShow", obj);
     },
@@ -319,6 +326,9 @@ export default new Vuex.Store({
       return state.navigateToPano;
     },
     assets(state) {
+      return state.assets;
+    },
+    models(state) {
       return state.assets;
     },
     xr_registered(state) {

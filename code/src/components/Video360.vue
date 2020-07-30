@@ -1,18 +1,19 @@
 <template>
     <div class="video-pano">
         <section class="video-pano__content">
-             <iframe 
-                class="video-pano__iframe"
-                :src="`//www.youtube.com/embed/${videoId}?autoplay=1&rel=0`"
-                width="1280" 
-                height="720" 
-                frameborder="0" 
-                title="MIS - Da Vinci Live" 
-                webkitallowfullscreen 
-                mozallowfullscreen 
-                allowfullscreen>
-            </iframe>
-            <!-- <iframe class="video-pano__iframe" src="https://www.fotografofabionunes.com/3dvista/museu-1/" title="W3Schools Free Online Web Tutorials"></iframe> -->
+            <div class="video-mask">
+                <iframe 
+                    class="video-pano__iframe"
+                    :src="`https://hml.exposicaodavinci500anos.com.br/assets/videos/${videoId}/`"
+                    width="1280" 
+                    height="720" 
+                    frameborder="0" 
+                    title="MIS - Da Vinci Live" 
+                    webkitallowfullscreen 
+                    mozallowfullscreen 
+                    allowfullscreen>
+                </iframe>
+            </div>
             <img class="video-pano__close" src="~@/assets/images/icons/close.png" @click="hide" alt="Fechar o video da live."> 
         </section>
     </div>
@@ -49,7 +50,7 @@ export default {
     position: fixed;
     top: 0;
     left: 0;
-    background-color: rgba(0, 0, 0, 0.8);
+    background-color: rgba(0, 0, 0, 0.95);
     z-index: 10;
     .video-pano__content {
         // @include set-size(65.8vw, 62.5vh);
@@ -57,12 +58,17 @@ export default {
         @include set-size(100vw, 100vh);
         @include center(absolute);
         overflow: hidden;
-        .video-pano__iframe {
+
+        .video-mask {
             @include set-size(90vw, 80vh);
+            overflow: hidden;
+            margin: 80px auto;
+        }
+        .video-pano__iframe {
+            @include set-size(90vw, 88vh);
             transform: translateY(100%);
             z-index: 1;
-            margin: 80px auto;
-            
+            margin-top: -8vh;
         }
     
         .video-pano__close {

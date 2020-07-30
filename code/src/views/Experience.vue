@@ -23,8 +23,10 @@
         v-on:map-close="mapClosed"
       />
       <Ar 
+        :content="infoModalContent" 
         ref="arModal"
         v-if="isArModal" 
+        v-on:close="arClosed"
       />
       <!-- <video v-if="!videoEnded" class="video-intro" autoplay muted ref="videoIntro">
         <source src="media/videos/da-vinci-intro-small.mp4" type="video/mp4"> -->
@@ -35,7 +37,7 @@
 
 <script>
 // @ is an alias to /src
-import { Preloader } from '@/utils/loaders/Preloader';
+// import { Preloader } from '@/utils/loaders/Preloader';
 import Pano from '@/components/Pano.vue'
 import Panolens from '@/components/Panolens.vue'
 import PanolensNew from '@/components/PanolensNew.vue'
@@ -49,7 +51,6 @@ import AudioPlayer from '@/components/AudioPlayer.vue'
 import InfoModal from '@/components/InfoModal.vue'
 import Ar from '@/components/Ar.vue'
 import { data } from '@/data/scenes.js';
-// import createjs from 'preload-js';
 export default {
   name: 'experience',
   components: {
@@ -80,81 +81,8 @@ export default {
     isMobile: navigator.userAgent.toLowerCase().match(/mobile/i),
     isIOS: /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream,
   }),
-  mounted(){
-    
-    // this.setupQueue()
-    // this.$nextTick(()=>{
-      // this.$store.dispatch("loading", true)
-      
-      // this.$refs.videoIntro.addEventListener('ended', this.onVideoIntroEnded, true)
-    // })
-  },
+  mounted(){},
   methods: {
-    // setupQueue(){
-    //   // this.preloader = new Preloader()
-    //   // this.preloader.debug = false
-    //   // this.preloader.addListener('onComplete', this.loadComplete);
-    //   // this.preloader.addListener('onProgress', this.loadProgress);
-    //   const assetsToLoad = []
-    //   data.scenes.map((scene, index) => {
-    //     let isImage = scene.type == 'image'
-    //     let urlPrefix = `https://hml.exposicaodavinci500anos.com.br/assets${this.isMobile ? '/mob' : ''}`
-    //     let ext = isImage ? `.jpg` : `.mp4`
-    //     if (index < 6) {
-    //       if (scene.type == 'image') {
-    //         assetsToLoad.push(
-    //           { 
-    //             id: scene.id, 
-    //             src: `${urlPrefix}/${scene.src}${ext}`, 
-    //             type: 'image' 
-    //           }
-    //           // { 
-    //           //   name: id, 
-    //           //   url: `${urlPrefix}/${scene.src}${ext}`, 
-    //           //   type: 'texture' 
-    //           // },
-    //         )
-    //       }
-    //     }
-    //   })
-    //   this.queue = new createjs.LoadQueue()
-    //   this.queue.on('complete', this.onLoadComplete);
-    //   this.queue.loadManifest(assetsToLoad)
-    //   this.queue.load()
-    //   // this.preloader.queue(assetsToLoad);
-    // },
-    // onLoadComplete(event) {
-    //   // console.log('onLoadComplete', event);
-    //     // Get Blob object instead of a formatted result
-    //     const assetsLoaded = []
-    //     data.scenes.map((scene, index) => {
-    //       if (index < 6) {
-    //         let blob = this.queue.getResult(scene.id, true);
-    //         assetsLoaded.push({
-    //           name: scene.id,
-    //           url: blob,
-    //           type: 'image'
-    //         })
-    //       }
-    //     })
-    //     this.$store.dispatch('assets', assetsLoaded)
-    // },
-    loadProgress(details){  
-      console.log('Preloader loadProgress: ', details.data);
-      if (details.data > 0.3) {
-        // this.$store.dispatch("loading", false)
-        this.queueLoaded = true
-        this.$store.dispatch("loading", false)
-      }
-      // this.$store.dispatch('loading_progress', details.data * 100)
-      // this.$store.dispatch('loaded', true)
-    },
-    loadComplete(details){  
-      // console.log('Preloader complete: ', details);
-      this.$store.dispatch('assets', details.data)
-      // this.queueLoaded = true
-      // this.$store.dispatch('loaded', true)
-    },
     onVideoIntroEnded(e){
       // console.log('onVideoIntroEnded', e)
       this.videoEnded = true
@@ -189,6 +117,12 @@ export default {
         this.$refs?.pano[params.value]()
       }
     },
+    arClosed() {
+      this.isArModal = false
+      this.isVideoLive = false
+      this.isVideo360 = false
+      this.isVideoLearn = false
+    },
     videoClosed() {
       this.isVideoLive = false
       this.isVideo360 = false
@@ -200,6 +134,7 @@ export default {
       if (this.$refs?.footerControls?.musicPlaying) this.$refs?.audioPlayer?.unmute()
     },
     onInfoLayer(params) {
+      console.log('onInfoLayer', params)
       if (params.type == 'content') {
         this.infoModalContent = params
         this.isInfoModal = true

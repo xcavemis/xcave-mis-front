@@ -139,8 +139,8 @@ export default {
     .map-comp__close {
         @include set-size(32px, 32px);
         position: fixed;
-        top: 18.5vh;
-        right: 12vw;
+        top: 15px;
+        right: 15px;
         z-index: 10;
         cursor: pointer;
         padding: 5px;
@@ -150,7 +150,8 @@ export default {
     }
 
     .map-comp__crop {
-        @include set-size(65.8vw, 62.5vh);
+        // @include set-size(65.8vw, 62.5vh);
+        @include set-size(90vw, 80vh);
         @include center(absolute);
         overflow: hidden;
         border: 1px solid $gray;
@@ -159,7 +160,7 @@ export default {
 
         /* width */
         &::-webkit-scrollbar {
-            width: 3px;
+            width: 10px;
         }
 
         /* Track */
@@ -196,13 +197,18 @@ export default {
                 position: absolute;
                 transform: translateX(-50%) translateY(-50%);
                 cursor: pointer;
+                z-index: 0;
                 .map-comp__marker--title {
                     opacity: 0;
                     color: $white;
-                    font-family: $rob-medium;
                     background-color: rgba(0,0,0,0.5);
-                    padding: 5px;
+                    padding: 4px 7px;
                     transition: opacity 0.4s $ease-in-out;
+                    border-radius: 4px;
+                    font-family: $rob-regular;
+                    @include center-y(absolute);
+                    @include font-size(14);
+                    margin-left: 7px;
                 }
 
                 .map-comp__marker--icon {
@@ -213,6 +219,7 @@ export default {
                 }
 
                 &:hover {
+                    z-index: 1000;
                     .map-comp__marker--title {
                         opacity: 1;
                     }

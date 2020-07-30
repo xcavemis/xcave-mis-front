@@ -11,6 +11,12 @@ export const military = {
         },
         infoHotspots: [
           {
+            vec3: [-1984.14, -1647.67, -4276.28],
+            title: "CIVIL V601",
+            target: "hPTMhqEJj5s",
+            type: 'learn',
+          },
+          {
             vec3: [4133.08, -1238.64, 2513.18],
             target: "projection503",
             title: "PROJECTION 503",
@@ -91,6 +97,12 @@ export const military = {
           vec3: [4993.30, -168.00, -1.84],
         },
         infoHotspots: [
+          {
+            vec3: [356.83, -398.72, 4965.13],
+            title: "CIVIL V602",
+            target: "fj2rmSWKviE",
+            type: 'learn',
+          },
           {
             vec3: [1065.83, -1835.82, -4519.80],
             target: "military601",
@@ -257,6 +269,12 @@ export const military = {
           vec3: [1871.94, -751.41, 4567.86],
         },
         infoHotspots: [
+          {
+            vec3: [-2705.39, -1516.56, -3914.93],
+            title: "CIVIL V601",
+            target: "hPTMhqEJj5s",
+            type: 'learn',
+          },
           {
             vec3: [-4710.86, -1550.53, -600.24],
             target: "military603",

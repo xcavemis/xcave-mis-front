@@ -28,6 +28,24 @@ export const civil = {
           },
         },
         {
+          vec3: [-4374.16, -421.51, -2372.07],
+          title: "CIVIL V201",
+          target: "5rUrmOLoV_E",
+          type: 'learn',
+        },
+        {
+          vec3: [4909.23, -283.88, -851.60],
+          title: "CIVIL V202",
+          target: "3Ru7NSuNzos",
+          type: 'learn',
+        },
+        {
+          vec3: [-1709.16, -1085.80, 4561.85],
+          title: "CIVIL V102",
+          target: "i07nmU0UPrc",
+          type: 'learn',
+        },
+        {
           vec3: [-3975.65, -548.69, 2970.83],
           title: "O CURR&Iacute;CULO DE UM G&Ecirc;NIO",
           type: 'content',
@@ -63,6 +81,12 @@ export const civil = {
         vec3: [-3434.39, -333.35, 3608.49]
       },
       infoHotspots: [
+        {
+          vec3: [4776.96, -683.29, 1271.84],
+          title: "CIVIL V201",
+          target: "5rUrmOLoV_E",
+          type: 'learn',
+        },
         {
           vec3: [-1712.09, -2339.85, -4066.36],
           target: "civil203",
@@ -250,6 +274,12 @@ title: "Grua sobre Plataforma Circular",
         vec3: [4989.06, -175.39, 77.17]
       },
       infoHotspots: [
+        {
+          vec3: [3057.64, -1047.18, -3802.11],
+          title: "CIVIL V202",
+          target: "3Ru7NSuNzos",
+          type: 'learn',
+        },
         {
           vec3: [-1712.09, -2339.85, -4066.36],
           target: "civil204",

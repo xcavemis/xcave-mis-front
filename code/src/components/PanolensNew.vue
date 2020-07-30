@@ -9,9 +9,11 @@
 
 <script>
 const THREE = require('three');
+import { progressiveImageLoader } from '@/utils/loaders/ProgressiveImgLoader';
 import { TweenMax, Quad } from 'gsap';
 const PANOLENS = require('@/utils/panolens/panolens.js');
 import { data } from '@/data/scenes.js';
+import { progressiveData } from '@/data/progressive-data.js'
 const hotspotInfo = require('@/assets/images/icons/hotspot-info.png')
 const hotspotAr = require('@/assets/images/icons/hotspot-ar.png')
 const hotspotLink = require('@/assets/images/icons/hotspot-link.png')
@@ -66,15 +68,16 @@ export default {
       this.controls?.update()
     },
     buildScene(key, direction){
+      // this.$store.dispatch('loading', true)
       this.$refs.bar.classList.remove( 'hide' );
       // TweenMax.to('.panolens-infospot', 0.6, { autoAlpha: 0, ease: Quad.easeInOut })
       const scene = this.findSceneDataById(key)
       const _pano = this.panos[scene.id]
       if(_pano) {
-        // if (direction) {
-        //   const { x, y, z } = new THREE.Vector3(direction[0], direction[1], direction[2]).normalize();
-        //   this.viewer.camera.position.set(x, -y, -z);
-        // }
+        if (direction) {
+          const { x, y, z } = new THREE.Vector3(direction[0], direction[1], direction[2]).normalize();
+          this.viewer.camera.position.set(x, -y, -z);
+        }
         // _pano.fadeIn(200)
         // _pano.fadeOut(200)
         console.log(_pano)
@@ -86,13 +89,28 @@ export default {
       let urlPrefix = isImage ? `https://hml.exposicaodavinci500anos.com.br/assets${this.isMobile ? '/mob' : ''}` : "https://hml.exposicaodavinci500anos.com.br/assets/videos";
       let ext = isImage ? `.jpg` : `.mp4`
       let id = scene.id.substring(scene.id.length - 3, scene.id.length)
+
+      
       // console.log(`${urlPrefix}/${scene.src}${ext}`)
       // console.log(this.$store.getters.assets)
+      let imageData = progressiveData[scene.id]
       let currentPano = isImage ? 
+        // new PANOLENS.ImagePanorama( imageData[0] ) :
         new PANOLENS.ImagePanorama(  `${urlPrefix}/${scene.src}${ext}` ) :
         new PANOLENS.VideoPanorama(  `${urlPrefix}/${scene.src}${ext}`, { autoplay: true, muted: true} );
 
-      currentPano.addEventListener( 'progress', this.onProgressUpdate );
+
+      
+      
+
+      // currentPano.updateTexture( progressiveTexture)
+
+      // currentPano.addEventListener( 'progress', this.onProgressUpdate );
+      // currentPano.addEventListener( 'enter-fade-complete', () => {
+      //   console.log('enter animation complete')
+      //   const imageURLS = imageData.splice(1, imageData.length)
+      //   progressiveImageLoader.load(imageURLS, currentPano)
+      // } );
 
       const { edgeLength } = currentPano;
       const radius = edgeLength / 2;
@@ -125,15 +143,19 @@ export default {
      
       if (!this.panos[scene.id]) {
         this.panos[scene.id] = currentPano
-      } else {
-        this.viewer.setPanorama( this.panos[scene.id] )
-        this.updateMenuNavigation(scene)
-        return
-      }
+      } 
+      // else {
+      //   this.viewer.setPanorama( this.panos[scene.id] )
+      //   this.updateMenuNavigation(scene)
+      //   return
+      // }
       
       this.viewer.add(currentPano)
       this.viewer.setPanorama( currentPano )
       currentPano.addEventListener('load', (e) => {
+        this.$store.dispatch('loading', false)
+        // console.log('panorama loaded')
+        
         if (!this.firstSceneLoaded) {
           // this.loadAllScenes()
           // this.setupQueue()

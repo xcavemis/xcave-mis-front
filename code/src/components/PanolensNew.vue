@@ -74,13 +74,12 @@ export default {
       const scene = this.findSceneDataById(key)
       const _pano = this.panos[scene.id]
       if(_pano) {
-        if (direction) {
-          const { x, y, z } = new THREE.Vector3(direction[0], direction[1], direction[2]).normalize();
-          this.viewer.camera.position.set(x, -y, -z);
-        }
-        // _pano.fadeIn(200)
-        // _pano.fadeOut(200)
-        console.log(_pano)
+        // if (direction) {
+        //   const { x, y, z } = new THREE.Vector3(direction[0], direction[1], direction[2]).normalize();
+        //   this.viewer.camera.position.set(x, -y, -z);
+        // }
+        _pano.animationDuration = 3500;
+        _pano.toggleInfospotVisibility(true, 0)
         this.viewer.setPanorama( _pano )
         this.updateMenuNavigation(scene)
         return
@@ -95,22 +94,27 @@ export default {
       // console.log(this.$store.getters.assets)
       let imageData = progressiveData[scene.id]
       let currentPano = isImage ? 
-        // new PANOLENS.ImagePanorama( imageData[0] ) :
-        new PANOLENS.ImagePanorama(  `${urlPrefix}/${scene.src}${ext}` ) :
+        new PANOLENS.ImagePanorama( `${urlPrefix}/progressive-images/2k/${scene.src}${ext}` ) :
+        // new PANOLENS.ImagePanorama(  `${urlPrefix}/${scene.src}${ext}` ) :
         new PANOLENS.VideoPanorama(  `${urlPrefix}/${scene.src}${ext}`, { autoplay: true, muted: true} );
 
 
-      
+      currentPano.animationDuration = 3500;
       
 
       // currentPano.updateTexture( progressiveTexture)
 
       // currentPano.addEventListener( 'progress', this.onProgressUpdate );
-      // currentPano.addEventListener( 'enter-fade-complete', () => {
-      //   console.log('enter animation complete')
-      //   const imageURLS = imageData.splice(1, imageData.length)
-      //   progressiveImageLoader.load(imageURLS, currentPano)
-      // } );
+      const imageURLS = [
+        `${urlPrefix}/progressive-images/2k/${scene.src}${ext}`,
+        `${urlPrefix}/progressive-images/4k/${scene.src}${ext}`,
+        `${urlPrefix}/progressive-images/8k/${scene.src}${ext}`,
+      ]
+      currentPano.addEventListener( 'enter-fade-complete', () => {
+      // const imageURLS = imageData.splice(1, imageData.length)
+        console.log('enter animation complete')
+        progressiveImageLoader.load(imageURLS, currentPano)
+      } );
 
       const { edgeLength } = currentPano;
       const radius = edgeLength / 2;
@@ -153,6 +157,7 @@ export default {
       this.viewer.add(currentPano)
       this.viewer.setPanorama( currentPano )
       currentPano.addEventListener('load', (e) => {
+        currentPano.toggleInfospotVisibility(true, 0)
         this.$store.dispatch('loading', false)
         // console.log('panorama loaded')
         
@@ -160,7 +165,7 @@ export default {
           // this.loadAllScenes()
           // this.setupQueue()
         }
-        this.viewer.setPanorama( currentPano )
+        // this.viewer.setPanorama( currentPano )
         this.updateMenuNavigation(scene)
         this.currentPano = currentPano
 

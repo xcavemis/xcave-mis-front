@@ -51,7 +51,7 @@
 }
 
 @mixin font-size($target) {
-  $em: ($target / 17);
+  $em: ($target / 16);
   font-size: #{$target}px;
   font-size: #{$em}em;
 }

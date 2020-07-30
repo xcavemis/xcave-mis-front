@@ -56,7 +56,7 @@ export default {
 
       // this.transitionName = transitionName || "fade";
     // });
-    // this.$store.dispatch("logout")
+    this.$store.dispatch("logout")
   }
 }
 </script>

@@ -1,6 +1,6 @@
 .form-field {
 	@include set-size(100%, 33px);
-	margin: 0 auto 12px auto;
+	margin: 0 auto 16px auto;
 	// display: flex;
 	// flex-flow: column-reverse;
 	text-align: left;
@@ -8,10 +8,10 @@
 	border-radius: 6px;
 	background-color: $white;
 	position: relative;	
+	height: 40px;
 
-	@include minWidth($min-width) {
-		height: 32px;
-	}
+
+
 
 	.error-message {
 		color: $warning-color;
@@ -24,7 +24,7 @@
 		// padding: 0 0.325rem;
 
 		@include minWidth($min-width) {
-			left: 12px;
+			left: 0
 		}
 	}
 
@@ -37,7 +37,7 @@
 		margin-left: 11px;
 		color: $bt-text-color;
 		font-family: $rob-regular;
-		@include font-size(9);
+		@include font-size(10);
 		@include center-y(absolute);
 
 	}
@@ -47,7 +47,7 @@
 		border: none;
 		color: $black;
 		font-family: $rob-regular;
-		@include font-size(10);
+		@include font-size(12);
 		padding-left: 11px;
 		outline: 0;
 		-webkit-appearance: none;
@@ -67,10 +67,11 @@
 	textarea.materialize-textarea {
 		border: none !important;
 		padding-left: 11px;
-		font-size: 9px;
+		font-size: 12px;
 		color: $black;
 		font-family: $rob-regular;
-		height: 32px;
+		height: 40px;
+    padding-top: 10px;
 	}
 
 	input:not([type]):focus:not([readonly]), 
@@ -91,7 +92,7 @@
 	}
 
 	&.error-field {
-		border: none;
+		border: 1px solid $warning-color;
 
 		label, input {
 			color: $warning-color;
@@ -139,7 +140,7 @@
 		transform: translate(0, -150%);
 		color: $black;
 		outline: none;
-		font-size: 6px;
+		font-size: 9px;
 	}
 	input:-webkit-autofill,
 	input:-webkit-autofill:hover, 
@@ -156,11 +157,11 @@
 }
 
 .form-filed__half {
-	@include set-size(100%, 32px);
+	@include set-size(100%, 40px);
 	display: flex;
 	align-items: flex-start;
 	justify-content: space-between;
-	margin: 0 auto 12px auto;
+	margin: 0 auto 15px auto;
 
 	.form-field {
 		width: 48.5%;
@@ -174,6 +175,18 @@
 
 		input {
 			margin-top: 0;
+		}
+	}
+	@include maxWidth(768){
+		flex-direction: column;
+		height: auto;
+		.form-field{
+			width: 100%;
+			margin-bottom: 16px;
+
+			&:last-child{
+				margin-bottom: 0;
+			}
 		}
 	}
 }

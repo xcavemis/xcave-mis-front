@@ -133,6 +133,7 @@ export default {
         align-items: baseline;
         justify-content: center;
         margin: 0 11px;
+        padding: 0;
 
         .auth-header__nav-list__item {
           @include set-size(140px, 54px);
@@ -201,15 +202,22 @@ export default {
   }
 
   @include maxWidth(1024) {
-    @include set-size(95vw, calc(100vh - 90px));
+    max-height: inherit;
+    @include set-size(95vw, 90vh);
     z-index: 1000;
     .auth-header {
       margin: 10px auto 0 auto;
     }
 
     .auth-container {
+      overflow: scroll;
       .auth-container__block {
         width: 90%;
+        margin: 40px auto 0;
+        position: relative;
+        transform: inherit;
+        left: 0;
+        top: 0;
       }
     }
 

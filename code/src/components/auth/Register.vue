@@ -617,9 +617,5 @@ export default {
       // line-height: 15px;
     }
   }
-
-  @include maxWidth(1024) {
-    padding-top: 40px;
-  }
 }
 </style>

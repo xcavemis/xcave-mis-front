@@ -58,7 +58,12 @@
         >COMPRAR INGRESSO</a>
       </div>
       <img class="third-step__ad" src="~@/assets/images/adcontainer_vert.png" v-if="!isMobile" />
-      <img class="third-step__ad" src="~@/assets/images/adcontainer_hor.png" v-else />
+      <img
+        class="third-step__ad"
+        :class="{isMobile: isMobile}"
+        src="~@/assets/images/adcontainer_hor.png"
+        v-else
+      />
     </section>
     <!-- <section class="home-step sponsors">
       <img class="sponsors__image" src="https://www.mis-sp.org.br/images/events/eMus2c3hqybAsMG3ppm7C0oYsUjueHRWzqvhjecj.jpeg" alt="">
@@ -84,7 +89,7 @@ export default {
   }),
   methods: {
     goTo() {
-      // this.$router.push('/experience')
+      this.$router.push("/experience");
       this.$store.dispatch("tokenCheck").then((res) => {
         if (
           res &&
@@ -291,8 +296,10 @@ export default {
   }
 }
 .third-step__ad {
-  max-width: 730px;
-  width: 100%;
+  &.isMobile {
+    max-width: 730px;
+    width: 100%;
+  }
 
   @include minWidth(1440) {
     @include center-y(absolute);

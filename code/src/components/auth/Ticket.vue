@@ -5,7 +5,7 @@
       <strong>{{user.name}}</strong>
     </h3>
     <h3 class="auth__title">VALIDE SEU TICKET SYMPLA</h3>
-    <h4 class="auth__subtitle auth__subtitle-desc">Digite o número do seu código de acesso</h4>
+    <h4 class="auth__subtitle auth__subtitle-desc">Digite seu código de acesso</h4>
     <form class="ticket-comp__form">
       <div class="form-field" :class="{'error-field': codeError.length > 0}">
         <input
@@ -203,10 +203,9 @@ export default {
     span {
       font-family: $got-medium;
     }
-    @include minWidth(1440) {
-      p {
-        text-shadow: 0px 0px 1px #000;
-      }
+
+    p {
+      text-shadow: 0px 0px 1px #000;
     }
   }
 

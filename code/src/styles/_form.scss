@@ -8,10 +8,8 @@
 	border-radius: 6px;
 	background-color: $white;
 	position: relative;	
+	height: 40px;
 
-	@include minWidth($min-width) {
-		height: 40px;
-	}
 
 
 
@@ -177,6 +175,18 @@
 
 		input {
 			margin-top: 0;
+		}
+	}
+	@include maxWidth(768){
+		flex-direction: column;
+		height: auto;
+		.form-field{
+			width: 100%;
+			margin-bottom: 16px;
+
+			&:last-child{
+				margin-bottom: 0;
+			}
 		}
 	}
 }

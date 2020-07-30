@@ -125,6 +125,9 @@
   display: -ms-flexbox;
   display: flex;
   max-width: 100%;
+  @include maxWidth(768) {
+    margin: 10px 0 0;
+  }
 }
 .governo-top .gov-social ul li {
   padding-left: 0;
@@ -137,6 +140,10 @@
   max-width: 100%;
   width: 24px;
   vertical-align: middle;
+
+  @include maxWidth(768) {
+    width: 20px;
+  }
 }
 .governo-top .gov-social-text {
   font-size: 1rem;
@@ -165,7 +172,7 @@
 }
 @media only screen and (max-width: 600px) {
   .governo-top {
-    height: 85px;
+    height: 80px;
     padding-top: 0;
     margin-bottom: 0;
     margin-top: 0;

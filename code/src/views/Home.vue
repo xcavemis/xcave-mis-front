@@ -57,7 +57,8 @@
           target="_blank"
         >COMPRAR INGRESSO</a>
       </div>
-      <img class="third-step__ad" src="~@/assets/images/adcontainer_vert.png" />
+      <img class="third-step__ad" src="~@/assets/images/adcontainer_vert.png" v-if="!isMobile" />
+      <img class="third-step__ad" src="~@/assets/images/adcontainer_hor.png" v-else />
     </section>
     <!-- <section class="home-step sponsors">
       <img class="sponsors__image" src="https://www.mis-sp.org.br/images/events/eMus2c3hqybAsMG3ppm7C0oYsUjueHRWzqvhjecj.jpeg" alt="">
@@ -79,6 +80,7 @@ export default {
   components: { Auth },
   data: () => ({
     authShow: false,
+    isMobile: window.innerWidth < 1024,
   }),
   methods: {
     goTo() {
@@ -133,6 +135,7 @@ export default {
   background-image: url(~@/assets/images/bg-home-step1.jpg);
   background-repeat: no-repeat;
   background-size: cover;
+  background-position: center center;
 
   .first-step__logo-mis {
     position: absolute;
@@ -140,7 +143,8 @@ export default {
     left: 103px;
 
     @include maxWidth(1023) {
-      left: 10%;
+      width: 100px;
+      @include center-x(absolute);
     }
   }
 
@@ -148,6 +152,7 @@ export default {
     @include center(absolute);
     width: 80vw;
     max-width: 900px;
+
     .first-step__center-content__title {
       width: 35.1vw;
       margin: 0 auto 40px auto;
@@ -176,6 +181,7 @@ export default {
 
     @include maxWidth(1024) {
       width: 95vw;
+      margin-top: 3vh;
       .first-step__center-content__title {
         width: 80%;
         @include font-size(15);
@@ -192,6 +198,7 @@ export default {
       }
 
       .first-step__center-content__buttons {
+        margin-top: 5vh;
         display: block;
         .first-step__center-content__button {
           min-width: 0;
@@ -205,8 +212,13 @@ export default {
     }
   }
   .first-step__ad {
+    position: absolute;
+    max-width: 730px;
+    width: 90%;
+
+    @include center-x(absolute);
+    bottom: 70px;
     @include minWidth(1440) {
-      @include center-x(absolute);
       bottom: 50px;
     }
   }
@@ -255,30 +267,36 @@ export default {
     height: auto;
     padding: 30px;
     .third-step__center-content {
+      width: 100%;
       @include reset-pos;
       .third-step__center-content__title {
-        @include font-size(36);
+        @include font-size(32);
         line-height: 32px;
+        text-align: center;
       }
       .third-step__center-content__description {
-        width: 70vw;
-        margin: 50px 0 30px 0;
+        text-align: justify;
+        width: 100%;
+        margin: 50px auto 24px;
         @include font-size(16);
         line-height: 20px;
       }
 
       .third-step__center-content__button {
-        // @include font-size(14);
-        // padding: 15px 30px;
-        margin-right: 5px;
+        @include font-size(10);
+        margin: 0 5px 24px 0;
+        width: 40vw;
       }
     }
   }
-  .third-step__ad {
-    @include minWidth(1440) {
-      @include center-y(absolute);
-      right: 120px;
-    }
+}
+.third-step__ad {
+  max-width: 730px;
+  width: 100%;
+
+  @include minWidth(1440) {
+    @include center-y(absolute);
+    right: 120px;
   }
 }
 

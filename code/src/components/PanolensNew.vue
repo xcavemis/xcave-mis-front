@@ -67,16 +67,17 @@ export default {
     },
     buildScene(key, direction){
       this.$refs.bar.classList.remove( 'hide' );
-      TweenMax.to('.panolens-infospot', 0.6, { autoAlpha: 0, ease: Quad.easeInOut })
+      // TweenMax.to('.panolens-infospot', 0.6, { autoAlpha: 0, ease: Quad.easeInOut })
       const scene = this.findSceneDataById(key)
       const _pano = this.panos[scene.id]
       if(_pano) {
-        if (direction) {
-          const { x, y, z } = new THREE.Vector3(direction[0], direction[1], direction[2]).normalize();
-          this.viewer.camera.position.set(x, -y, -z);
-        }
-        _pano.fadeIn(200)
-        _pano.fadeOut(200)
+        // if (direction) {
+        //   const { x, y, z } = new THREE.Vector3(direction[0], direction[1], direction[2]).normalize();
+        //   this.viewer.camera.position.set(x, -y, -z);
+        // }
+        // _pano.fadeIn(200)
+        // _pano.fadeOut(200)
+        console.log(_pano)
         this.viewer.setPanorama( _pano )
         this.updateMenuNavigation(scene)
         return
@@ -86,9 +87,9 @@ export default {
       let ext = isImage ? `.jpg` : `.mp4`
       let id = scene.id.substring(scene.id.length - 3, scene.id.length)
       // console.log(`${urlPrefix}/${scene.src}${ext}`)
-      console.log(this.$store.getters.assets)
+      // console.log(this.$store.getters.assets)
       let currentPano = isImage ? 
-        new PANOLENS.ImagePanorama(  this.$store.getters.assets[id] ? URL.createObjectURL(this.$store.getters.assets[id].url) : `${urlPrefix}/${scene.src}${ext}` ) :
+        new PANOLENS.ImagePanorama(  `${urlPrefix}/${scene.src}${ext}` ) :
         new PANOLENS.VideoPanorama(  `${urlPrefix}/${scene.src}${ext}`, { autoplay: true, muted: true} );
 
       currentPano.addEventListener( 'progress', this.onProgressUpdate );
@@ -108,7 +109,8 @@ export default {
           require('@/assets/images/icons/hotspot-ar.png') : 
           require('@/assets/images/icons/hotspot-link.png')
         )
-        infoSpot.addHoverText(info.title, info.type == 'panorama' || info.type == 'learn' ? 80: 50)
+        // infoSpot.addHoverText(info.title, info.type == 'panorama' || info.type == 'learn' ? 80 : 40)
+        infoSpot.addHoverText(info.title)
         infoSpot.position.copy( pos );
         infoSpot.addEventListener('click', (e) => {
           // if (info.type == 'content' || info.type == 'panorama' || info.type == 'learn') {
@@ -134,7 +136,7 @@ export default {
       currentPano.addEventListener('load', (e) => {
         if (!this.firstSceneLoaded) {
           // this.loadAllScenes()
-          this.setupQueue()
+          // this.setupQueue()
         }
         this.viewer.setPanorama( currentPano )
         this.updateMenuNavigation(scene)

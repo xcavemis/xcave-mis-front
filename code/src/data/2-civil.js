@@ -15,6 +15,7 @@ export const civil = {
           vec3: [-4537.07, -1831.31, -1007.82],
           target: "codices103",
           type: 'link',
+          title: "CÓDICES 102",
           direction: {
             vec3: [-2750.31, 275.70, -4154.68],
           },
@@ -22,9 +23,28 @@ export const civil = {
         {
           vec3: [-3238.94, -1719.08, -3386.18],
           target: "civil202",
+          title: "CIVIL 202",
           type: 'link',
           direction: {
             vec3: [-3376.33, -399.64, 3662.05],
+          },
+        },
+        {
+          vec3: [2892.52, -1649.27, -3718.81],
+          target: "civil204",
+          title: "CIVIL 204",
+          type: 'link',
+          direction: {
+            vec3: [4984.20, -14.10, 290.97],
+          },
+        },
+        {
+          vec3: [4715.55, -1622.19, 215.28],
+          target: "civil205",
+          title: "CIVIL 205",
+          type: 'link',
+          direction: {
+            vec3: [4984.20, -14.10, 290.97],
           },
         },
         {
@@ -178,7 +198,7 @@ export const civil = {
         },
         {
           vec3: [49.07, -1569.84, 4743.58],
-    title: "Carro autopropulsionado",
+          title: "Carro autopropulsionado",
           type: 'content',
           image: ["2-Civil/D203a.jpg","2-Civil/D203b.jpg"],
           audio: '2-Civil/A205.mp3',
@@ -194,7 +214,7 @@ export const civil = {
         },
         {
           vec3: [2611.95, -691.89, -4196.85],
-title: "Grua sobre Plataforma Circular",
+          title: "Grua sobre Plataforma Circular",
           type: 'content',
           image: ["2-Civil/D209a.jpg","2-Civil/D209b.jpg"],
           audio: '',
@@ -213,7 +233,16 @@ title: "Grua sobre Plataforma Circular",
       },
       infoHotspots: [
         {
-          vec3: [-641.14, -2587.76, -4222.89],
+          vec3: [-4765.28, -1502.80, 36.79],
+          target: "civil201",
+          title: "CIVIL 201",
+          type: 'link',
+          direction: {
+            vec3: [-4900.51, -785.02, -581.27],
+          },
+        },
+        {
+          vec3: [-1478.83, -1909.32, -4375.21],
           target: "civil203",
           title: "CIVIL 203",
           type: 'link',
@@ -222,7 +251,7 @@ title: "Grua sobre Plataforma Circular",
           },
         },
         {
-          vec3: [-2893.10, -1944.53, 3574.69],
+          vec3: [-3301.08, -1731.05, 3317.80],
           target: "civil205",
           title: "CIVIL 205",
           type: 'link',

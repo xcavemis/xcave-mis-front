@@ -2063,7 +2063,7 @@
 	            this.onHoverStart( event );
 
 	            // Lock element
-	            this.lockHoverElement();
+	            // this.lockHoverElement();
 
 	        }
 
@@ -3867,7 +3867,8 @@
 
 	    this.active = false;
 
-	    this.infospotAnimation = new Tween.Tween( this ).to( {}, this.animationDuration / 2 );
+	    this.infospotAnimation = new Tween.Tween( this ).to( { opacity: 1 }, 0 );
+	    // this.infospotAnimation = new Tween.Tween( this ).to( {  }, this.animationDuration / 2 );
 
 	    this.addEventListener( 'load', this.fadeIn.bind( this ) );
 	    this.addEventListener( 'panolens-container', this.setContainer.bind( this ) );
@@ -4348,7 +4349,7 @@
 
 	        this.fadeOutAnimation.stop();
 	        this.fadeInAnimation
-	            .to( { opacity: 1 }, 2000 )
+	            .to( { opacity: 1 }, duration )
 	            .onUpdate( this.onFadeAnimationUpdate.bind( this ) )
 	            .onComplete( function () {
 
@@ -4377,7 +4378,7 @@
 
 	        this.fadeInAnimation.stop();
 	        this.fadeOutAnimation
-	            .to( { opacity: 0 }, 2000 )
+	            .to( { opacity: 0 }, duration )
 	            .onUpdate( this.onFadeAnimationUpdate.bind( this ) )
 	            .start();
 

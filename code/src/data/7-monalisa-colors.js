@@ -30,6 +30,24 @@ export const monalisaColors = {
             },
           },
           {
+            vec3: [3700.23, -2023.63, 2678.94],
+            target: "monalisa-colors703",
+            title: "MONA LISA COLORS 703",
+            type: 'link',
+            direction: {
+              vec3: [4327.57, -161.56, -2491.05],
+            },
+          },
+          {
+            vec3: [457.65, -1392.82, 4774.24],
+            target: "monalisa-colors704",
+            title: "MONA LISA COLORS 704",
+            type: 'link',
+            direction: {
+              vec3: [4327.57, -161.56, -2491.05],
+            },
+          },
+          {
             vec3: [-4126.63, -720.28, -2713.92],
             title: "D-701",
             type: 'content',
@@ -66,6 +84,15 @@ export const monalisaColors = {
             type: 'link',
             direction: {
               vec3: [1760.62, -511.10, 4641.02],
+            },
+          },
+          {
+            vec3: [-3399.23, -1268.44, 3426.73],
+            target: "monalisa-colors704",
+            title: "MONA LISA COLORS 704",
+            type: 'link',
+            direction: {
+              vec3: [4327.57, -161.56, -2491.05],
             },
           },
           {
@@ -168,6 +195,24 @@ export const monalisaColors = {
           vec3: [2771.93, -323.67, 4138.39]
         },
         infoHotspots: [
+          {
+            vec3: [3648.39, -1212.54, -3189.30],
+            target: "monalisa-colors701",
+            title: "MONA LISA COLORS 701",
+            type: 'link',
+            direction: {
+              vec3: [-519.03, -502.83, -4944.30],
+            },
+          },
+          {
+            vec3: [4452.98, -1039.73, -2010.78],
+            target: "monalisa-colors702",
+            title: "MONA LISA COLORS 702",
+            type: 'link',
+            direction: {
+              vec3: [-519.03, -502.83, -4944.30],
+            },
+          },
           {
             vec3: [4628.98, -1623.98, -944.22],
             target: "monalisa-colors703",

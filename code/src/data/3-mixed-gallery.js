@@ -36,6 +36,24 @@ export const mixedGallery = {
           },
         },
         {
+          vec3: [1450.55, -1521.53, 4534.48],
+          target: "mixed304",
+          title: "GALERIA MISTA 304",
+          type: 'link',
+          direction: {
+            vec3: [2895.73, -783.67, 3999.48],
+          },
+        },
+        {
+          vec3: [4580.72, -1347.72, 1467.11],
+          target: "mixed315",
+          title: "GALERIA MISTA 315",
+          type: 'link',
+          direction: {
+            vec3: [4959.62, -163.24, 563.72],
+          },
+        },
+        {
           vec3: [1477.10, -706.98, -4719.06],
           title: "Asas Batendo",
           type: 'content',
@@ -226,6 +244,15 @@ export const mixedGallery = {
           type: 'link',
           direction: {
             vec3: [3621.78, -6.94, 3439.22],
+          },
+        },
+        {
+          vec3: [1476.10, -1345.92, 4578.84],
+          target: "mixed315",
+          title: "GALERIA MISTA 315",
+          type: 'link',
+          direction: {
+            vec3: [2564.24, -339.66, -4272.52],
           },
         },
         {
@@ -714,6 +741,15 @@ export const mixedGallery = {
           },
         },
         {
+          vec3: [262.61, -1725.76, -4674.86],
+          target: "mixed316",
+          title: "GALERIA MISTA 316",
+          type: 'link',
+          direction: {
+            vec3: [4938.60, 380.35, -642.00],
+          },
+        },
+        {
           vec3: [1634.53, -107.20, 4716.44],
       title: "O Homem Vitruviano",
           type: 'content',
@@ -845,6 +881,24 @@ export const mixedGallery = {
       },
       infoHotspots: [
         {
+          vec3: [-4869.11, -1107.67, 87.57],
+          target: "mixed301",
+          title: "GALERIA MISTA 301",
+          type: 'link',
+          direction: {
+            vec3: [4865.04, -90.65, -1121.73],
+          },
+        },
+        {
+          vec3: [-2314.30, -1408.71, 4193.57],
+          target: "mixed304",
+          title: "GALERIA MISTA 304",
+          type: 'link',
+          direction: {
+            vec3: [-1690.74, -130.31, -4693.90],
+          },
+        },
+        {
           vec3: [-79.29, -1582.13, -4737.46],
           target: "mixed314",
           title: "GALERIA MISTA 314",
@@ -923,6 +977,24 @@ export const mixedGallery = {
         vec3:[-2841.80, -33.86, 4106.58]
       },
       infoHotspots: [
+        {
+          vec3: [4836.03, -1166.78, -494.40],
+          target: "mixed302",
+          title: "GALERIA MISTA 302",
+          type: 'link',
+          direction: {
+            vec3: [2454.01, -121.81, 4348.20],
+          },
+        },
+        {
+          vec3: [-4648.68, -1777.34, 399.13],
+          target: "mixed312",
+          title: "GALERIA MISTA 312",
+          type: 'link',
+          direction: {
+            vec3: [2454.01, -121.81, 4348.20],
+          },
+        },
         {
           vec3: [72.41, -1526.61, -4756.70],
           target: "mixed315",

@@ -36,6 +36,24 @@ export const anatomy = {
           },
         },
         {
+          vec3: [-4001.17, -2181.60, 2036.46],
+          target: "anatomy403",
+          title: "ANATOMY 403",
+          type: 'link',
+          direction: {
+            vec3: [187.27, -31.62, -4988.94],
+          },
+        },
+        {
+          vec3: [-4488.38, -1629.30, -1471.87],
+          target: "anatomy404",
+          title: "ANATOMY 404",
+          type: 'link',
+          direction: {
+            vec3: [187.27, -31.62, -4988.94],
+          },
+        },
+        {
           vec3: [3299.05, -1050.82, 3599.92],
           title: "Estudos de Anatomia",
           type: 'content',

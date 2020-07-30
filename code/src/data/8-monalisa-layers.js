@@ -35,6 +35,24 @@ export const monalisaLayers = {
             },
           },
           {
+            vec3: [3585.68, -1888.93, 2916.63],
+            target: "monalisa-layers803",
+            title: "MONA LISA LAYERS 803",
+            type: 'link',
+            direction: {
+              vec3: [2149.81, -346.33, 4493.31],
+            },
+          },
+          {
+            vec3: [4776.00, -1333.26, 583.18],
+            target: "monalisa-layers804",
+            title: "MONA LISA LAYERS 804",
+            type: 'link',
+            direction: {
+              vec3: [2149.81, -346.33, 4493.31],
+            },
+          },
+          {
             vec3: [-3751.84, -50.88, 3297.88],
             title: "D-801",
             type: 'content',
@@ -81,6 +99,24 @@ export const monalisaLayers = {
             vec3: [-3778.16, -1502.09, -2899.47],
             target: "monalisa-layers803",
             title: "MONA LISA LAYERS 803",
+            type: 'link',
+            direction: {
+              vec3: [4021.88, -343.41, -2946.18],
+            },
+          },
+          {
+            vec3: [-4675.85, -1468.20, 972.56],
+            target: "monalisa-layers804",
+            title: "MONA LISA LAYERS 804",
+            type: 'link',
+            direction: {
+              vec3: [4021.88, -343.41, -2946.18],
+            },
+          },
+          {
+            vec3: [-4735.12, -1315.64, -872.98],
+            target: "monalisa-layers805",
+            title: "MONA LISA LAYERS 805",
             type: 'link',
             direction: {
               vec3: [4021.88, -343.41, -2946.18],
@@ -141,6 +177,15 @@ export const monalisaLayers = {
             vec3: [-3918.93, -1819.62, -2498.77],
             target: "monalisa-layers804",
             title: "MONA LISA LAYERS 804",
+            type: 'link',
+            direction: {
+              vec3: [3846.57, -403.72, -3157.47],
+            },
+          },
+          {
+            vec3: [-1075.32, -2197.70, -4352.17],
+            target: "monalisa-layers805",
+            title: "MONA LISA LAYERS 805",
             type: 'link',
             direction: {
               vec3: [3846.57, -403.72, -3157.47],

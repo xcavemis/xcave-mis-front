@@ -1,6 +1,7 @@
 <template>
     <div class="loading-comp">
         <div class="loading-comp__content">
+            <!-- <div class="loader"></div> -->
             <!-- <svg class="loading-comp__content-icon" xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 80 80">
                 <g id="Group_22" data-name="Group 22" transform="translate(-11253 -786)">
                     <rect id="Rectangle_21" data-name="Rectangle 21" width="80" height="80" transform="translate(11253 786)" fill="none"/>
@@ -11,7 +12,7 @@
                 </g>
             </svg>     -->
             <p class="loading-comp__content-text">
-                <strong>CARREGANDO</strong><br>
+                <!-- <strong>CARREGANDO</strong><br> -->
             </p>  
         </div>
     </div>
@@ -23,7 +24,7 @@
     position: fixed;
     top: 0;
     left: 0;
-    background-color: rgba(0,0,0,0.3);
+    background-color: rgba(0,0,0,0.05);
     z-index: 1000;
 
     .loading-comp__content {
@@ -69,5 +70,64 @@
             // }
         }
     }
+
+    .loader,
+    .loader:before,
+    .loader:after {
+        border-radius: 50%;
+        width: 1.5em;
+        height: 1.5em;
+        -webkit-animation-fill-mode: both;
+        animation-fill-mode: both;
+        -webkit-animation: load7 1.8s infinite ease-in-out;
+        animation: load7 1.8s infinite ease-in-out;
+    }
+    .loader {
+        color: $orange;
+        font-size: 10px;
+        margin: 80px auto;
+        position: relative;
+        text-indent: -9999em;
+        -webkit-transform: translateZ(0);
+        -ms-transform: translateZ(0);
+        transform: translateZ(0);
+        -webkit-animation-delay: -0.16s;
+        animation-delay: -0.16s;
+    }
+    .loader:before,
+    .loader:after {
+        content: '';
+        position: absolute;
+        top: 0;
+    }
+    .loader:before {
+        left: -3.5em;
+        -webkit-animation-delay: -0.32s;
+        animation-delay: -0.32s;
+    }
+    .loader:after {
+        left: 3.5em;
+    }
+    @-webkit-keyframes load7 {
+    0%,
+    80%,
+    100% {
+        box-shadow: 0 2.5em 0 -1.3em;
+    }
+    40% {
+        box-shadow: 0 2.5em 0 0;
+    }
+    }
+    @keyframes load7 {
+    0%,
+    80%,
+    100% {
+        box-shadow: 0 2.5em 0 -1.3em;
+    }
+    40% {
+        box-shadow: 0 2.5em 0 0;
+    }
+    }
+
 }
 </style>

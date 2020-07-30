@@ -42,7 +42,6 @@ export default {
         isIOS: /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream,
     }),
     mounted(){
-        console.log(this.content.image)
         this.imgSrc = this.content.image[0]
         this.$nextTick(()=>{
             this.$refs.imageToDrag.addEventListener('load', this.setInitialSize)
@@ -80,9 +79,9 @@ export default {
         setInitialSize(){
             if (this.$refs.imageToDrag.offsetWidth > this.$refs.imageToDrag.offsetHeight) {
                 this.$refs.imageToDrag.style.width = 'auto'
-                this.$refs.imageToDrag.style.height = '130%'
+                this.$refs.imageToDrag.style.height = '100%'
             } else if (this.$refs.imageToDrag.offsetWidth < this.$refs.imageToDrag.offsetHeight) {
-                this.$refs.imageToDrag.style.width = '130%'
+                this.$refs.imageToDrag.style.width = '100%'
                 this.$refs.imageToDrag.style.height = 'auto'
             }
         },
@@ -226,7 +225,7 @@ export default {
                     .info-modal__preview-button{
                         width: 20px;
                         height: 20px;
-                        background-color: $orange;
+                        background-color: $white;
                         border-radius: 50%;
                         margin: 15px 5px;
                         cursor: pointer;

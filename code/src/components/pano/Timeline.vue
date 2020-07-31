@@ -80,6 +80,15 @@ export default {
     background-color: rgba(0, 0, 0, 0.2);
     position: relative;
     cursor: pointer;
+    transition: all 0.2s ease-in;
+    &:hover {
+      transform: translateZ(0);
+
+      border-color: $orange;
+      .timeline-comp__marker-label {
+        color: $orange;
+      }
+    }
 
     .timeline-comp__marker-icon {
       @include set-size(5px, 5px);

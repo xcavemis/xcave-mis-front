@@ -265,6 +265,13 @@ export default {
       .footer-controls__button-icon {
         @include set-size(24px, 24px);
         cursor: pointer;
+        opacity: 0.7;
+        transform: translateZ(0) scale(1);
+        transition: all 0.2s ease-in-out;
+        &:hover {
+          opacity: 1;
+          transform: translateZ(0) scale(1.1);
+        }
       }
       .footer-controls__button-label {
         @include font-scale(1366, 1680, 10, 12);
@@ -296,10 +303,14 @@ export default {
         @include set-size(110px, auto);
 
         &.icon-small {
-          @include set-size(10px, 10px);
-          transition: transform 0.4s $ease-ease;
-          &.rotated {
-            transform: rotate(180deg);
+          @include set-size(14px, 14px);
+          cursor: pointer;
+          opacity: 1;
+          transform: translateZ(0) scale(1);
+          transition: all 0.2s ease-in-out;
+          &:hover {
+            opacity: 0.6;
+            transform: translateZ(0) scale(1.1);
           }
         }
       }

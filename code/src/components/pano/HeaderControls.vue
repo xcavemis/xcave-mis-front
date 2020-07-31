@@ -144,6 +144,13 @@ export default {
       }
       .header-controls__button-icon {
         @include set-size(24px, 24px);
+        cursor: pointer;
+        opacity: 0.7;
+        transform: translateZ(0);
+        transition: all 0.2s ease-in-out;
+        &:hover {
+          opacity: 1;
+        }
       }
 
       &:first-child {

@@ -58,7 +58,7 @@ export default {
       this.controls.enableDamping = true;
       this.controls.dampingFactor = 0.2;
       this.controls.screenSpacePanning = true;
-      this.controls.minFov = 15;
+      this.controls.minFov = 18;
       this.controls.maxFov = 70;
 
       this.buildScene("codices101", [4979.33, -341.24, -138.51]);

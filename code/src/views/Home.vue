@@ -17,7 +17,7 @@
         >Embarque numa experiência única e transporte-se para o incrível mundo de um dos maiores inventores de todos os tempos. Nessa versão digital você poderá ver todas as obras em detalhes, terá também acesso à vídeos especiais com informações importantes sobre o Gênio.</p>
         <div class="first-step__center-content__buttons">
           <a
-            class="default-button first-step__center-content__button white"
+            class="default-button first-step__center-content__button white pulse"
             href="javascript:void(0)"
             @click="goTo"
           >INICIAR EXPERIÊNCIA</a>

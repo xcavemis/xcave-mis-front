@@ -105,6 +105,7 @@ export default {
         { scale: 1, autoAlpha: 1, ease: Quad.easeInOut, delay: 0.8 },
         0.01
       );
+
       TweenMax.fromTo(
         ".login-comp__begin-bt",
         0.6,
@@ -238,11 +239,17 @@ export default {
     color: $black;
     font-family: $got-medium;
     @include font-size(14);
+    padding-bottom: 10px;
     span {
       font-family: $got-medium;
     }
 
     @include minWidth(1440) {
+      a:hover {
+        background: $white;
+        opacity: 0.8;
+      }
+
       p {
         text-shadow: 0px 0px 1px #000;
       }
@@ -255,12 +262,6 @@ export default {
     margin: 40px auto 20px auto;
     border: 0;
     outline: none;
-
-    &:disabled {
-      background-color: rgba(255, 255, 255, 0.8) !important;
-      color: #b8b8b8;
-      cursor: not-allowed;
-    }
   }
 
   @include maxWidth(1024) {

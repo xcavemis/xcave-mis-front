@@ -1,7 +1,7 @@
 <template>
     <div class="loading-comp">
         <div class="loading-comp__content">
-            <!-- <div class="loader"></div> -->
+            <div class="loader"></div>
             <!-- <svg class="loading-comp__content-icon" xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 80 80">
                 <g id="Group_22" data-name="Group 22" transform="translate(-11253 -786)">
                     <rect id="Rectangle_21" data-name="Rectangle 21" width="80" height="80" transform="translate(11253 786)" fill="none"/>
@@ -24,7 +24,7 @@
     position: fixed;
     top: 0;
     left: 0;
-    background-color: rgba(0,0,0,0.05);
+    background-color: rgba(0, 0, 0, 0.5);
     z-index: 1000;
 
     .loading-comp__content {

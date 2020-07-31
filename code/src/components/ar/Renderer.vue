@@ -16,6 +16,7 @@ import { ShadowMesh } from 'three/examples/jsm/objects/ShadowMesh.js'
 // import { FXAAShader } from 'three/examples/jsm/shaders/FXAAShader.js';
 import { TweenMax, Quad } from "gsap";
 import { Preloader } from '@/utils/loaders/Preloader';
+
 export default {
   props: ['content'],
   components: {},
@@ -48,8 +49,11 @@ export default {
     })
   },
   methods: {
-    show() {
-        TweenMax.fromTo('.ar-renderer', 0.6, { autoAlpha: 0 }, { autoAlpha: 1, ease: Quad.easeInOut })
+    show(delay) {
+        TweenMax.fromTo(this.model.scale, 0.8, { x: 0, y: 0, z: 0 }, { x: 1, y: 1, z: 1, delay: delay * 0.8, ease: Quad.easeInOut })
+        TweenMax.fromTo('.ar-renderer', 0.6, { autoAlpha: 0 }, { autoAlpha: 1, delay: delay, ease: Quad.easeInOut, onComplete: ()=>{
+
+        }})
     },
     hide() {
     },
@@ -68,13 +72,14 @@ export default {
     },
     loadComplete(details){  
       // console.log('Preloader complete: ', details);
+      
       this.setupScene(details.data[this.content.id]);
     },
     setupScene(_model) {
         // SCENE
         this.scene = new THREE.Scene();
         // scene.background = new THREE.Color( 0x59472b );
-        this.scene.fog = new THREE.FogExp2( 0xcccccc, 0.002 );
+        // this.scene.fog = new THREE.FogExp2( 0xcccccc, 0.002 );
 
         // RENDERER
         this.renderer = new THREE.WebGLRenderer( { antialias: true, alpha: true } );
@@ -104,8 +109,9 @@ export default {
 
         // MODEL
         this.model = _model.scene
-        this.model.rotation.set(0,-0.7,0)
         this.model.position.set(0,-40,0)
+        this.model.rotation.set(0,0,0)
+        this.model.scale.set(0, 0, 0)
         window.model = this.model
         this.model.traverse(child => {
             if (child.isMesh) { 
@@ -116,7 +122,7 @@ export default {
         this.scene.add(this.model)
 
         //  SHADOW
-        var light = new THREE.SpotLight( 0xffffff, 1 );
+        var light = new THREE.SpotLight( 0xffffff, 0.7 );
         light.position.set( 0, 1500, 0 );
         light.angle = Math.PI * 0.2;
         light.castShadow = true;
@@ -129,7 +135,7 @@ export default {
 
         var planeGeometry = new THREE.PlaneBufferGeometry( 2000, 2000 );
         planeGeometry.rotateX( - Math.PI / 2 );
-        var planeMaterial = new THREE.ShadowMaterial( { opacity: 0.2 } );
+        var planeMaterial = new THREE.ShadowMaterial( { opacity: 0.15 } );
 
         var plane = new THREE.Mesh( planeGeometry, planeMaterial );
         // plane.position.y = 0;
@@ -151,6 +157,7 @@ export default {
 
         this.setupLights()
         this.animate()
+        this.$emit('load-complete')
     },
     setupLights(){
         const ambLight = new THREE.AmbientLight( 0xf0f0f0 )
@@ -254,9 +261,9 @@ export default {
 
         let delta = this.clock.getDelta();
 
-        this.model.rotation.y += delta * 0.05
+        if (this.model) this.model.rotation.y += delta * 0.05
 
-        this.mixer.update( delta );
+        if (this.mixer) this.mixer.update( delta );
 
         this.controls?.update()
         
@@ -285,7 +292,20 @@ export default {
       
 
     },
+  },
+  beforeDestroy() {
+    this.scene.children.map(child => {
+      this.scene.remove(child)
+    })
+    this.model = null
+    this.camera = null
+    this.renderer.dispose()
+    this.renderer = null
+    this.scene.dispose()
+    this.scene = null
+    cancelAnimationFrame(this.animate);
   }
+
 };
 </script>
 

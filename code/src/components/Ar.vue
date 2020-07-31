@@ -4,7 +4,7 @@
       <div class="ar-modal__block">
         <video autoplay="true" muted playsinline width="100%" height="100%" id="video-camera"></video>
         <div class="ar-modal__mask"></div>
-        <Renderer ref="rendererRef" :content="content"/>
+        <Renderer ref="rendererRef" v-if="videoLoaded" :content="content" v-on:load-complete="onModelLoaded"/>
       </div>
       <CameraRequestRejection v-if="showRequestWarning"/>
     </div>
@@ -29,7 +29,7 @@ export default {
   watch: {
     '$store.getters.xr_registered': function(val, old) {
       if (val != old) {
-        this.$refs?.rendererRef?.show()
+        // this.$refs?.rendererRef?.show()
       }
     }
   },
@@ -38,6 +38,7 @@ export default {
       isVideoObject: false,
       showRequestWarning: false,
       loading: false,
+      videoLoaded: false,
       stream: null,
       iOS: /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream
     }
@@ -54,11 +55,11 @@ export default {
     show() {
       TweenMax.set('html, body', { overflow: 'hidden' })
       TweenMax.fromTo('.ar-modal', 0.6, { autoAlpha: 0 }, { autoAlpha: 1, ease: Quad.easeInOut })
-      TweenMax.fromTo('.ar-modal__block', 0.6, { y: '100%' }, { y: '0%', ease: Quad.easeInOut, delay: 0.3 })
+      
       TweenMax.fromTo('.ar-modal__close', 0.6, { scale: 0 }, { scale: 1, ease: Quad.easeInOut, delay: 0.8 })
-      if (this.$store.getters.xr_registered) {
-        this.$refs?.rendererRef?.show()
-      }
+      // if (this.$store.getters.xr_registered) {
+      //   this.$refs?.rendererRef?.show()
+      // }
     },
     hide(){
       TweenMax.fromTo('.ar-modal__close', 0.4, { scale: 1 }, { scale: 0, ease: Quad.easeInOut })
@@ -68,6 +69,12 @@ export default {
       }})
       TweenMax.fromTo('.ar-modal', 0.6, { autoAlpha: 1 }, { autoAlpha: 0, ease: Quad.easeInOut, delay: 0.3 })
         
+    },
+    onModelLoaded(){
+      this.loading = false
+      this.$nextTick(()=>{
+        this.$refs?.rendererRef?.show(1)
+      })
     },
     getMotionEventAuth(){
         return new Promise(resolve => {
@@ -92,8 +99,13 @@ export default {
           this.video.srcObject = stream;
           this.stream = stream
           this.video.play();
-          this.$store.dispatch('xr_registered', true)
-          TweenMax.to('.ar-modal__mask', 0.6, { autoAlpha: 0, delay: 0.4, ease: Quad.easeInOut })
+          
+          this.loading = true
+          TweenMax.fromTo('.ar-modal__block', 0.6, { y: '100%' }, { y: '0%', ease: Quad.easeInOut, onComplete: ()=>{
+            this.videoLoaded = true
+            this.$store.dispatch('xr_registered', true)
+          }})
+          TweenMax.set('.ar-modal__mask', { autoAlpha: 0, delay: 0.4 })
         }).catch(( error ) => {
           this.showRequestWarning = true
           console.error( 'Unable to access the camera/webcam.', error );
@@ -122,6 +134,10 @@ export default {
   left: 0;
   background-color: rgba(0, 0, 0, 0.95);
   z-index: 10;
+
+  canvas {
+    outline: none;
+  }
     
   .ar-modal__crop{
     @include set-size(90vw, 80vh);
@@ -154,6 +170,7 @@ export default {
     min-height: 100%;
     width: auto;
     height: auto;
+    background-color: $black;
   }
 
   .ar-modal__mask,  .video-comp {

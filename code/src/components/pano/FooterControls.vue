@@ -1,5 +1,10 @@
 <template>
   <div class="footer-controls">
+    <a
+      class="default-button footer-controls__logout white"
+      href="javascript:void(0)"
+      @click="logout"
+    >SAIR DA EXPERIÊNCIA</a>
     <div class="footer-controls__left">
       <div class="footer-controls__left-button" @click="toggleMusic">
         <div class="footer-controls__button-icon sound-bar">
@@ -195,6 +200,10 @@ export default {
       const footer = document.querySelector(".footer-component__experience");
       footer.classList.add("open");
     },
+    logout() {
+      this.$store.dispatch("logout");
+      this.$router.push("/");
+    },
   },
 };
 </script>
@@ -296,8 +305,17 @@ export default {
       }
     }
   }
-
+  .footer-controls__logout {
+    display: none;
+  }
   @include maxWidth(1024) {
+    .footer-controls__logout {
+      display: block;
+
+      position: absolute;
+      width: 90%;
+      bottom: 80px;
+    }
     .footer-controls__center {
       display: none;
     }

@@ -67,7 +67,7 @@ export default {
   -webkit-user-drag: none;
   -webkit-touch-callout: none;
   -ms-content-zooming: none;
-  -webkit-tap-highlight-color: rgba(0,0,0,0);
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
   background-color: $black;
 
   .pano-comp__iframe {
@@ -94,7 +94,6 @@ export default {
   height: 100%;
   overflow: hidden;
   background-color: #000;
-
 }
 canvas {
   top: 0;

@@ -9,9 +9,11 @@
                         <img class="info-modal__preview-icon" src="~@/assets/images/icons/hand.png" @click="hide" alt="CLIQUE E ARRASTE PARA VISUALIZAR">
                         <p class="info-modal__preview-text">CLIQUE E ARRASTE<br>PARA VISUALIZAR</p>
                     </div>
-                    <ul v-if="content.image && content.image.length > 1" class="info-modal__preview-buttons">
+                    <!-- <ul v-if="content.image && content.image.length > 1" class="info-modal__preview-buttons">
                         <li class="info-modal__preview-button" v-for="idx of content.image.length" :key="idx" @click="changeImage(idx)"></li>
-                    </ul>
+                    </ul> -->
+                    <div class="info-modal__preview-prev" v-if="content.image.length > 1 && curreImgIdx != 0" @click="prevImage"></div>
+                    <div class="info-modal__preview-next" @click="nextImage" v-if="content.image.length > 1 &&  curreImgIdx != content.image.length - 1"></div>
                 </div>
                 <div class="info-modal__content">
                     <img class="info-modal__close" src="~@/assets/images/icons/close-info.png" @click="hide" alt="Fechar o conteúdo.">
@@ -38,6 +40,7 @@ export default {
         zoomEl: null,
         previewElm: null,
         imgSrc: null,
+        curreImgIdx: 0,
         isMobile: navigator.userAgent.toLowerCase().match(/mobile/i),
         isIOS: /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream,
     }),
@@ -70,6 +73,20 @@ export default {
         })
     },
     methods: {
+        nextImage() {
+            if (this.curreImgIdx < this.content.image.length) this.curreImgIdx++
+            this.imgSrc = this.content.image[this.curreImgIdx]
+            this.$nextTick(()=>{
+                this.$refs.imageToDrag?.addEventListener('load', this.setInitialSize)
+            })
+        },
+        prevImage() {
+            if (this.curreImgIdx > 0) this.curreImgIdx--
+            this.imgSrc = this.content.image[this.curreImgIdx]
+            this.$nextTick(()=>{
+                this.$refs.imageToDrag?.addEventListener('load', this.setInitialSize)
+            })
+        },
         changeImage(id) {
             this.imgSrc = this.content.image[id-1]
             this.$nextTick(()=>{
@@ -208,6 +225,45 @@ export default {
                         text-shadow: 0px 0px 4px #000000;
                     }
 
+                }
+
+                .info-modal__preview-prev,
+                .info-modal__preview-next {
+                    @include set-size(50px, 50px);
+                    @include center-y(absolute);
+                    background-repeat: no-repeat;
+                    background-size: 60% 60%;
+                    background-position: 50% 50%;
+                    background-color: rgba(0,0,0,0.2);
+                    border-radius: 50%;
+                    border: 2px solid $white;
+                    cursor: pointer;
+                    transition: transform 0.4s $ease-in-out;
+
+                    &:hover{
+                        transform: scale(1.1) translateY(-45%);
+                        animation: arrowLoop 0.8s linear infinite;
+                    }
+
+                    @keyframes arrowLoop {
+                        0% {
+                            background-position: 50% 50%;
+                        }
+                        50% {
+                            background-position: 60% 50%;
+                        }
+                        100% {
+                            background-position: 50% 50%;
+                        }
+                    }
+                }
+                .info-modal__preview-prev {
+                    background-image: url(~@/assets/images/icons/arrow-prev.png);
+                    left: 15px;
+                }
+                .info-modal__preview-next {
+                    background-image: url(~@/assets/images/icons/arrow-next.png);
+                    right: 15px;
                 }
 
                 .info-modal__preview-buttons{

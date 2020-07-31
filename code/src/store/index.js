@@ -16,6 +16,7 @@ export default new Vuex.Store({
     hasHoursAvaliable: null,
     endTime: null,
     loadingShow: false,
+    mute: false,
     assets: {},
     models: {},
     xr_registered: false,
@@ -53,6 +54,9 @@ export default new Vuex.Store({
     },
     loadingShow(state, bool) {
       state.loadingShow = bool;
+    },
+    mute(state, bool) {
+      state.mute = bool;
     },
     xr_registered(state, bool) {
       state.xr_registered = bool;
@@ -153,11 +157,13 @@ export default new Vuex.Store({
         }
       }
     },
-    async checkIn({ commit }, ticketData) {
+    async checkIn({ commit, state }, ticketData) {
       const uri = "/checkins/ticketNumber";
 
       try {
-        const res = await api.post(uri, ticketData);
+        const res = await api.post(uri, ticketData, {
+          headers: `Bearer ${state.user.access_token}`
+        });
         const {
           group,
           access_token: token,
@@ -273,6 +279,10 @@ export default new Vuex.Store({
       commit("loadingShow", bool);
       
     },
+    mute({ commit }, bool) {
+      commit("mute", bool);
+      
+    },
     xr_registered({ commit }, bool) {
       commit("xr_registered", bool);
     },
@@ -318,6 +328,9 @@ export default new Vuex.Store({
     },
     loadingShow(state) {
       return state.loadingShow;
+    },
+    mute(state) {
+      return state.mute;
     },
     warningShow(state) {
       return state.warningShow;

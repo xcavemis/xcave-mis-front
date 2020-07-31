@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <Header />
-    <router-view/>
+    <router-view />
     <Loading v-if="$store.getters.loadingShow" />
     <Warning v-if="$store.getters.warningShow.show" :text="$store.getters.warningShow.text" />
     <Footer />
@@ -9,50 +9,51 @@
 </template>
 
 <script>
-import Header from '@/components/Header';
-import Footer from '@/components/Footer';
-import Loading from '@/components/Loading'
-import Warning from '@/components/Warning'
+import Header from "@/components/Header";
+import Footer from "@/components/Footer";
+import Loading from "@/components/Loading";
+import Warning from "@/components/Warning";
 
 export default {
   components: { Header, Footer, Loading, Warning },
   methods: {
     onLogout() {
+      this.$store.dispatch("mute", true);
       this.$store.dispatch("logout");
-    }
+    },
   },
   watch: {
     $route(to, from) {
       if (to !== from) {
-        if (!this.auth && to.name != 'Home') {
-          this.$router.push('/')
+        if (!this.auth && to.name != "Home") {
+          this.$router.push("/");
         }
       }
-    }
+    },
   },
   computed: {
     auth() {
       return this.$store.getters.isAuthenticated;
     },
-    user(){
-      return this.$store.getters.user
-    }
+    user() {
+      return this.$store.getters.user;
+    },
   },
   created() {
-    this.$store.dispatch("autoLogin").then(res => {
-      console.log('auto login: ', res)
-      if (!this.auth && this.$route.name != 'Home') {
-        this.$router.push('/')
+    this.$store.dispatch("autoLogin").then((res) => {
+      console.log("auto login: ", res);
+      if (!this.auth && this.$route.name != "Home") {
+        this.$router.push("/");
       }
     });
-    // this.$router.beforeEach((to, from, next) => {
-    //   window.scrollTo(0, 0);
-      // let transitionName = to.meta.transition || from.meta.transition;
-      // if (transitionName === "slide") {
-      //   const toDepth = to.meta.depth;
-      //   const fromDepth = from.meta.depth;
-      //   transitionName = toDepth < fromDepth ? "prev" : "next";
-      // }
+  //   // this.$router.beforeEach((to, from, next) => {
+  //   //   window.scrollTo(0, 0);
+  //   // let transitionName = to.meta.transition || from.meta.transition;
+  //   // if (transitionName === "slide") {
+  //   //   const toDepth = to.meta.depth;
+  //   //   const fromDepth = from.meta.depth;
+  //   //   transitionName = toDepth < fromDepth ? "prev" : "next";
+  //   // }
 
       // this.transitionName = transitionName || "fade";
     // });
@@ -84,25 +85,25 @@ export default {
     left: 0;
   }
 
-   /* width */
-    &::-webkit-scrollbar {
-      width: 3px;
-    }
+  /* width */
+  &::-webkit-scrollbar {
+    width: 3px;
+  }
 
-    /* Track */
-    &::-webkit-scrollbar-track {
-        background: transparent; 
-    }
-    
-    /* Handle */
-    &::-webkit-scrollbar-thumb {
-        background: #cccccc; 
-    }
+  /* Track */
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
 
-    /* Handle on hover */
-    &::-webkit-scrollbar-thumb:hover {
-        background: #e4e4e4; 
-    }
+  /* Handle */
+  &::-webkit-scrollbar-thumb {
+    background: #cccccc;
+  }
+
+  /* Handle on hover */
+  &::-webkit-scrollbar-thumb:hover {
+    background: #e4e4e4;
+  }
 }
 
 #nav {

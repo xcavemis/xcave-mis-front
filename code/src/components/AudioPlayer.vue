@@ -59,10 +59,10 @@ export default {
 
         },
         mute(){
-            this.mainSound?.fade(1, 0, 1000)
+            this.mainSound?.fade(1, 0, 0)
         },
         unmute(){
-            this.mainSound?.fade(0, 1, 1000)
+            this.mainSound?.fade(0, 1, 0)
         },
     }
 }

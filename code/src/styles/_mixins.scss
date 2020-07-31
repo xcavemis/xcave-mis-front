@@ -220,3 +220,16 @@
 		$index: $index + 1;
 	}
 }
+
+
+@keyframes pulse {
+  25% {
+    -webkit-transform: scale(1);
+    transform: scale(1);
+  }
+  75% {
+    -webkit-transform: scale(0.9);
+    transform: scale(0.9);
+  }
+
+}

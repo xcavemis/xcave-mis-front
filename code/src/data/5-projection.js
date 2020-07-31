@@ -30,7 +30,7 @@ export const projection = {
             },
           },
           {
-            vec3: [-4875.59, -350.40, -1042.97],
+            vec3: [-4957.65, -429.34, -430.35],
             target: "PROJECTION-501",
             title: 'PROJECTION 360 501',
             type: 'panorama',
@@ -39,7 +39,7 @@ export const projection = {
             },
           },
           {
-            vec3: [4458.14, -1491.01, 1679.75],
+            vec3: [4609.75, -1025.89, 1617.58],
             target: "PROJECTION-502",
             title: 'PROJECTION 360 502',
             type: 'panorama',

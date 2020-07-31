@@ -32,6 +32,9 @@
       <div class="auth-container__block" v-if="currStep == 2">
         <Ticket />
       </div>
+      <div class="auth-container__block" v-if="currStep == 3">
+        <Recovery v-on:go-recovery="goToRecovery" />
+      </div>
     </div>
   </div>
 </template>
@@ -41,12 +44,14 @@ import { TweenMax, Quad } from "gsap";
 import Register from "@/components/auth/Register";
 import Login from "@/components/auth/Login";
 import Ticket from "@/components/auth/Ticket";
+import Recovery from "@/components/auth/Recovery";
 export default {
   name: "Auth",
   components: {
     Register,
     Login,
     Ticket,
+    Recovery,
   },
   data: () => ({
     currStep: 1,
@@ -54,7 +59,7 @@ export default {
   }),
   mounted() {
     this.currStep = this.auth ? 2 : 1;
-    console.log("user", this.$store);
+    // console.log("user", this.$store);
   },
   methods: {
     show() {
@@ -85,6 +90,10 @@ export default {
     goToRegister() {
       this.currStep = 0;
       this.isRegister = true;
+    },
+    goToRecovery() {
+      console.log("foii");
+      this.currStep = 3;
     },
   },
   computed: {

@@ -57,8 +57,8 @@ export default {
         speedLimit: 0.1,
       });
       this.controls = this.viewer.getControl();
-      this.controls.enableDamping = true;
-      this.controls.dampingFactor = 0.05;
+      // this.controls.enableDamping = true;
+      // this.controls.dampingFactor = 0.05;
       // this.controls.screenSpacePanning = true;
       this.controls.minFov = 18;
       this.controls.maxFov = 70;

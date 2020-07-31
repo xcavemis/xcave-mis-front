@@ -26,15 +26,6 @@ export const military = {
             },
           },
           {
-            vec3: [3696.60, -1236.98, 3118.84],
-            target: "projection503Video",
-            title: "PROJECTION 503 Video",
-            type: 'link',
-            direction: {
-              vec3: [3352.72, 60.86, 3705.29],
-            },
-          },
-          {
             vec3: [-1824.18, -1412.41, 4426.41],
             target: "military602",
             title: "MILITARY 602",

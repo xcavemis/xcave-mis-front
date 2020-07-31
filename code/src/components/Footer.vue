@@ -35,7 +35,7 @@ export default {
 <style lang="scss">
 .footer-component {
   background-color: $black;
-  padding: 14.1vh 8.27vw;
+  padding: 14.1vh 8.27vw 9vh 8.27vw;
   position: relative;
   a {
     display: none;

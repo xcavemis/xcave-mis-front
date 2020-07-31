@@ -301,7 +301,7 @@ export default {
     width: 100%;
   }
 
-  @include minWidth(1440) {
+  @include minWidth(1024) {
     @include center-y(absolute);
     right: 120px;
   }

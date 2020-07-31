@@ -6249,7 +6249,7 @@
 	    this.maxPolarAngle = Math.PI; // radians
 
 	    // Momentum
-	  	this.momentumDampingFactor = 0.90;
+	  	this.momentumDampingFactor = 0.87;
 	  	this.momentumScalingFactor = -0.005;
 	  	this.momentumKeydownFactor = 20;
 

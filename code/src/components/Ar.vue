@@ -38,6 +38,7 @@ export default {
       isVideoObject: false,
       showRequestWarning: false,
       loading: false,
+      stream: null,
       iOS: /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream
     }
   },
@@ -89,6 +90,7 @@ export default {
         const constraints = { video: { facingMode: 'environment' } };
         navigator.mediaDevices.getUserMedia( constraints ).then(( stream ) => {
           this.video.srcObject = stream;
+          this.stream = stream
           this.video.play();
           this.$store.dispatch('xr_registered', true)
           TweenMax.to('.ar-modal__mask', 0.6, { autoAlpha: 0, delay: 0.4, ease: Quad.easeInOut })
@@ -104,6 +106,11 @@ export default {
       this.video.play();
     }
   },
+  beforeDestroy() {
+    this.stream?.getTracks().forEach(function(track) {
+      track.stop();
+    });
+  }
 }
 </script>
 

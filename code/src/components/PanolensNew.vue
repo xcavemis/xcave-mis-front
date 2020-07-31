@@ -12,6 +12,7 @@ const THREE = require("three");
 import { progressiveImageLoader } from "@/utils/loaders/ProgressiveImgLoader";
 import { TweenMax, Quad } from "gsap";
 const PANOLENS = require("@/utils/panolens/panolens.js");
+// const PANOLENS = require("panolens");
 import { data } from "@/data/scenes.js";
 import { progressiveData } from "@/data/progressive-data.js";
 const hotspotInfo = require("@/assets/images/icons/hotspot-info.png");
@@ -53,8 +54,8 @@ export default {
         output: "console",
         autoHideInfospot: false,
         controlButtons: [],
-        dampingFactor: 0.01,
-        speedLimit: 0.1,
+        // dampingFactor: 0.01,
+        // speedLimit: 1,
       });
       this.controls = this.viewer.getControl();
       // this.controls.enableDamping = true;
@@ -115,9 +116,9 @@ export default {
       // currentPano.addEventListener( 'progress', this.onProgressUpdate );
       const imageURLS = [
         `${urlPrefix}/progressive-images/2k/${scene.src}${ext}`,
-        `${urlPrefix}/progressive-images/4k/${scene.src}${ext}`,
-        `${urlPrefix}/progressive-images/8k/${scene.src}${ext}`,
-        `${urlPrefix}/progressive-images/16k/${scene.src}${ext}`,
+        // `${urlPrefix}/progressive-images/4k/${scene.src}${ext}`,
+        // `${urlPrefix}/progressive-images/8k/${scene.src}${ext}`,
+        // `${urlPrefix}/progressive-images/16k/${scene.src}${ext}`,
       ];
       currentPano.addEventListener("enter-fade-complete", () => {
         // const imageURLS = imageData.splice(1, imageData.length)
@@ -411,7 +412,7 @@ export default {
   top: 0;
   left: 0;
   width: 100%;
-  height: calc(100vh - 70px);
+  height: 100%;
   overflow: hidden;
   background-color: #000;
 }

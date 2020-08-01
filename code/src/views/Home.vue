@@ -74,7 +74,7 @@
         <a class="banner__center-content__button" href="https://www.sympla.com.br/" target="_blank">COMPRAR INGRESSO</a>
       </div>
     </section>-->
-    <Auth ref="authComp" v-if="authShow" />
+    <Auth ref="authComp" v-if="authShow" v-on:closed="onAuthClosed" />
   </article>
 </template>
 
@@ -101,10 +101,13 @@ export default {
         } else {
           this.authShow = true;
           this.$nextTick(() => {
-            this.$refs.authComp.show();
+            this.$refs?.authComp?.show();
           });
         }
       });
+    },
+    onAuthClosed(){
+      this.authShow = false;
     },
     validateTime(date) {
       return new Date(date) - new Date() > 0;

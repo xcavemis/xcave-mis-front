@@ -22,6 +22,7 @@
         </ul>
       </nav>
     </header>
+    <img class="auth-close" src="~@/assets/images/icons/close.png" @click="hide" alt="Fechar o conteúdo.">
     <div class="auth-container">
       <div class="auth-container__block" v-if="currStep == 0">
         <Register v-on:go-ticket="goToTicket" />
@@ -75,8 +76,41 @@ export default {
         { y: "-100%" },
         { y: "0%", ease: Quad.easeInOut, delay: 0.4 }
       );
+      TweenMax.fromTo(
+        ".auth-close",
+        0.6,
+        { autoAlpha: 0 },
+        { autoAlpha: 1, delay: 0.8, ease: Quad.easeInOut }
+      );
     },
-    hide() {},
+    hide() {
+      TweenMax.fromTo(
+        ".auth-container",
+        0.4,
+        { autoAlpha: 1 },
+        { autoAlpha: 0, ease: Quad.easeInOut }
+      );
+      TweenMax.fromTo(
+        ".auth-close",
+        0.4,
+        { autoAlpha: 1 },
+        { autoAlpha: 0, ease: Quad.easeInOut }
+      );
+      TweenMax.fromTo(
+        ".auth-bg",
+        0.6,
+        { y: "0%" },
+        { y: "100%", ease: Quad.easeInOut, delay: 0.4, onComplete: ()=> {
+          this.$emit('closed')
+        }}
+      );
+      TweenMax.fromTo(
+        ".auth-header__nav",
+        0.4,
+        { y: "0%" },
+        { y: "-100%", ease: Quad.easeInOut }
+      );
+    },
     goToTab(id) {
       console.log(this.$store.getters.user);
       if ((id == 0 || id == 1) && this.$store.getters.user) return;
@@ -126,12 +160,28 @@ export default {
     transform: translateY(100%);
   }
 
+  
+  .auth-close {
+    @include set-size(32px, 32px);
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    z-index: 10;
+    cursor: pointer;
+    transition: transform 0.4s $ease-in-out;
+    
+    &:hover {
+        transform: rotate(180deg) !important;
+    }
+  }
+
   .auth-header {
     @include set-size(100%, auto);
     display: block;
     margin: 40px auto 0 auto;
     position: relative;
     overflow: hidden;
+
 
     .auth-header__nav {
       background: transparent;

@@ -69,17 +69,6 @@ export default {
     Map,
     Ar,
   },
-  watch: {
-    "$store.getters.mute": function (val, old) {
-      if (val != old) {
-        if (val) {
-          this.$refs?.audioPlayer?.mute();
-        } else {
-          this.$refs?.audioPlayer?.unmute();
-        }
-      }
-    },
-  },
   data: () => ({
     isVideoLive: false,
     isVideo360: false,

@@ -109,13 +109,19 @@ export default {
       TweenMax.fromTo(
         ".login-comp__begin-bt",
         0.6,
-        { y: "300%" },
-        { y: "0%", ease: Quad.easeInOut, delay: 0.8 }
+        { autoAlpha: 0 },
+        { autoAlpha: 1, ease: Quad.easeInOut, delay: 0.4}
       );
+      // TweenMax.fromTo(
+      //   ".login-comp__begin-bt",
+      //   1.4,
+      //   { y: "250%" },
+      //   { y: "0%", ease: Quad.easeInOut, delay: 0.4}
+      // );
       TweenMax.fromTo(
         ".login-comp__register-disclaimer",
         0.6,
-        { y: "300%" },
+        { y: "130%" },
         { y: "0%", ease: Quad.easeInOut, delay: 0.8 }
       );
     },
@@ -174,32 +180,32 @@ export default {
       };
       this.$store.dispatch("login", formData).then((e) => {
         console.log("login success", e);
-        this.$router.push("/experience");
-        // const { status, data, endTime } = e?.response;
-        // if (status >= 200 && status <= 204) {
-        //   if (this.validateTime(endTime)) {
-        //     this.$router.push("/experience");
-        //   } else {
-        //     this.$emit("go-ticket");
-        //   }
-        //   this.$store.dispatch("loading", false);
-        // } else {
-        //   let message = data.message;
-        //   if (status == 401) {
-        //     message = "E-mail ou senha incorretos.";
-        //   } else if (status == 400) {
-        //     message = "E-mail ou senha inválidos.";
-        //   } else if (status == 404) {
-        //     message = "E-mail não encontrado.";
-        //   } else {
-        //     message = "Erro inesperado no servidor.";
-        //   }
-        //   this.$store.dispatch("warning", {
-        //     show: true,
-        //     text: message,
-        //   });
-        //   this.$store.dispatch("loading", false);
-        // }
+        // this.$router.push("/experience");
+        const { status, data, endTime } = e?.response;
+        if (status >= 200 && status <= 204) {
+          if (this.validateTime(endTime)) {
+            this.$router.push("/experience");
+          } else {
+            this.$emit("go-ticket");
+          }
+          this.$store.dispatch("loading", false);
+        } else {
+          let message = data.message;
+          if (status == 401) {
+            message = "E-mail ou senha incorretos.";
+          } else if (status == 400) {
+            message = "E-mail ou senha inválidos.";
+          } else if (status == 404) {
+            message = "E-mail não encontrado.";
+          } else {
+            message = "Erro inesperado no servidor.";
+          }
+          this.$store.dispatch("warning", {
+            show: true,
+            text: message,
+          });
+          this.$store.dispatch("loading", false);
+        }
       });
     },
     validateTime(date) {
@@ -220,7 +226,7 @@ export default {
   position: relative !important;
 
   .login-comp__form {
-    padding-bottom: 40px;
+    margin-bottom: 40px;
     overflow: hidden;
   }
   .login-comp__recovery {
@@ -262,6 +268,7 @@ export default {
     margin: 40px auto 20px auto;
     border: 0;
     outline: none;
+    opacity: 0;
   }
 
   @include maxWidth(1024) {

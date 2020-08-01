@@ -64,6 +64,12 @@ export default {
         unmute(){
             this.mainSound?.fade(0, 1, 0)
         },
+    },
+    beforeDestroy(){
+        this.mainSound?.stop()
+        this.mainSound = null
+        this.dynamicSound?.stop()
+        this.dynamicSound = null
     }
 }
 </script>

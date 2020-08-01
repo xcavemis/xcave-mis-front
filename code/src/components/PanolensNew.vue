@@ -28,6 +28,7 @@ export default {
     currentSceneID: 0,
     viewer: null,
     panos: {},
+    oldSceneName: 'codices',
     isMobile: navigator.userAgent.toLowerCase().match(/mobile/i),
     isIOS: /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream,
     currentPano: null,
@@ -89,10 +90,13 @@ export default {
       }
       let isImage = scene.type == "image";
       let urlPrefix = isImage
-        ? `https://hml.exposicaodavinci500anos.com.br/assets${
-            this.isMobile ? "/mob" : ""
-          }`
+        ? `https://hml.exposicaodavinci500anos.com.br/assets`
         : "https://hml.exposicaodavinci500anos.com.br/assets/videos";
+      // let urlPrefix = isImage
+      //   ? `https://hml.exposicaodavinci500anos.com.br/assets${
+      //       this.isMobile ? "/mob" : ""
+      //     }`
+      //   : "https://hml.exposicaodavinci500anos.com.br/assets/videos";
       let ext = isImage ? `.jpg` : `.mp4`;
       let id = scene.id.substring(scene.id.length - 3, scene.id.length);
 
@@ -114,12 +118,20 @@ export default {
       // currentPano.updateTexture( progressiveTexture)
 
       // currentPano.addEventListener( 'progress', this.onProgressUpdate );
-      const imageURLS = [
-        `${urlPrefix}/progressive-images/2k/${scene.src}${ext}`,
-        // `${urlPrefix}/progressive-images/4k/${scene.src}${ext}`,
-        // `${urlPrefix}/progressive-images/8k/${scene.src}${ext}`,
-        // `${urlPrefix}/progressive-images/16k/${scene.src}${ext}`,
-      ];
+      let imageURLS = [
+          `${urlPrefix}/progressive-images/2k/${scene.src}${ext}`,
+          // `${urlPrefix}/progressive-images/4k/${scene.src}${ext}`,
+          `${urlPrefix}/progressive-images/8k/${scene.src}${ext}`,
+          `${urlPrefix}/progressive-images/16k/${scene.src}${ext}`,
+        ];
+      if (this.isMobile) {
+
+        imageURLS = []
+        imageURLS = [
+          `${urlPrefix}/progressive-images/2k/${scene.src}${ext}`,
+          `${urlPrefix}/progressive-images/4k/${scene.src}${ext}`,
+        ];
+      }
       currentPano.addEventListener("enter-fade-complete", () => {
         // const imageURLS = imageData.splice(1, imageData.length)
         console.log("enter animation complete");
@@ -304,8 +316,11 @@ export default {
     },
     updateMenuNavigation(scene) {
       let sceneName = scene.groupId;
+      
       const currScene = this.$store.getters.visitedScenes[sceneName];
+      const oldScene = this.$store.getters.visitedScenes[this.oldSceneName];
       const currSceneList = currScene.arr;
+      console.log('currSceneList BEFORE', currSceneList)
       if (currSceneList.indexOf(scene.id) < 0) {
         currSceneList.push(scene.id);
         this.$store.dispatch("visited_scenes", {
@@ -313,26 +328,45 @@ export default {
           arr: currSceneList,
         });
       }
+
+
+      console.log('sceneName', this.oldSceneName)
+      // console.log('currSceneList', currSceneList)
+      // console.log('oldScene.len', oldScene.len)
+      // console.log('visited_scenes', this.$store.getters.visitedScenes)
+      if (oldScene.arr.length != oldScene.len) {
+          this.$store.dispatch("navigation_status", {
+          room: this.oldSceneName,
+          status: "pending",
+        });
+      }
+
       Object.keys(this.$store.getters.navigationStatus).forEach((room) => {
         let scn = this.$store.getters.visitedScenes[room];
-
+        
         if (sceneName == room && scn.arr.length == scn.len) {
+          // console.log(sceneName, 'visited current')
           this.$store.dispatch("navigation_status", {
             room: sceneName,
             status: "visited-current",
           });
         } else if (sceneName != room && scn.arr.length == scn.len) {
+          // console.log(sceneName, 'visited')
           this.$store.dispatch("navigation_status", {
             room: sceneName,
             status: "visited",
           });
-        } else if (sceneName == room && scn.arr.length < scn.len) {
+        }
+        
+        if (sceneName == room && scn.arr.length < scn.len) {
+          
           this.$store.dispatch("navigation_status", {
-            room: sceneName,
+            room: room,
             status: "current",
           });
         }
       });
+      this.oldSceneName = sceneName
     },
     findSceneById(id) {
       for (let i = 0; i < this.scenes.length; i++) {

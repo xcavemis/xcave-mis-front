@@ -65,7 +65,7 @@ export default {
     }),
     watch: {
         sliderZoom: function(val, old) {
-            console.log('sliderZoom', val)
+            // console.log('sliderZoom', val)
         }
     },
     mounted(){
@@ -88,7 +88,7 @@ export default {
                 contain: 'outside',
             })
             // window.addEventListener('wheel', this.panzoom.zoomWithWheel)
-             window.addEventListener('wheel', this.mouseWheelEvent)
+            this.previewElm.addEventListener('wheel', this.mouseWheelEvent)
             this.$refs.rangeZoom.addEventListener('input', this.inputChange)
         },
         zoomIn(e){
@@ -197,6 +197,8 @@ export default {
         this.zoomEl = null
         // view.reset()
         this.panzoom.destroy()
+        this.previewElm.removeEventListener('wheel', this.mouseWheelEvent)
+        this.$refs.rangeZoom.removeEventListener('input', this.inputChange)
         this.previewElm.removeEventListener('mouseover', this.onOverPreview, false)
         this.previewElm.removeEventListener('mouseout', this.onOutPreview, false)
     }
@@ -362,12 +364,13 @@ export default {
                     font-family: $gar-bold;
                     @include font-size(32);
                     color: $black;
+                    margin-top: 0;
                 }
 
                 .info-modal__content-description {
                     font-family: $got-medium;
-                    @include font-size(15);
-                    line-height: 17px;;
+                    @include font-size(16);
+                    line-height: 20px;
                     color: $black;
                     height: 52%;
                     overflow-x: hidden;
@@ -449,11 +452,18 @@ export default {
                  overflow-y: scroll;
                 .info-modal__preview {
                     width: 100%;
+                    height: 50vh;
                 }
 
                 .info-modal__content {
                     width: 100%;
                     padding: 5vw;
+                    height: auto;
+
+                    .info-modal__content-description {
+                        @include font-size(15);
+                        line-height: 19px;
+                    }
 
                     .info-modal__close {
                         position: fixed;

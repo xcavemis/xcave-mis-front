@@ -83,6 +83,7 @@ export default {
     position: fixed;
     top: 0;
     left: 0;
+    transform: translateY(-100%);
   }
 
   /* width */

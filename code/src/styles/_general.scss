@@ -14,18 +14,18 @@ body, html {
 
 	/* width */
 	&::-webkit-scrollbar {
-	width: 3px;
+		width: 10px;
 	}
 
 	/* Track */
 	&::-webkit-scrollbar-track {
 		background: $black; 
-		border-left: 1px solid #cccccc;
+		border-left: 1px solid #fff;
 	}
 	
 	/* Handle */
 	&::-webkit-scrollbar-thumb {
-		background: #cccccc; 
+		background: #fff; 
 	}
 
 	/* Handle on hover */
@@ -68,7 +68,7 @@ body, html {
 	display: inline-block;
 	letter-spacing: 0.05em;
 	cursor: pointer;
-	transition: all 0.2s ease-in;
+	transition: background-color 0.4s $ease-in-out;
 	&.black {
 		background-color: $bt-bg-color;
 		color: $white;

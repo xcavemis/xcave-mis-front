@@ -1,8 +1,9 @@
 <template>
   <article class="home">
     <section class="home-step first-step">
+      <ShaderBg />
       <img
-        class="first-step__logo-mis"
+        class="first-step__logo-mis" 
         src="~@/assets/images/logo-mis-exp.png"
         alt="MIS - MUSEU DA ARTE E DO SOM EXPERIENCE"
       />
@@ -12,12 +13,12 @@
           src="~@/assets/images/logo-da-vinci.png"
           alt="LEONARDO DA VINCI – 500 ANOS DE UM GÊNIO"
         />
-        <p
-          class="first-step__center-content__description"
-        >Embarque numa experiência única e transporte-se para o incrível mundo de um dos maiores inventores de todos os tempos. Nessa versão digital você poderá ver todas as obras em detalhes, terá também acesso à vídeos especiais com informações importantes sobre o Gênio. Com a compra do ingresso você ajuda a manter as atividades do MIS Experience.</p>
+        <p class="first-step__center-content__description" >
+          Embarque numa experiência única e transporte-se para o incrível mundo de um dos maiores inventores de todos os tempos. Nessa versão digital você poderá ver todas as obras em detalhes, terá também acesso à vídeos especiais com informações importantes sobre o Gênio. Com a compra do ingresso você ajuda a manter as atividades do MIS Experience.
+        </p>
         <div class="first-step__center-content__buttons">
           <a
-            class="default-button first-step__center-content__button white pulse"
+            class="default-button first-step__center-content__button white"
             href="javascript:void(0)"
             @click="goTo"
           >INICIAR EXPERIÊNCIA</a>
@@ -80,14 +81,48 @@
 
 <script>
 import Auth from "@/components/Auth";
+import { TweenMax, Quad } from 'gsap';
+import Splitting from "splitting";
+import ShaderBg from "@/components/ShaderBg";
 export default {
   name: "Home",
-  components: { Auth },
+  components: { Auth, ShaderBg },
   data: () => ({
     authShow: false,
     isMobile: window.innerWidth < 1024,
   }),
+  mounted(){
+    this.$nextTick(()=>{
+      this.show()
+    })
+  },
   methods: {
+    show(){ 
+      
+      this.splittingTitle = Splitting({
+        target: this.$el.querySelector(".first-step__center-content .first-step__center-content__description"),
+        by: "chars",
+      });
+      TweenMax.fromTo('.shader-bg', 1, { autoAlpha: 0 }, { autoAlpha: 1, delay: 0.4, ease: Quad.easeInOut, onComplete: ()=> {
+
+        TweenMax.fromTo('.governo-top', 0.6, { y: '-100%' }, { y: '0%', delay: 0.8, ease: Quad.easeInOut })
+        TweenMax.fromTo('.first-step__logo-mis', 0.6, { autoAlpha: 0 }, { autoAlpha: 1, delay: 0.4, ease: Quad.easeInOut })
+        TweenMax.fromTo('.first-step__center-content .first-step__center-content__title', 0.6, { autoAlpha: 0 }, { autoAlpha: 1, delay: 0.6, ease: Quad.easeInOut})
+        this.splittingTitle[0].chars.map((char) => {
+          TweenMax.fromTo(
+            char,
+              0.6,
+              { autoAlpha: 0 },
+              { autoAlpha: 1, ease: Quad.easeInOut, delay: 0.8 + Math.random() * 0.8 }
+          );
+        })
+        TweenMax.staggerFromTo('.first-step__center-content .first-step__center-content__button', 0.6, { y: '100%' }, { y: '0%', ease: Quad.easeInOut, delay: 1.6}, 0.1, ()=>{
+          setTimeout(()=>{
+            document.querySelector('.first-step__center-content__button.white').classList.add('pulse')
+          }, 1000)
+        })
+      }})
+    },
     goTo() {
       this.$router.push("/experience");
       this.$store.dispatch("tokenCheck").then((res) => {
@@ -119,6 +154,7 @@ export default {
 <style lang="scss">
 .home {
   // @include set-size(100%, 100%);
+  background-color: $black;
   .auth {
     @include center(fixed);
   }
@@ -140,15 +176,20 @@ export default {
 
 .first-step {
   position: relative;
-  background-image: url(~@/assets/images/bg-home-step1.jpg);
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center center;
+  // background-image: url(~@/assets/images/bg-home-step1.jpg);
+  // background-repeat: no-repeat;
+  // background-size: cover;
+  // background-position: center center;
+
+  .shader-bg {
+    opacity: 0;
+  }
 
   .first-step__logo-mis {
     position: absolute;
     top: 97px;
     left: 103px;
+    opacity: 0;
 
     @include maxWidth(1023) {
       width: 100px;
@@ -164,6 +205,7 @@ export default {
     .first-step__center-content__title {
       width: 35.1vw;
       margin: 0 auto 40px auto;
+      opacity: 0;
     }
     .first-step__center-content__description {
       @include font-scale(1366, 1680, 14, 18);
@@ -173,6 +215,11 @@ export default {
       margin: 0;
       text-shadow: 0px 0px 4px #000000;
       line-height: 1.2;
+      .word {
+        .char {
+          opacity: 0;
+        }
+      }
     }
 
     .first-step__center-content__buttons {
@@ -181,9 +228,11 @@ export default {
       display: flex;
       justify-content: space-between;
       align-items: center;
+      overflow: hidden;
 
       .first-step__center-content__button {
         min-width: 150px;
+        transform: translateY(100%);
       }
     }
 

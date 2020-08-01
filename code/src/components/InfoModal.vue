@@ -9,9 +9,25 @@
                         <img class="info-modal__preview-icon" src="~@/assets/images/icons/hand.png" @click="hide" alt="CLIQUE E ARRASTE PARA VISUALIZAR">
                         <p class="info-modal__preview-text">CLIQUE E ARRASTE<br>PARA VISUALIZAR</p>
                     </div>
-                    <!-- <ul v-if="content.image && content.image.length > 1" class="info-modal__preview-buttons">
-                        <li class="info-modal__preview-button" v-for="idx of content.image.length" :key="idx" @click="changeImage(idx)"></li>
-                    </ul> -->
+                    <div class="info-modal__controls">
+                        <img
+                            class="info-modal__controls__button-icon"
+                            alt="Afastar imagem"
+                            @mouseleave="zoomOut($event)"
+                            @mousedown="zoomOut($event)"
+                            @mouseup="zoomOut($event)"
+                            src="~@/assets/images/icons/zoom-out.png"
+                        />
+                        <input ref="rangeZoom" class="info-modal__controls__range-input" type="range" min="0.584" max="2" step="0.05" value="0"  v-model="sliderZoom">
+                        <img
+                            class="info-modal__controls__button-icon"
+                            alt="Aproximar imagem"
+                            @mouseleave="zoomIn($event)"
+                            @mousedown="zoomIn($event)"
+                            @mouseup="zoomIn($event)"
+                            src="~@/assets/images/icons/zoom-in.png"
+                        />
+                    </div>
                     <div class="info-modal__preview-prev" v-if="content.image.length > 1 && curreImgIdx != 0" @click="prevImage"></div>
                     <div class="info-modal__preview-next" @click="nextImage" v-if="content.image.length > 1 &&  curreImgIdx != content.image.length - 1"></div>
                 </div>
@@ -28,8 +44,9 @@
 
 <script>
 import { TweenMax, Quad } from 'gsap';
+import Panzoom from '@panzoom/panzoom'
 // import { dragAndZoom } from '@/components/pano/DragAndZoom';
-import { view } from '@/components/pano/DragAndZoom';
+// import { view } from '@/components/pano/DragAndZoom';
     // require('@/components/pano/DragAndZoom')
 
 export default {
@@ -41,38 +58,82 @@ export default {
         previewElm: null,
         imgSrc: null,
         curreImgIdx: 0,
+        pressedTimer: 0,
+        sliderZoom: 0,
         isMobile: navigator.userAgent.toLowerCase().match(/mobile/i),
         isIOS: /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream,
     }),
+    watch: {
+        sliderZoom: function(val, old) {
+            console.log('sliderZoom', val)
+        }
+    },
     mounted(){
         this.imgSrc = this.content.image[0]
         this.$nextTick(()=>{
-            this.$refs.imageToDrag.addEventListener('load', this.setInitialSize)
+            this.$refs.imageToDrag.addEventListener('load', this.onImageLoaded)
             this.previewElm = this.$el.querySelector('.info-modal__preview')
-            // const _canvas = this.$el.querySelector('#canvas-drag')
-            // dragAndZoom(
-            //     _canvas, 
-            //     {
-            //         w: previewElm.offsetWidth,
-            //         h: previewElm.offsetHeight
-            //     },
-            //     `media/images/${this.content.image}`
-            // )
-            this.zoomEl = this.$el.querySelector('.info-modal__preview-image')
-            if (!this.isMobile) {
-                this.previewElm.addEventListener('mouseover', this.onOverPreview, false)
-                this.previewElm.addEventListener('mouseout', this.onOutPreview, false)
-                this.previewElm.addEventListener("mousemove", this.mouseEvent, {passive: false});
-                this.previewElm.addEventListener("mousedown", this.mouseEvent, {passive: false});
-                this.previewElm.addEventListener("mouseup", this.mouseEvent, {passive: false});
-                this.previewElm.addEventListener("mouseout", this.mouseEvent, {passive: false});
-                this.previewElm.addEventListener("wheel", this.mouseWheelEvent, {passive: false});
-            } else {
-                
-            }
+            this.previewElm.addEventListener('mouseover', this.onOverPreview, false)
+            this.previewElm.addEventListener('mouseout', this.onOutPreview, false)
         })
     },
     methods: {
+        onImageLoaded(){
+            this.panzoom = Panzoom(this.$refs.imageToDrag, {
+                // animate: true,
+                maxScale: 2,
+                minScale: 0.5,
+                startX:-this.$refs.imageToDrag.offsetWidth / 2,
+                startY:-this.$el.offsetHeight / 2,
+                contain: 'outside',
+            })
+            // window.addEventListener('wheel', this.panzoom.zoomWithWheel)
+             window.addEventListener('wheel', this.mouseWheelEvent)
+            this.$refs.rangeZoom.addEventListener('input', this.inputChange)
+        },
+        zoomIn(e){
+            if (e.type == "mousedown") {
+                clearInterval(this.pressedTimer);
+                this.pressedTimer = setInterval(() => {
+                    this.panzoom?.zoomToPoint(
+                        this.panzoom.getScale() + 0.01,
+                        {
+                            clientX: this.$refs.imageToDrag.offsetWidth / 2,
+                            clientY: this.$el.offsetHeight / 2,
+                        }
+                    )
+                    this.sliderZoom = this.panzoom.getScale()
+                });
+            } else {
+                clearInterval(this.pressedTimer);
+            }
+        },
+        zoomOut(e){
+            if (e.type == "mousedown") {
+                clearInterval(this.pressedTimer);
+                this.pressedTimer = setInterval(() => {
+                    this.panzoom?.zoomToPoint(
+                        this.panzoom.getScale() - 0.01,
+                        {
+                            clientX: this.$refs.imageToDrag.offsetWidth / 2,
+                            clientY: 250,
+                        }
+                    )
+                    this.sliderZoom = this.panzoom.getScale()
+                });
+            } else {
+                clearInterval(this.pressedTimer);
+            }
+        },
+        inputChange(event) {
+            this.panzoom?.zoomToPoint(
+                event.target.valueAsNumber,
+                {
+                    clientX: this.$refs.imageToDrag.offsetWidth / 2,
+                    clientY: this.$el.offsetHeight / 2,
+                }
+            )
+        },
         nextImage() {
             if (this.curreImgIdx < this.content.image.length) this.curreImgIdx++
             this.imgSrc = this.content.image[this.curreImgIdx]
@@ -87,12 +148,6 @@ export default {
                 this.$refs.imageToDrag?.addEventListener('load', this.setInitialSize)
             })
         },
-        changeImage(id) {
-            this.imgSrc = this.content.image[id-1]
-            this.$nextTick(()=>{
-                this.$refs.imageToDrag?.addEventListener('load', this.setInitialSize)
-            })
-        },
         setInitialSize(){
             if (this.$refs.imageToDrag.offsetWidth > this.$refs.imageToDrag.offsetHeight) {
                 this.$refs.imageToDrag.style.width = 'auto'
@@ -102,32 +157,9 @@ export default {
                 this.$refs.imageToDrag.style.height = 'auto'
             }
         },
-        mouseEvent(event) {
-            if (event.type === "mousedown") { this.mouse.button = true }
-            if (event.type === "mouseup" || event.type === "mouseout") { this.mouse.button = false }
-            this.mouse.oldX = this.mouse.x;
-            this.mouse.oldY = this.mouse.y;
-            this.mouse.x = event.pageX;
-            this.mouse.y = event.pageY;
-            if(this.mouse.button) { // pan
-                this.zoomEl.style.transition = `transform 0s linear`;
-                view.pan({x: this.mouse.x - this.mouse.oldX, y: this.mouse.y - this.mouse.oldY});
-                view.applyTo(this.zoomEl);
-            }
-            event.preventDefault();
-        },
         mouseWheelEvent(event) {
-            const x = event.offsetX - (this.zoomEl.offsetWidth / 2);
-            const y = event.offsetY - (this.zoomEl.offsetHeight / 2);
-            this.zoomEl.style.transition = `transform 0.2s linear`;
-            if (event.deltaY < 0) { 
-                view.scaleAt({x, y}, 1.1, 0.56, 6.5);
-                view.applyTo(this.zoomEl);
-            } else { 
-                view.scaleAt({x, y}, 1 / 1.1, 0.56, 6.5);
-                view.applyTo(this.zoomEl);
-            }
-            
+            this.panzoom.zoomWithWheel(event)
+            this.sliderZoom = this.panzoom.getScale()
             event.preventDefault();
         },
         onOverPreview(e){
@@ -163,14 +195,10 @@ export default {
     beforeDestroy(){
         this.mouse = {x: 0, y: 0, oldX: 0, oldY: 0, button: false}
         this.zoomEl = null
-        view.reset()
+        // view.reset()
+        this.panzoom.destroy()
         this.previewElm.removeEventListener('mouseover', this.onOverPreview, false)
         this.previewElm.removeEventListener('mouseout', this.onOutPreview, false)
-        this.previewElm.removeEventListener("mousemove", this.mouseEvent, {passive: false});
-        this.previewElm.removeEventListener("mousedown", this.mouseEvent, {passive: false});
-        this.previewElm.removeEventListener("mouseup", this.mouseEvent, {passive: false});
-        this.previewElm.removeEventListener("mouseout", this.mouseEvent, {passive: false});
-        this.previewElm.removeEventListener("wheel", this.mouseWheelEvent, {passive: false});
     }
 }
 </script>
@@ -205,7 +233,7 @@ export default {
                     @include set-size(auto, auto);
                     // @include set-size(100%, auto);
                     // @include center(absolute);
-                    pointer-events: none;
+                    // pointer-events: none;
                 }
 
                 .info-modal__preview-instructions{
@@ -266,6 +294,36 @@ export default {
                     right: 15px;
                 }
 
+                .info-modal__controls { 
+                    @include set-size(100%, 50px);
+                    position: absolute;
+                    left: 0;
+                    bottom: 0;
+                    display: flex;
+                    justify-content: center;
+                    align-content: center;
+                    background-color: rgba(0,0,0,0.1);
+                    .mg-r {
+                        margin-right: 20px;
+                    }
+                    .info-modal__controls__button-icon { 
+                        @include set-size(32px, 32px);
+                        margin: 9px 10px;
+                        cursor: pointer;
+                        opacity: 0.7;
+                        transform: translateZ(0) scale(1);
+                        transition: all 0.2s ease-in-out;
+                        &:hover {
+                            opacity: 1;
+                            transform: translateZ(0) scale(1.1);
+                        }
+                    } 
+
+                    .info-modal__controls__range-input {
+                        width: 160px
+                    }
+
+                }
                 .info-modal__preview-buttons{
                     margin: 0;
                     padding: 0;

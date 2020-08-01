@@ -10,6 +10,7 @@
     "deploy:cleanup": "vue-cli-service s3-deploy-cleanup"
   },
   "dependencies": {
+    "@panzoom/panzoom": "^4.3.1",
     "axios": "^0.19.2",
     "bowser": "^2.9.0",
     "core-js": "^3.6.5",

@@ -26,7 +26,7 @@ export default {
     $route(to, from) {
       if (to !== from) {
         if (!this.auth && to.name != "Home") {
-          this.$router.push("/");
+          // this.$router.push("/");
         }
       }
     },
@@ -43,7 +43,7 @@ export default {
     this.$store.dispatch("autoLogin").then((res) => {
       console.log("auto login: ", res);
       if (!this.auth && this.$route.name != "Home") {
-        this.$router.push("/");
+        // this.$router.push("/");
       }
     });
   //   // this.$router.beforeEach((to, from, next) => {

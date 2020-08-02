@@ -5,9 +5,9 @@
 
 <script>
 const THREE = require('three')
-import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer.js';
-import { RenderPass } from 'three/examples/jsm/postprocessing/RenderPass.js';
-import { ShaderPass } from 'three/examples/jsm/postprocessing/ShaderPass.js';
+import { EffectComposer } from '@/utils/postprocessing/EffectComposer.js';
+import { RenderPass } from '@/utils/postprocessing/RenderPass.js';
+import { ShaderPass } from '@/utils/postprocessing/ShaderPass.js';
 import axios from 'axios';
 import { TweenMax, Quad } from 'gsap'
 import { resizeRenderToDisplaySize } from '@/utils/resizeScreen'
@@ -117,9 +117,8 @@ export default {
           "resolution": { value: new THREE.Vector2(1.,window.innerHeight/window.innerWidth) },
           "uMouse": { value: new THREE.Vector2(0,0) },
           "uVelo": { value: 0.0 },
-          "uScale": { value: 0 },
-          "uRadius": { value: this.isMobile ? 0.4 : 0.2 },
-          "uType": { value: 2 },
+          "uRadius": { value: this.isMobile ? 0.4 : 0.15 },
+          "uType": { value: 0 },
           "time": { value: 0 }
         },
         vertexShader: this.postVertex,
@@ -132,13 +131,6 @@ export default {
     },
     render() {
       requestAnimationFrame( this.render );
-
-      // if (this.transitionPos.value > 0 && this.transitionPos.value < this.amountPerImage * this.textures.length - 1) {
-      //   this.updateTexture(this.transitionPos.value);
-      //   this.material.uniforms.blend.value = (this.transitionPos.value % this.amountPerImage) / this.amountPerImage;
-      // }
-
-      // this.material.uniforms.time.value += 0.1;
   
       this.time+=0.05;
       this.getSpeed();
@@ -149,19 +141,6 @@ export default {
       
       // this.renderer.render(this.scene, this.camera);
       if(this.composer) this.composer.render()
-    },
-    dispatchTransition(to){
-      TweenMax.to(this.transitionPos, 1.4, { value: to, ease: Quad.easeInOut })
-    },
-    updateTexture(pos) {
-      if(this.tex2 != this.textures[Math.floor(pos / this.amountPerImage)]) {
-        this.tex2 = this.textures[Math.floor(pos / this.amountPerImage)]
-        this.material.uniforms.tex2.value = this.tex2;
-      }
-      if(this.tex1 != this.textures[Math.floor(pos / this.amountPerImage) + 1]) {
-        this.tex1 = this.textures[Math.floor(pos / this.amountPerImage) + 1]
-        this.material.uniforms.tex1.value = this.tex1;
-      }
     },
     onResize(e){
       this.renderer.setSize( window.innerWidth, window.innerHeight );

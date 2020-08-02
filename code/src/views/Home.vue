@@ -1,7 +1,7 @@
 <template>
   <article class="home">
     <section class="home-step first-step">
-      <!-- <ShaderBg /> -->
+      <ShaderBg />
       <img
         class="first-step__logo-mis" 
         src="~@/assets/images/logo-mis-exp.png"
@@ -83,12 +83,12 @@
 import Auth from "@/components/Auth";
 import { TweenMax, Quad } from 'gsap';
 import Splitting from "splitting";
-// import ShaderBg from "@/components/ShaderBg";
+import ShaderBg from "@/components/ShaderBg";
 export default {
   name: "Home",
   components: { 
     Auth, 
-    // ShaderBg 
+    ShaderBg 
   },
   data: () => ({
     authShow: false,
@@ -186,7 +186,7 @@ export default {
   background-position: center center;
   
   .shader-bg {
-    opacity: 0;
+    // opacity: 0;
   }
 
   .first-step__logo-mis {

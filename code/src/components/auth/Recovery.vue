@@ -127,7 +127,6 @@ export default {
         email: this.formData.email,
       };
       this.$store.dispatch("passRecovery", formData).then((e) => {
-        console.log("login success", e);
         const { status, data, endTime } = e?.response;
         if (status >= 200 && status <= 204) {
           this.$store.dispatch("loading", false);

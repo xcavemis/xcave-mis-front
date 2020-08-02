@@ -6,43 +6,41 @@
         Insira abaixo um nova senha.
       </h4>
       <form class="change-pass-comp__form">
-        <div class="form-filed">
-          <div class="form-field" :class="{'error-field': oldPassError.length > 0}">
-            <input
-              id="oldPass"
-              v-model="formData.oldPass"
-              type="password"
-              placeholder="SENHA ATUAL"
-              name="pass"
-              @blur="checkForm('newPass')"
-            />
-            <label for="pass">SENHA ATUAL</label>
-            <small class="error-message" v-html="oldPassError"></small>
-          </div>
-          <div class="form-field" :class="{'error-field': oldPassError.length > 0}">
-            <input
-              id="newPass"
-              v-model="formData.newPass"
-              type="password"
-              placeholder="NOVA SENHA"
-              name="pass"
-              @blur="checkForm('newPass')"
-            />
-            <label for="pass">NOVA SENHA</label>
-            <small class="error-message" v-html="newPassError"></small>
-          </div>
-          <div class="form-field" :class="{'error-field': newPassConfirmError.length > 0}">
-            <input
-              id="passConfirm"
-              v-model="formData.newPassConfirm"
-              type="password"
-              placeholder="CONFIRMAR NOVA SENHA"
-              name="passConfirm"
-              @blur="checkForm('newPassConfirm')"
-            />
-            <label for="passConfirm">CONFIRMAR NOVA SENHA</label>
-            <small class="error-message" v-html="newPassConfirmError"></small>
-          </div>
+        <div class="form-field" :class="{'error-field': oldPassError.length > 0}">
+          <input
+            id="oldPass"
+            v-model="formData.oldPass"
+            type="password"
+            placeholder="SENHA ATUAL"
+            name="pass"
+            @blur="checkForm('newPass')"
+          />
+          <label for="pass">SENHA ATUAL</label>
+          <small class="error-message" v-html="oldPassError"></small>
+        </div>
+        <div class="form-field" :class="{'error-field': oldPassError.length > 0}">
+          <input
+            id="newPass"
+            v-model="formData.newPass"
+            type="password"
+            placeholder="NOVA SENHA"
+            name="pass"
+            @blur="checkForm('newPass')"
+          />
+          <label for="pass">NOVA SENHA</label>
+          <small class="error-message" v-html="newPassError"></small>
+        </div>
+        <div class="form-field" :class="{'error-field': newPassConfirmError.length > 0}">
+          <input
+            id="passConfirm"
+            v-model="formData.newPassConfirm"
+            type="password"
+            placeholder="CONFIRMAR NOVA SENHA"
+            name="passConfirm"
+            @blur="checkForm('newPassConfirm')"
+          />
+          <label for="passConfirm">CONFIRMAR NOVA SENHA</label>
+          <small class="error-message" v-html="newPassConfirmError"></small>
         </div>
         <button
           class="default-button black change-pass-comp__begin-bt"
@@ -123,20 +121,18 @@ export default {
         oldPassword: this.formData.oldPass,
         newPassword: this.formData.newPass,
       };
-      console.log('formData', formData)
-      return
 
-      this.$store.dispatch("passwordNew", formData).then((e) => {
-        console.log("create success", e);
+      this.$store.dispatch("changePass", formData).then((e) => {
         const { status, data } = e?.response;
         if (status >= 200 && status <= 204) {
           this.$store.dispatch("loading", false);
-          this.$emit("go-ticket");
+          this.$store.dispatch("warning", {
+            show: true,
+            text: 'Senha alterada com sucesso.',
+          });
+          this.hide()
         } else {
           let message = data.message;
-          if (status == 409) {
-            message = `O e-mail ${this.formData.email} já está em uso.`;
-          }
           this.$store.dispatch("warning", {
             show: true,
             text: message,
@@ -195,7 +191,7 @@ export default {
         }
       }
 
-      this.isValid = this.passValid && this.passConfirmValid
+      this.isValid = this.newPassValid && this.newPassConfirmValid
     },
   },
 };
@@ -241,6 +237,8 @@ export default {
   .change-pass-comp__form {
     padding-bottom: 40px;
     overflow: hidden;
+    width: 70%;
+    margin: 0 auto;
 
     @include minWidth(1440) {
       padding-bottom: 0;

@@ -204,6 +204,52 @@ export default new Vuex.Store({
         }
       }
     },
+    async changePass({ commit, state }, passData) {
+      const uri = "/auth/password/new";
+      console.log('changePass', passData )
+      try {
+        const res = await api.post(uri, passData, {
+          headers: {
+            'Authorization': `Bearer ${state.token}` 
+          }
+        });
+        console.log('checkIn', res)
+        const {
+          group,
+          access_token: token,
+          user,
+          hasHoursAvaliable,
+          endTime,
+        } = res.data;
+
+
+        localStorage.setItem("user", JSON.stringify(user));
+        localStorage.setItem("token", token);
+        localStorage.setItem("hasHoursAvaliable", hasHoursAvaliable);
+        localStorage.setItem("endTime", endTime);
+
+        commit("authUser", {
+          token,
+          user,
+          hasHoursAvaliable,
+          endTime,
+        });
+        return {
+          response: {
+            user, 
+            endTime, 
+            group, 
+            hasHoursAvaliable, 
+            status: res.status,
+          }
+        }
+      } catch (error) {
+        console.log(error);
+        return {
+          response: error?.response
+        }
+      }
+    },
     async tokenCheck({ commit, dispatch, state }) {
       const uri = "/auth/check";
       try {

@@ -6,7 +6,7 @@
 <script>
 const Hammer = require('hammerjs');
 const THREE = require("three");
-import Stats from 'three/examples/jsm/libs/stats.module.js';
+// import Stats from 'three/examples/jsm/libs/stats.module.js';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 import { DeviceOrientationControls } from 'three/examples/jsm/controls/DeviceOrientationControls.js';
 import { ShadowMesh } from 'three/examples/jsm/objects/ShadowMesh.js'

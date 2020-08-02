@@ -150,7 +150,6 @@ export default {
         ticketNumber: this.formData.code,
       };
       this.$store.dispatch("checkIn", formData).then((e) => {
-        console.log("login success", e);
         const { status, data } = e?.response;
         if (status >= 200 && status <= 204) {
           this.$router.push("/experience");

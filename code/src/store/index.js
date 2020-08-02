@@ -159,11 +159,14 @@ export default new Vuex.Store({
     },
     async checkIn({ commit, state }, ticketData) {
       const uri = "/checkins/ticketNumber";
-
+      console.log('checkIn', state, ticketData )
       try {
         const res = await api.post(uri, ticketData, {
-          headers: `Bearer ${state.user.access_token}`
+          headers: {
+            'Authorization': `Bearer ${state.token}` 
+          }
         });
+        console.log('checkIn', res)
         const {
           group,
           access_token: token,
@@ -195,7 +198,7 @@ export default new Vuex.Store({
           }
         }
       } catch (error) {
-        // console.log(error?.response);
+        console.log(error);
         return {
           response: error?.response
         }

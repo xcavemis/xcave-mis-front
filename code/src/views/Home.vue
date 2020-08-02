@@ -124,12 +124,12 @@ export default {
       }})
     },
     goTo() {
-      this.$router.push("/experience");
       this.$store.dispatch("tokenCheck").then((res) => {
         if (
           res &&
           res.status >= 200 &&
           res.status <= 204 &&
+          res.endTime != null &&
           this.validateTime(res.endTime)
         ) {
           this.$router.push("/experience");

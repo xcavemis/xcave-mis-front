@@ -69,7 +69,6 @@ export default {
       let material = new MeshBasicMaterial({ map: this.texLoader.load('/textures/bg-home-step1.jpg') })
       let mesh = new THREE.Mesh(geometry, material);
       this.scene.add(mesh);
-      console.log(mesh)
 
       const ambLight = new THREE.AmbientLight(0xffffff)
       this.scene.add(ambLight)
@@ -119,7 +118,7 @@ export default {
           "uMouse": { value: new THREE.Vector2(0,0) },
           "uVelo": { value: 0.0 },
           "uScale": { value: 0 },
-          "uRadius": { value: this.isMobile ? 0.4 : 0.15 },
+          "uRadius": { value: this.isMobile ? 0.4 : 0.2 },
           "uType": { value: 2 },
           "time": { value: 0 }
         },

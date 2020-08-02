@@ -13,7 +13,7 @@
             type="password"
             placeholder="SENHA ATUAL"
             name="pass"
-            @blur="checkForm('newPass')"
+            @blur="checkForm('oldPass')"
           />
           <label for="pass">SENHA ATUAL</label>
           <small class="error-message" v-html="oldPassError"></small>

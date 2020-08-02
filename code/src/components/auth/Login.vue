@@ -30,10 +30,10 @@
         <label for="pass">SENHA</label>
         <small class="error-message" v-html="passError"></small>
       </div>
-      <!-- <a
+      <a
         class="login-comp__recovery"
         @click="goToRecovery"
-      >Esqueceu a senha? Clique aqui para recuperar</a> -->
+      >Esqueceu a senha? Clique aqui para recuperar</a>
       <button
         class="default-button black login-comp__begin-bt"
         type="submit"
@@ -81,6 +81,7 @@ export default {
   },
   methods: {
     show() {
+      TweenMax.set(this.$el, { autoAlpha: 1 })
       const splittingTitle = Splitting({
         target: this.$el.querySelector(".auth__title"),
         by: "words",
@@ -107,6 +108,12 @@ export default {
       );
 
       TweenMax.fromTo(
+        ".login-comp__recovery",
+        0.6,
+        { autoAlpha: 0 },
+        { autoAlpha: 1, ease: Quad.easeInOut, delay: 1}
+      );
+      TweenMax.fromTo(
         ".login-comp__begin-bt",
         0.6,
         { autoAlpha: 0 },
@@ -125,7 +132,9 @@ export default {
         { y: "0%", ease: Quad.easeInOut, delay: 0.8 }
       );
     },
-    hide() {},
+    hide() {
+      TweenMax.to(this.$el, 0.6, { autoAlpha: 0, ease: Quad.easeInOut })
+    },
     goToRegister() {
       this.$emit("go-register");
     },
@@ -191,15 +200,6 @@ export default {
           this.$store.dispatch("loading", false);
         } else {
           let message = data.message;
-          if (status == 401) {
-            message = "E-mail ou senha incorretos.";
-          } else if (status == 400) {
-            message = "E-mail ou senha inválidos.";
-          } else if (status == 404) {
-            message = "E-mail não encontrado.";
-          } else {
-            message = "Erro inesperado no servidor.";
-          }
           this.$store.dispatch("warning", {
             show: true,
             text: message,
@@ -232,7 +232,7 @@ export default {
   .login-comp__recovery {
     color: $black;
     font-family: $got-medium;
-    @include font-size(14);
+    @include font-size(13);
     text-shadow: 0px 0px 1px #000;
     cursor: pointer;
   }

@@ -297,10 +297,20 @@
 	font-family: $rob-regular;
 	@include font-size(9);
 	color: $black;
+	&:after {
+		content: "";
+		@include center-y(absolute);
+		right: 10px;
+		width: 0; 
+		height: 0; 
+		border-left: 5px solid transparent;
+		border-right: 5px solid transparent;
+		border-top: 5px solid $black;
+	}
 }
 
 .custom-select select {
-	display: none; /*hide original SELECT element:*/
+	// display: none; /*hide original SELECT element:*/
 }
 
 .select-selected {

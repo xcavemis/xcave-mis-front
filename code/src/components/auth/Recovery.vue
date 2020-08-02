@@ -22,10 +22,6 @@
         :disabled="!isValid"
       >CONTINUAR</button>
     </form>
-    <div class="recovery__register-disclaimer">
-      <p>Ainda não possui um cadastro?</p>
-      <a class="default-button white" @click="goToRegister">CADASTRE-SE AQUI</a>
-    </div>
   </div>
 </template>
 
@@ -58,6 +54,7 @@ export default {
   },
   methods: {
     show() {
+      TweenMax.set(this.$el, { autoAlpha: 1 })
       const splittingTitle = Splitting({
         target: this.$el.querySelector(".auth__title"),
         by: "words",
@@ -95,7 +92,9 @@ export default {
         { y: "0%", ease: Quad.easeInOut, delay: 0.8 }
       );
     },
-    hide() {},
+    hide() {
+      TweenMax.to(this.$el, 0.6, { autoAlpha: 0, ease: Quad.easeInOut})
+    },
     goToRegister() {
       this.$emit("go-register");
     },
@@ -127,34 +126,24 @@ export default {
       const formData = {
         email: this.formData.email,
       };
-      this.$store.dispatch("login", formData).then((e) => {
+      this.$store.dispatch("passRecovery", formData).then((e) => {
         console.log("login success", e);
-        this.$router.push("/experience");
-        // const { status, data, endTime } = e?.response;
-        // if (status >= 200 && status <= 204) {
-        //   if (this.validateTime(endTime)) {
-        //     this.$router.push("/experience");
-        //   } else {
-        //     this.$emit("go-ticket");
-        //   }
-        //   this.$store.dispatch("loading", false);
-        // } else {
-        //   let message = data.message;
-        //   if (status == 401) {
-        //     message = "E-mail ou senha incorretos.";
-        //   } else if (status == 400) {
-        //     message = "E-mail ou senha inválidos.";
-        //   } else if (status == 404) {
-        //     message = "E-mail não encontrado.";
-        //   } else {
-        //     message = "Erro inesperado no servidor.";
-        //   }
-        //   this.$store.dispatch("warning", {
-        //     show: true,
-        //     text: message,
-        //   });
-        //   this.$store.dispatch("loading", false);
-        // }
+        const { status, data, endTime } = e?.response;
+        if (status >= 200 && status <= 204) {
+          this.$store.dispatch("loading", false);
+          this.$emit('recovery-success')
+          this.$store.dispatch("warning", {
+            show: true,
+            text: data.message,
+          });
+        } else {
+          let message = data.message;
+          this.$store.dispatch("warning", {
+            show: true,
+            text: message,
+          });
+          this.$store.dispatch("loading", false);
+        }
       });
     },
     validateTime(date) {

@@ -250,6 +250,21 @@ export default new Vuex.Store({
         }
       }
     },
+    async passRecovery({ commit, state }, data) {
+      const uri = "/auth/password/recover";
+      try {
+        const res = await api.post(uri, data);
+        console.log('passRecovery', res)
+        return {
+          response: res 
+        }
+      } catch (error) {
+        console.log(error);
+        return {
+          response: error?.response
+        }
+      }
+    },
     async tokenCheck({ commit, dispatch, state }) {
       const uri = "/auth/check";
       try {

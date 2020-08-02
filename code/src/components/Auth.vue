@@ -7,7 +7,7 @@
           <li
             class="auth-header__nav-list__item"
             @click="goToTab(0)"
-            :class="{'selected': currStep == 0 || user, 'register-show': isRegister}"
+            :class="{'selected': currStep == 0 || user, 'register-show': isRegister && !isRecovery}"
           >CADASTRO</li>
           <li
             class="auth-header__nav-list__item"
@@ -19,22 +19,26 @@
             @click="goToTab(2)"
             :class="{'selected': currStep == 2}"
           >TICKET</li>
+          <li
+            class="auth-header__nav-list__item"
+            :class="{'selected': currStep == 3, 'recovery-show': isRecovery && !isRegister}"
+          >RECUPERAR SENHA</li>
         </ul>
       </nav>
     </header>
     <img class="auth-close" src="~@/assets/images/icons/close.png" @click="hide" alt="Fechar o conteúdo.">
     <div class="auth-container">
       <div class="auth-container__block" v-if="currStep == 0">
-        <Register v-on:go-ticket="goToTicket" />
+        <Register ref="registerComp" v-on:go-ticket="goToTicket" />
       </div>
       <div class="auth-container__block" v-if="currStep == 1">
-        <Login v-on:go-register="goToRegister" v-on:go-ticket="goToTicket" />
+        <Login ref="loginComp" v-on:go-register="goToRegister" v-on:go-recovery="goToRecovery" v-on:go-ticket="goToTicket" />
       </div>
       <div class="auth-container__block" v-if="currStep == 2">
-        <Ticket />
+        <Ticket ref="ticketComp" v-on:logout="hide"/>
       </div>
       <div class="auth-container__block" v-if="currStep == 3">
-        <Recovery v-on:go-recovery="goToRecovery" />
+        <Recovery ref="recoveryComp" v-on:recovery-success="onRecoverySuccess"/>
       </div>
     </div>
   </div>
@@ -57,6 +61,7 @@ export default {
   data: () => ({
     currStep: 1,
     isRegister: false,
+    isRecovery: false,
   }),
   mounted() {
     this.currStep = this.auth ? 2 : 1;
@@ -112,23 +117,47 @@ export default {
       );
     },
     goToTab(id) {
-      console.log(this.$store.getters.user);
+      if (id == 1) {
+        this.isRecovery = false
+        this.isRegister = false
+      }
+      if (this.isRecovery && id == 2) return
       if ((id == 0 || id == 1) && this.$store.getters.user) return;
       if (id == 2 && !this.$store.getters.user) return;
+      this.hideCurrent(()=>{
+        this.currStep = id;
+      })
+    },
+    hideCurrent(cb){
+      if (this.currStep == 0) this.$refs.registerComp.hide()
+      if (this.currStep == 1) this.$refs.loginComp.hide()
+      if (this.currStep == 2) this.$refs.ticketComp.hide()
+      if (this.currStep == 3) this.$refs.recoveryComp.hide()
 
-      this.currStep = id;
+      setTimeout(cb, 1000)
     },
     goToTicket() {
-      this.currStep = 2;
+      this.hideCurrent(()=>{
+        this.currStep = 2;
+      })
     },
     goToRegister() {
-      this.currStep = 0;
-      this.isRegister = true;
+      this.hideCurrent(()=>{
+        this.currStep = 0;
+        this.isRegister = true;
+      })
     },
     goToRecovery() {
-      console.log("foii");
-      this.currStep = 3;
+      this.hideCurrent(()=>{
+        this.currStep = 3;
+        this.isRecovery = true;
+      })
     },
+    onRecoverySuccess(){
+      this.hideCurrent(()=>{
+        this.currStep = 1;
+      })
+    }
   },
   computed: {
     auth() {
@@ -206,11 +235,14 @@ export default {
           letter-spacing: 0.05rem;
           cursor: pointer;
 
-          &:first-child {
+          &:first-child, &:last-child {
             display: none;
           }
 
           &.register-show {
+            display: inline;
+          }
+          &.recovery-show {
             display: inline;
           }
 

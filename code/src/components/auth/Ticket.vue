@@ -2,7 +2,7 @@
   <div class="ticket-comp">
     <h3 class="auth__subtitle auth__subtitle-name">
       Olá,
-      <strong>{{user.name}}</strong>
+      <strong>{{user.name.split(' ')[0]}}</strong>
     </h3>
     <h3 class="auth__title">VALIDE SEU TICKET SYMPLA</h3>
     <h4 class="auth__subtitle auth__subtitle-desc">Digite seu código de acesso</h4>
@@ -19,12 +19,18 @@
         <label for="code">CÓDIGO SYMPLA</label>
         <small class="error-message" v-html="codeError"></small>
       </div>
-      <button
-        class="default-button black ticket-comp__begin-bt"
-        type="submit"
-        @click="sendData"
-        :disabled="!isValid"
-      >CONTINUAR</button>
+      <div class="buttons-container">
+        <div
+          class="default-button white ticket-comp__begin-bt"
+          @click="logout"
+        >SAIR</div>
+        <button
+          class="default-button black ticket-comp__begin-bt"
+          type="submit"
+          @click="sendData"
+          :disabled="!isValid"
+        >CONTINUAR</button>
+      </div>
     </form>
     <div class="ticket-comp__register-disclaimer">
       <p>
@@ -69,6 +75,7 @@ export default {
   },
   methods: {
     show() {
+      TweenMax.set(this.$el, { autoAlpha: 1 })
       const splittingTitle = Splitting({
         target: this.$el.querySelector(".auth__title"),
         by: "words",
@@ -114,7 +121,16 @@ export default {
         { y: "0%", ease: Quad.easeInOut, delay: 0.8 }
       );
     },
-    hide() {},
+    hide() {
+      TweenMax.to(this.$el, 0.6, { autoAlpha: 0, ease: Quad.easeInOut })
+    },
+    logout(){
+      this.$store.dispatch("loading", true);
+      this.$store.dispatch("logout").then(e =>{
+        this.$store.dispatch("loading", false);
+        this.$emit('logout')
+      });
+    },
     goToRegister() {
       this.$emit("go-register");
     },
@@ -188,6 +204,13 @@ export default {
   .ticket-comp__form {
     padding-bottom: 40px;
     overflow: hidden;
+
+    .buttons-container {
+      width: 80%;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+    }
   }
 
   .ticket-comp__register-disclaimer {

@@ -28,32 +28,60 @@
           src="~@/assets/images/icons/fullscreen-exit.png"
         />
       </div>
-      <a
-        class="default-button header-controls__right-logout white"
-        href="javascript:void(0)"
-        @click="logout"
-      >SAIR</a>
+      <div class="header-controls__right-user" @click="toggleUser">
+        <h5 class="user-name">{{userName}}</h5>
+        <div class="user-container">
+          <a
+            class="default-button header-controls__right-logout white"
+            href="javascript:void(0)"
+            @click="chagePass"
+          >TROCA DE SENHA</a>
+          <a
+            class="default-button header-controls__right-logout white"
+            href="javascript:void(0)"
+            @click="logout"
+          >SAIR</a>
+        </div>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
 import Timeline from "@/components/pano/Timeline.vue";
-
+import { TweenMax, Quad } from 'gsap';
 export default {
   components: {
     Timeline,
   },
   data: () => ({
     fullscreen: false,
+    userName: '',
+    isUserVisible: false,
   }),
+  created(){
+    this.userName = `Olá, ${this.$store.getters.user.name.split(' ')[0]}`
+  },
   mounted() {
     document.addEventListener("fullscreenchange", this.fullscreenChange);
     document.addEventListener("mozfullscreenchange", this.fullscreenChange);
     document.addEventListener("webkitfullscreenchange", this.fullscreenChange);
     document.addEventListener("msfullscreenchange", this.fullscreenChange);
+    TweenMax.to('.governo-top', 0.6, { y: '0%', ease: Quad.easeInOut })
   },
   methods: {
+    toggleUser(e){
+      if (!this.isUserVisible) {
+        TweenMax.set('.user-container', { display: 'block' })
+        TweenMax.fromTo('.user-container', 0.6, { autoAlpha: 0 }, { autoAlpha: 1, ease: Quad.easeInOut })
+      } else {
+        TweenMax.fromTo('.user-container', 0.6, { autoAlpha: 1 }, { autoAlpha: 0, ease: Quad.easeInOut, onComplete: ()=> {
+          TweenMax.set('.user-container', { display: 'none' })
+        }})
+
+      }
+      this.isUserVisible = !this.isUserVisible
+    },
     goTutorial() {},
     fullscreenChange(e) {
       this.fullscreen = !this.fullscreen;
@@ -92,9 +120,12 @@ export default {
       }
     },
     logout() {
-      this.$store.dispatch("mute", true);
       this.$store.dispatch("logout");
       this.$router.push("/");
+    },
+    chagePass() {
+      console.log('change pass...')
+      this.$emit('change-pass')
     },
   },
 };
@@ -158,12 +189,54 @@ export default {
         margin-right: 15px;
       }
     }
-    .header-controls__right-logout {
-      height: 40px;
-      padding-top: 0;
-      line-height: 40px;
-      margin: 0 16px;
-      min-width: 100px;
+
+    .header-controls__right-user {
+      cursor: pointer;
+      position: relative;
+
+      .user-name {
+        @include font-scale(1366, 1680, 10, 12);
+        font-family: $rob-regular;
+        color: $white;
+        margin-right: 15px;
+        text-shadow: 0px 0px 4px #000000;
+      } 
+      
+      .user-container { 
+        // @include set-size(200px, auto);
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        transform: translateY(100%);
+        background-color: rgba(0,0,0,0.5);
+        padding: 10px;
+        border-radius: 4px;
+        display: none;
+
+        &:before {
+          content: "";
+          position: absolute;
+          right: 15px;
+          top: -15px;
+          width: 0; 
+          height: 0; 
+          border-left: 15px solid transparent;
+          border-right: 15px solid transparent;
+          border-bottom: 15px solid rgba(0,0,0,0.5);
+        }
+
+        .header-controls__right-logout {
+          height: 40px;
+          padding-top: 0;
+          line-height: 40px;
+          margin: 10px auto;
+          min-width: 100px;
+        } 
+
+        .default-button {
+          width: 140px;
+        }
+      }
     }
   }
   @include maxWidth(1024) {

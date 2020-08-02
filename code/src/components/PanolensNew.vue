@@ -8,12 +8,12 @@
 </template>
 
 <script>
-// const THREE = require("three");
+const THREE = require("three");
+const PANOLENS = require("@/utils/panolens/panolens.js");
+// const THREE = require("@/utils/panolens/three.min.js");
+// const PANOLENS = require("panolens");
 import { progressiveImageLoader } from "@/utils/loaders/ProgressiveImgLoader";
 import { TweenMax, Quad } from "gsap";
-// const PANOLENS = require("@/utils/panolens/panolens.js");
-const THREE = require("@/utils/panolens/three.min.js");
-const PANOLENS = require("panolens");
 import { data } from "@/data/scenes.js";
 import { progressiveData } from "@/data/progressive-data.js";
 const hotspotInfo = require("@/assets/images/icons/hotspot-info.png");

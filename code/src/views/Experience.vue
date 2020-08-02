@@ -3,7 +3,7 @@
     <!-- <Pano ref="pano" v-if="queueLoaded" v-on:info-layer="onInfoLayer" /> -->
     <!-- <Panolens ref="pano" v-if="queueLoaded" v-on:info-layer="onInfoLayer"/> -->
     <PanolensNew ref="pano" v-if="queueLoaded" v-on:info-layer="onInfoLayer"/>
-    <HeaderControls ref="headerControls" />
+    <HeaderControls ref="headerControls" v-on:change-pass="onChangePass" v-on:close="changePassClosed"/>
     <FooterControls ref="footerControls" v-on:action="onFooterAction" />
     <VideoLive v-if="isVideoLive" video-id="c8dFQbj20dg" v-on:close="videoClosed" ref="videoLive" />
     <Video360
@@ -34,12 +34,14 @@
     <source src="media/videos/da-vinci-intro-small.mp4" type="video/mp4">-->
     <!-- <source src="mov_bbb.ogg" type="video/ogg"> -->
     <!-- </video> -->
+    <ChangePass ref="changePass" v-if="isChangePass" v-on:close="changePassClosed"/>
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
 // import { Preloader } from '@/utils/loaders/Preloader';
+import ChangePass from "@/components/auth/ChangePass";
 import Pano from "@/components/Pano.vue";
 import Panolens from "@/components/Panolens.vue";
 import PanolensNew from "@/components/PanolensNew.vue";
@@ -68,6 +70,7 @@ export default {
     InfoModal,
     Map,
     Ar,
+    ChangePass,
   },
   data: () => ({
     isVideoLive: false,
@@ -75,6 +78,7 @@ export default {
     isVideoLearn: false,
     isInfoModal: false,
     isArModal: false,
+    isChangePass: false,
     isMap: false,
     infoModalContent: null,
     preloader: null,
@@ -141,6 +145,16 @@ export default {
       this.isInfoModal = false;
       if (this.$refs?.footerControls?.musicPlaying)
         this.$refs?.audioPlayer?.unmute();
+    },
+    changePassClosed() {
+      this.isChangePass = false;
+    },
+    onChangePass() {
+      console.log('onChangePass')
+      this.isChangePass = true;
+      this.$nextTick(()=>{
+        this.$refs?.changePass?.show()
+      })
     },
     onInfoLayer(params) {
       console.log("onInfoLayer", params);

@@ -1,7 +1,7 @@
 <template>
   <article class="home">
     <section class="home-step first-step">
-      <ShaderBg />
+      <!-- <ShaderBg /> -->
       <img
         class="first-step__logo-mis" 
         src="~@/assets/images/logo-mis-exp.png"
@@ -83,10 +83,13 @@
 import Auth from "@/components/Auth";
 import { TweenMax, Quad } from 'gsap';
 import Splitting from "splitting";
-import ShaderBg from "@/components/ShaderBg";
+// import ShaderBg from "@/components/ShaderBg";
 export default {
   name: "Home",
-  components: { Auth, ShaderBg },
+  components: { 
+    Auth, 
+    // ShaderBg 
+  },
   data: () => ({
     authShow: false,
     isMobile: window.innerWidth < 1024,
@@ -103,7 +106,7 @@ export default {
         target: this.$el.querySelector(".first-step__center-content .first-step__center-content__description"),
         by: "chars",
       });
-      TweenMax.fromTo('.shader-bg', 1, { autoAlpha: 0 }, { autoAlpha: 1, delay: 0.4, ease: Quad.easeInOut, onComplete: ()=> {
+      TweenMax.fromTo(this.$el, 1, { autoAlpha: 0 }, { autoAlpha: 1, delay: 0.4, ease: Quad.easeInOut, onComplete: ()=> {
 
         TweenMax.fromTo('.governo-top', 0.6, { y: '-100%' }, { y: '0%', delay: 0.8, ease: Quad.easeInOut })
         TweenMax.fromTo('.first-step__logo-mis', 0.6, { autoAlpha: 0 }, { autoAlpha: 1, delay: 0.4, ease: Quad.easeInOut })
@@ -155,6 +158,7 @@ export default {
 .home {
   // @include set-size(100%, 100%);
   background-color: $black;
+  opacity: 0;
   .auth {
     @include center(fixed);
   }
@@ -176,11 +180,11 @@ export default {
 
 .first-step {
   position: relative;
-  // background-image: url(~@/assets/images/bg-home-step1.jpg);
-  // background-repeat: no-repeat;
-  // background-size: cover;
-  // background-position: center center;
-
+  background-image: url(~@/assets/images/bg-home-step1.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center center;
+  
   .shader-bg {
     opacity: 0;
   }

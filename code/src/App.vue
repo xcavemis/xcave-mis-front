@@ -1,7 +1,9 @@
 <template>
   <div id="app">
     <Header />
-    <router-view />
+    <transition :name="transitionName">
+      <router-view />
+    </transition>
     <Loading v-if="$store.getters.loadingShow" />
     <Warning v-if="$store.getters.warningShow.show" :text="$store.getters.warningShow.text" />
     <Footer />
@@ -16,12 +18,6 @@ import Warning from "@/components/Warning";
 
 export default {
   components: { Header, Footer, Loading, Warning },
-  methods: {
-    onLogout() {
-      this.$store.dispatch("mute", true);
-      this.$store.dispatch("logout");
-    },
-  },
   watch: {
     $route(to, from) {
       if (to !== from) {
@@ -31,6 +27,23 @@ export default {
       }
     },
   },
+  data: () => ({
+    transitionName: 'slide-left'
+  }),
+  // beforeRouteUpdate (to, from, next) {
+  //   const toDepth = to.path.split('/').length
+  //   const fromDepth = from.path.split('/').length
+  //   this.transitionName = toDepth < fromDepth ? 'slide-right' : 'slide-left'
+  //   next()
+  // },
+  created() {
+    this.$store.dispatch("autoLogin").then((res) => {
+      // console.log("auto login: ", res);
+      if (!this.auth && this.$route.name != "Home") {
+        this.$router.push("/");
+      }
+    });
+  },
   computed: {
     auth() {
       return this.$store.getters.isAuthenticated;
@@ -39,34 +52,6 @@ export default {
       return this.$store.getters.user;
     },
   },
-  created() {
-    this.$store.dispatch("autoLogin").then((res) => {
-      console.log("auto login: ", res);
-      if (!this.auth && this.$route.name != "Home") {
-        this.$router.push("/");
-      }
-    });
-  //   // this.$router.beforeEach((to, from, next) => {
-  //   //   window.scrollTo(0, 0);
-  //   // let transitionName = to.meta.transition || from.meta.transition;
-  //   // if (transitionName === "slide") {
-  //   //   const toDepth = to.meta.depth;
-  //   //   const fromDepth = from.meta.depth;
-  //   //   transitionName = toDepth < fromDepth ? "prev" : "next";
-  //   // }
-
-      // this.transitionName = transitionName || "fade";
-    // });
-    // this.$store.dispatch("logout")
-  },
-  methods:{
-    show(){
-      
-    },
-    hide(){
-
-    }
-  }
 }
 </script>
 <style lang="scss">

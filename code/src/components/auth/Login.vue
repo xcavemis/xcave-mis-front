@@ -188,7 +188,7 @@ export default {
         password: this.formData.pass,
       };
       this.$store.dispatch("login", formData).then((e) => {
-        console.log("login success", e);
+        // console.log("login success", e);
         // this.$router.push("/experience");
         const { status, data, endTime } = e?.response;
         if (status >= 200 && status <= 204) {

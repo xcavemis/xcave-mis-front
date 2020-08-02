@@ -124,7 +124,6 @@ export default {
       this.$router.push("/");
     },
     chagePass() {
-      console.log('change pass...')
       this.$emit('change-pass')
     },
   },

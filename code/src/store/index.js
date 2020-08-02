@@ -159,14 +159,14 @@ export default new Vuex.Store({
     },
     async checkIn({ commit, state }, ticketData) {
       const uri = "/checkins/ticketNumber";
-      console.log('checkIn', state, ticketData )
+      // console.log('checkIn', state, ticketData )
       try {
         const res = await api.post(uri, ticketData, {
           headers: {
             'Authorization': `Bearer ${state.token}` 
           }
         });
-        console.log('checkIn', res)
+        // console.log('checkIn', res)
         const {
           group,
           access_token: token,
@@ -175,7 +175,7 @@ export default new Vuex.Store({
           endTime,
         } = res.data;
 
-        console.log('checkIn user:', res)
+        // console.log('checkIn user:', res)
 
         localStorage.setItem("user", JSON.stringify(user));
         localStorage.setItem("token", token);
@@ -206,14 +206,14 @@ export default new Vuex.Store({
     },
     async changePass({ commit, state }, passData) {
       const uri = "/auth/password/new";
-      console.log('changePass', passData )
+      // console.log('changePass', passData )
       try {
         const res = await api.post(uri, passData, {
           headers: {
             'Authorization': `Bearer ${state.token}` 
           }
         });
-        console.log('checkIn', res)
+        // console.log('checkIn', res)
         const {
           group,
           access_token: token,
@@ -254,7 +254,7 @@ export default new Vuex.Store({
       const uri = "/auth/password/recover";
       try {
         const res = await api.post(uri, data);
-        console.log('passRecovery', res)
+        // console.log('passRecovery', res)
         return {
           response: res 
         }
@@ -282,7 +282,7 @@ export default new Vuex.Store({
           localStorage.setItem("token", token);
           localStorage.setItem("hasHoursAvaliable", hasHoursAvaliable);
           localStorage.setItem("endTime", endTime);
-          console.log('tokenCheck user', user)
+          // console.log('tokenCheck user', user)
           commit("authUser", {
             token,
             user,
@@ -313,7 +313,7 @@ export default new Vuex.Store({
         const endTime = localStorage.getItem("endTime");
         
         const user = JSON.parse(userStr);
-        console.log('autoLogin user', user)
+        // console.log('autoLogin user', user)
         commit("authUser", {
           token,
           user,

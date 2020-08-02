@@ -49,9 +49,9 @@ export default {
                 });
                 
                 this.dynamicSound?.play();
-                console.log('playTo', this.dynamicSound, path)
+                // console.log('playTo', this.dynamicSound, path)
                 this.dynamicSound?.on('load', () => {
-                    console.log('dynamicSOund load')
+                    // console.log('dynamicSOund load')
                 });
             })
         },

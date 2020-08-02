@@ -190,6 +190,7 @@ export default {
   }
 
   .first-step__logo-mis {
+    width: 200px;
     position: absolute;
     top: 97px;
     left: 103px;

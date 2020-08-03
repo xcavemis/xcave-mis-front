@@ -120,9 +120,9 @@ export default {
           );
         })
         TweenMax.staggerFromTo('.first-step__center-content .first-step__center-content__button', 0.6, { y: '100%' }, { y: '0%', ease: Quad.easeInOut, delay: 1.6}, 0.1, ()=>{
-          setTimeout(()=>{
-            document.querySelector('.first-step__center-content__button.white').classList.add('pulse')
-          }, 1000)
+          // setTimeout(()=>{
+          //   document.querySelector('.first-step__center-content__button.white').classList.add('pulse')
+          // }, 1000)
         })
       }})
     },
@@ -137,6 +137,7 @@ export default {
         ) {
           this.$router.push("/experience");
         } else {
+          TweenMax.set('html, body', { overflowY: 'hidden'})
           this.authShow = true;
           this.$nextTick(() => {
             this.$refs?.authComp?.show();
@@ -145,6 +146,7 @@ export default {
       });
     },
     onAuthClosed(){
+      TweenMax.set('html, body', { overflowY: 'auto'})
       this.authShow = false;
     },
     validateTime(date) {
@@ -197,7 +199,7 @@ export default {
     opacity: 0;
 
     @include maxWidth(1023) {
-      width: 100px;
+      width: 160px;
       @include center-x(absolute);
     }
   }
@@ -261,13 +263,13 @@ export default {
 
       .first-step__center-content__buttons {
         margin-top: 5vh;
-        display: block;
+        // display: block;
         .first-step__center-content__button {
           min-width: 0;
-          width: 60%;
-          @include font-size(12);
-          padding: 15px 30px;
-          display: block;
+          width: 45%;
+          @include font-size(10);
+          padding: 15px;
+          // display: block;
           margin: 0 auto 15px auto;
         }
       }

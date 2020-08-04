@@ -67,8 +67,13 @@ export default {
 
       let geometry = new THREE.PlaneGeometry(2.8, 1.4, 4, 4);
       let material = new MeshBasicMaterial({ map: this.texLoader.load('/textures/bg-home-step1.jpg') })
-      let mesh = new THREE.Mesh(geometry, material);
-      this.scene.add(mesh);
+      this.mesh = new THREE.Mesh(geometry, material);
+      this.scene.add(this.mesh);
+
+      let dist = this.camera.position.z - this.mesh.position.z;
+      let height = window.innerHeight < 900 ? 0.9 : 1.2;
+      this.camera.fov = 2 * Math.atan(height / (2 * dist)) * (180 / Math.PI);
+      this.camera.updateProjectionMatrix();
 
       const ambLight = new THREE.AmbientLight(0xffffff)
       this.scene.add(ambLight)
@@ -146,7 +151,10 @@ export default {
       this.renderer.setSize( window.innerWidth, window.innerHeight );
       const canvas = this.renderer.domElement
       this.camera.aspect = canvas.clientWidth / canvas.clientHeight
-      this.camera.updateProjectionMatrix()
+      let dist = this.camera.position.z - this.mesh.position.z;
+      let height = window.innerHeight < 900 ? 0.9 : 1.2;
+      this.camera.fov = 2 * Math.atan(height / (2 * dist)) * (180 / Math.PI);
+      this.camera.updateProjectionMatrix();
     },
     loadTextFile(url) {
         return axios.get(url).then(response => {

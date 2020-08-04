@@ -121,29 +121,7 @@ export default {
         })
         this.scene.add(this.model)
 
-        //  SHADOW
-        var light = new THREE.SpotLight( 0xffffff, 0.7 );
-        light.position.set( 0, 1500, 0 );
-        light.angle = Math.PI * 0.2;
-        light.castShadow = true;
-        light.shadow.camera.near = 200;
-        light.shadow.camera.far = 2000;
-        light.shadow.bias = - 0.000222;
-        light.shadow.mapSize.width = 1024;
-        light.shadow.mapSize.height = 1024;
-        this.scene.add( light );
-
-        var planeGeometry = new THREE.PlaneBufferGeometry( 2000, 2000 );
-        planeGeometry.rotateX( - Math.PI / 2 );
-        var planeMaterial = new THREE.ShadowMaterial( { opacity: 0.15 } );
-
-        var plane = new THREE.Mesh( planeGeometry, planeMaterial );
-        // plane.position.y = 0;
-        plane.receiveShadow = true;
-        plane.position.set(0,-41,0)
-        this.scene.add( plane );
-
-
+        
         // ANIMATIONS
         const animations = _model.animations
         this.mixer = new THREE.AnimationMixer( this.model );
@@ -160,8 +138,41 @@ export default {
         this.$emit('load-complete')
     },
     setupLights(){
-        const ambLight = new THREE.AmbientLight( 0xf0f0f0 )
+        const ambLight = new THREE.AmbientLight( 0xffffff, 2 )
         this.scene.add( ambLight );
+
+        //  SHADOW
+        var light = new THREE.SpotLight( 0xffffff, 2 );
+        light.position.set( 0, 500, 0 );
+        light.angle = Math.PI * 0.2;
+        light.castShadow = true;
+        light.shadow.camera.near = 200;
+        light.shadow.camera.far = 2000;
+        light.shadow.bias = - 0.000222;
+        light.shadow.mapSize.width = 1024;
+        light.shadow.mapSize.height = 1024;
+        this.scene.add( light );
+        
+        // var light2 = new THREE.SpotLight( 0xffffff, 2 );
+        // light2.position.set( 0, 400, 0 );
+        // light2.angle = Math.PI * 0.2;
+        // light2.castShadow = true;
+        // light2.shadow.camera.near = 200;
+        // light2.shadow.camera.far = 2000;
+        // light2.shadow.bias = - 0.000222;
+        // light2.shadow.mapSize.width = 1024;
+        // light2.shadow.mapSize.height = 1024;
+        // this.scene.add( light2 );
+
+        var planeGeometry = new THREE.PlaneBufferGeometry( 2000, 2000 );
+        planeGeometry.rotateX( - Math.PI / 2 );
+        var planeMaterial = new THREE.ShadowMaterial( { opacity: 0.15 } );
+
+        var plane = new THREE.Mesh( planeGeometry, planeMaterial );
+        // plane.position.y = 0;
+        plane.receiveShadow = true;
+        plane.position.set(0,-41,0)
+        this.scene.add( plane );
 
         
     },

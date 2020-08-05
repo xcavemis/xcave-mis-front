@@ -1,8 +1,8 @@
 <template>
   <div class="experience">
-    <!-- <Pano ref="pano" v-if="queueLoaded" v-on:info-layer="onInfoLayer" /> -->
+    <Pano ref="pano" v-if="queueLoaded" v-on:info-layer="onInfoLayer" />
     <!-- <Panolens ref="pano" v-if="queueLoaded" v-on:info-layer="onInfoLayer"/> -->
-    <PanolensNew ref="pano" v-if="queueLoaded" v-on:info-layer="onInfoLayer"/>
+    <!-- <PanolensNew ref="pano" v-if="queueLoaded" v-on:info-layer="onInfoLayer"/> -->
     <HeaderControls ref="headerControls" v-on:change-pass="onChangePass" v-on:close="changePassClosed"/>
     <FooterControls ref="footerControls" v-on:action="onFooterAction" />
     <VideoLive v-if="isVideoLive" video-id="c8dFQbj20dg" v-on:close="videoClosed" ref="videoLive" />

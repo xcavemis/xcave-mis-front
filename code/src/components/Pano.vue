@@ -1,7 +1,7 @@
 <template>
   <div class="pano-comp">
     <iframe 
-      :src="`https://hml.exposicaodavinci500anos.com.br/assets/panorama-view/index.html`"
+      :src="`https://hml.exposicaodavinci500anos.com.br/assets/panorama-view/index.html?skip-loading#media=${panoIndex}`"
       class="pano-comp__iframe"
       width="100%" 
       height="100%" 
@@ -18,26 +18,25 @@
 <script>
 import { data } from '@/data/scenes.js';
 export default {
+  data: () => ({
+    panoIndex: 1
+  }),
   created() {
     window.addEventListener('message', event => {
-      console.log(typeof event.data)
-      if(typeof event.data === 'string' && event.data.indexOf('codi') > -1) {
-        let content = event.data.split('_')
-        console.log('message', content, this.findSceneDataById(content[0])); 
-        const scene = this.findSceneDataById(content[0])
-        const id = content[2]
-        const type = content[1]
-        scene.infoHotspots?.map((info) => {
-          if (info?.id == id) {
-            this.$emit("info-layer", info)
-            return
-          }
-        })
+      console.log(event.data)
+      if(typeof event.data === 'string' && event.data.indexOf('id') > -1) {
+        let content = JSON.parse(event.data)
+        let infoData =  this.findContentById(content.id)
+        this.$emit("info-layer", infoData)
       }
-  }); 
+    }); 
+    setTimeout(()=>{
+      this.panoIndex = 2
+    }, 3000)
   },
   methods: {
-    findSceneDataById(id) {
+    findContentById(id) {
+      console.log('findContentById: ', data)
       for (let i = 0; i < data.scenes.length; i++) {
         if (data.scenes[i].id === id) {
           return data.scenes[i];

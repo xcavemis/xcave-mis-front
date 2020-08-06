@@ -1,6 +1,7 @@
 <template>
   <div class="experience">
-    <Pano ref="pano" v-if="queueLoaded" v-on:info-layer="onInfoLayer" />
+    <PanolensNew ref="pano" v-if="queueLoaded" v-on:info-layer="onInfoLayer" />
+    <!-- <Pano ref="pano" v-if="queueLoaded" v-on:info-layer="onInfoLayer" /> -->
     <HeaderControls ref="headerControls" v-on:change-pass="onChangePass" v-on:close="changePassClosed"/>
     <FooterControls ref="footerControls" v-on:action="onFooterAction" />
     <VideoLive v-if="isVideoLive" video-id="c8dFQbj20dg" v-on:close="videoClosed" ref="videoLive" />
@@ -41,6 +42,7 @@
 // import { Preloader } from '@/utils/loaders/Preloader';
 import ChangePass from "@/components/auth/ChangePass";
 import Pano from "@/components/Pano.vue";
+import PanolensNew from "@/components/PanolensNew.vue";
 import FooterControls from "@/components/pano/FooterControls.vue";
 import HeaderControls from "@/components/pano/HeaderControls.vue";
 import Map from "@/components/pano/Map.vue";
@@ -55,6 +57,7 @@ export default {
   name: "experience",
   components: {
     Pano,
+    PanolensNew,
     FooterControls,
     HeaderControls,
     VideoLive,

@@ -37,6 +37,7 @@ export default {
   background-color: $black;
   padding: 14.1vh 8.27vw 9vh 8.27vw;
   position: relative;
+  z-index: 4;
   a {
     display: none;
   }

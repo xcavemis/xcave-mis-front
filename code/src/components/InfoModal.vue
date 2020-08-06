@@ -93,9 +93,12 @@ export default {
         this.imgSrc = this.content.image[0]
         this.$nextTick(()=>{
             this.circle = document.getElementById('circle')
-            this.circleLength = this.circle.getTotalLength()
-            this.circle.setAttribute('stroke-dasharray', this.circleLength)
-            this.circle.setAttribute('stroke-dashoffset', this.circleLength)
+            if (this.circle) {
+
+                this.circleLength = this.circle.getTotalLength()
+                this.circle.setAttribute('stroke-dasharray', this.circleLength)
+                this.circle.setAttribute('stroke-dashoffset', this.circleLength)
+            }
 
             this.$refs.imageToDrag.addEventListener('load', this.onImageLoaded)
             this.previewElm = this.$el.querySelector('.info-modal__preview')

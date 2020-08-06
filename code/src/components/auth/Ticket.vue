@@ -210,6 +210,10 @@ export default {
       margin: 0 auto;
       display: flex;
       justify-content: space-between;
+
+      @include maxWidth(1023) {
+        width: 100%;
+      }
     }
   }
 

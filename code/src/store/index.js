@@ -19,8 +19,10 @@ export default new Vuex.Store({
     mute: false,
     assets: {},
     models: {},
+    audio_end: false,
     xr_registered: false,
     navigateToPano: '',
+    audioTime: 0,
     warningShow: { show: false, text: '' },
     navigationStatus: { 
       codices: 'pending',
@@ -63,6 +65,12 @@ export default new Vuex.Store({
     },
     assets(state, obj) {
       state.assets = obj;
+    },
+    audioTime(state, num) {
+      state.audioTime = num;
+    },
+    audio_end(state, bool) {
+      state.audio_end = bool;
     },
     models(state, obj) {
       state.models = obj;
@@ -347,6 +355,12 @@ export default new Vuex.Store({
       commit("mute", bool);
       
     },
+    audioTime({ commit }, num) {
+      commit("audioTime", num);
+    },
+    audio_end({ commit }, bool) {
+      commit("audio_end", bool);
+    },
     xr_registered({ commit }, bool) {
       commit("xr_registered", bool);
     },
@@ -395,6 +409,12 @@ export default new Vuex.Store({
     },
     mute(state) {
       return state.mute;
+    },
+    audioTime(state) {
+      return state.audioTime;
+    },
+    audio_end(state) {
+      return state.audio_end;
     },
     warningShow(state) {
       return state.warningShow;

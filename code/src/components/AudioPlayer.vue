@@ -10,6 +10,7 @@ export default {
         mainSound: null,
         dynamicSound: null,
         stopTimer: 0,
+        updateTimer: 0,
     }),
     mounted(){
         this.mainSound = new Howl({
@@ -49,9 +50,20 @@ export default {
                 });
                 
                 this.dynamicSound?.play();
-                // console.log('playTo', this.dynamicSound, path)
+                this.$store.commit('audio_end', false)
+                clearInterval(this.updateTimer)
+                this.updateTimer = setInterval(()=>{
+
+                    let currentTime = this.dynamicSound?.seek();
+                    let maxduration = this.dynamicSound?.duration();
+                    let calc = currentTime / maxduration;
+                    this.$store.commit('audioTime', !isNaN(calc) ? calc : 0)
+                }, 250)
                 this.dynamicSound?.on('load', () => {
                     // console.log('dynamicSOund load')
+                });
+                this.dynamicSound?.on('end', () => {
+                    this.$store.commit('audio_end', true)
                 });
             })
         },
@@ -66,6 +78,7 @@ export default {
         },
     },
     beforeDestroy(){
+        clearInterval(this.updateTimer)
         this.mainSound?.stop()
         this.mainSound = null
         this.dynamicSound?.stop()

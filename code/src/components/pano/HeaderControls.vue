@@ -144,6 +144,7 @@ export default {
   justify-content: space-around;
   align-items: flex-start;
   padding-top: 30px;
+  z-index: 3;
 
   .header-controls__left {
     width: 16.1%;

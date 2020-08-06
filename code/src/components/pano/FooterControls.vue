@@ -216,6 +216,7 @@ export default {
   display: flex;
   justify-content: space-around;
   align-items: flex-start;
+  z-index: 3;
 
   .footer-controls__left {
     @include set-size(16.1%, 100%);

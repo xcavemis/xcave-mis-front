@@ -10,18 +10,25 @@
       title="MIS - Da Vinci Live" 
       webkitallowfullscreen 
       mozallowfullscreen 
-      allowfullscreen>
+      allowfullscreen
+      v-if="isPano"
+      >
     </iframe>
   </div>
 </template>
 
 <script>
 import { data } from '@/data/scenes.js';
+
 export default {
   data: () => ({
-    panoIndex: 1
+    panoIndex: 1,
+    iOS: /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream,
+    isPano: false
   }),
-  created() {
+  async mounted() {
+    // if (this.iOS) await this.getMotionEventAuth()
+    this.isPano = true
     window.addEventListener('message', event => {
       console.log(event.data)
       if(typeof event.data === 'string' && event.data.indexOf('id') > -1) {
@@ -35,6 +42,9 @@ export default {
     // }, 3000)
   },
   methods: {
+    goToScene(id){
+      this.panoIndex = id
+    },
     findContentById(id) {
       console.log('findContentById: ', data)
       for (let i = 0; i < data.scenes.length; i++) {
@@ -68,6 +78,9 @@ export default {
   -ms-content-zooming: none;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
   background-color: $black;
+
+  #viewer { background-color: #FFFFFF; z-index:1; position:absolute; width: 100%; height: 100%; top: 0; }
+  #preloadContainer { z-index:2; position:relative; width:100%; height:100%; opacity:0; transition: opacity 0.5s; -webkit-transition: opacity 0.5s; -moz-transition: opacity 0.5s; -o-transition: opacity 0.5s;}
 
   .pano-comp__iframe {
     @include set-size(100%, 100%);

@@ -9,7 +9,7 @@
                         <img class="info-modal__preview-icon" src="~@/assets/images/icons/hand.png" @click="hide" alt="CLIQUE E ARRASTE PARA VISUALIZAR">
                         <p class="info-modal__preview-text">CLIQUE E ARRASTE<br>PARA VISUALIZAR</p>
                     </div>
-                    <div class="info-modal__controls">
+                    <div class="info-modal__controls" v-if="!isMobile">
                         <img
                             ref="zoomOutBtn"
                             class="info-modal__controls__button-icon"
@@ -19,7 +19,7 @@
                             @mouseup="zoomOut($event)"
                             src="~@/assets/images/icons/zoom-out.png"
                         />
-                        <input v-if="!isMobile" ref="rangeZoom" class="info-modal__controls__range-input" type="range" min="0.584" max="2" step="0.05" value="0"  v-model="sliderZoom">
+                        <input ref="rangeZoom" class="info-modal__controls__range-input" type="range" min="0.584" max="2" step="0.05" value="0"  v-model="sliderZoom">
                         <img
                             ref="zoomInBtn"
                             class="info-modal__controls__button-icon"
@@ -38,7 +38,12 @@
                     <img v-if="isMobile" class="info-modal__close" src="~@/assets/images/icons/close.png" @click="hide" alt="Fechar o conteúdo.">
                     <h3 class="info-modal__content-title" v-if="content.title" v-html="content.title"></h3>
                     <p class="info-modal__content-description" v-if="content.text" v-html="content.text"></p>
-                    <a v-if="content.audio" href="javascript:void(0)" class="info-modal__content-play" :class="{'playing': isPlaying}" @click="togglePlay">AUDIO GUIA</a>
+                    <a v-if="content.audio" href="javascript:void(0)" class="info-modal__content-play" :class="{'playing': isPlaying}" @click="togglePlay">
+                        <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 100 100">
+                            <path id="circle" fill="none" stroke="#FFFFFF" stroke-miterlimit="10" d="M50,2.9L50,2.9C76,2.9,97.1,24,97.1,50v0C97.1,76,76,97.1,50,97.1h0C24,97.1,2.9,76,2.9,50v0C2.9,24,24,2.9,50,2.9z"/>
+                        </svg>
+                        AUDIO GUIA
+                    </a>
                 </div>
             </section>
         </div>
@@ -63,21 +68,47 @@ export default {
         curreImgIdx: 0,
         pressedTimer: 0,
         sliderZoom: 0,
+        circle: null,
+        circleLength: 0,
         isMobile: navigator.userAgent.toLowerCase().match(/mobile/i),
         isIOS: /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream,
     }),
     watch: {
         sliderZoom: function(val, old) {
             // console.log('sliderZoom', val)
+        },
+        '$store.getters.audioTime': function(val, old) {
+            if (val != old) {
+                let calc = this.circleLength - ( val * this.circleLength );
+                this.circle.setAttribute('stroke-dashoffset', calc)
+            }
+        },
+        '$store.getters.audio_end': function(val, old) {
+            if (val != old && val == true) {
+                this.isPlaying = false
+            }
         }
     },
     mounted(){
         this.imgSrc = this.content.image[0]
         this.$nextTick(()=>{
+            this.circle = document.getElementById('circle')
+            this.circleLength = this.circle.getTotalLength()
+            this.circle.setAttribute('stroke-dasharray', this.circleLength)
+            this.circle.setAttribute('stroke-dashoffset', this.circleLength)
+
             this.$refs.imageToDrag.addEventListener('load', this.onImageLoaded)
             this.previewElm = this.$el.querySelector('.info-modal__preview')
-            this.previewElm.addEventListener('mouseover', this.onOverPreview, false)
-            this.previewElm.addEventListener('mouseout', this.onOutPreview, false)
+            if (!this.isMobile) {
+                this.previewElm.addEventListener('mouseover', this.onOverPreview, false)
+                this.previewElm.addEventListener('mouseout', this.onOutPreview, false)
+            } else {
+                this.previewElm.addEventListener('touchstart', (e) => {
+                    TweenMax.to('.info-modal__preview-instructions', 0.6, { autoAlpha: 0, ease: Quad.easeInOut, onComplete: ()=>{
+                        TweenMax.set('.info-modal__preview-instructions', { display: 'none' })
+                    }})
+                }, false)
+            }
         })
     },
     methods: {
@@ -94,14 +125,10 @@ export default {
             if (!this.isMobile) {
                 this.previewElm.addEventListener('wheel', this.mouseWheelEvent)
                 this.$refs.rangeZoom?.addEventListener('input', this.inputChange)
-            } else {
-                this.$refs.zoomInBtn?.addEventListener('touchstart', this.zoomIn)
-                this.$refs.zoomOutBtn?.addEventListener('touchstart', this.zoomOut)
-                
             }
         },
         zoomIn(e){
-            if (e.type == "mousedown" || e.type == "touchstart") {
+            if (e.type == "mousedown") {
                 clearInterval(this.pressedTimer);
                 this.pressedTimer = setInterval(() => {
                     this.panzoom?.zoomToPoint(
@@ -118,7 +145,7 @@ export default {
             }
         },
         zoomOut(e){
-            if (e.type == "mousedown" || e.type == "touchstart") {
+            if (e.type == "mousedown") {
                 clearInterval(this.pressedTimer);
                 this.pressedTimer = setInterval(() => {
                     this.panzoom?.zoomToPoint(
@@ -205,11 +232,11 @@ export default {
         this.mouse = {x: 0, y: 0, oldX: 0, oldY: 0, button: false}
         this.zoomEl = null
         // view.reset()
-        this.panzoom.destroy()
-        this.previewElm.removeEventListener('wheel', this.mouseWheelEvent)
-        this.$refs.rangeZoom.removeEventListener('input', this.inputChange)
-        this.previewElm.removeEventListener('mouseover', this.onOverPreview, false)
-        this.previewElm.removeEventListener('mouseout', this.onOutPreview, false)
+        this.panzoom?.destroy()
+        this.previewElm?.removeEventListener('wheel', this.mouseWheelEvent)
+        this.$refs.rangeZoom?.removeEventListener('input', this.inputChange)
+        this.previewElm?.removeEventListener('mouseover', this.onOverPreview, false)
+        this.previewElm?.removeEventListener('mouseout', this.onOutPreview, false)
     }
 }
 </script>
@@ -221,6 +248,7 @@ export default {
     top: 0;
     left: 0;
     background-color: rgba(0, 0, 0, 0.8);
+    z-index: 5; 
     .info-modal__crop {
         @include set-size(65.8vw, 62.5vh);
         @include center(absolute);
@@ -432,6 +460,16 @@ export default {
 
                     &.playing {
                         background-image: url('~@/assets/images/icons/pause-info.png');
+                    }
+
+                    svg {
+                        height: 100%;
+                        @include center-y(absolute);
+                        left: 0;
+                        path {
+                            stroke-width: 7px;
+                            stroke: $orange;
+                        }
                     }
                 }
 

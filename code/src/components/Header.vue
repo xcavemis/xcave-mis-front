@@ -52,7 +52,7 @@
 <style lang="scss">
 .governo-top {
   position: relative;
-  z-index: 1;
+  z-index: 5;
   height: 70px;
   background-position: left top;
   background-size: auto 100%;

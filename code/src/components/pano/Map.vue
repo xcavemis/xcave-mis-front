@@ -8,7 +8,7 @@
                     <div class="map-comp__marker" 
                         v-for="(mark, idx) of markers" 
                         :key="idx" 
-                        @click="goTo(mark.id)"
+                        @click="goTo(idx + 1)"
                         :style="{
                             left: mark.x,
                             top: mark.y
@@ -24,19 +24,12 @@
     </div>
 </template>
 <script>
-import { view } from '@/components/pano/DragAndZoom';
 import { mapData } from '@/data/map';
 import { TweenMax, Quad } from 'gsap';
+import Panzoom from '@panzoom/panzoom'
 export default {
     props: ['text'],
     data: () => ({
-        mouse: {
-            x:  0, 
-            y:  0, 
-            oldX: 0, 
-            oldY: 0, 
-            button: false
-        },
         zoomEl: null,
         previewElm: null,
         markers: [],
@@ -44,27 +37,21 @@ export default {
     mounted(){
         this.markers = mapData.markers
         this.$nextTick(()=>{
-            this.mouse = {
-                x: this.$refs?.mapCrop?.offsetWidth * 0.5, 
-                y: this.$refs?.mapCrop?.offsetHeight * 0.5, 
-                oldX: 0, 
-                oldY: 0, 
-                button: false
+            this.panzoom = Panzoom(this.$refs.mapContent, {
+                maxScale: 2,
+                minScale: 0.5,
+            })
+            // window.addEventListener('wheel', this.panzoom.zoomWithWheel)
+            if (!this.isMobile) {
+                this.$refs.mapContent.addEventListener('wheel', this.mouseWheelEvent)
             }
-            // this.$refs?.mapCrop?.addEventListener('mouseover', this.onOverPreview, false)
-            // this.$refs?.mapCrop?.addEventListener('mouseout', this.onOutPreview, false)
-            // this.$refs?.mapCrop?.addEventListener("mousemove", this.mouseEvent, {passive: false});
-            // this.$refs?.mapCrop?.addEventListener("mousedown", this.mouseEvent, {passive: false});
-            // this.$refs?.mapCrop?.addEventListener("mouseup", this.mouseEvent, {passive: false});
-            // this.$refs?.mapCrop?.addEventListener("mouseout", this.mouseEvent, {passive: false});
-            // this.$refs?.mapCrop?.addEventListener("wheel", this.mouseWheelEvent, {passive: false});
         })
     },
     methods: {
         show(){
             TweenMax.set('html, body', { overflow: 'hidden' })
             TweenMax.to(this.$el, 0.6, { autoAlpha: 1, ease: Quad.easeInOut } )  
-            TweenMax.fromTo(this.$refs.mapContent, 0.6, { y: '100%' }, { y: '0%', ease: Quad.easeInOut, delay: 0.3 } )  
+            TweenMax.fromTo(this.$refs.mapCrop, 0.6, { y: '150%' }, { y: '0%', ease: Quad.easeInOut, delay: 0.3 } )  
         },
         hide(){
             TweenMax.fromTo(this.$refs.mapContent, 0.6, { y: '0%' }, { y: '100%', ease: Quad.easeInOut } )  
@@ -73,57 +60,22 @@ export default {
                 TweenMax.set('html, body', { overflow: 'inherit' })
             }})
         },
+        mouseWheelEvent(event) {
+            this.panzoom.zoomWithWheel(event)
+            event.preventDefault();
+        },
         goTo(id) {
             this.$emit('navigate-to', id)
             this.close()
-        },
-        mouseEvent(event) {
-            if (event.type === "mousedown") { this.mouse.button = true }
-            if (event.type === "mouseup" || event.type === "mouseout") { this.mouse.button = false }
-            this.mouse.oldX = this.mouse.x;
-            this.mouse.oldY = this.mouse.y;
-            this.mouse.x = event.pageX;
-            this.mouse.y = event.pageY;
-            if(this.mouse.button) { // pan
-                this.$refs.mapContent.style.transition = `transform 0s linear`;
-                view.pan({x: this.mouse.x - this.mouse.oldX, y: this.mouse.y - this.mouse.oldY});
-                view.applyTo(this.$refs.mapContent);
-            }
-            event.preventDefault();
-        },
-        mouseWheelEvent(event) {
-            const x = event.offsetX - (this.$refs.mapContent.offsetWidth / 2);
-            const y = event.offsetY - (this.$refs.mapContent.offsetHeight / 2);
-            this.$refs.mapContent.style.transition = `transform 0.2s linear`;
-            if (event.deltaY < 0) { 
-                view.scaleAt({x, y}, 1.1, 0.4, 1.3);
-                view.applyTo(this.$refs.mapContent);
-            } else { 
-                view.scaleAt({x, y}, 1 / 1.1, 0.4, 1.3);
-                view.applyTo(this.$refs.mapContent);
-            }
-            
-            event.preventDefault();
         },
         close(){
             this.hide()
         }
     },
     beforeDestroy(){
-        this.mouse = {
-            x: this.$refs?.mapCrop?.offsetWidth * 0.5, 
-            y: this.$refs?.mapCrop?.offsetHeight * 0.5, 
-            oldX: 0, 
-            oldY: 0, 
-            button: false
-        }
-        // this.$refs?.mapCrop?.removeEventListener('mouseover', this.onOverPreview, false)
-        // this.$refs?.mapCrop?.removeEventListener('mouseout', this.onOutPreview, false)
-        // this.$refs?.mapCrop?.removeEventListener("mousemove", this.mouseEvent, {passive: false});
-        // this.$refs?.mapCrop?.removeEventListener("mousedown", this.mouseEvent, {passive: false});
-        // this.$refs?.mapCrop?.removeEventListener("mouseup", this.mouseEvent, {passive: false});
-        // this.$refs?.mapCrop?.removeEventListener("mouseout", this.mouseEvent, {passive: false});
-        // this.$refs?.mapCrop?.removeEventListener("wheel", this.mouseWheelEvent, {passive: false});
+        this.panzoom?.destroy()
+        this.panzoom = null
+        this.$refs.mapContent?.removeEventListener('wheel', this.mouseWheelEvent)
     }
 }
 </script>

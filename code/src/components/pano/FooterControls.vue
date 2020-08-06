@@ -1,10 +1,10 @@
 <template>
   <div class="footer-controls">
-    <a
+    <!-- <a
       class="default-button footer-controls__logout white"
       href="javascript:void(0)"
       @click="logout"
-    >SAIR DA EXPERIÊNCIA</a>
+    >SAIR DA EXPERIÊNCIA</a> -->
     <div class="footer-controls__left">
       <div class="footer-controls__left-button" @click="toggleMusic">
         <div class="footer-controls__button-icon sound-bar">
@@ -333,10 +333,16 @@ export default {
     }
     .footer-controls__left,
     .footer-controls__right {
-      width: 50%;
-
+      width: 50vw;
+      
       .live-button {
         display: none;
+      }
+
+      .footer-controls__right-group {
+        .footer-controls__button-icon {
+          @include set-size(110px, 35px);
+        }
       }
     }
 

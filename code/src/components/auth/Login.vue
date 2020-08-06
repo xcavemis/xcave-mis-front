@@ -272,10 +272,16 @@ export default {
   }
 
   @include maxWidth(1024) {
+
+    .login-comp__form {
+      margin-bottom: 25px;
+    }
     .login-comp__register-disclaimer {
       display: block;
       width: 100%;
-
+      > p {
+        margin-bottom: 0;
+      }
       > .default-button {
         margin-top: 15px;
       }

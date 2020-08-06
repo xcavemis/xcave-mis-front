@@ -292,12 +292,13 @@ export default {
     }
   }
 
+  
   @include maxWidth(1024) {
     max-height: inherit;
-    @include set-size(95vw, 90vh);
+    @include set-size(95vw, 70vh);
     z-index: 1000;
     .auth-header {
-      margin: 10px auto 0 auto;
+      margin: 30px auto 0 auto;
     }
 
     .auth-container {
@@ -319,6 +320,10 @@ export default {
       @include font-size(12);
       margin-bottom: 15px;
     }
+  }
+
+  @include maxHeight(640) {
+    @include set-size(95vw, 85vh);
   }
 }
 </style>

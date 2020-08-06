@@ -32,7 +32,7 @@
         <h5 class="user-name">{{userName}}</h5>
         <div class="user-container">
           <a
-            class="default-button header-controls__right-logout white"
+            class="default-button header-controls__right-logout white change-pass"
             href="javascript:void(0)"
             @click="chagePass"
           >TROCA DE SENHA</a>
@@ -205,7 +205,7 @@ export default {
         // @include set-size(200px, auto);
         position: absolute;
         bottom: 0;
-        right: 0;
+        right: 5px;
         transform: translateY(100%);
         background-color: rgba(0,0,0,0.5);
         padding: 10px;
@@ -239,16 +239,36 @@ export default {
     }
   }
   @include maxWidth(1024) {
-    justify-content: flex-start;
+    justify-content: space-between;
     align-items: flex-start;
     .header-controls__left {
       width: 45%;
       margin-left: 2.5vw;
     }
-    .header-controls__center,
-    .header-controls__right {
+    .header-controls__center{
       display: none;
     }
+    .header-controls__right {
+      .header-controls__right-button {
+        display: none;
+      }
+
+      .user-container  {
+        padding: 10px;
+        .change-pass {
+          display: none;
+        }
+
+        .default-button {
+          width: 100px !important;
+          height: 32px !important;
+          line-height: 32px !important;
+          margin: 0  !important;
+        }
+      }
+    }
+
+
   }
 }
 </style>

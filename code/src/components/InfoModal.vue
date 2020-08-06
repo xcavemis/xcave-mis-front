@@ -11,6 +11,7 @@
                     </div>
                     <div class="info-modal__controls">
                         <img
+                            ref="zoomOutBtn"
                             class="info-modal__controls__button-icon"
                             alt="Afastar imagem"
                             @mouseleave="zoomOut($event)"
@@ -18,8 +19,9 @@
                             @mouseup="zoomOut($event)"
                             src="~@/assets/images/icons/zoom-out.png"
                         />
-                        <input ref="rangeZoom" class="info-modal__controls__range-input" type="range" min="0.584" max="2" step="0.05" value="0"  v-model="sliderZoom">
+                        <input v-if="!isMobile" ref="rangeZoom" class="info-modal__controls__range-input" type="range" min="0.584" max="2" step="0.05" value="0"  v-model="sliderZoom">
                         <img
+                            ref="zoomInBtn"
                             class="info-modal__controls__button-icon"
                             alt="Aproximar imagem"
                             @mouseleave="zoomIn($event)"
@@ -32,7 +34,8 @@
                     <div class="info-modal__preview-next" @click="nextImage" v-if="content.image.length > 1 &&  curreImgIdx != content.image.length - 1"></div>
                 </div>
                 <div class="info-modal__content">
-                    <img class="info-modal__close" src="~@/assets/images/icons/close-info.png" @click="hide" alt="Fechar o conteúdo.">
+                    <img v-if="!isMobile" class="info-modal__close" src="~@/assets/images/icons/close-info.png" @click="hide" alt="Fechar o conteúdo.">
+                    <img v-if="isMobile" class="info-modal__close" src="~@/assets/images/icons/close.png" @click="hide" alt="Fechar o conteúdo.">
                     <h3 class="info-modal__content-title" v-if="content.title" v-html="content.title"></h3>
                     <p class="info-modal__content-description" v-if="content.text" v-html="content.text"></p>
                     <a v-if="content.audio" href="javascript:void(0)" class="info-modal__content-play" :class="{'playing': isPlaying}" @click="togglePlay">AUDIO GUIA</a>
@@ -88,11 +91,17 @@ export default {
                 contain: 'outside',
             })
             // window.addEventListener('wheel', this.panzoom.zoomWithWheel)
-            this.previewElm.addEventListener('wheel', this.mouseWheelEvent)
-            this.$refs.rangeZoom.addEventListener('input', this.inputChange)
+            if (!this.isMobile) {
+                this.previewElm.addEventListener('wheel', this.mouseWheelEvent)
+                this.$refs.rangeZoom?.addEventListener('input', this.inputChange)
+            } else {
+                this.$refs.zoomInBtn?.addEventListener('touchstart', this.zoomIn)
+                this.$refs.zoomOutBtn?.addEventListener('touchstart', this.zoomOut)
+                
+            }
         },
         zoomIn(e){
-            if (e.type == "mousedown") {
+            if (e.type == "mousedown" || e.type == "touchstart") {
                 clearInterval(this.pressedTimer);
                 this.pressedTimer = setInterval(() => {
                     this.panzoom?.zoomToPoint(
@@ -109,7 +118,7 @@ export default {
             }
         },
         zoomOut(e){
-            if (e.type == "mousedown") {
+            if (e.type == "mousedown" || e.type == "touchstart") {
                 clearInterval(this.pressedTimer);
                 this.pressedTimer = setInterval(() => {
                     this.panzoom?.zoomToPoint(
@@ -467,6 +476,13 @@ export default {
 
                     .info-modal__close {
                         position: fixed;
+                        @include set-size(32px, 32px)
+                    }
+
+                    .info-modal__content-play {
+                        position: relative;
+                        left: 0;
+                        bottom: 0;
                     }
                 }
             }

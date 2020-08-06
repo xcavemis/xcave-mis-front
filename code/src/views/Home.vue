@@ -47,16 +47,18 @@
           <br />
           <br />Leonardo da Vinci - 500 Anos de um Gênio traz ainda os Segredos de Mona Lisa – uma análise da pintura mais famosa do mundo, realizada no Museu do Louvre por Pascal Cotte, renomado engenheiro, pesquisador e fotógrafo de obras de arte.
         </p>
-        <a
-          class="default-button third-step__center-content__button white"
-          href="javascript:void(0)"
-          @click="goTo"
-        >INICIAR EXPERIÊNCIA</a>
-        <a
-          class="default-button third-step__center-content__button orange"
-          href="https://www.sympla.com.br/teste-mis-davinci-digital-v1__904158"
-          target="_blank"
-        >COMPRAR INGRESSO</a>
+        <div class="third-step__center-content__buttons">
+          <a
+            class="default-button third-step__center-content__button white"
+            href="javascript:void(0)"
+            @click="goTo"
+          >INICIAR EXPERIÊNCIA</a>
+          <a
+            class="default-button third-step__center-content__button orange"
+            href="https://www.sympla.com.br/teste-mis-davinci-digital-v1__904158"
+            target="_blank"
+          >COMPRAR INGRESSO</a>
+        </div>
       </div>
       <img class="third-step__ad" src="~@/assets/images/adcontainer_vert.png" v-if="!isMobile" />
       <img
@@ -119,7 +121,7 @@ export default {
               { autoAlpha: 1, ease: Quad.easeInOut, delay: 0.8 + Math.random() * 0.8 }
           );
         })
-        TweenMax.staggerFromTo('.first-step__center-content .first-step__center-content__button', 0.6, { y: '100%' }, { y: '0%', ease: Quad.easeInOut, delay: 1.6}, 0.1, ()=>{
+        TweenMax.staggerFromTo('.first-step__center-content .first-step__center-content__button', 0.6, { y: '150%' }, { y: '0%', ease: Quad.easeInOut, delay: 1.6}, 0.1, ()=>{
           // setTimeout(()=>{
           //   document.querySelector('.first-step__center-content__button.white').classList.add('pulse')
           // }, 1000)
@@ -239,7 +241,7 @@ export default {
 
       .first-step__center-content__button {
         min-width: 150px;
-        transform: translateY(100%);
+        transform: translateY(150%);
       }
     }
 
@@ -322,6 +324,7 @@ export default {
       color: $white;
       margin: 36px 0;
     }
+   
 
     .third-step__center-content__button {
       margin-right: 25px;
@@ -346,9 +349,14 @@ export default {
         line-height: 20px;
       }
 
+       .third-step__center-content__buttons {
+          display: flex;
+          justify-content: space-around;
+       }
+
       .third-step__center-content__button {
         @include font-size(10);
-        margin: 0 5px 24px 0;
+        margin: 0 0 24px 0;
         width: 40vw;
       }
     }

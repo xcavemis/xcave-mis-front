@@ -16,6 +16,7 @@ import { ShadowMesh } from 'three/examples/jsm/objects/ShadowMesh.js'
 // import { FXAAShader } from 'three/examples/jsm/shaders/FXAAShader.js';
 import { TweenMax, Quad } from "gsap";
 import { Preloader } from '@/utils/loaders/Preloader';
+import { TextureLoader } from 'three';
 
 export default {
   props: ['content'],
@@ -31,9 +32,11 @@ export default {
         controls: null,
         scale: 1,
         tapPosition: null,
+        loadedData: {},
         minScale: new THREE.Vector3(0.5, 0.5, 0.5),
         maxScale: new THREE.Vector3(8, 8, 8),
         firstTapToRotation: false,
+        friction: 0.01,
         isDragging: false,
         orientationControlsGranted: false,
         isMobile: navigator.userAgent.toLowerCase().match(/mobile/i),
@@ -50,7 +53,7 @@ export default {
   },
   methods: {
     show(delay) {
-        TweenMax.fromTo(this.model.scale, 0.8, { x: 0, y: 0, z: 0 }, { x: 1, y: 1, z: 1, delay: delay * 0.8, ease: Quad.easeInOut })
+        TweenMax.fromTo(this.model.scale, 0.8, { x: 0, y: 0, z: 0 }, { x: this.content.scale, y: this.content.scale, z: this.content.scale, delay: delay * 0.8, ease: Quad.easeInOut })
         TweenMax.fromTo('.ar-renderer', 0.6, { autoAlpha: 0 }, { autoAlpha: 1, delay: delay, ease: Quad.easeInOut, onComplete: ()=>{
 
         }})
@@ -65,14 +68,15 @@ export default {
       this.preloader.queue([
         // models
         { name: this.content.id, url: `models/${this.content.model}`, type: this.content.ext },
+        { name: 'hdr', url: `textures/rooitou_park_1k.jpg`, type: 'texture' },
       ])
     },
     loadProgress(details){  
       // console.log('Preloader loadProgress: ', details.data);
     },
     loadComplete(details){  
-      // console.log('Preloader complete: ', details);
-      
+      console.log('Preloader complete: ', details);
+      this.loadedData = details.data
       this.setupScene(details.data[this.content.id]);
     },
     setupScene(_model) {
@@ -87,11 +91,11 @@ export default {
         this.renderer.setSize( this.$el.offsetWidth, this.$el.offsetHeight );
         this.$el.appendChild( this.renderer.domElement );
         this.renderer.shadowMap.enabled = true;
-        // this.renderer.shadowMap.type = THREE.PCFSoftShadowMapping;
+        this.renderer.outputEncoding = THREE.sRGBEncoding;
 
         // CAMERA
         this.camera = new THREE.PerspectiveCamera( 60, this.$el.offsetWidth / this.$el.offsetHeight, 1, 1000 );
-        this.camera.position.set( this.isMobile ? 0 : -128, this.isMobile ? 60 : 129, this.isMobile ? 40 : -5 );
+        this.camera.position.set( this.isMobile ? this.content.camera.x : -128, this.isMobile ? this.content.camera.y : 129, this.isMobile ? this.content.camera.z : -5 );
         // CONTROLS
         if (!this.isMobile) {
             this.controls = new OrbitControls(this.camera, this.renderer.domElement );
@@ -103,9 +107,11 @@ export default {
             this.controls.maxPolarAngle = Math.PI / 2;
         } else {
             this.controls = new DeviceOrientationControls(this.camera)
+            if (!this.isIOS) this.controls.alphaOffset = - Math.PI / 2
         }
 
         this.clock = new THREE.Clock()
+
 
         // MODEL
         this.model = _model.scene
@@ -115,6 +121,8 @@ export default {
         window.model = this.model
         this.model.traverse(child => {
             if (child.isMesh) { 
+                // child.material.envMap = this.loadedData.hdr
+                // child.material.envMapIntensity = 2
                 child.receiveShadow = true
                 child.castShadow = true
             }
@@ -138,32 +146,23 @@ export default {
         this.$emit('load-complete')
     },
     setupLights(){
-        const ambLight = new THREE.AmbientLight( 0xffffff, 2 )
+        const ambLight = new THREE.AmbientLight( 0xffffff, this.content.lights.ambientIntensity )
         this.scene.add( ambLight );
 
         //  SHADOW
-        var light = new THREE.SpotLight( 0xffffff, 2 );
-        light.position.set( 0, 500, 0 );
-        light.angle = Math.PI * 0.2;
-        light.castShadow = true;
-        light.shadow.camera.near = 200;
-        light.shadow.camera.far = 2000;
-        light.shadow.bias = - 0.000222;
-        light.shadow.mapSize.width = 1024;
-        light.shadow.mapSize.height = 1024;
-        this.scene.add( light );
+        const pointLight = new THREE.SpotLight( 0xffffff, this.content.lights.pointIntensity );
+        pointLight.position.set( 0, 500, 0 );
+        pointLight.angle = Math.PI * 0.2;
+        pointLight.castShadow = true;
+        pointLight.shadow.camera.near = 200;
+        pointLight.shadow.camera.far = 2000;
+        pointLight.shadow.bias = - 0.000222;
+        pointLight.shadow.mapSize.width = 1024;
+        pointLight.shadow.mapSize.height = 1024;
+        this.scene.add( pointLight );
         
-        // var light2 = new THREE.SpotLight( 0xffffff, 2 );
-        // light2.position.set( 0, 400, 0 );
-        // light2.angle = Math.PI * 0.2;
-        // light2.castShadow = true;
-        // light2.shadow.camera.near = 200;
-        // light2.shadow.camera.far = 2000;
-        // light2.shadow.bias = - 0.000222;
-        // light2.shadow.mapSize.width = 1024;
-        // light2.shadow.mapSize.height = 1024;
-        // this.scene.add( light2 );
-
+       const dirLight = new THREE.DirectionalLight(0xffffff, this.content.lights.directionalIntensity  )
+       this.scene.add(dirLight)
         var planeGeometry = new THREE.PlaneBufferGeometry( 2000, 2000 );
         planeGeometry.rotateX( - Math.PI / 2 );
         var planeMaterial = new THREE.ShadowMaterial( { opacity: 0.15 } );
@@ -171,7 +170,7 @@ export default {
         var plane = new THREE.Mesh( planeGeometry, planeMaterial );
         // plane.position.y = 0;
         plane.receiveShadow = true;
-        plane.position.set(0,-41,0)
+        plane.position.set(0,this.content.shadow.z,0)
         this.scene.add( plane );
 
         
@@ -191,7 +190,7 @@ export default {
         this.pinchActive = true
         const pinchScale = this.scale + this.scale * (e.scale - 1) * 0.4;
         if((pinchScale >= this.minScale.x && pinchScale <= this.maxScale.x)){
-          if(this.model != null) this.model.scale.set(pinchScale, pinchScale, pinchScale);
+          if(this.model != null) this.model.scale.set(pinchScale * this.content.scaleFactor, pinchScale * this.content.scaleFactor, pinchScale * this.content.scaleFactor);
         }
       });
       
@@ -215,9 +214,9 @@ export default {
         let direction = e.direction
         let distance = e.distance
         if ((direction == 2 || direction == 4) && distance > 40) {
-          let rotY = this.iOS ? 0.5 : 1.0
+          let rotY = this.iOS ? this.friction : 1.0
           if (direction == 2) {
-            rotY = this.iOS ? -0.5 : -1.0
+            rotY = this.iOS ? -this.friction : -1.0
           }
           let currentRot = new THREE.Vector3(this.model.rotation.x, this.model.rotation.y, this.model.rotation.z)
           let newRot = new THREE.Vector3(this.model.rotation.x, this.model.rotation.y + rotY, this.model.rotation.z)
@@ -235,13 +234,14 @@ export default {
         this.firstTapToRotation = distance < 10
       }
       if(this.isDragging && !this.firstTapToRotation) {
-        let rotY = 1
+        let rotY = this.isIOS ? 0.5 : 1
         if (e.changedTouches[0].clientX < this.previousTouchPosition.x) {
-          rotY *= -1
+          rotY *= this.isIOS ? -0.8 : -1
         }
+
         let currentRot = new THREE.Vector3(this.model.rotation.x, this.model.rotation.y, this.model.rotation.z)
         let newRot = new THREE.Vector3(this.model.rotation.x, this.model.rotation.y + rotY, this.model.rotation.z)
-        currentRot.lerp(newRot, this.iOS ? 0.08 : 0.2)
+        currentRot.lerp(newRot, this.iOS ? 0.01 : 0.05)
         this.model.rotation.set(currentRot.x, currentRot.y, currentRot.z)
       }
       
@@ -272,7 +272,7 @@ export default {
 
         let delta = this.clock.getDelta();
 
-        if (this.model) this.model.rotation.y += delta * 0.05
+        if (this.model && !this.isDragging) this.model.rotation.y += delta * 0.05
 
         if (this.mixer) this.mixer.update( delta );
 

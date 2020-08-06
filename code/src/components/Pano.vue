@@ -1,7 +1,7 @@
 <template>
   <div class="pano-comp">
     <iframe 
-      :src="`https://hml.exposicaodavinci500anos.com.br/assets/panorama-view/index.html?skip-loading#media=${panoIndex}`"
+      :src="`https://hml.exposicaodavinci500anos.com.br/assets/panorama-view/index.html#media=${panoIndex}`"
       class="pano-comp__iframe"
       width="100%" 
       height="100%" 
@@ -30,9 +30,9 @@ export default {
         this.$emit("info-layer", infoData)
       }
     }); 
-    setTimeout(()=>{
-      this.panoIndex = 2
-    }, 3000)
+    // setTimeout(()=>{
+    //   this.panoIndex = 2
+    // }, 3000)
   },
   methods: {
     findContentById(id) {

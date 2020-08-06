@@ -2,6 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import Experience from '../views/Experience.vue'
+import ExperienceAr from '../views/ExperienceAr.vue'
 
 Vue.use(VueRouter)
 

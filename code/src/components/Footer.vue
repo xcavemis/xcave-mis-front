@@ -89,6 +89,8 @@ export default {
 
     @include maxWidth(768) {
       &.mobile {
+        @include set-size(90%, auto);
+        margin-top: 32px;
         display: block;
       }
       &.desk {

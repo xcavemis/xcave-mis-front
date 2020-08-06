@@ -37,7 +37,7 @@ export default {
       mouse: new THREE.Vector2(),
       followMouse: new THREE.Vector2(),
       prevMouse: new THREE.Vector2(),
-      publicPath: process.env.NODE_ENV === "production" ? `${window.theme_url}/assets` : ''
+      publicPath: process.env.NODE_ENV === "production" ? `` : ''
     }
   },
   mounted(){
@@ -45,8 +45,8 @@ export default {
   },
   methods: {
     async loadShaders(){
-      this.postVertex = await this.loadTextFile(`${this.publicPath}/shaders/post/vertex.glsl`);
-      this.postFragment = await this.loadTextFile(`${this.publicPath}/shaders/post/fragment.glsl`);
+      this.postVertex = await this.loadTextFile(`/shaders/post/vertex.glsl`);
+      this.postFragment = await this.loadTextFile(`/shaders/post/fragment.glsl`);
     },
     async buildScene(){
       await this.loadShaders()
@@ -170,6 +170,17 @@ export default {
         new THREE.TextureLoader().load(url, resolve);
       });
     },
+  },
+  beforeDestroy(){
+    this.scene.children.map(child => {
+      this.scene.remove(child)
+    })
+    this.camera = null
+    this.renderer.dispose()
+    this.renderer = null
+    this.scene.dispose()
+    this.scene = null
+    cancelAnimationFrame(this.render);
   }
 }
 </script>

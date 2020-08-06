@@ -137,6 +137,7 @@ export default {
     },
     infoLayerClosed() {
       this.isInfoModal = false;
+      this.$refs?.audioPlayer?.destroyDynamic();
       if (this.$refs?.footerControls?.musicPlaying)
         this.$refs?.audioPlayer?.unmute();
     },

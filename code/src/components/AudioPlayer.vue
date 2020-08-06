@@ -53,11 +53,12 @@ export default {
                 this.$store.commit('audio_end', false)
                 clearInterval(this.updateTimer)
                 this.updateTimer = setInterval(()=>{
-
-                    let currentTime = this.dynamicSound?.seek();
-                    let maxduration = this.dynamicSound?.duration();
-                    let calc = currentTime / maxduration;
-                    this.$store.commit('audioTime', !isNaN(calc) ? calc : 0)
+                    if (!this.$store.getters.audio_ended && this.dynamicSound) {
+                        let currentTime = this.dynamicSound?.seek();
+                        let maxduration = this.dynamicSound?.duration();
+                        let calc = currentTime / maxduration;
+                        this.$store.commit('audioTime', !isNaN(calc) ? calc : 0)
+                    }
                 }, 250)
                 this.dynamicSound?.on('load', () => {
                     // console.log('dynamicSOund load')
@@ -76,6 +77,12 @@ export default {
         unmute(){
             this.mainSound?.fade(0, 1, 0)
         },
+        destroyDynamic(){
+            clearInterval(this.updateTimer)
+            this.dynamicSound?.stop()
+            this.dynamicSound?.unload()
+            this.dynamicSound = null
+        }
     },
     beforeDestroy(){
         clearInterval(this.updateTimer)

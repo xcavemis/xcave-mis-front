@@ -177,6 +177,7 @@ export default {
   max-height: 640px;
   border-radius: 4px;
   overflow: hidden;
+  z-index: 10;
 
   .auth-bg {
     @include set-size(100%, 100%);
@@ -321,9 +322,19 @@ export default {
       margin-bottom: 15px;
     }
   }
+    
+  @include maxWidthAndHeight(1920, 700) {
+    @include set-size(95vw, 100vh);
+    min-height: 100vh;
 
-  @include maxHeight(640) {
-    @include set-size(95vw, 85vh);
+    .auth-header {
+      margin: 20px auto 0 auto;
+    }
   }
+  @include maxWidthAndHeight(1023, 640) {
+    @include set-size(95vw, 85vh);
+    min-height: 85vh;
+  }
+
 }
 </style>

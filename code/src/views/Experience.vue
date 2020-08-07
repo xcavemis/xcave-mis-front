@@ -4,7 +4,7 @@
     <Pano ref="pano" v-if="queueLoaded" v-on:info-layer="onInfoLayer" />
     <HeaderControls ref="headerControls" v-on:change-pass="onChangePass" v-on:close="changePassClosed"/>
     <FooterControls ref="footerControls" v-on:action="onFooterAction" />
-    <VideoLive v-if="isVideoLive" video-id="c8dFQbj20dg" v-on:close="videoClosed" ref="videoLive" />
+    <VideoLive v-if="isVideoLive && !isMobile" video-id="c8dFQbj20dg" v-on:close="videoClosed" ref="videoLive" />
     <Video360
       v-if="isVideo360"
       :video-id="infoModalContent.target"
@@ -27,7 +27,7 @@
       v-on:pause-audio="onPauseAudio"
       v-on:play-audio="onPlayAudio"
     />
-    <Map ref="map" v-if="isMap" v-on:navigate-to="panoGoTo" v-on:map-close="mapClosed" />
+    <Map ref="map" v-if="isMap && !isMobile" v-on:navigate-to="panoGoTo" v-on:map-close="mapClosed" />
     <Ar :content="infoModalContent" ref="arModal" v-if="isArModal" v-on:close="arClosed" />
     <!-- <video v-if="!videoEnded" class="video-intro" autoplay muted ref="videoIntro">
     <source src="media/videos/da-vinci-intro-small.mp4" type="video/mp4">-->
@@ -42,7 +42,6 @@
 // import { Preloader } from '@/utils/loaders/Preloader';
 import ChangePass from "@/components/auth/ChangePass";
 import Pano from "@/components/Pano.vue";
-// import PanolensNew from "@/components/PanolensNew.vue";
 import FooterControls from "@/components/pano/FooterControls.vue";
 import HeaderControls from "@/components/pano/HeaderControls.vue";
 import Map from "@/components/pano/Map.vue";
@@ -57,7 +56,6 @@ export default {
   name: "experience",
   components: {
     Pano,
-    // PanolensNew,
     FooterControls,
     HeaderControls,
     VideoLive,
@@ -117,13 +115,14 @@ export default {
         this.$nextTick(() => {
           this.$refs?.map[params.value]();
         });
-      } else if (params.type == "navigate") {
-        this.$refs?.pano[params.value]();
-      } else if (params.type == "zoom") {
-        this.$refs?.pano[params.value]();
-      } else if (params.type == "move") {
-        this.$refs?.pano[params.value]();
-      }
+      } 
+      // else if (params.type == "navigate") {
+      //   this.$refs?.pano[params.value]();
+      // } else if (params.type == "zoom") {
+      //   this.$refs?.pano[params.value]();
+      // } else if (params.type == "move") {
+      //   this.$refs?.pano[params.value]();
+      // }
     },
     arClosed() {
       this.isArModal = false;

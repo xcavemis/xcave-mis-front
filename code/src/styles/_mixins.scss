@@ -159,6 +159,12 @@
 	}
 }
 
+@mixin maxWidthAndHeight($w, $h) {
+	@media screen and (max-width: $w + px) and (max-height: $h + px) {
+		@content;
+	}
+}
+
 @mixin apply-font($name: robotoregular, $size: 1rem) {
 	font-family: $name;
 	font-size: $size;

@@ -1,12 +1,48 @@
 export const mixedGallery = {
   scenes: [
     {
-      id: "A-305",
+      id: "RA-3",
       title: "Realidade Aumentada",
       type: 'ar',
       model: 'Drum.gltf',
-      id: 'drum',
       ext: 'gltf',
+      scale: 1,
+      scaleFactor: 1,
+      lights: {
+        ambientIntensity: 1.5,
+        pointIntensity: 1.2,
+        directionalIntensity: 2,
+      },
+      camera: {
+        x: 0,
+        y: 60,
+        z: 130
+      },
+      shadow: {
+        z: -40
+      }
+    },
+    {
+      id: "RA-2",
+      title: "Realidade Aumentada",
+      type: 'ar',
+      model: 'helicopter.gltf',
+      ext: 'gltf',
+      scale: 0.1,
+      scaleFactor: 0.1,
+      lights: {
+        ambientIntensity: 0.6,
+        pointIntensity: 0.1,
+        directionalIntensity: 0.8,
+      },
+      camera: {
+        x: 0,
+        y: 80,
+        z: 300
+      },
+      shadow: {
+        z: -120
+      }
     },
     {
       id: "V-301",

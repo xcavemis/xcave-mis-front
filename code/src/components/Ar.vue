@@ -146,7 +146,7 @@ export default {
     background-color: $black;
 
     @include maxWidth(1024) {
-      @include set-size(95vw, 70%);
+      @include set-size(100%, 100%);
     }
 
     .ar-modal__block {

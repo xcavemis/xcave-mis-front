@@ -166,7 +166,7 @@ export default {
                 .map-comp__marker--icon {
                     width: 100%;
                     margin: 0 auto;
-                    box-shadow: 0px 0px 33px rgba(0, 0, 0, 0.7);
+                    // box-shadow: 0px 0px 33px rgba(0, 0, 0, 0.7);
                     border-radius: 50%;
                 }
 

@@ -1,5 +1,6 @@
 <template>
   <div class="pano-comp">
+      <!-- :src="`http://169.254.189.77:8081/index.html#media=${panoIndex}`" -->
     <iframe 
       :src="`https://hml.exposicaodavinci500anos.com.br/assets/panorama-view/index.html#media=${panoIndex}`"
       class="pano-comp__iframe"
@@ -11,6 +12,7 @@
       webkitallowfullscreen 
       mozallowfullscreen 
       allowfullscreen
+      allow="accelerometer; gyroscope;"
       v-if="isPano"
       >
     </iframe>
@@ -36,17 +38,18 @@ export default {
   },
   async mounted() {
     // if (this.iOS) await this.getMotionEventAuth()
-    this.isPano = true
+    
     window.addEventListener('message', event => {
       console.log(event.data)
       if(typeof event.data === 'string' && event.data.indexOf('id') > -1) {
         let content = JSON.parse(event.data)
         let infoData =  this.findContentById(content.id)
+        console.log('content', content)
         this.$emit("info-layer", infoData)
       }
     }); 
+    this.isPano = true  
     // setTimeout(()=>{
-    //   this.panoIndex = 2
     // }, 3000)
   },
   methods: {

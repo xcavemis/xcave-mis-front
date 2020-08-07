@@ -6,7 +6,7 @@
       @click="logout"
     >SAIR DA EXPERIÊNCIA</a> -->
     <div class="footer-controls__left">
-      <div class="footer-controls__left-button" @click="toggleMusic">
+      <div class="footer-controls__left-button audio-button" @click="toggleMusic">
         <div class="footer-controls__button-icon sound-bar">
           <div id="bar-1" class="bar" :class="{'no-anim': !this.musicPlaying}"></div>
           <div id="bar-2" class="bar" :class="{'no-anim': !this.musicPlaying}"></div>
@@ -336,6 +336,7 @@ export default {
     .footer-controls__right {
       width: 50vw;
       
+      .audio-button,
       .live-button {
         display: none;
       }

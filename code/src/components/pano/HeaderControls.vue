@@ -60,7 +60,9 @@ export default {
     isUserVisible: false,
   }),
   created(){
-    this.userName = `Olá, ${this.$store.getters.user.name.split(' ')[0]}`
+    if (this.$store.getters.user && this.$store.getters.user.name) {
+      this.userName = `Olá, ${this.$store.getters.user.name.split(' ')[0]}`
+    }
   },
   mounted() {
     document.addEventListener("fullscreenchange", this.fullscreenChange);
@@ -156,6 +158,7 @@ export default {
   }
   .header-controls__center {
     width: 62.4%;
+    min-width: 690px;
   }
   .header-controls__right {
     width: 20%;

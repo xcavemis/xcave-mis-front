@@ -1,7 +1,7 @@
 <template>
   <article class="home">
     <section class="home-step first-step">
-      <ShaderBg />
+      <ShaderBg v-if="$route.name == 'Home' && !isMobile" />
       <img
         class="first-step__logo-mis" 
         src="~@/assets/images/logo-mis-exp.png"
@@ -28,8 +28,8 @@
             target="_blank"
           >COMPRAR INGRESSO</a>
         </div>
+        <img class="first-step__ad" src="~@/assets/images/adcontainer_hor.png" />
       </div>
-      <img class="first-step__ad" src="~@/assets/images/adcontainer_hor.png" />
     </section>
     <section class="home-step second-step"></section>
     <section class="home-step third-step">
@@ -200,8 +200,11 @@ export default {
     left: 103px;
     opacity: 0;
 
-    @include maxWidth(1023) {
+    @include maxWidth(1366) {
       width: 160px;
+    }
+
+    @include maxWidth(768) {
       @include center-x(absolute);
     }
   }
@@ -210,6 +213,7 @@ export default {
     @include center(absolute);
     width: 80vw;
     max-width: 900px;
+    margin-top: 5vh;
 
     .first-step__center-content__title {
       width: 35.1vw;
@@ -245,7 +249,7 @@ export default {
       }
     }
 
-    @include maxWidth(1024) {
+    @include maxWidth(768) {
       width: 95vw;
       margin-top: 3vh;
       .first-step__center-content__title {
@@ -278,14 +282,22 @@ export default {
     }
   }
   .first-step__ad {
-    position: absolute;
+    // position: absolute;
+    margin-top: 10vh;
     max-width: 730px;
     width: 90%;
 
-    @include center-x(absolute);
-    bottom: 70px;
+    @include maxHeight(700) {
+      margin-top: 7vh;
+    }
+    @include maxHeight(580) {
+      max-width: 500px;
+    }
+
+    // @include center-x(absolute);
+    // bottom: 70px;
     @include minWidth(1440) {
-      bottom: 50px;
+      // bottom: 50px;
     }
   }
 }

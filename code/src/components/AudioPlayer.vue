@@ -11,16 +11,19 @@ export default {
         dynamicSound: null,
         stopTimer: 0,
         updateTimer: 0,
+        isMobile: navigator.userAgent.toLowerCase().match(/mobile/i),
+        isIOS: /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream,
     }),
     mounted(){
-        this.mainSound = new Howl({
-            src: [`${this.default}.mp3`, `${this.default}.ogg`],
-            autoplay: true,
-            loop: true,
-            volume: 1,
-            onend: this.onEnded,
-        });
-        this.mainSound?.seek(30)
+        if (!this.isMobile) {
+            this.mainSound = new Howl({
+                src: [`${this.default}.mp3`, `${this.default}.ogg`],
+                autoplay: true,
+                loop: true,
+                volume: 1,
+                onend: this.onEnded,
+            });
+        }
     },
     methods: {
         play(){

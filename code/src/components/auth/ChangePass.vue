@@ -205,6 +205,7 @@ export default {
   position: absolute;
   top: 0;
   left: 0;
+  z-index: 10;
 
   .change-pass__close {
     @include set-size(32px, 32px);

@@ -172,6 +172,13 @@ export default {
     },
   },
   beforeDestroy(){
+    if (this.isMobile) {
+      window.removeEventListener('touchmove', this.touchMove)
+    } else {
+      window.removeEventListener('mousemove', this.mouseMove)
+    }
+
+    window.removeEventListener('resize', this.onResize)
     this.scene.children.map(child => {
       this.scene.remove(child)
     })

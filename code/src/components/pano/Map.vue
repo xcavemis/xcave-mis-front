@@ -5,11 +5,10 @@
             <div class="map-comp__content" ref="mapContent">
                 <img src="~@/assets/images/map-bg.jpg" alt="" class="map-comp__bg">
                 <div class="map-comp__markers">
-                        <!-- @click="goTo(idx + 1)" -->
                     <div class="map-comp__marker" 
                         v-for="(mark, idx) of markers" 
                         :key="idx" 
-                        @click="goTo(mark.id)"
+                        @click="goTo(idx + 1)"
                         :style="{
                             left: mark.x,
                             top: mark.y

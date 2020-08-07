@@ -22,10 +22,18 @@ import { data } from '@/data/scenes.js';
 
 export default {
   data: () => ({
-    panoIndex: 1,
+    panoIndex: 0,
     iOS: /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream,
     isPano: false
   }),
+  watch: {
+    "$store.getters.navigateToPano": function (val, old) {
+      if (val != old) {
+        console.log('navigateToPano', val)
+        this.goToScene(val)
+      }
+    },
+  },
   async mounted() {
     // if (this.iOS) await this.getMotionEventAuth()
     this.isPano = true

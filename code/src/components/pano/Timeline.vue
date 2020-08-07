@@ -2,7 +2,7 @@
   <div class="timeline-comp">
     <div
       class="timeline-comp__marker"
-      @click="goTo('codices101')"
+      @click="goTo('1')"
       :class="{'current': $store.getters.navigationStatus.codices == 'current', 'visited': $store.getters.navigationStatus.codices == 'visited', 'visited-current': $store.getters.navigationStatus.codices == 'visited-current'}"
     >
       <div class="timeline-comp__marker-icon"></div>
@@ -11,7 +11,7 @@
     <div class="timeline-comp__divide"></div>
     <div
       class="timeline-comp__marker"
-      @click="goTo('civil201')"
+      @click="goTo('4')"
       :class="{'current': $store.getters.navigationStatus.civil == 'current', 'visited': $store.getters.navigationStatus.civil == 'visited', 'visited-current': $store.getters.navigationStatus.civil == 'visited-current'}"
     >
       <div class="timeline-comp__marker-icon"></div>
@@ -20,7 +20,7 @@
     <div class="timeline-comp__divide"></div>
     <div
       class="timeline-comp__marker"
-      @click="goTo('mixed301')"
+      @click="goTo('9')"
       :class="{'current': $store.getters.navigationStatus.mixed == 'current', 'visited': $store.getters.navigationStatus.mixed == 'visited', 'visited-current': $store.getters.navigationStatus.mixed == 'visited-current'}"
     >
       <div class="timeline-comp__marker-icon"></div>
@@ -29,7 +29,7 @@
     <div class="timeline-comp__divide"></div>
     <div
       class="timeline-comp__marker"
-      @click="goTo('projection501')"
+      @click="goTo('25')"
       :class="{'current': $store.getters.navigationStatus.sensorial == 'current', 'visited': $store.getters.navigationStatus.sensorial == 'visited', 'visited-current': $store.getters.navigationStatus.sensorial == 'visited-current'}"
     >
       <div class="timeline-comp__marker-icon"></div>
@@ -38,7 +38,7 @@
     <div class="timeline-comp__divide"></div>
     <div
       class="timeline-comp__marker"
-      @click="goTo('military601')"
+      @click="goTo('33')"
       :class="{'current': $store.getters.navigationStatus.militar == 'current', 'visited': $store.getters.navigationStatus.militar == 'visited', 'visited-current': $store.getters.navigationStatus.militar == 'visited-current'}"
     >
       <div class="timeline-comp__marker-icon"></div>
@@ -47,7 +47,7 @@
     <div class="timeline-comp__divide"></div>
     <div
       class="timeline-comp__marker"
-      @click="goTo('monalisa-colors701')"
+      @click="goTo('39')"
       :class="{'current': $store.getters.navigationStatus.monalisa == 'current', 'visited': $store.getters.navigationStatus.monalisa == 'visited', 'visited-current': $store.getters.navigationStatus.monalisa == 'visited-current'}"
     >
       <div class="timeline-comp__marker-icon"></div>

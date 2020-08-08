@@ -2,7 +2,7 @@
     <div class="warning-comp">
         <div class="warning-comp__content">
             <p class="warning-comp__content-text" v-html="text"></p> 
-            <a class="default-button black warning-comp__content-btn" href="javascript:void(0)" @click="close">ENTENDI</a> 
+            <a class="default-button white warning-comp__content-btn" href="javascript:void(0)" @click="close">ENTENDI</a> 
         </div>
     </div>
 </template>

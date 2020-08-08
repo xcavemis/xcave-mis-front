@@ -23,7 +23,7 @@
           id="pass"
           v-model="formData.pass"
           type="password"
-          placeholder="SENHA"
+          placeholder="******"
           name="pass"
           @blur="checkForm('pass')"
         />
@@ -35,7 +35,7 @@
         @click="goToRecovery"
       >Esqueceu a senha? Clique aqui para recuperar</a>
       <button
-        class="default-button black login-comp__begin-bt"
+        class="default-button white login-comp__begin-bt"
         type="submit"
         @click="sendData"
         :disabled="!isValid"
@@ -43,7 +43,7 @@
     </form>
     <div class="login-comp__register-disclaimer">
       <p>Ainda não possui um cadastro?</p>
-      <a class="default-button white" @click="goToRegister">CADASTRE-SE AQUI</a>
+      <a class="default-button black" @click="goToRegister">CADASTRE-SE AQUI</a>
     </div>
   </div>
 </template>

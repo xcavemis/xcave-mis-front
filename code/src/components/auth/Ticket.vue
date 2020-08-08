@@ -2,9 +2,9 @@
   <div class="ticket-comp">
     <h3 class="auth__subtitle auth__subtitle-name">
       Olá,
-      <strong>{{user.name.split(' ')[0]}}</strong>
+      <strong v-if="user && user.name">{{user.name.split(' ')[0]}}</strong>
     </h3>
-    <h3 class="auth__title">VALIDE SEU TICKET SYMPLA</h3>
+    <h3 class="auth__title">VALIDE SEU TICKET</h3>
     <h4 class="auth__subtitle auth__subtitle-desc">Digite seu código de acesso</h4>
     <form class="ticket-comp__form">
       <div class="form-field" :class="{'error-field': codeError.length > 0}">
@@ -38,7 +38,7 @@
         <br />para experiência digital?
       </p>
       <a
-        class="default-button white"
+        class="default-button black"
         href="https://www.sympla.com.br/teste-mis-davinci-digital-v1__904158"
         target="_blank"
       >COMPRAR INGRESSO DIGITAL</a>

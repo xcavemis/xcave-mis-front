@@ -24,7 +24,7 @@
           >INICIAR EXPERIÊNCIA</a>
           <a
             class="default-button first-step__center-content__button black"
-            href="https://www.sympla.com.br/teste-mis-davinci-digital-v1__904158"
+            href="https://davincidigital.test.byinti.com/"
             target="_blank"
           >COMPRAR INGRESSO</a>
         </div>
@@ -55,7 +55,7 @@
           >INICIAR EXPERIÊNCIA</a>
           <a
             class="default-button third-step__center-content__button orange"
-            href="https://www.sympla.com.br/teste-mis-davinci-digital-v1__904158"
+            href="https://davincidigital.test.byinti.com/"
             target="_blank"
           >COMPRAR INGRESSO</a>
         </div>
@@ -106,22 +106,24 @@ export default {
       
       this.splittingTitle = Splitting({
         target: this.$el.querySelector(".first-step__center-content .first-step__center-content__description"),
-        by: "chars",
+        by: "lines",
       });
-      TweenMax.fromTo(this.$el, 1, { autoAlpha: 0 }, { autoAlpha: 1, delay: 0.4, ease: Quad.easeInOut, onComplete: ()=> {
+      TweenMax.fromTo(this.$el, 1, { autoAlpha: 0 }, { autoAlpha: 1, delay: 0.6, ease: Quad.easeInOut, onComplete: ()=> {
 
         TweenMax.fromTo('.governo-top', 0.6, { y: '-100%' }, { y: '0%', delay: 0.8, ease: Quad.easeInOut })
         TweenMax.fromTo('.first-step__logo-mis', 0.6, { autoAlpha: 0 }, { autoAlpha: 1, delay: 0.4, ease: Quad.easeInOut })
         TweenMax.fromTo('.first-step__center-content .first-step__center-content__title', 0.6, { autoAlpha: 0 }, { autoAlpha: 1, delay: 0.6, ease: Quad.easeInOut})
-        this.splittingTitle[0].chars.map((char) => {
+        TweenMax.fromTo('.first-step__center-content .first-step__center-content__description', 1, { autoAlpha: 0 }, { autoAlpha: 1, delay: 0.8, ease: Quad.easeInOut})
+        TweenMax.fromTo('.first-step__ad', 0.6, { autoAlpha: 0 }, { autoAlpha: 1, delay: 1.4, ease: Quad.easeInOut})
+        this.splittingTitle[0].lines.map((line, index) => {
           TweenMax.fromTo(
-            char,
+            line,
               0.6,
               { autoAlpha: 0 },
-              { autoAlpha: 1, ease: Quad.easeInOut, delay: 0.8 + Math.random() * 0.8 }
+              { autoAlpha: 1, ease: Quad.easeInOut, delay: 0.8 + (index / 10) }
           );
         })
-        TweenMax.staggerFromTo('.first-step__center-content .first-step__center-content__button', 0.6, { y: '150%' }, { y: '0%', ease: Quad.easeInOut, delay: 1.6}, 0.1, ()=>{
+        TweenMax.staggerFromTo('.first-step__center-content .first-step__center-content__button', 0.6, { y: '150%' }, { y: '0%', ease: Quad.easeInOut, delay: 1.2}, 0.1, ()=>{
           // setTimeout(()=>{
           //   document.querySelector('.first-step__center-content__button.white').classList.add('pulse')
           // }, 1000)
@@ -229,6 +231,7 @@ export default {
       text-shadow: 0px 0px 4px #000000;
       line-height: 1.2;
       .word {
+        opacity: 0;
         .char {
           opacity: 0;
         }
@@ -286,7 +289,7 @@ export default {
     margin-top: 10vh;
     max-width: 730px;
     width: 90%;
-
+    opacity: 0;
     @include maxHeight(700) {
       margin-top: 7vh;
     }

@@ -68,13 +68,13 @@ body, html {
 	display: inline-block;
 	letter-spacing: 0.05em;
 	cursor: pointer;
-	transition: background-color 0.6s $ease-in-out, color 0.6s $ease-in-out;
+	transition: background-color 0.6s linear, color 0.6s linear, opacity 0.6s linear;
 	&.black {
 		background-color: $bt-bg-color;
 		color: $white;
-
+		transition: background-color 0.8s linear, color 0.6s linear, opacity 0.6s linear;
 		&:hover{
-			background-color: $white;
+			background-color: #cd9f3f;
 			color: $bt-bg-color;		
 		}
 	}
@@ -93,8 +93,10 @@ body, html {
 		background-color: #cd9f3f;
 		color: $bt-bg-color;
 		&:hover{
-			background-color: $white;
-			color: $bt-bg-color;		}
+			opacity: 0.8;
+			// background-color: $white;
+			// color: $bt-bg-color;		
+		}
 	}
 
 	&.pulse {

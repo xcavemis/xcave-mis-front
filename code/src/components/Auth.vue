@@ -117,6 +117,7 @@ export default {
       );
     },
     goToTab(id) {
+      if (this.currStep == id) return
       if (id == 1) {
         this.isRecovery = false
         this.isRegister = false
@@ -329,6 +330,16 @@ export default {
 
     .auth-header {
       margin: 20px auto 0 auto;
+    }
+
+    .register-comp {
+      .auth__subtitle  {
+        margin-bottom: 16px;
+      }
+
+      .register-comp__form {
+        padding-bottom: 0;
+      }
     }
   }
   @include maxWidthAndHeight(1023, 640) {

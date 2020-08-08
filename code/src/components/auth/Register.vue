@@ -51,7 +51,7 @@
             id="pass"
             v-model="formData.pass"
             type="password"
-            placeholder="SENHA"
+            placeholder="******"
             name="pass"
             @blur="checkForm('pass')"
           />
@@ -63,7 +63,7 @@
             id="passConfirm"
             v-model="formData.passConfirm"
             type="password"
-            placeholder="CONFIRMAR SENHA"
+            placeholder="******"
             name="passConfirm"
             @blur="checkForm('passConfirm')"
           />

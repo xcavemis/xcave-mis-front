@@ -271,11 +271,10 @@ export default {
                 background-color: #333;
                 .info-modal__preview-image {
                     @include set-size(auto, auto);
-                    transition: all 0.1s linear !important;
                     opacity: 0;
-                    // @include set-size(100%, auto);
-                    // @include center(absolute);
-                    // pointer-events: none;
+                    @include minWidth(1023) {
+                        transition: all 0.1s linear !important;
+                    }
                 }
 
                 .info-modal__preview-instructions{

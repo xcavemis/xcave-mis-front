@@ -13,6 +13,8 @@ export default new Vuex.Store({
   state: {
     token: null,
     user: null,
+    webinarLink: null,
+    period: null,
     hasHoursAvaliable: null,
     endTime: null,
     loadingShow: false,
@@ -42,9 +44,11 @@ export default new Vuex.Store({
     },
   },
   mutations: {
-    authUser(state, { token, user, hasHoursAvaliable, endTime }) {
+    authUser(state, { token, user, hasHoursAvaliable, endTime, webinarLink, period }) {
       state.token = token;
       state.user = user;
+      state.webinarLink = webinarLink;
+      state.period = period;
       state.hasHoursAvaliable = hasHoursAvaliable;
       state.endTime = endTime;
     },
@@ -99,7 +103,10 @@ export default new Vuex.Store({
           access_token: token,
           hasHoursAvaliable,
           endTime,
+          period,
+          webinarLink
         } = res.data;
+        console.log('Login res', res)
 
         localStorage.setItem("user", JSON.stringify(user));
         localStorage.setItem("token", token);
@@ -111,6 +118,8 @@ export default new Vuex.Store({
           user,
           hasHoursAvaliable,
           endTime,
+          webinarLink,
+          period
         });
         return {
           response: {
@@ -181,6 +190,8 @@ export default new Vuex.Store({
           user,
           hasHoursAvaliable,
           endTime,
+          webinarLink,
+          period
         } = res.data;
 
         // console.log('checkIn user:', res)
@@ -195,6 +206,8 @@ export default new Vuex.Store({
           user,
           hasHoursAvaliable,
           endTime,
+          webinarLink,
+          period
         });
         return {
           response: {
@@ -228,6 +241,8 @@ export default new Vuex.Store({
           user,
           hasHoursAvaliable,
           endTime,
+          webinarLink,
+          period
         } = res.data;
 
 
@@ -241,6 +256,8 @@ export default new Vuex.Store({
           user,
           hasHoursAvaliable,
           endTime,
+          webinarLink,
+          period
         });
         return {
           response: {
@@ -276,15 +293,20 @@ export default new Vuex.Store({
     async tokenCheck({ commit, dispatch, state }) {
       const uri = "/auth/check";
       try {
-        const res = await api.get(uri, { 
-          headers: { Authorization: `Bearer ${state.token}` } 
+        const res = await api.get(uri, {
+          headers: {
+            'Authorization': `Bearer ${state.token}` 
+          }
         });
         const {
           user,
           access_token: token,
           hasHoursAvaliable,
           endTime,
+          webinarLink,
+          period
         } = res.data;
+        console.log('tokenCheck', res.data)
         if (user && user != undefined) {
           localStorage.setItem("user", JSON.stringify(user));
           localStorage.setItem("token", token);
@@ -296,6 +318,8 @@ export default new Vuex.Store({
             user,
             hasHoursAvaliable,
             endTime,
+            webinarLink,
+            period
           });
         }
 
@@ -327,6 +351,8 @@ export default new Vuex.Store({
           user,
           hasHoursAvaliable,
           endTime,
+          webinarLink,
+          period
         });
         
         return {
@@ -400,6 +426,12 @@ export default new Vuex.Store({
     },
     user(state) {
       return state.user;
+    },
+    webinarLink(state) {
+      return state.webinarLink;
+    },
+    period(state) {
+      return state.period;
     },
     authorizationHeader(state) {
       return state.token ? { Authorization: `Bearer ${state.token}` } : null;

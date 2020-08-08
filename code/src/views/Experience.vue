@@ -83,6 +83,19 @@ export default {
     isIOS: /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream,
   }),
   mounted() {
+    this.$store.dispatch("tokenCheck").then((res) => {
+      if (
+        res &&
+        res.status >= 200 &&
+        res.status <= 204 &&
+        res.endTime != null &&
+        this.validateTime(res.endTime)
+      ) {
+        
+      } else {
+        // this.$router.push({name: 'Home'})
+      }
+    });
     document
       .querySelector(".footer-component")
       .classList.add("footer-component__experience");
@@ -207,6 +220,9 @@ export default {
         this.$refs?.audioPlayer?.play();
       }
       this.infoModalContent.audioLoaded = true;
+    },
+    validateTime(date) {
+      return new Date(date) - new Date() > 0;
     },
   },
 };

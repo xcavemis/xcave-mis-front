@@ -17,10 +17,10 @@
         </div>
         <span class="footer-controls__button-label">Música de Fundo</span>
       </div>
-      <!-- <div class="footer-controls__left-button live-button" @click="goLive">
+      <div class="footer-controls__left-button live-button" @click="goLive" v-if="isLiveShow">
         <img class="footer-controls__button-icon" src="~@/assets/images/icons/play-small.png" />
         <span class="footer-controls__button-label">Live</span>
-      </div> -->
+      </div>
     </div>
     <div class="footer-controls__center">
       <div class="footer-controls__center-group">
@@ -137,11 +137,25 @@ export default {
   data: () => ({
     musicPlaying: true,
     pressedTimer: 0,
+    isLiveShow: false
   }),
   mounted() {
+    if (this.$store.getters.period) {
+      let isValidPeriod = this.validateTime(this.$store.getters.period.start, this.$store.getters.period.end)
+      if (isValidPeriod) {
+        this.isLiveShow = true
+      } else {
+        this.isLiveShow = false
+      }
+    } else {
+      this.isLiveShow = true
+    }
     window.addEventListener("scroll", this.onScroll);
   },
   methods: {
+    validateTime(start, end) {
+      return new Date(end) - new Date(start) > 0;
+    },
     onScroll(e) {
       this.openFooter = window.scrollY > 100;
     },

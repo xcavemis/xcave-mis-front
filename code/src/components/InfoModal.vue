@@ -3,7 +3,7 @@
         <div class="info-modal__crop">
             <section class="info-modal__block">
                 <div class="info-modal__preview">
-                    <img class="info-modal__preview-image" ref="imageToDrag" :src="`https://hml.exposicaodavinci500anos.com.br/assets/obras/${imgSrc}`" v-if="imgSrc" :alt="content.title">
+                    <img class="info-modal__preview-image" @click="removeInstructions" ref="imageToDrag" :src="`https://hml.exposicaodavinci500anos.com.br/assets/obras/${imgSrc}`" v-if="imgSrc" :alt="content.title">
                     <!-- <canvas id="canvas-drag" class="info-modal__preview-image"></canvas> -->
                     <div class="info-modal__preview-instructions">
                         <img class="info-modal__preview-icon" src="~@/assets/images/icons/hand.png" @click="hide" alt="CLIQUE E ARRASTE PARA VISUALIZAR">
@@ -19,7 +19,7 @@
                             @mouseup="zoomOut($event)"
                             src="~@/assets/images/icons/zoom-out.png"
                         />
-                        <input ref="rangeZoom" class="info-modal__controls__range-input" type="range" min="0.584" max="2" step="0.05" value="0"  v-model="sliderZoom">
+                        <input ref="rangeZoom" class="info-modal__controls__range-input" type="range" min="1" max="2" step="0.05" value="0"  v-model="sliderZoom">
                         <img
                             ref="zoomInBtn"
                             class="info-modal__controls__button-icon"
@@ -70,6 +70,7 @@ export default {
         sliderZoom: 0,
         circle: null,
         circleLength: 0,
+        isInstructions: true,
         isMobile: navigator.userAgent.toLowerCase().match(/mobile/i),
         isIOS: /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream,
     }),
@@ -103,27 +104,35 @@ export default {
             this.$refs.imageToDrag.addEventListener('load', this.onImageLoaded)
             this.previewElm = this.$el.querySelector('.info-modal__preview')
             if (!this.isMobile) {
-                this.previewElm.addEventListener('mouseover', this.onOverPreview, false)
-                this.previewElm.addEventListener('mouseout', this.onOutPreview, false)
+                // this.previewElm.addEventListener('mouseover', this.onOverPreview, false)
+                // this.previewElm.addEventListener('mouseout', this.onOutPreview, false)
+                //  this.$refs.imageToDrag.addEventListener('click', this.removeInstructions, false)
             } else {
-                this.previewElm.addEventListener('touchstart', (e) => {
-                    TweenMax.to('.info-modal__preview-instructions', 0.6, { autoAlpha: 0, ease: Quad.easeInOut, onComplete: ()=>{
-                        TweenMax.set('.info-modal__preview-instructions', { display: 'none' })
-                    }})
-                }, false)
+                // this.previewElm.addEventListener('touchstart', this.removeInstructions, false)
             }
         })
     },
     methods: {
+        removeInstructions(){
+            this.isInstructions = false
+            TweenMax.to('.info-modal__preview-instructions', 0.6, { autoAlpha: 0, ease: Quad.easeInOut, onComplete: ()=>{
+                TweenMax.set('.info-modal__preview-instructions', { display: 'none' })
+            }})
+        },
         onImageLoaded(){
+            this.setInitialSize()
             this.panzoom = Panzoom(this.$refs.imageToDrag, {
-                // animate: true,
                 maxScale: 2,
-                minScale: 0.5,
-                startX:-this.$refs.imageToDrag.offsetWidth / 2,
-                startY:-this.$el.offsetHeight / 2,
+                // minScale: 1,
+                // startX:-this.$refs.imageToDrag.offsetWidth / 2,
+                // startY:-this.$el.offsetHeight / 2,
                 contain: 'outside',
             })
+            this.$refs.imageToDrag.addEventListener('panzoomchange', (event) => {
+                if (this.isInstructions && (event.detail.x != 0 || event.detail.y != 0 || event.detail.scale != 1)) this.removeInstructions()
+                // console.log(event.detail) // => { x: 0, y: 0, scale: 1 }
+            })
+            
             // window.addEventListener('wheel', this.panzoom.zoomWithWheel)
             if (!this.isMobile) {
                 this.previewElm.addEventListener('wheel', this.mouseWheelEvent)
@@ -134,13 +143,8 @@ export default {
             if (e.type == "mousedown") {
                 clearInterval(this.pressedTimer);
                 this.pressedTimer = setInterval(() => {
-                    this.panzoom?.zoomToPoint(
-                        this.panzoom.getScale() + 0.01,
-                        {
-                            clientX: this.$refs.imageToDrag.offsetWidth / 2,
-                            clientY: this.$el.offsetHeight / 2,
-                        }
-                    )
+                    if (this.panzoom.getScale() > 2) return
+                    this.panzoom?.zoom(this.panzoom.getScale() + 0.01, { animate: true })
                     this.sliderZoom = this.panzoom.getScale()
                 });
             } else {
@@ -151,13 +155,8 @@ export default {
             if (e.type == "mousedown") {
                 clearInterval(this.pressedTimer);
                 this.pressedTimer = setInterval(() => {
-                    this.panzoom?.zoomToPoint(
-                        this.panzoom.getScale() - 0.01,
-                        {
-                            clientX: this.$refs.imageToDrag.offsetWidth / 2,
-                            clientY: 250,
-                        }
-                    )
+                    if (this.panzoom.getScale() < 1) return
+                    this.panzoom?.zoom(this.panzoom.getScale() - 0.01, { animate: true })
                     this.sliderZoom = this.panzoom.getScale()
                 });
             } else {
@@ -165,27 +164,25 @@ export default {
             }
         },
         inputChange(event) {
-            this.panzoom?.zoomToPoint(
-                event.target.valueAsNumber,
-                {
-                    clientX: this.$refs.imageToDrag.offsetWidth / 2,
-                    clientY: this.$el.offsetHeight / 2,
-                }
-            )
+            this.panzoom?.zoom(event.target.valueAsNumber, { animate: true })
         },
         nextImage() {
             if (this.curreImgIdx < this.content.image.length) this.curreImgIdx++
-            this.imgSrc = this.content.image[this.curreImgIdx]
-            this.$nextTick(()=>{
-                this.$refs.imageToDrag?.addEventListener('load', this.setInitialSize)
-            })
+            this.updateSrc()
         },
         prevImage() {
             if (this.curreImgIdx > 0) this.curreImgIdx--
-            this.imgSrc = this.content.image[this.curreImgIdx]
-            this.$nextTick(()=>{
-                this.$refs.imageToDrag?.addEventListener('load', this.setInitialSize)
-            })
+            this.updateSrc()
+        },
+        updateSrc(){
+            TweenMax.to(this.$refs.imageToDrag, 0.4, { autoAlpha: 0, ease: Quad.easeInOut, onComplete: ()=>{
+                this.imgSrc = this.content.image[this.curreImgIdx]
+                this.$nextTick(()=>{
+                    this.panzoom.reset()
+                    this.sliderZoom = this.panzoom.getScale()
+                    this.$refs.imageToDrag?.addEventListener('load', this.setInitialSize)
+                })
+            }})
         },
         setInitialSize(){
             if (this.$refs.imageToDrag.offsetWidth > this.$refs.imageToDrag.offsetHeight) {
@@ -195,6 +192,7 @@ export default {
                 this.$refs.imageToDrag.style.width = '100%'
                 this.$refs.imageToDrag.style.height = 'auto'
             }
+            TweenMax.to(this.$refs.imageToDrag, 0.6, { autoAlpha: 1, delay: 0.6,ease: Quad.easeInOut })
         },
         mouseWheelEvent(event) {
             this.panzoom.zoomWithWheel(event)
@@ -273,6 +271,8 @@ export default {
                 background-color: #333;
                 .info-modal__preview-image {
                     @include set-size(auto, auto);
+                    transition: all 0.1s linear !important;
+                    opacity: 0;
                     // @include set-size(100%, auto);
                     // @include center(absolute);
                     // pointer-events: none;
@@ -299,11 +299,10 @@ export default {
 
                 .info-modal__preview-prev,
                 .info-modal__preview-next {
-                    @include set-size(50px, 50px);
+                    @include set-size(32px, 32px);
                     @include center-y(absolute);
                     background-repeat: no-repeat;
                     background-size: 60% 60%;
-                    background-position: 50% 50%;
                     background-color: rgba(0,0,0,0.2);
                     border-radius: 50%;
                     border: 2px solid $white;
@@ -312,7 +311,7 @@ export default {
 
                     &:hover{
                         transform: scale(1.1) translateY(-45%);
-                        animation: arrowLoop 0.8s linear infinite;
+                        // animation: arrowLoop 0.8s linear infinite;
                     }
 
                     @keyframes arrowLoop {
@@ -330,14 +329,16 @@ export default {
                 .info-modal__preview-prev {
                     background-image: url(~@/assets/images/icons/arrow-prev.png);
                     left: 15px;
+                    background-position: 40% 50%;
                 }
                 .info-modal__preview-next {
                     background-image: url(~@/assets/images/icons/arrow-next.png);
                     right: 15px;
+                    background-position: 60% 50%;
                 }
 
                 .info-modal__controls { 
-                    @include set-size(100%, 50px);
+                    @include set-size(100%, 40px);
                     position: absolute;
                     left: 0;
                     bottom: 0;
@@ -349,8 +350,8 @@ export default {
                         margin-right: 20px;
                     }
                     .info-modal__controls__button-icon { 
-                        @include set-size(32px, 32px);
-                        margin: 9px 10px;
+                        @include set-size(22px, 22px);
+                        margin: 10px 10px;
                         cursor: pointer;
                         opacity: 0.7;
                         transform: translateZ(0) scale(1);
@@ -416,6 +417,10 @@ export default {
                     overflow-x: hidden;
                     overflow-y: scroll;
                     padding-right: 30px;
+
+                    @include minHeight(730) {
+                        height: 70%;
+                    }
 
                     h2 {
                         margin: 0;

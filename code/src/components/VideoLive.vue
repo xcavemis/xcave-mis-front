@@ -1,9 +1,10 @@
 <template>
     <div class="video-live">
         <section class="video-live__content">
+            <div class="video-live__iframe" v-html="embedPlayer"></div>
 
                 <!-- src="https://player.vimeo.com/video/{video_id}" -->
-            <iframe 
+            <!-- <iframe 
                 class="video-live__iframe"
                 :src="`//www.youtube.com/embed/${videoId}?autoplay=1`"
                 width="1280" 
@@ -13,17 +14,37 @@
                 webkitallowfullscreen 
                 mozallowfullscreen 
                 allowfullscreen>
-            </iframe>
+            </iframe> -->
             <img class="video-live__close" src="~@/assets/images/icons/close.png" @click="hide" alt="Fechar o video da live.">
         </section>
     </div>
 </template>
 
 <script>
+import axios from "axios";
 import { TweenMax, Quad } from 'gsap';
 
 export default {
     props: ['videoId'],
+    data: () => ({
+        embedPlayer: null
+    }),
+    created(){
+        this.$store.dispatch('loading', true)
+        axios.get(`https://vimeo.com/api/oembed.json?url=${this.$store.getters.webinarLink}&width=1280&height=720&responsive=true`)
+        .then((res) => {
+            const { data, status } = res
+            if (status && status == 200) {
+                this.$store.dispatch('loading', false)
+                this.embedPlayer = data.html
+            }
+        }).catch(function (error) {
+            // handle error
+            console.log(error);
+            this.$store.dispatch('loading', false)
+        })
+        
+    },
     methods: {
         show() {
             TweenMax.fromTo('.video-live', 0.6, { autoAlpha: 0 }, { autoAlpha: 1, ease: Quad.easeInOut })
@@ -61,6 +82,10 @@ export default {
             transform: translateY(100%);
             z-index: 1;
             margin: 80px auto;
+
+            iframe {
+                @include set-size(100%, 100%);
+            }
             
         }
     

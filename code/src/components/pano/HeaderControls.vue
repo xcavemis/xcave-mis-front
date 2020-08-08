@@ -44,6 +44,9 @@
         </div>
       </div>
     </div>
+    <div class="header-controls__mobile">
+      <Timeline />
+    </div>
   </div>
 </template>
 
@@ -148,6 +151,10 @@ export default {
   padding-top: 30px;
   z-index: 3;
 
+  .header-controls__mobile {
+    display: none;
+  }
+
   .header-controls__left {
     width: 16.1%;
 
@@ -245,6 +252,14 @@ export default {
   @include maxWidth(1024) {
     justify-content: space-between;
     align-items: flex-start;
+
+    .header-controls__mobile {
+      display: block;
+      position: absolute;
+      top: 90px;
+      width: 90%;
+      left: 5%;
+    }
     .header-controls__left {
       width: 45%;
       margin-left: 2.5vw;
@@ -253,6 +268,7 @@ export default {
       display: none;
     }
     .header-controls__right {
+      z-index: 10;
       .header-controls__right-button {
         display: none;
       }

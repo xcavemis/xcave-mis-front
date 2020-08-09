@@ -11,7 +11,7 @@
             id="oldPass"
             v-model="formData.oldPass"
             type="password"
-            placeholder="SENHA ATUAL"
+            placeholder="******"
             name="pass"
             @blur="checkForm('oldPass')"
           />
@@ -23,7 +23,7 @@
             id="newPass"
             v-model="formData.newPass"
             type="password"
-            placeholder="NOVA SENHA"
+            placeholder="******"
             name="pass"
             @blur="checkForm('newPass')"
           />
@@ -35,7 +35,7 @@
             id="passConfirm"
             v-model="formData.newPassConfirm"
             type="password"
-            placeholder="CONFIRMAR NOVA SENHA"
+            placeholder="******"
             name="passConfirm"
             @blur="checkForm('newPassConfirm')"
           />

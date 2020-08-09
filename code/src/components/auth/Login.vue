@@ -252,8 +252,8 @@ export default {
 
     @include minWidth(1440) {
       a:hover {
-        background: $white;
-        opacity: 0.8;
+        // background: $white;
+        // opacity: 0.8;
       }
 
       p {

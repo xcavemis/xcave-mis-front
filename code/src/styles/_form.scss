@@ -295,8 +295,9 @@
 	@include set-size(100%, 100%);
 	position: relative;
 	font-family: $rob-regular;
-	@include font-size(9);
+	@include font-size(16);
 	color: $black;
+	-webkit-appearance: none;
 	&:after {
 		content: "";
 		@include center-y(absolute);

@@ -39,7 +39,7 @@
       </p>
       <a
         class="default-button black"
-        href="https://www.sympla.com.br/teste-mis-davinci-digital-v1__904158"
+        href="https://davincidigital.test.byinti.com/"
         target="_blank"
       >COMPRAR INGRESSO DIGITAL</a>
     </div>
@@ -172,9 +172,6 @@ export default {
           this.$store.dispatch("loading", false);
         } else {
           let message = data.message;
-          if (status == 404) {
-            message = "Ticket não encontrado no Sympla.";
-          }
           this.$store.dispatch("warning", {
             show: true,
             text: message,

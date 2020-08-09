@@ -142,7 +142,7 @@ export default {
   mounted() {
     if (this.$store.getters.period) {
       let isValidPeriod = this.validateTime(this.$store.getters.period.start, this.$store.getters.period.end)
-      if (isValidPeriod) {
+      if (isValidPeriod && this.$store.getters.webinarLink) {
         this.isLiveShow = true
       } else {
         this.isLiveShow = false

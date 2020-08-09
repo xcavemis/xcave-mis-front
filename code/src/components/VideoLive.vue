@@ -31,7 +31,7 @@ export default {
     }),
     created(){
         this.$store.dispatch('loading', true)
-        axios.get(`https://vimeo.com/api/oembed.json?url=${this.$store.getters.webinarLink}&width=1280&height=720&responsive=true`)
+        axios.get(`https://vimeo.com/api/oembed.json?url=${this.$store.getters.webinarLink}`)
         .then((res) => {
             const { data, status } = res
             if (status && status == 200) {
@@ -84,7 +84,7 @@ export default {
             margin: 80px auto;
 
             iframe {
-                @include set-size(100%, 100%);
+                @include set-size(100% !important, 100% !important);
             }
             
         }

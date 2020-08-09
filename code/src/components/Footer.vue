@@ -35,7 +35,8 @@ export default {
 <style lang="scss">
 .footer-component {
   background-color: $black;
-  padding: 14.1vh 8.27vw 9vh 8.27vw;
+  // padding: 14.1vh 8.27vw 9vh 8.27vw;
+  padding: 2vh 8.27vw 2vh 8.27vw;
   position: relative;
   z-index: 4;
   a {
@@ -43,7 +44,7 @@ export default {
   }
 
   &__experience {
-    padding: 7vh 8.27vw 2.4vh 8.27vw;
+    padding: 0vh 8.27vw 0vh 8.27vw;
     position: fixed;
     height: auto;
     bottom: -100%;

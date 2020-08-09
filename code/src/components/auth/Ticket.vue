@@ -16,7 +16,7 @@
           name="code"
           @blur="checkForm('code')"
         />
-        <label for="code">CÓDIGO SYMPLA</label>
+        <label for="code">CÓDIGO DO TICKET</label>
         <small class="error-message" v-html="codeError"></small>
       </div>
       <div class="buttons-container">

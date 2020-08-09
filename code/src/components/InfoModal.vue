@@ -250,6 +250,9 @@ export default {
     left: 0;
     background-color: rgba(0, 0, 0, 0.8);
     z-index: 5; 
+    @include maxWidth(1024) {
+        height: 100%;
+    }
     .info-modal__crop {
         @include set-size(65.8vw, 62.5vh);
         @include center(absolute);
@@ -497,7 +500,7 @@ export default {
         }
 
         @include maxWidth(1024) {
-            @include set-size(95vw, 70vh);
+            @include set-size(95vw, 95%);
 
             .info-modal__block {
                 justify-content: space-around;

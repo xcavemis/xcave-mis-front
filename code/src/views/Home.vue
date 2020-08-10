@@ -221,6 +221,7 @@ export default {
       width: 35.1vw;
       margin: 0 auto 40px auto;
       opacity: 0;
+      max-width: 480px;
     }
     .first-step__center-content__description {
       @include font-scale(1366, 1680, 14, 18);

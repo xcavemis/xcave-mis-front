@@ -116,14 +116,14 @@
     <div class="footer-controls__right">
       <div class="footer-controls__right-group" @click="openFooter">
         <img
-          class="footer-controls__button-icon icon-small mg-l mg-r"
+          class="footer-controls__button-icon icon-small mg-l"
           alt="Abrir o rodapé"
           src="~@/assets/images/icons/arrow-down-small.png"
         />
         <img
-          class="footer-controls__button-icon mg-l mg-r"
+          class="footer-controls__button-icon"
           alt="Abrir o rodapé"
-          src="~@/assets/images/logo-mis-exp.png"
+          src="~@/assets/images/logo-mis-exp-gov.png"
         />
       </div>
     </div>
@@ -233,7 +233,7 @@ export default {
   z-index: 3;
 
   .footer-controls__left {
-    @include set-size(16.1%, 100%);
+    @include set-size(25%, 100%);
     display: flex;
     justify-content: flex-start;
     align-items: center;
@@ -248,7 +248,7 @@ export default {
       }
 
       &:first-child {
-        margin-right: 15px;
+        margin: 0 15px;
       }
 
       .footer-controls__button-label {
@@ -261,7 +261,7 @@ export default {
     }
   }
   .footer-controls__center {
-    @include set-size(62.4%, 100%);
+    @include set-size(50%, 100%);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -298,14 +298,14 @@ export default {
     }
   }
   .footer-controls__right {
-    @include set-size(16.1%, 100%);
+    @include set-size(25%, 100%);
     display: flex;
-    justify-content: center;
+    justify-content: flex-end;
     align-items: center;
 
     .footer-controls__right-group {
       display: flex;
-      justify-content: center;
+      justify-content: flex-end;
       align-items: initial;
       cursor: pointer;
       .mg-l {
@@ -316,7 +316,9 @@ export default {
       }
 
       .footer-controls__button-icon {
-        @include set-size(110px, auto);
+        @include set-size(auto, 45px);
+
+        
 
         &.icon-small {
           @include set-size(14px, 14px);
@@ -324,9 +326,19 @@ export default {
           opacity: 1;
           transform: translateZ(0) scale(1);
           transition: all 0.2s ease-in-out;
+          margin-top: 12px;
+          margin-right: 3px;
           &:hover {
             opacity: 0.6;
             transform: translateZ(0) scale(1.1);
+          }
+        }
+
+        @include maxWidth(1200) {
+          @include set-size(auto, 30px);
+
+          &.icon-small {
+            margin-top: 7px;
           }
         }
       }

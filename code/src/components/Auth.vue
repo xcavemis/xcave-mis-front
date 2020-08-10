@@ -2,13 +2,13 @@
   <div class="auth">
     <div class="auth-bg"></div>
     <header class="auth-header">
-      <nav class="auth-header__nav">
+      <nav class="auth-header__nav" :class="{'left-mg': isRegister && !isRecovery, 'right-mg': isRecovery && !isRegister}">
         <ul class="auth-header__nav-list">
           <li
             class="auth-header__nav-list__item"
             @click="goToTab(0)"
             :class="{'selected': currStep == 0 || user, 'register-show': isRegister && !isRecovery}"
-          >CADASTRO</li>
+          ><span>CADASTRO</span></li>
           <li
             class="auth-header__nav-list__item"
             @click="goToTab(1)"
@@ -22,7 +22,7 @@
           <li
             class="auth-header__nav-list__item"
             :class="{'selected': currStep == 3, 'recovery-show': isRecovery && !isRegister}"
-          >RECUPERAR SENHA</li>
+          ><span>RECUPERAR SENHA</span></li>
         </ul>
       </nav>
     </header>
@@ -118,13 +118,13 @@ export default {
     },
     goToTab(id) {
       if (this.currStep == id) return
+      if (this.isRecovery && id == 2) return
+      if ((id == 0 || id == 1) && this.$store.getters.user) return;
+      if (id == 2 && !this.$store.getters.user) return;
       if (id == 1) {
         this.isRecovery = false
         this.isRegister = false
       }
-      if (this.isRecovery && id == 2) return
-      if ((id == 0 || id == 1) && this.$store.getters.user) return;
-      if (id == 2 && !this.$store.getters.user) return;
       this.hideCurrent(()=>{
         this.currStep = id;
       })
@@ -134,8 +134,8 @@ export default {
       if (this.currStep == 1) this.$refs.loginComp.hide()
       if (this.currStep == 2) this.$refs.ticketComp.hide()
       if (this.currStep == 3) this.$refs.recoveryComp.hide()
-
-      setTimeout(cb, 1000)
+    
+      setTimeout(cb, 800)
     },
     goToTicket() {
       this.hideCurrent(()=>{
@@ -215,8 +215,17 @@ export default {
 
 
     .auth-header__nav {
+      min-width: 100%;
       background: transparent;
       box-shadow: none;
+      transition: margin 0.6s $ease-in-out;
+
+      &.left-mg {
+        margin-left: 12%;
+      }
+      &.right-mg {
+        margin-left: -21%;
+      }
 
       .auth-header__nav-list {
         display: flex;
@@ -224,6 +233,7 @@ export default {
         justify-content: center;
         margin: 0 11px;
         padding: 0;
+        
 
         .auth-header__nav-list__item {
           @include set-size(140px, 54px);
@@ -235,17 +245,30 @@ export default {
           animation: border-bottom 0.6s $ease-in-out;
           margin: 0 4px;
           letter-spacing: 0.05rem;
+          transition: transform 0.6s $ease-in-out;
+          span {
+            transition: all 0.6s 0.4s $ease-in-out;
+          }
           cursor: pointer;
-
           &:first-child, &:last-child {
-            display: none;
+            transform: scaleX(0);
+            span {
+              opacity: 0;
+            }
           }
 
           &.register-show {
-            display: inline;
+            transform: scaleX(1);
+
+            span {
+              opacity: 1;
+            }
           }
           &.recovery-show {
-            display: inline;
+            transform: scaleX(1);
+            span {
+              opacity: 1;
+            }
           }
 
           &.selected {

@@ -2,13 +2,39 @@
 <template>
   <div class="ar-renderer">
     <div class="tap-instructions__scale-container user-action-none" v-if="showInstructions">
-      <img class="tap-instructions__svg" src="~@/assets/images/icons/icon-scale.svg" alt="Arraste o dedo para rotacionar.">
-      <img class="tap-instructions__svg" src="~@/assets/images/icons/icon-rotate.svg" alt="Arraste o dedo para rotacionar.">
-      <div class="tap-instructions__txt user-action-none">
-        <div class="text-masked" v-html="interact_instructions.line1"></div>
-        <div class="text-masked" v-html="interact_instructions.line2"></div>
+      <img v-if="isMobile" class="tap-instructions__svg" src="~@/assets/images/icons/icon-scale.svg" alt="Arraste o dedo para rotacionar.">
+      <img v-if="isMobile" class="tap-instructions__svg" src="~@/assets/images/icons/icon-rotate.svg" alt="Arraste o dedo para rotacionar.">
+      <div v-if="isMobile" class="tap-instructions__txt user-action-none">
+        <div class="text-masked" v-html="interact_instructions.mobile.line1"></div>
+        <div class="text-masked" v-html="interact_instructions.mobile.line2"></div>
+      </div>
+      <img v-if="!isMobile" class="tap-instructions__img" src="~@/assets/images/icons/mouse-control.png" alt="Arraste o dedo para rotacionar.">
+      <div v-if="!isMobile" class="tap-instructions__txt user-action-none">
+        <div class="text-masked" v-html="interact_instructions.desktop.line1"></div>
+        <div class="text-masked" v-html="interact_instructions.desktop.line2"></div>
       </div>
     </div>
+    <!-- <div class="ar-renderer__controls" v-if="!isMobile">
+      <img
+          ref="zoomOutBtn"
+          class="ar-renderer__controls__button-icon"
+          alt="Afastar imagem"
+          @mouseleave="zoomOut($event)"
+          @mousedown="zoomOut($event)"
+          @mouseup="zoomOut($event)"
+          src="~@/assets/images/icons/zoom-out.png"
+      />
+      <input ref="rangeZoom" class="ar-renderer__controls__range-input" type="range" min="0" max="1" step="0.05" value="0"  v-model="sliderZoom">
+      <img
+          ref="zoomInBtn"
+          class="ar-renderer__controls__button-icon"
+          alt="Aproximar imagem"
+          @mouseleave="zoomIn($event)"
+          @mousedown="zoomIn($event)"
+          @mouseup="zoomIn($event)"
+          src="~@/assets/images/icons/zoom-in.png"
+      />
+    </div> -->
   </div>
 </template>
 
@@ -42,14 +68,21 @@ export default {
         scale: 1,
         tapPosition: null,
         loadedData: {},
+        sliderZoom: 1,
         minScale: new THREE.Vector3(0.5, 0.5, 0.5),
         maxScale: new THREE.Vector3(8, 8, 8),
         firstTapToRotation: false,
         friction: 0.01,
         isDragging: false,
         interact_instructions: {
+          mobile: {
             line1: "USE OS DEDOS PARA AUMENTAR,",
             line2: "DIMINUIR OU GIRAR O OBJETO."
+          },
+          desktop: {
+            line1: "USE O MOUSE PARA AUMENTAR,",
+            line2: "DIMINUIR OU GIRAR O OBJETO."
+          }
         },
         orientationControlsGranted: false,
         showInstructions: true,
@@ -69,7 +102,7 @@ export default {
     show(delay) {
         TweenMax.fromTo(this.model.scale, 0.8, { x: 0, y: 0, z: 0 }, { x: this.content.scale, y: this.content.scale, z: this.content.scale, delay: delay * 0.8, ease: Quad.easeInOut })
         TweenMax.fromTo('.ar-renderer', 0.6, { autoAlpha: 0 }, { autoAlpha: 1, delay: delay, ease: Quad.easeInOut, onComplete: ()=>{
-          TweenMax.to('.tap-instructions__scale-container', 0.6, { autoAlpha: 0, delay: 5, ease: Quad.easeInOut, onComplete: ()=> {
+          TweenMax.to('.tap-instructions__scale-container', 0.6, { autoAlpha: 0, delay: this.isMobile ? 5 : 10, ease: Quad.easeInOut, onComplete: ()=> {
             this.showInstructions = false
           }})
         }})
@@ -94,6 +127,7 @@ export default {
       console.log('Preloader complete: ', details);
       this.loadedData = details.data
       this.setupScene(details.data[this.content.id]);
+      // this.$refs.rangeZoom?.addEventListener('input', this.inputChange)
     },
     setupScene(_model) {
         // SCENE
@@ -125,7 +159,7 @@ export default {
             this.controls = new DeviceOrientationControls(this.camera)
             if (!this.isIOS) this.controls.alphaOffset = - Math.PI / 2
         }
-
+        window.controls = this.controls 
         this.clock = new THREE.Clock()
 
 
@@ -282,13 +316,30 @@ export default {
         y: e.changedTouches[0].clientY
       };
     },
+    zoomOut(e) {
+      if (this.model.scale.x > 0.01) {
+        TweenMax.fromTo(this.model.scale, 0.6, 
+          { x: this.model.scale.x, y: this.model.scale.y, z: this.model.scale.z }, 
+          { x: this.model.scale.x - 0.05, y: this.model.scale.y - 0.05, z: this.model.scale.z - 0.05, ease: Quad.easeInOut })
+      }
+    },
+    zoomIn(e) {
+      if (this.model.scale.x < this.maxScale.x) {
+        TweenMax.fromTo(this.model.scale, 0.6, 
+          { x: this.model.scale.x, y: this.model.scale.y, z: this.model.scale.z }, 
+          { x: this.model.scale.x + 0.05, y: this.model.scale.y + 0.05, z: this.model.scale.z + 0.05, ease: Quad.easeInOut })
+      }
+    },
+    inputChange(event) {
+     console.log('inputChange', event.target.valueAsNumber)
+    },
     
     animate() {
         requestAnimationFrame(this.animate);
 
         let delta = this.clock.getDelta();
 
-        if (this.model && !this.isDragging) this.model.rotation.y += delta * 0.05
+        if (this.model && !this.isDragging && this.content.auto_rotate) this.model.rotation.y += delta * 0.05
 
         if (this.mixer) this.mixer.update( delta );
 
@@ -350,13 +401,24 @@ export default {
     @include center-x(absolute);
     bottom: 20vh;
     z-index: 10;
+    pointer-events: none;
     // opacity: 0;
     // display: none;  
+
+    @include minWidth(1024) {
+      bottom: 0;
+      padding: 15px;;
+      background-color: rgba(0,0,0,0.2);
+    }
     
     .tap-instructions__svg{
       @include set-size(22vw, 20vw);
       max-width: 80px;
       margin-bottom: 2.9vh;
+    }
+    .tap-instructions__img{
+      @include set-size(22vw, auto);
+      max-width: 80px;
     }
 
     .tap-instructions__txt{
@@ -380,6 +442,36 @@ export default {
       .cls-2 {
         fill: #fff;
       }
+    }
+  }
+
+  .ar-renderer__controls { 
+    @include set-size(100%, 40px);
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    background-color: rgba(0,0,0,0.1);
+    .mg-r {
+        margin-right: 20px;
+    }
+    .ar-renderer__controls__button-icon { 
+        @include set-size(22px, 22px);
+        margin: 10px 10px;
+        cursor: pointer;
+        opacity: 0.7;
+        transform: translateZ(0) scale(1);
+        transition: all 0.2s ease-in-out;
+        &:hover {
+            opacity: 1;
+            transform: translateZ(0) scale(1.1);
+        }
+    } 
+
+    .ar-renderer__controls__range-input {
+        width: 160px
     }
   }
 

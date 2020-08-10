@@ -8,6 +8,7 @@ export const mixedGallery = {
       ext: 'gltf',
       scale: 1,
       scaleFactor: 1,
+      auto_rotate: true,
       lights: {
         ambientIntensity: 1.5,
         pointIntensity: 1.2,
@@ -30,6 +31,7 @@ export const mixedGallery = {
       ext: 'gltf',
       scale: 0.1,
       scaleFactor: 0.1,
+      auto_rotate: false,
       lights: {
         ambientIntensity: 0.6,
         pointIntensity: 0.1,

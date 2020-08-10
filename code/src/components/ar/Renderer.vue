@@ -1,6 +1,15 @@
 
 <template>
-  <div class="ar-renderer"></div>
+  <div class="ar-renderer">
+    <div class="tap-instructions__scale-container user-action-none" v-if="showInstructions">
+      <img class="tap-instructions__svg" src="~@/assets/images/icons/icon-scale.svg" alt="Arraste o dedo para rotacionar.">
+      <img class="tap-instructions__svg" src="~@/assets/images/icons/icon-rotate.svg" alt="Arraste o dedo para rotacionar.">
+      <div class="tap-instructions__txt user-action-none">
+        <div class="text-masked" v-html="interact_instructions.line1"></div>
+        <div class="text-masked" v-html="interact_instructions.line2"></div>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -38,7 +47,12 @@ export default {
         firstTapToRotation: false,
         friction: 0.01,
         isDragging: false,
+        interact_instructions: {
+            line1: "USE OS DEDOS PARA AUMENTAR,",
+            line2: "DIMINUIR OU GIRAR O OBJETO."
+        },
         orientationControlsGranted: false,
+        showInstructions: true,
         isMobile: navigator.userAgent.toLowerCase().match(/mobile/i),
         isIOS: /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream,
     };
@@ -55,7 +69,9 @@ export default {
     show(delay) {
         TweenMax.fromTo(this.model.scale, 0.8, { x: 0, y: 0, z: 0 }, { x: this.content.scale, y: this.content.scale, z: this.content.scale, delay: delay * 0.8, ease: Quad.easeInOut })
         TweenMax.fromTo('.ar-renderer', 0.6, { autoAlpha: 0 }, { autoAlpha: 1, delay: delay, ease: Quad.easeInOut, onComplete: ()=>{
-
+          TweenMax.to('.tap-instructions__scale-container', 0.6, { autoAlpha: 0, delay: 5, ease: Quad.easeInOut, onComplete: ()=> {
+            this.showInstructions = false
+          }})
         }})
     },
     hide() {
@@ -327,6 +343,46 @@ export default {
   background-color: transparent;
   z-index: 10;
   opacity: 0;
+
+
+  .tap-instructions__scale-container{
+    @include set-size(100%, auto);
+    @include center-x(absolute);
+    bottom: 20vh;
+    z-index: 10;
+    // opacity: 0;
+    // display: none;  
+    
+    .tap-instructions__svg{
+      @include set-size(22vw, 20vw);
+      max-width: 80px;
+      margin-bottom: 2.9vh;
+    }
+
+    .tap-instructions__txt{
+      color: #fff;
+      @include font-size(16);
+      font-family: $mont-regular;
+      text-shadow: 0px 0px 4px rgba(0,0,0,0.16);
+      margin: 0;
+      text-align: center;
+
+      @include maxWidth(375) {
+        @include font-size(14);
+      }
+    }
+
+    .second-step {
+      .cls-1 {
+        opacity: 0.2;
+      }
+
+      .cls-2 {
+        fill: #fff;
+      }
+    }
+  }
+
 }
 
 </style>

@@ -237,8 +237,8 @@ export default {
 
         .auth-header__nav-list__item {
           @include set-size(140px, 54px);
-          font-family: $rob-bold;
-          @include font-size(10);
+          font-family: $mont-regular;
+          @include font-size(12);
           line-height: 54px;
           color: $gray;
           border-bottom: 2px solid $gray;
@@ -300,19 +300,19 @@ export default {
   }
   .auth__subtitle {
     color: $black;
-    font-family: $got-medium;
+    font-family:  $mont-light;
     @include font-size(14);
     letter-spacing: 0.05rem;
     margin: 0 auto 32px auto;
     span {
-      font-family: $got-medium;
+      font-family:  $mont-light;
     }
 
     strong {
-      font-family: $got-black;
+      font-family:  $mont-medium;
 
       .word {
-        font-family: $got-black;
+        font-family:  $mont-medium;
       }
     }
   }
@@ -347,7 +347,7 @@ export default {
     }
   }
     
-  @include maxWidthAndHeight(1920, 700) {
+  @include maxWidthAndHeight(1920, 750) {
     @include set-size(95vw, 100vh);
     min-height: 100vh;
 
@@ -365,9 +365,9 @@ export default {
       }
     }
   }
-  @include maxWidthAndHeight(1023, 640) {
-    @include set-size(95vw, 85vh);
-    min-height: 85vh;
+  @include maxWidth(1023) {
+    @include set-size(95vw, 75vh);
+    min-height: 75vh;
   }
 
 }

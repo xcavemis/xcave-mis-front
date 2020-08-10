@@ -76,9 +76,9 @@
           <div class="custom-select gender-select">
             <select id="genderSelect" v-model="formData.gender">
               <option value="-1">GÊNERO</option>
-              <option value="1">Feminino</option>
-              <option value="2">Masculino</option>
-              <option value="3">Prefiro não informar</option>
+              <option value="Feminino">Feminino</option>
+              <option value="Masculino">Masculino</option>
+              <option value="Outro">Prefiro não informar</option>
             </select>
             <label for="genderSelect" v-if="!formData.gender">GÊNERO</label>
           </div>

@@ -4,22 +4,28 @@
       Olá,
       <strong v-if="user && user.name">{{user.name.split(' ')[0]}}</strong>
     </h3>
-    <h3 class="auth__title">VALIDE SEU TICKET</h3>
-    <h4 class="auth__subtitle auth__subtitle-desc">Digite seu código de acesso</h4>
+    <div v-if="!ticketIsValid">
+      <h3 class="auth__title">VALIDE SEU TICKET</h3>
+      <h4 class="auth__subtitle auth__subtitle-desc">Digite seu código de acesso</h4>
+    </div>
+    <div v-if="ticketIsValid">
+      <h3 class="auth__title">TUDO PRONTO.</h3>
+      <h4 class="auth__subtitle auth__subtitle-desc">Seu ticket vale 24horas.</h4>
+    </div>
     <form class="ticket-comp__form">
-      <div class="form-field" :class="{'error-field': codeError.length > 0}">
+      <div class="form-field" :class="{'error-field': codeError.length > 0}" v-if="!ticketIsValid">
         <input
           id="code"
           v-model="formData.code"
           type="text"
-          placeholder="RYD83PECCG"
+          placeholder="nOIhpFLDyLvwAB-G5uX6"
           name="code"
           @blur="checkForm('code')"
         />
         <label for="code">CÓDIGO DO TICKET</label>
         <small class="error-message" v-html="codeError"></small>
       </div>
-      <div class="buttons-container">
+      <div class="buttons-container" v-if="!ticketIsValid">
         <div
           class="default-button white ticket-comp__begin-bt"
           @click="logout"
@@ -27,9 +33,21 @@
         <button
           class="default-button black ticket-comp__begin-bt"
           type="submit"
-          @click="sendData"
+          @click="verifyTicket"
           :disabled="!isValid"
         >CONTINUAR</button>
+      </div>
+      <div class="buttons-container" v-if="ticketIsValid">
+        <div
+          class="default-button white ticket-comp__begin-bt"
+          @click="logout"
+        >VOLTAR DEPOIS</div>
+        <button
+          class="default-button black ticket-comp__begin-bt"
+          type="submit"
+          @click="sendData"
+          :disabled="!isValid"
+        >INICIAR AGORA</button>
       </div>
     </form>
     <div class="ticket-comp__register-disclaimer">
@@ -48,7 +66,6 @@
 
 <script>
 import { TweenMax, Quad } from "gsap";
-import Splitting from "splitting";
 export default {
   name: "Login",
   data() {
@@ -60,6 +77,7 @@ export default {
       codeError: "",
       codeValid: false,
       isValid: false,
+      ticketIsValid: false,
     };
   },
   watch: {
@@ -76,19 +94,6 @@ export default {
   methods: {
     show() {
       TweenMax.set(this.$el, { autoAlpha: 1 })
-      const splittingTitle = Splitting({
-        target: this.$el.querySelector(".auth__title"),
-        by: "words",
-      });
-      const splittingSubtitleName = Splitting({
-        target: this.$el.querySelector(".auth__subtitle-name"),
-        by: "words",
-      });
-      const splittingSubtitle = Splitting({
-        target: this.$el.querySelector(".auth__subtitle-desc"),
-        by: "words",
-      });
-
       window.scrollTo(0, 0);
       TweenMax.staggerFromTo(
         ".form-field",
@@ -97,16 +102,15 @@ export default {
         { autoAlpha: 1, ease: Quad.easeInOut, delay: 0.8 },
         0.02
       );
-      TweenMax.staggerFromTo(
+      TweenMax.fromTo(
         [
-          splittingTitle[0].words,
-          splittingSubtitle[0].words,
-          splittingSubtitleName[0].words,
+          '.auth__title',
+          ".auth__subtitle-name",
+          ".auth__subtitle-desc"
         ],
         0.6,
-        { scale: 1.6, autoAlpha: 0 },
-        { scale: 1, autoAlpha: 1, ease: Quad.easeInOut, delay: 0.8 },
-        0.01
+        { autoAlpha: 0 },
+        { autoAlpha: 1, ease: Quad.easeInOut, delay: 0.8 },
       );
       TweenMax.fromTo(
         ".ticket-comp__begin-bt",
@@ -157,6 +161,29 @@ export default {
       }
 
       this.isValid = this.codeValid;
+    },
+    verifyTicket(e) {
+      this.$store.dispatch("loading", true);
+      e.preventDefault();
+      const formData = {
+        userId: this.user.id,
+        ticketNumber: this.formData.code,
+      };
+      this.$store.dispatch("verifyTicket", formData).then((e) => {
+        const { status, data, endTime } = e?.response;
+          console.log('RES verify ticket: ', e.response)
+        if (status >= 200 && status <= 204) {
+          this.$store.dispatch("loading", false);
+          this.ticketIsValid = true
+        } else {
+          let message = data.message;
+          this.$store.dispatch("warning", {
+            show: true,
+            text: message,
+          });
+          this.$store.dispatch("loading", false);
+        }
+      });
     },
     sendData(e) {
       this.$store.dispatch("loading", true);
@@ -221,10 +248,10 @@ export default {
     justify-content: space-between;
     align-items: center;
     color: $black;
-    font-family: $got-medium;
+    font-family: $mont-light;
     @include font-size(14);
     span {
-      font-family: $got-medium;
+      font-family: $mont-light;
     }
 
     p {

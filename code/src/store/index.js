@@ -290,14 +290,36 @@ export default new Vuex.Store({
         }
       }
     },
-    async tokenCheck({ commit, dispatch, state }) {
-      const uri = "/auth/check";
+    async verifyTicket({ commit, state }, data) {
+      const uri = `/checkins/verify/${data.ticketNumber}/${data.userId}`;
       try {
         const res = await api.get(uri, {
           headers: {
             'Authorization': `Bearer ${state.token}` 
           }
         });
+        console.log('verifyTicket', res)
+        return {
+          response: res 
+        }
+      } catch (error) {
+        console.log(error);
+        return {
+          response: error?.response
+        }
+      }
+    },
+    async tokenCheck({ commit, state }) {
+      const uri = "/auth/check";
+      const token = state.token ? state.token : localStorage.getItem("token")??null
+      // console.log('token', token)
+      try {
+        const res = await api.get(uri, {
+          headers: {
+            'Authorization': `Bearer ${token}` 
+          }
+        });
+        console.log(res)
         const {
           user,
           access_token: token,
@@ -306,7 +328,6 @@ export default new Vuex.Store({
           webinarLink,
           period
         } = res.data;
-        console.log('tokenCheck', res.data)
         if (user && user != undefined) {
           localStorage.setItem("user", JSON.stringify(user));
           localStorage.setItem("token", token);
@@ -328,7 +349,6 @@ export default new Vuex.Store({
           status: res.status,
         }
       } catch (error) {
-        dispatch('logout')
         return {
           response: error?.response
         }
@@ -360,7 +380,7 @@ export default new Vuex.Store({
           endTime
         }
       } catch (error) {
-        dispatch('logout')
+        // dispatch('logout')
         return {
           response: error?.response
         }

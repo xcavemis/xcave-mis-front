@@ -200,6 +200,11 @@ export default {
           this.$store.dispatch("loading", false);
         } else {
           let message = data.message;
+          if (status > 500 && status < 600) {
+            message = data.message;
+          } else {
+            message = 'E-mail ou senha incorretos.'
+          }
           this.$store.dispatch("warning", {
             show: true,
             text: message,
@@ -231,8 +236,8 @@ export default {
   }
   .login-comp__recovery {
     color: $black;
-    font-family: $got-medium;
-    @include font-size(13);
+    font-family: $mont-light;
+    @include font-size(12);
     text-shadow: 0px 0px 1px #000;
     cursor: pointer;
   }
@@ -243,11 +248,11 @@ export default {
     justify-content: space-between;
     align-items: center;
     color: $black;
-    font-family: $got-medium;
+    font-family: $mont-light;
     @include font-size(14);
     padding-bottom: 10px;
     span {
-      font-family: $got-medium;
+      font-family: $mont-light;
     }
 
     @include minWidth(1440) {

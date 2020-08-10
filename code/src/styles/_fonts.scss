@@ -61,3 +61,32 @@
     font-display: swap;
 }
 
+@font-face {
+    font-family: 'MontserratRegular';
+    src: url('~@/assets/fonts/Montserrat-Regular.woff2') format('woff2'),
+        url('~@/assets/fonts/Montserrat-Regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'MontserratMedium';
+    src: url('~@/assets/fonts/Montserrat-Medium.woff2') format('woff2'),
+        url('~@/assets/fonts/Montserrat-Medium.woff') format('woff');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'MontserratLight';
+    src: url('~@/assets/fonts/Montserrat-Light.woff2') format('woff2'),
+        url('~@/assets/fonts/Montserrat-Light.woff') format('woff');
+    font-weight: 300;
+    font-style: normal;
+    font-display: swap;
+}
+
+
+

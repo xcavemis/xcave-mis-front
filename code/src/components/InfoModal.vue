@@ -32,6 +32,7 @@
                     </div>
                     <div class="info-modal__preview-prev" v-if="content.image.length > 1 && curreImgIdx != 0" @click="prevImage"></div>
                     <div class="info-modal__preview-next" @click="nextImage" v-if="content.image.length > 1 &&  curreImgIdx != content.image.length - 1"></div>
+                    <Loading v-if="imageLoading" />
                 </div>
                 <div class="info-modal__content">
                     <img v-if="!isMobile" class="info-modal__close" src="~@/assets/images/icons/close-info.png" @click="hide" alt="Fechar o conteúdo.">
@@ -52,13 +53,17 @@
 
 <script>
 import { TweenMax, Quad } from 'gsap';
-import Panzoom from '@panzoom/panzoom'
+import Panzoom from '@panzoom/panzoom';
+import Loading from '@/components/Loading';
 // import { dragAndZoom } from '@/components/pano/DragAndZoom';
 // import { view } from '@/components/pano/DragAndZoom';
     // require('@/components/pano/DragAndZoom')
 
 export default {
     props: ['content'],
+    components: {
+        Loading
+    },
     data: () => ({
         isPlaying: false,
         mouse: {x: 0, y: 0, oldX: 0, oldY: 0, button: false},
@@ -71,6 +76,7 @@ export default {
         circle: null,
         circleLength: 0,
         isInstructions: true,
+        imageLoading: true,
         isMobile: navigator.userAgent.toLowerCase().match(/mobile/i),
         isIOS: /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream,
     }),
@@ -92,6 +98,7 @@ export default {
     },
     mounted(){
         this.imgSrc = this.content.image[0]
+        setTimeout(this.removeInstructions, 3000)
         this.$nextTick(()=>{
             this.circle = document.getElementById('circle')
             if (this.circle) {
@@ -175,6 +182,7 @@ export default {
             this.updateSrc()
         },
         updateSrc(){
+            this.imageLoading = true
             TweenMax.to(this.$refs.imageToDrag, 0.4, { autoAlpha: 0, ease: Quad.easeInOut, onComplete: ()=>{
                 this.imgSrc = this.content.image[this.curreImgIdx]
                 this.$nextTick(()=>{
@@ -192,7 +200,9 @@ export default {
                 this.$refs.imageToDrag.style.width = '100%'
                 this.$refs.imageToDrag.style.height = 'auto'
             }
-            TweenMax.to(this.$refs.imageToDrag, 0.6, { autoAlpha: 1, delay: 0.6,ease: Quad.easeInOut })
+            TweenMax.to(this.$refs.imageToDrag, 0.6, { autoAlpha: 1, delay: 0.6,ease: Quad.easeInOut, onComplete: ()=> {
+                this.imageLoading = false
+            }})
         },
         mouseWheelEvent(event) {
             this.panzoom.zoomWithWheel(event)
@@ -272,6 +282,15 @@ export default {
                 overflow: hidden;
                 position: relative;
                 background-color: #333;
+
+                .loading-comp {
+                    @include set-size(100%, 100%);
+                    position: absolute;
+
+                    .loading-comp__content {
+                        margin-top: -25px;
+                    }
+                }
                 .info-modal__preview-image {
                     @include set-size(auto, auto);
                     opacity: 0;
@@ -412,8 +431,8 @@ export default {
                 }
 
                 .info-modal__content-description {
-                    font-family: $got-medium;
-                    @include font-size(16);
+                    font-family: $mont-medium;
+                    @include font-size(14);
                     line-height: 20px;
                     color: $black;
                     height: 52%;
@@ -428,6 +447,10 @@ export default {
                     h2 {
                         margin: 0;
                         font-size: 16px;
+                    }
+
+                    strong {
+                        font-family: $mont-regular;
                     }
 
                     /* width */

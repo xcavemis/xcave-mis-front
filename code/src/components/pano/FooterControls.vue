@@ -369,7 +369,7 @@ export default {
 
       .footer-controls__right-group {
         .footer-controls__button-icon {
-          @include set-size(110px, 35px);
+          @include set-size(200px, 36px);
         }
       }
     }

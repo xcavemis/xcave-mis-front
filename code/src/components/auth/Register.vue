@@ -368,11 +368,13 @@ export default {
           this.errors.push("A cidade precisa ter ao menos 3 caracteres.");
           this.cityError = "*A cidade precisa ter ao menos 3 caracteres.";
           this.cityValid = false;
-        } else if (!this.containChars(this.formData.city)) {
-          this.errors.push("A cidade não pode conter somente números.");
-          this.cityError = "*A cidade não pode conter somente números.";
-          this.cityValid = false;
-        } else {
+        } 
+        // else if (!this.containChars(this.formData.city)) {
+        //   this.errors.push("A cidade não pode conter somente números.");
+        //   this.cityError = "*A cidade não pode conter somente números.";
+        //   this.cityValid = false;
+        // }
+         else {
           this.cityError = "";
           this.cityValid = true;
         }

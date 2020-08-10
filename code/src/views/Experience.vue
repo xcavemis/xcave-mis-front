@@ -231,6 +231,9 @@ export default {
 .experience {
   @include set-size(100%, 100%);
   position: relative;
+  @include maxWidth(1023) {
+    overflow: hidden;
+  }
 
   .video-intro {
     @include set-size(100%, 100%);

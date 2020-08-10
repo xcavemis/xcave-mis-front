@@ -94,10 +94,16 @@ export default {
   #preloadContainer { z-index:2; position:relative; width:100%; height:100%; opacity:0; transition: opacity 0.5s; -webkit-transition: opacity 0.5s; -moz-transition: opacity 0.5s; -o-transition: opacity 0.5s;}
 
   .pano-comp__iframe {
-    @include set-size(100%, 100%);
+    @include set-size(100%, calc(100% - 140px));
     position: absolute;
-    top: 0;
+    top: 70px;
     left: 0;
+
+    @include maxWidth(1023) {
+      @include set-size(100%, calc(100% - 150px));
+      top: 80px;
+      
+    }
   }
 
   .experience-overlay {

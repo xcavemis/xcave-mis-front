@@ -276,7 +276,8 @@ export default {
                     @include set-size(auto, auto);
                     opacity: 0;
                     @include minWidth(1023) {
-                        transition: all 0.1s linear !important;
+                        // transition: transform 0.1s linear !important, left 0.1s linear !important;
+                        // -webkit-transition: transform 0.1s linear !important, left 0.1s linear !important;
                     }
                 }
 
@@ -421,7 +422,7 @@ export default {
                     padding-right: 30px;
 
                     @include minHeight(730) {
-                        height: 70%;
+                        height: 65%;
                     }
 
                     h2 {

@@ -43,9 +43,13 @@ export default {
       console.log(event.data)
       if(typeof event.data === 'string' && event.data.indexOf('id') > -1) {
         let content = JSON.parse(event.data)
-        let infoData =  this.findContentById(content.id)
         console.log('content', content)
-        this.$emit("info-layer", infoData)
+        if (content.id == 'toggleMap') {
+          this.$emit("toggle-map", true)
+        } else {
+          let infoData =  this.findContentById(content.id)
+          this.$emit("info-layer", infoData)
+        }
       }
     }); 
     this.isPano = true  
@@ -94,13 +98,13 @@ export default {
   #preloadContainer { z-index:2; position:relative; width:100%; height:100%; opacity:0; transition: opacity 0.5s; -webkit-transition: opacity 0.5s; -moz-transition: opacity 0.5s; -o-transition: opacity 0.5s;}
 
   .pano-comp__iframe {
-    @include set-size(100%, calc(100% - 140px));
+    @include set-size(100%, calc(100% - 70px));
     position: absolute;
     top: 70px;
     left: 0;
 
     @include maxWidth(1023) {
-      @include set-size(100%, calc(100% - 150px));
+      @include set-size(100%, calc(100% - 70px));
       top: 80px;
       
     }

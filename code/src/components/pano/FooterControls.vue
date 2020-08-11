@@ -226,17 +226,21 @@ export default {
 <style lang="scss">
 .footer-controls {
   @include set-size(100%, 70px);
-  background-color: $black;
+  background-color: transparent;
   display: flex;
   justify-content: space-around;
   align-items: flex-start;
   z-index: 3;
+  pointer-events: none;
+  touch-action: none;
 
   .footer-controls__left {
     @include set-size(25%, 100%);
     display: flex;
     justify-content: flex-start;
     align-items: center;
+    pointer-events: all;
+    touch-action: initial;
     .footer-controls__left-button {
       display: flex;
       justify-content: center;
@@ -265,6 +269,9 @@ export default {
     display: flex;
     justify-content: center;
     align-items: center;
+    opacity: 0;
+    pointer-events: none;
+    touch-action: none;
 
     .footer-controls__center-group {
       display: flex;
@@ -302,6 +309,8 @@ export default {
     display: flex;
     justify-content: flex-end;
     align-items: center;
+    pointer-events: all;
+    touch-action: initial;
 
     .footer-controls__right-group {
       display: flex;

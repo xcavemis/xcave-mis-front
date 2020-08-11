@@ -1,7 +1,7 @@
 <template>
   <div class="experience">
     <!-- <PanolensNew ref="pano" v-if="queueLoaded" v-on:info-layer="onInfoLayer" /> -->
-    <Pano ref="pano" v-if="queueLoaded" v-on:info-layer="onInfoLayer" />
+    <Pano ref="pano" v-if="queueLoaded" v-on:toggle-map="toggleMap" v-on:info-layer="onInfoLayer" />
     <HeaderControls ref="headerControls" v-on:change-pass="onChangePass" v-on:close="changePassClosed"/>
     <FooterControls ref="footerControls" v-on:action="onFooterAction" />
     <VideoLive v-if="isVideoLive && !isMobile" video-id="c8dFQbj20dg" v-on:close="videoClosed" ref="videoLive" />
@@ -122,12 +122,13 @@ export default {
         });
       } else if (params.type == "music") {
         this.$refs?.audioPlayer[params.value ? "unmute" : "mute"]();
-      } else if (params.type == "map") {
-        this.isMap = true;
-        this.$nextTick(() => {
-          this.$refs?.map[params.value]();
-        });
       } 
+      // else if (params.type == "map") {
+      //   this.isMap = true;
+      //   this.$nextTick(() => {
+      //     this.$refs?.map[params.value]();
+      //   });
+      // } 
       // else if (params.type == "navigate") {
       //   this.$refs?.pano[params.value]();
       // } else if (params.type == "zoom") {
@@ -164,6 +165,12 @@ export default {
       this.$nextTick(()=>{
         this.$refs?.changePass?.show()
       })
+    },
+    toggleMap(bool){
+      this.isMap = true;
+      this.$nextTick(() => {
+        this.$refs?.map?.show();
+      });
     },
     onInfoLayer(params) {
       console.log("onInfoLayer", params);

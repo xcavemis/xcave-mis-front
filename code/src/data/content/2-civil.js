@@ -3,13 +3,13 @@ export const civil = {
     {
       id: "V-201",
       title: "CIVIL V201",
-      target: "5rUrmOLoV_E",
+      target: "446670343",
       type: 'learn',
     },
     {
       id: "V-202",
       title: "CIVIL V202",
-      target: "3Ru7NSuNzos",
+      target: "446670572",
       type: 'learn',
     },
     {

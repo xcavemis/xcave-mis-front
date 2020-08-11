@@ -9,6 +9,7 @@ const api = axios.create({
   baseURL: process.env.VUE_APP_API_BASEURL,
 });
 
+
 export default new Vuex.Store({
   state: {
     token: null,
@@ -311,13 +312,10 @@ export default new Vuex.Store({
     },
     async tokenCheck({ commit, state }) {
       const uri = "/auth/check";
-      const token = state.token ? state.token : localStorage.getItem("token")??null
-      // console.log('token', token)
+      const _token = state.token ? state.token : localStorage.getItem("token")??null
       try {
         const res = await api.get(uri, {
-          headers: {
-            'Authorization': `Bearer ${token}` 
-          }
+          headers: {'Authorization': 'Bearer '+_token }
         });
         console.log(res)
         const {

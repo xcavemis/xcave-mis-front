@@ -14,7 +14,7 @@
           alt="LEONARDO DA VINCI – 500 ANOS DE UM GÊNIO"
         />
         <p class="first-step__center-content__description" >
-          Embarque numa experiência única e transporte-se para o incrível mundo de um dos maiores inventores de todos os tempos. Nessa versão digital você poderá ver todas as obras em detalhes, terá também acesso à vídeos especiais com informações importantes sobre o Gênio. Com a compra do ingresso você ajuda a manter as atividades do MIS Experience.
+          Transporte-se para o incrível mundo de um dos maiores gênios de todos os tempos, Leonardo Da Vinci. Uma experiência multissensorial com animações gráficas em alta definição, realidade aumentada, lives educativas, imagens em alta resolução, áudio e vídeos. Conheça a história completa, em detalhes, da vida do mestre Da Vinci, em um ambiente digital e imersivo. Ao comprar o ingresso você ajuda a manter as atividades do MIS Experience.
         </p>
         <div class="first-step__center-content__buttons">
           <a
@@ -39,13 +39,15 @@
           <br />500 Anos de um Gênio
         </h1>
         <p class="third-step__center-content__description">
-          O MIS Experience – criado pelo Governo do Estado de São Paulo, por meio da Secretaria de Cultura e Economia Criativa, e pelo Museu da Imagem e do Som, em parceria com a TV Cultura – inaugura com a exposição Leonardo da Vinci – 500 Anos de um Gênio. Uma experiência imersiva, que possibilitará ao visitante conhecer a vida e o legado de Da Vinci por meio de uma exclusiva galeria com projeções, capaz de promover uma experiência interativa inédita no país. A exposição é patrocinada pelo Bradesco, Cielo, Fiat, Pirelli, Sabesp e Vale.
+          O MIS Experience, instituição da Secretaria de Cultura e Economia Criativa do Governo do Estado de São Paulo, apresenta a exposição digital <strong>Leonardo Da Vinci: 500 Anos de um Gênio</strong>. De modo totalmente imersivo, o visitante conhece a vida e o legado do artista italiano por meio de uma experiência inédita no país.
           <br />
-          <br />A mostra, considerada a investigação mais completa e detalhada sobre o trabalho de Leonardo da Vinci, apresenta 18 áreas temáticas que conta a trajetória do grande gênio renascentista e traz réplicas de máquinas desenhadas pelo artista italiano. Os visitantes terão uma experiência multissensorial com animações gráficas em alta definição, combinadas com um conteúdo multimídia e narrativa em áudio, o que permitirá ao público uma vivência divertida, educativa e esclarecedora a pessoas de todas as idades e interesses, sejam elas amantes de arte e da história. Os visitantes também terão a oportunidade de conhecer, pela primeira vez, a mente do homem que lançou as bases para algumas das invenções mais notáveis da sociedade moderna, como o helicóptero, o automóvel, o submarino, o paraquedas e a bicicleta.
+          <br />Criada em parceria com o <strong>Museo Leonardo Da Vinci</strong>, de Roma, em colaboração com diversos especialistas e historiadores da Itália e da França, a exposição é desenvolvida pela <strong>Grande Exhibitions</strong>, empresa sediada em Melbourne, na Austrália, com escritórios no Reino Unido e nos EUA.
           <br />
-          <br />Criada em parceria com o Museo Leonardo da Vinci, em Roma, e contando com a colaboração de diversos especialistas e historiadores da Itália e da França, a exposição é criada pela Grande Exhibitions, empresa sediada em Melbourne, na Austrália, com escritórios no Reino Unido e nos EUA.
+          <br />Esta é a mais completa e detalhada mostra sobre o trabalho de <strong>Leonardo Da Vinci</strong>. São 18 áreas temáticas, que contam a trajetória do grande gênio renascentista, apresentando réplicas de máquinas que foram desenhadas pelo artista. Os visitantes têm a oportunidade de conhecer a mente do homem que lançou as bases para algumas das invenções mais notáveis da sociedade moderna, como o helicóptero, o automóvel, o submarino, o paraquedas e a bicicleta. O conteúdo apresentado permite uma experiência multissensorial com animações gráficas em alta definição, combinadas com uma plataforma digital. Assim, o público, de todas as idades, pode vivenciar a história de maneira divertida, educativa e esclarecedora.
           <br />
-          <br />Leonardo da Vinci - 500 Anos de um Gênio traz ainda os Segredos de Mona Lisa – uma análise da pintura mais famosa do mundo, realizada no Museu do Louvre por Pascal Cotte, renomado engenheiro, pesquisador e fotógrafo de obras de arte.
+          <br /><strong>Leonardo da Vinci - 500 Anos de um Gênio</strong>, ainda apresenta os <strong>Segredos de Mona Lisa</strong> – uma análise da pintura mais famosa do mundo, realizada no <strong>Museu do Louvre</strong> por Pascal Cotte, renomado engenheiro, pesquisador e fotógrafo de obras de arte.
+          <br />
+          <br />A experiência imersiva digital é patrocinada por Cielo e Sabesp; com parceria da TV Cultura; apoio Institucional da Folha; desenvolvimento da experiência digital: Agência EKO e XCAVE Studio; concepção, Grande Exhibitions e Sensory 4 Immersive Experience. Uma realização do MIS Experience e da Secretaria de Economia Criativa do Governo do Estado de São Paulo.
         </p>
         <div class="third-step__center-content__buttons">
           <a
@@ -97,6 +99,7 @@ export default {
     isMobile: window.innerWidth < 1024,
   }),
   mounted(){
+    TweenMax.set('html, body', { overflow: 'auto' })
     this.$nextTick(()=>{
       this.show()
     })
@@ -131,22 +134,29 @@ export default {
       }})
     },
     goTo() {
-      this.$store.dispatch("tokenCheck").then((res) => {
-        if (
-          res &&
-          res.status >= 200 &&
-          res.status <= 204 &&
-          res.endTime != null &&
-          this.validateTime(res.endTime)
-        ) {
-          this.$router.push("/experience");
-        } else {
-          TweenMax.set('html, body', { overflowY: 'hidden'})
-          this.authShow = true;
-          this.$nextTick(() => {
-            this.$refs?.authComp?.show();
-          });
-        }
+      
+      // this.$store.dispatch("tokenCheck").then((res) => {
+      //   if (
+      //     res &&
+      //     res.status >= 200 &&
+      //     res.status <= 204 &&
+      //     res.endTime != null &&
+      //     this.validateTime(res.endTime)
+      //   ) {
+      //     this.$router.push("/experience");
+      //   } else {
+      //     TweenMax.set('html, body', { overflowY: 'hidden'})
+      //     this.authShow = true;
+      //     this.$nextTick(() => {
+      //       this.$refs?.authComp?.show();
+      //     });
+      //   }
+      // });
+      document.body.scrollTo(0,0)
+      TweenMax.set('html, body', { overflowY: 'hidden', delay: 0.6})
+      this.authShow = true;
+      this.$nextTick(() => {
+        this.$refs?.authComp?.show();
       });
     },
     onAuthClosed(){
@@ -339,6 +349,10 @@ export default {
       // line-height: 30px;
       color: $white;
       margin: 36px 0;
+
+      strong{
+        font-family: $rob-bold;
+      }
     }
    
 

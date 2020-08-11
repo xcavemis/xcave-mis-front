@@ -11,6 +11,13 @@
       v-on:close="videoClosed"
       ref="video360"
     />
+    <VideoIntro
+      v-if="isVideoIntro"
+      video-id="446818239"
+      v-on:close="videoIntroClosed"
+      v-on:played="onVideoIntroPlayed"
+      ref="video360"
+    />
     <VideoLearn
       v-if="isVideoLearn"
       :video-id="infoModalContent.target"
@@ -29,6 +36,7 @@
     />
     <Map ref="map" v-if="isMap && !isMobile" v-on:navigate-to="panoGoTo" v-on:map-close="mapClosed" />
     <Ar :content="infoModalContent" ref="arModal" v-if="isArModal" v-on:close="arClosed" />
+    
     <!-- <video v-if="!videoEnded" class="video-intro" autoplay muted ref="videoIntro">
     <source src="media/videos/da-vinci-intro-small.mp4" type="video/mp4">-->
     <!-- <source src="mov_bbb.ogg" type="video/ogg"> -->
@@ -47,6 +55,7 @@ import HeaderControls from "@/components/pano/HeaderControls.vue";
 import Map from "@/components/pano/Map.vue";
 import VideoLive from "@/components/VideoLive.vue";
 import Video360 from "@/components/Video360.vue";
+import VideoIntro from "@/components/VideoIntro.vue";
 import VideoLearn from "@/components/VideoLearn.vue";
 import AudioPlayer from "@/components/AudioPlayer.vue";
 import InfoModal from "@/components/InfoModal.vue";
@@ -60,6 +69,7 @@ export default {
     HeaderControls,
     VideoLive,
     Video360,
+    VideoIntro,
     VideoLearn,
     AudioPlayer,
     InfoModal,
@@ -70,6 +80,7 @@ export default {
   data: () => ({
     isVideoLive: false,
     isVideo360: false,
+    isVideoIntro: true,
     isVideoLearn: false,
     isInfoModal: false,
     isArModal: false,
@@ -77,7 +88,7 @@ export default {
     isMap: false,
     infoModalContent: null,
     preloader: null,
-    queueLoaded: true,
+    queueLoaded: false,
     videoEnded: false,
     isMobile: navigator.userAgent.toLowerCase().match(/mobile/i),
     isIOS: /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream,
@@ -100,12 +111,17 @@ export default {
       .classList.add("footer-component__experience");
   },
   methods: {
+    onVideoIntroPlayed(e) {
+      console.log('onVideoIntroPlayed')
+      this.queueLoaded = true
+    },
     onVideoIntroEnded(e) {
       // console.log('onVideoIntroEnded', e)
       this.videoEnded = true;
+
     },
     panoGoTo(id) {
-      // console.log('panoGoTo', id)
+      console.log('panoGoTo', id)
       this.$refs?.pano?.goToScene(id);
     },
     mapClosed() {
@@ -143,7 +159,14 @@ export default {
       this.isVideo360 = false;
       this.isVideoLearn = false;
     },
+    videoIntroClosed() {
+      this.isVideoIntro = false;
+      this.panoGoTo(0)
+      if (this.$refs?.footerControls?.musicPlaying)
+        this.$refs?.audioPlayer?.unmute();
+    },
     videoClosed() {
+      this.isVideoIntro = false;
       this.isVideoLive = false;
       this.isVideo360 = false;
       this.isVideoLearn = false;
@@ -243,9 +266,8 @@ export default {
   }
 
   .video-intro {
-    @include set-size(100%, 100%);
     position: absolute;
-    top: 0;
+    top: 70px;
     left: 0;
   }
 

@@ -49,31 +49,31 @@ export const mixedGallery = {
     {
       id: "V-301",
       title: "CIVIL V301",
-      target: "diQ9zNPASpE",
+      target: "446670386",
       type: 'learn',
     },
     {
       id: "V-302",
       title: "CIVIL V302",
-      target: "-Xy4v_Ox0MQ",
+      target: "446670496",
       type: 'learn',
     },
     {
       id: "V-303",
       title: "CIVIL V303",
-      target: "INaSiN1pTeo",
+      target: "446670532",
       type: 'learn',
     },
     {
       id: "V-304",
       title: "CIVIL V304",
-      target: "sWx_du80ojQ",
+      target: "446670237",
       type: 'learn',
     },
     {
       id: "V-305",   
       title: "CIVIL V305",
-      target: "I_0HFtvsQEs",
+      target: "446670424",
       type: 'learn',
     },
     {

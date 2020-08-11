@@ -86,9 +86,7 @@ export default {
 
             if( typeof(__cm_room_width) != "undefined" ) _cc_obj.width = __cm_room_width;
             if( typeof(__cm_room_height) != "undefined" ) _cc_obj.height = __cm_room_height;
-            // this.embedPlayer = _cc_obj
             this.$refs.iframeContainer.appendChild(_cc_obj)
-            console.log('_cc_obj', _cc_obj)
             this.$store.dispatch('loading', false)
         })
     },

@@ -7,6 +7,12 @@ export const codices = {
       type: 'learn',
     },
     {
+      id: "V-102",
+      title: "CÓDICES V101",
+      target: "446670172",
+      type: 'learn',
+    },
+    {
       id: "D-101",
       title: "CÓDICES",
       type: 'content',

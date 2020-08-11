@@ -1,7 +1,8 @@
 <template>
     <div class="video-live">
         <section class="video-live__content">
-            <div class="video-live__iframe" v-html="embedPlayer"></div>
+            <!-- <div class="video-live__iframe" v-html="embedPlayer"></div> -->
+            <div class="video-live__iframe" ref="iframeContainer"></div>
 
                 <!-- src="https://player.vimeo.com/video/{video_id}" -->
             <!-- <iframe 
@@ -31,19 +32,65 @@ export default {
     }),
     created(){
         this.$store.dispatch('loading', true)
-        axios.get(`https://vimeo.com/api/oembed.json?url=${this.$store.getters.webinarLink}`)
-        .then((res) => {
-            const { data, status } = res
-            if (status && status == 200) {
-                this.$store.dispatch('loading', false)
-                this.embedPlayer = data.html
-            }
-        }).catch(function (error) {
-            // handle error
-            console.log(error);
+        // axios.get(`https://api.clickmeeting.com/v1/conferences/${this.$store.getters.webinarLink}`)
+        // https://embed.clickmeeting.com/embed_conference.html?r=1714776743922933
+        // https://api.clickmeeting.com/v1/conferences/747181165
+       
+        // axios.get(`https://embed.clickmeeting.com/embed_conference.html?r=1714776743922933`, {
+        //     headers: {
+        //         'X-Api-Key': 'us3c6da3157287163fa7ad5ca97e3cda1077a6a44b'
+        //     }
+        // })
+        // .then((res) => {
+        //     const { data, status } = res
+        //     if (status && status == 200) {
+        //         this.$store.dispatch('loading', false)
+        //         // console.log('res', res.data)
+        //         // this.embedPlayer = data.html
+        //     }
+        // }).catch(function (error) {
+        //     // handle error
+        //     console.log(error);
+        //     this.$store.dispatch('loading', false)
+        // })
+        // axios.get(`https://vimeo.com/api/oembed.json?url=${this.$store.getters.webinarLink}`)
+        // .then((res) => {
+        //     const { data, status } = res
+        //     if (status && status == 200) {
+        //         this.$store.dispatch('loading', false)
+        //         this.embedPlayer = data.html
+        //     }
+        // }).catch(function (error) {
+        //     // handle error
+        //     console.log(error);
+        //     this.$store.dispatch('loading', false)
+        // })
+        
+    },
+    mounted(){
+        this.$nextTick(()=>{
+            const _cc_obj = document.createElement ( "iframe" );
+            _cc_obj.id = "clickmeetingFlashroomIframe";
+            _cc_obj.src = "https://xcavelive.clickmeeting.com/747181165?popup=off&lang=pt&xlang=pt";
+            _cc_obj.frameBorder = "0";
+            _cc_obj.allow = "microphone; camera; fullscreen; autoplay";
+            _cc_obj.allowfullscreen = "true";
+            _cc_obj.webkitallowfullscreen = "true";
+            _cc_obj.mozallowfullscreen = "true";
+            _cc_obj.oallowfullscreen  = "true";
+            _cc_obj.msallowfullscreen = "true";
+            _cc_obj.style.border = "none";
+            _cc_obj.width = "1280";
+            _cc_obj.height = "720";
+            _cc_obj.style.display = "block";
+
+            if( typeof(__cm_room_width) != "undefined" ) _cc_obj.width = __cm_room_width;
+            if( typeof(__cm_room_height) != "undefined" ) _cc_obj.height = __cm_room_height;
+            // this.embedPlayer = _cc_obj
+            this.$refs.iframeContainer.appendChild(_cc_obj)
+            console.log('_cc_obj', _cc_obj)
             this.$store.dispatch('loading', false)
         })
-        
     },
     methods: {
         show() {

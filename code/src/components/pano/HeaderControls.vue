@@ -179,7 +179,7 @@ export default {
       cursor: pointer;
       .header-controls__button-label {
         @include font-scale(1366, 1680, 10, 12);
-        font-family: $rob-regular;
+        font-family: $mont-regular;
         color: $white;
         margin-right: 15px;
         text-shadow: 0px 0px 4px #000000;
@@ -196,7 +196,7 @@ export default {
       }
 
       &:first-child {
-        margin-right: 15px;
+        // margin-right: 15px;
       }
     }
 

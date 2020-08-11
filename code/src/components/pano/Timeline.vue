@@ -124,9 +124,9 @@ export default {
     }
     .timeline-comp__marker-label {
       width: 90px;
-      @include font-scale(1366, 1680, 10, 14);
+      @include font-scale(1366, 1680, 10, 13);
       @include center-x(absolute);
-      font-family: $rob-regular;
+      font-family: $mont-regular;
       color: #999999;
       transition: color 0.6s $ease-in-out;
       bottom: -100%;

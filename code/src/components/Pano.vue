@@ -37,10 +37,7 @@ export default {
     },
   },
   async mounted() {
-    // if (this.iOS) await this.getMotionEventAuth()
-    
     window.addEventListener('message', event => {
-      console.log(event.data)
       if(typeof event.data === 'string' && event.data.indexOf('id') > -1) {
         let content = JSON.parse(event.data)
         console.log('content', content)

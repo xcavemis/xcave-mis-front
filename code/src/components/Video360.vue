@@ -63,12 +63,22 @@ export default {
             @include set-size(90vw, 80vh);
             overflow: hidden;
             margin: 80px auto;
+
+             @include maxWidth(1023) {
+                @include set-size(100vw, 100vh);
+                margin-top: 0vh;
+            }
         }
         .video-pano__iframe {
             @include set-size(90vw, 88vh);
             transform: translateY(100%);
             z-index: 1;
             margin-top: -8vh;
+
+            @include maxWidth(1023) {
+                @include set-size(100vw, 100vh);
+                margin-top: 0vh;
+            }
         }
     
         .video-pano__close {

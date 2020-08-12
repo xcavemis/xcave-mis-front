@@ -298,10 +298,9 @@ export default new Vuex.Store({
           "introShow": true
         }, {
           headers: {
-            'Authorization': `Bearer ${state.token}` 
+            'Authorization': `Bearer ${state.token}`
           }
         });
-        // console.log('passRecovery', res)
         return {
           response: res 
         }

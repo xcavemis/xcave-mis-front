@@ -3,7 +3,7 @@ export const codices = {
     {
       id: "V-101",
       title: "CÓDICES V101",
-      target: "446670572",
+      target: "446670290",
       type: 'learn',
     },
     {

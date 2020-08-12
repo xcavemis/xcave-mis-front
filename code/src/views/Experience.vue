@@ -161,7 +161,11 @@ export default {
     },
     videoIntroClosed() {
       this.isVideoIntro = false;
-      this.panoGoTo(0)
+      if (!this.$store.getters.user.introShow) {
+        this.$store.dispatch("introShow", this.$store.getters.user.id).then((e) => {
+          // console.log('introShow response', e)
+        });
+      }
       if (this.$refs?.footerControls?.musicPlaying)
         this.$refs?.audioPlayer?.unmute();
     },

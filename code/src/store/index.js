@@ -291,6 +291,27 @@ export default new Vuex.Store({
         }
       }
     },
+    async introShow({ commit, state }, userId) {
+      const uri = `/users/introShow/${userId}`;
+      try {
+        const res = await api.put(uri, {
+          "introShow": true
+        }, {
+          headers: {
+            'Authorization': `Bearer ${state.token}` 
+          }
+        });
+        // console.log('passRecovery', res)
+        return {
+          response: res 
+        }
+      } catch (error) {
+        console.log(error);
+        return {
+          response: error?.response
+        }
+      }
+    },
     async verifyTicket({ commit, state }, data) {
       const uri = `/checkins/verify/${data.ticketNumber}/${data.userId}`;
       try {

@@ -29,8 +29,8 @@ export const mixedGallery = {
       type: 'ar',
       model: 'helicopter.gltf',
       ext: 'gltf',
-      scale: 0.1,
-      scaleFactor: 0.1,
+      scale: 1,
+      scaleFactor: 1,
       auto_rotate: false,
       lights: {
         ambientIntensity: 0.6,

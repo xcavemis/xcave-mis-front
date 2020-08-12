@@ -172,7 +172,7 @@ export default {
         this.model.traverse(child => {
             if (child.isMesh) { 
                 // child.material.envMap = this.loadedData.hdr
-                // child.material.envMapIntensity = 2
+                child.material.side = THREE.DoubleSide
                 child.receiveShadow = true
                 child.castShadow = true
             }

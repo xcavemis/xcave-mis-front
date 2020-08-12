@@ -14,6 +14,11 @@
             <div class="video-intro__block" :class="{'opacity-bg': playing}">
                 <img class="video-intro__play" @click="play" src="~@/assets/images/icons/play-big.png" alt="Iniciar o video de introdução."> 
             </div>
+            <a
+                class="default-button video-intro__skip-button white"
+                href="javascript:void(0)"
+                @click="skip"
+            >PULAR INTRODUÇÃO</a>
         </section>
     </div>
 </template>
@@ -24,7 +29,9 @@ import Player from '@vimeo/player';
 export default {
     props: ['videoId'],
     data: () => ({
-        playing: false
+        playing: false,
+        videoDuration: 95,
+        isMobile: navigator.userAgent.toLowerCase().match(/mobile/i),
     }),
     mounted(){
         TweenMax.set('html, body', { cursor: 'pointer' })
@@ -36,12 +43,15 @@ export default {
             });
 
             this.player.on('play', () => {
-                
-                
+                if (this.$store.getters.user && this.$store.getters.user.introShow)  {
+                    TweenMax.to('.video-intro__skip-button', 0.6, { display: 'block', autoAlpha: 1, delay: 5 })
+                }
             });
             this.player.on('ended', this.onVideoEnded);
             this.player.setLoop(false).then(function(loop) {
             });
+
+            this.player.getDuration().then((seconds) => { this.videoDuration = seconds })
             // this.player.setCurrentTime(90).then(function(seconds) {})
 
             // this.player.getVideoTitle().then(function(title) {
@@ -63,9 +73,20 @@ export default {
             }})
             
         },
+        skip(e){
+            TweenMax.to('.video-intro__skip-button', 0.4, { autoAlpha: 0, onComplete: ()=>{
+                this.hide()
+                this.player.pause().then(() => {
+                    this.player.destroy().then(function() {})
+                })
+            }})
+            
+            // this.player.setCurrentTime(this.videoDuration - 1)
+        },
         play(e){
             this.playing = true
             this.player.play()
+            if (!this.isMobile) this.player.setVolume(1);
             TweenMax.to('.video-intro__play', 0.6, { autoAlpha: 0, ease: Quad.easeInOut })
             this.$emit('played')
         },
@@ -90,6 +111,17 @@ export default {
         overflow: hidden;
         position: relative;
         cursor: pointer;
+
+        .video-intro__skip-button {
+            position: fixed;
+            right: 15px;
+            bottom: 15px;
+            z-index: 500;
+            display: none;
+            opacity: 0;
+            // @include font-size(10);
+            padding: 8px 15px;
+        }
 
         
         .video-intro__iframe {

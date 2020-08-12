@@ -219,6 +219,9 @@ export default {
     @include maxWidth(768) {
       @include center-x(absolute);
     }
+    @include maxHeight(640) {
+      width: 130px;
+    }
   }
 
   .first-step__center-content {
@@ -265,7 +268,7 @@ export default {
 
     @include maxWidth(768) {
       width: 95vw;
-      margin-top: 3vh;
+      margin-top: 8vh;
       .first-step__center-content__title {
         width: 80%;
         @include font-size(15);
@@ -291,6 +294,30 @@ export default {
           padding: 15px;
           // display: block;
           margin: 0 auto 15px auto;
+        }
+      }
+    }
+
+    @include maxHeight(640) {
+      margin-top: 12vh;
+      .first-step__center-content__title {
+        margin: 0 auto 20px auto;
+      }
+
+      .first-step__center-content__description {
+        @include font-size(12);
+      }
+
+      .first-step__center-content__buttons {
+        margin-top: 3vh;
+        // display: block;
+        .first-step__center-content__button {
+          min-width: 0;
+          width: 45%;
+          @include font-size(10);
+          padding: 15px;
+          // display: block;
+          margin: 0 auto 5px auto;
         }
       }
     }

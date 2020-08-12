@@ -6,7 +6,7 @@
       @click="logout"
     >SAIR DA EXPERIÊNCIA</a> -->
     <div class="footer-controls__left">
-      <!-- <div class="footer-controls__left-button audio-button" @click="toggleMusic">
+      <div class="footer-controls__left-button audio-button" @click="toggleMusic">
         <div class="footer-controls__button-icon sound-bar">
           <div id="bar-1" class="bar" :class="{'no-anim': !this.musicPlaying}"></div>
           <div id="bar-2" class="bar" :class="{'no-anim': !this.musicPlaying}"></div>
@@ -16,7 +16,7 @@
           <div id="bar-6" class="bar" :class="{'no-anim': !this.musicPlaying}"></div>
         </div>
         <span class="footer-controls__button-label">Música de Fundo</span>
-      </div> -->
+      </div>
       <div class="footer-controls__left-button live-button" @click="goLive" v-if="isLiveShow">
         <img class="footer-controls__button-icon" src="~@/assets/images/icons/play-small.png" />
         <span class="footer-controls__button-label">Live MIS</span>

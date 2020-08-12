@@ -130,7 +130,7 @@ export default {
             this.setInitialSize()
             this.panzoom = Panzoom(this.$refs.imageToDrag, {
                 maxScale: 2,
-                // minScale: 1,
+                minScale: 1,
                 // startX:-this.$refs.imageToDrag.offsetWidth / 2,
                 // startY:-this.$el.offsetHeight / 2,
                 contain: 'outside',
@@ -195,9 +195,9 @@ export default {
         setInitialSize(){
             if (this.$refs.imageToDrag.offsetWidth > this.$refs.imageToDrag.offsetHeight) {
                 this.$refs.imageToDrag.style.width = 'auto'
-                this.$refs.imageToDrag.style.height = '100%'
+                this.$refs.imageToDrag.style.height = '130%'
             } else if (this.$refs.imageToDrag.offsetWidth < this.$refs.imageToDrag.offsetHeight) {
-                this.$refs.imageToDrag.style.width = '100%'
+                this.$refs.imageToDrag.style.width = '130%'
                 this.$refs.imageToDrag.style.height = 'auto'
             }
             TweenMax.to(this.$refs.imageToDrag, 0.6, { autoAlpha: 1, delay: 0.6,ease: Quad.easeInOut, onComplete: ()=> {

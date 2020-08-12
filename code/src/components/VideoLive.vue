@@ -38,29 +38,29 @@ export default {
         // https://embed.clickmeeting.com/embed_conference.html?r=1714776743922933
         // https://api.clickmeeting.com/v1/conferences/747181165
        
-        axios.get(`https://api.clickmeeting.com/v1/conferences/active`, {
-            headers: {
-                'X-Api-Key': 'us3c6da3157287163fa7ad5ca97e3cda1077a6a44b'
-            }
-        })
-        .then((res) => {
-            const { data, status } = res
-            if (status && status == 200) {
-                console.log(res.data)
-                res.data.map(data => {
-                    let { room_pin } = data
-                    if (room_pin == this.videoId) {
-                        this.buildMeeting(room_pin)
-                        return
-                    }
-                })
-                // this.embedPlayer = data.html
-            }
-        }).catch((error) => {
-            // handle error
-            console.log(error);
-            this.$store.dispatch('loading', false)
-        })
+        // axios.get(`https://api.clickmeeting.com/v1/conferences/active`, {
+        //     headers: {
+        //         'X-Api-Key': 'us3c6da3157287163fa7ad5ca97e3cda1077a6a44b',
+        //         'Access-Control-Allow-Origin': '*'
+        //     }
+        // })
+        // .then((res) => {
+        //     const { data, status } = res
+        //     if (status && status == 200) {
+        //         res.data.map(data => {
+        //             let { room_pin } = data
+        //             if (room_pin == this.videoId) {
+        //                 this.buildMeeting(room_pin)
+        //                 return
+        //             }
+        //         })
+        //         // this.embedPlayer = data.html
+        //     }
+        // }).catch((error) => {
+        //     // handle error
+        //     console.log(error);
+        //     this.$store.dispatch('loading', false)
+        // })
         // axios.get(`https://vimeo.com/api/oembed.json?url=${this.$store.getters.webinarLink}`)
         // .then((res) => {
         //     const { data, status } = res
@@ -76,6 +76,9 @@ export default {
         
     },
     mounted(){
+        this.$nextTick(()=>{
+            this.buildMeeting(this.videoId)
+        })
     },
     methods: {
         buildMeeting(room_pin) {

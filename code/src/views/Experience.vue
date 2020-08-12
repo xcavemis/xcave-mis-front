@@ -4,7 +4,7 @@
     <Pano ref="pano" v-if="queueLoaded" v-on:toggle-map="toggleMap" v-on:info-layer="onInfoLayer" />
     <HeaderControls ref="headerControls" v-on:change-pass="onChangePass" v-on:close="changePassClosed"/>
     <FooterControls ref="footerControls" v-on:action="onFooterAction" />
-    <VideoLive v-if="isVideoLive && !isMobile" video-id="c8dFQbj20dg" v-on:close="videoClosed" ref="videoLive" />
+    <VideoLive v-if="isVideoLive && !isMobile" video-id="747181165" v-on:close="videoClosed" ref="videoLive" />
     <Video360
       v-if="isVideo360"
       :video-id="infoModalContent.target"

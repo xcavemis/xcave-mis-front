@@ -6,8 +6,9 @@
 
                 <!-- src="https://player.vimeo.com/video/{video_id}" -->
             <!-- <iframe 
+                v-if="conferenceSrc"
                 class="video-live__iframe"
-                :src="`//www.youtube.com/embed/${videoId}?autoplay=1`"
+                :src="conferenceSrc"
                 width="1280" 
                 height="720" 
                 frameborder="0" 
@@ -28,7 +29,8 @@ import { TweenMax, Quad } from 'gsap';
 export default {
     props: ['videoId'],
     data: () => ({
-        embedPlayer: null
+        embedPlayer: null,
+        conferenceSrc: null
     }),
     created(){
         this.$store.dispatch('loading', true)
@@ -36,23 +38,29 @@ export default {
         // https://embed.clickmeeting.com/embed_conference.html?r=1714776743922933
         // https://api.clickmeeting.com/v1/conferences/747181165
        
-        // axios.get(`https://embed.clickmeeting.com/embed_conference.html?r=1714776743922933`, {
-        //     headers: {
-        //         'X-Api-Key': 'us3c6da3157287163fa7ad5ca97e3cda1077a6a44b'
-        //     }
-        // })
-        // .then((res) => {
-        //     const { data, status } = res
-        //     if (status && status == 200) {
-        //         this.$store.dispatch('loading', false)
-        //         // console.log('res', res.data)
-        //         // this.embedPlayer = data.html
-        //     }
-        // }).catch(function (error) {
-        //     // handle error
-        //     console.log(error);
-        //     this.$store.dispatch('loading', false)
-        // })
+        axios.get(`https://api.clickmeeting.com/v1/conferences/active`, {
+            headers: {
+                'X-Api-Key': 'us3c6da3157287163fa7ad5ca97e3cda1077a6a44b'
+            }
+        })
+        .then((res) => {
+            const { data, status } = res
+            if (status && status == 200) {
+                console.log(res.data)
+                res.data.map(data => {
+                    let { room_pin } = data
+                    if (room_pin == this.videoId) {
+                        this.buildMeeting(room_pin)
+                        return
+                    }
+                })
+                // this.embedPlayer = data.html
+            }
+        }).catch((error) => {
+            // handle error
+            console.log(error);
+            this.$store.dispatch('loading', false)
+        })
         // axios.get(`https://vimeo.com/api/oembed.json?url=${this.$store.getters.webinarLink}`)
         // .then((res) => {
         //     const { data, status } = res
@@ -68,10 +76,12 @@ export default {
         
     },
     mounted(){
-        this.$nextTick(()=>{
+    },
+    methods: {
+        buildMeeting(room_pin) {
             const _cc_obj = document.createElement ( "iframe" );
             _cc_obj.id = "clickmeetingFlashroomIframe";
-            _cc_obj.src = "https://xcavelive.clickmeeting.com/747181165?popup=off&lang=pt&xlang=pt";
+            _cc_obj.src = `https://xcavelive.clickmeeting.com/${room_pin}?popup=off&lang=pt&xlang=pt`;
             _cc_obj.frameBorder = "0";
             _cc_obj.allow = "microphone; camera; fullscreen; autoplay";
             _cc_obj.allowfullscreen = "true";
@@ -86,11 +96,11 @@ export default {
 
             if( typeof(__cm_room_width) != "undefined" ) _cc_obj.width = __cm_room_width;
             if( typeof(__cm_room_height) != "undefined" ) _cc_obj.height = __cm_room_height;
+            _cc_obj.onload = ()=> {
+                this.$store.dispatch('loading', false)
+            }
             this.$refs.iframeContainer.appendChild(_cc_obj)
-            this.$store.dispatch('loading', false)
-        })
-    },
-    methods: {
+        },
         show() {
             TweenMax.fromTo('.video-live', 0.6, { autoAlpha: 0 }, { autoAlpha: 1, ease: Quad.easeInOut })
             TweenMax.fromTo('.video-live__iframe', 0.6, { y: '100%' }, { y: '0%', ease: Quad.easeInOut, delay: 0.3 })

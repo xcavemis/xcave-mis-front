@@ -1,6 +1,29 @@
 export const civil = {
   scenes: [    
     {
+      id: "RA-1",
+      title: "Realidade Aumentada",
+      type: 'ar',
+      model: 'Drum.gltf',
+      ext: 'gltf',
+      scale: 1,
+      scaleFactor: 1,
+      auto_rotate: true,
+      lights: {
+        ambientIntensity: 1.5,
+        pointIntensity: 1.2,
+        directionalIntensity: 2,
+      },
+      camera: {
+        x: 0,
+        y: 60,
+        z: 130
+      },
+      shadow: {
+        z: -40
+      }
+    },
+    {
       id: "V-201",
       title: "CIVIL V201",
       target: "446670343",

@@ -24,7 +24,7 @@
       v-on:close="videoClosed"
       ref="videoLearn"
     />
-    <AudioPlayer ref="audioPlayer" />
+    <AudioPlayer ref="audioPlayer" v-if="isAudioPlayer" />
     <InfoModal
       ref="infoModal"
       v-if="isInfoModal"
@@ -86,6 +86,7 @@ export default {
     isArModal: false,
     isChangePass: false,
     isMap: false,
+    isAudioPlayer: false,
     infoModalContent: null,
     preloader: null,
     queueLoaded: false,
@@ -116,9 +117,7 @@ export default {
       this.queueLoaded = true
     },
     onVideoIntroEnded(e) {
-      // console.log('onVideoIntroEnded', e)
       this.videoEnded = true;
-
     },
     panoGoTo(id) {
       console.log('panoGoTo', id)
@@ -166,8 +165,13 @@ export default {
           // console.log('introShow response', e)
         });
       }
-      if (this.$refs?.footerControls?.musicPlaying)
-        this.$refs?.audioPlayer?.unmute();
+      setTimeout(()=>{
+        this.isAudioPlayer = true
+        this.$nextTick(()=>{
+          if (this.$refs?.footerControls?.musicPlaying)
+            this.$refs?.audioPlayer?.unmute();
+        })
+      }, 2000)
     },
     videoClosed() {
       this.isVideoIntro = false;

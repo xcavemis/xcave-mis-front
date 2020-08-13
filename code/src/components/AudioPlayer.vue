@@ -15,15 +15,15 @@ export default {
         isIOS: /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream,
     }),
     mounted(){
-        // if (!this.isMobile) {
-        //     this.mainSound = new Howl({
-        //         src: [`${this.default}.mp3`, `${this.default}.ogg`],
-        //         autoplay: true,
-        //         loop: true,
-        //         volume: 0.4,
-        //         onend: this.onEnded,
-        //     });
-        // }
+        if (!this.isMobile) {
+            this.mainSound = new Howl({
+                src: [`${this.default}.mp3`, `${this.default}.ogg`],
+                autoplay: true,
+                loop: true,
+                volume: 0.4,
+                onend: this.onEnded,
+            });
+        }
     },
     methods: {
         play(){
@@ -49,7 +49,7 @@ export default {
                 this.dynamicSound = new Howl({
                     src: [`${path}`, `${path}`],
                     autoplay: true,
-                    volume: 1,
+                    volume: 10,
                 });
                 
                 this.dynamicSound?.play();
@@ -75,10 +75,10 @@ export default {
 
         },
         mute(){
-            // this.mainSound?.fade(1, 0, 0)
+            this.mainSound?.fade(1, 0, 0)
         },
         unmute(){
-            // this.mainSound?.fade(0, 0.4, 0)
+            this.mainSound?.fade(0, 0.4, 0)
         },
         destroyDynamic(){
             clearInterval(this.updateTimer)
@@ -89,8 +89,8 @@ export default {
     },
     beforeDestroy(){
         clearInterval(this.updateTimer)
-        // this.mainSound?.stop()
-        // this.mainSound = null
+        this.mainSound?.stop()
+        this.mainSound = null
         this.dynamicSound?.stop()
         this.dynamicSound = null
     }

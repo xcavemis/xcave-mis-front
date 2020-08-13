@@ -5,15 +5,16 @@
       href="javascript:void(0)"
       @click="logout"
     >SAIR DA EXPERIÊNCIA</a> -->
+    <div class="footer-controls__grad"></div>
     <div class="footer-controls__left">
       <div class="footer-controls__left-button audio-button" @click="toggleMusic">
         <div class="footer-controls__button-icon sound-bar">
-          <div id="bar-1" class="bar" :class="{'no-anim': !this.musicPlaying}"></div>
+          <!-- <div id="bar-1" class="bar" :class="{'no-anim': !this.musicPlaying}"></div> -->
           <div id="bar-2" class="bar" :class="{'no-anim': !this.musicPlaying}"></div>
           <div id="bar-3" class="bar" :class="{'no-anim': !this.musicPlaying}"></div>
           <div id="bar-4" class="bar" :class="{'no-anim': !this.musicPlaying}"></div>
-          <div id="bar-5" class="bar" :class="{'no-anim': !this.musicPlaying}"></div>
-          <div id="bar-6" class="bar" :class="{'no-anim': !this.musicPlaying}"></div>
+          <!-- <div id="bar-5" class="bar" :class="{'no-anim': !this.musicPlaying}"></div> -->
+          <!-- <div id="bar-6" class="bar" :class="{'no-anim': !this.musicPlaying}"></div> -->
         </div>
         <span class="footer-controls__button-label">Música de Fundo</span>
       </div>
@@ -236,6 +237,17 @@ export default {
   z-index: 3;
   pointer-events: none;
   touch-action: none;
+  
+  .footer-controls__grad {
+    @include set-size(100%, 20px);
+    position: absolute;
+    top: -18px;
+    left: 0;
+    background: black;
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.7) 55%, rgba(0, 0, 0, 1) 100%);
+    touch-action: none;
+    pointer-events: none;
+  }
 
   @include maxWidth(1023) {
     background-color: $black;
@@ -260,13 +272,17 @@ export default {
 
       &:first-child {
         margin: 0 15px;
+
+        .footer-controls__button-label {
+          margin-left: 10px;
+        }
       }
 
       .footer-controls__button-label {
-        @include font-size(13);
+        @include font-size(11);
         font-family: $mont-regular;
         color: $white;
-        margin-left: 15px;
+        margin-left: 20px;
         text-shadow: 0px 0px 4px #000000;
       }
     }
@@ -361,8 +377,11 @@ export default {
         @include maxWidth(1200) {
           @include set-size(auto, 30px);
 
+          .footer-controls__right-group__label {
+            @include set-size(40vw, auto);
+          }
           &.icon-small {
-            margin-top: 7px;
+            // margin-top: 7px;
           }
         }
       }
@@ -384,7 +403,7 @@ export default {
     }
     .footer-controls__left,
     .footer-controls__right {
-      width: 50vw;
+      width: 100vw;
       
       .audio-button,
       .live-button {
@@ -393,7 +412,7 @@ export default {
 
       .footer-controls__right-group {
         .footer-controls__button-icon {
-          @include set-size(200px, 36px);
+          @include set-size(50vw, auto);
         }
       }
     }
@@ -417,7 +436,7 @@ export default {
   @include set-size(2px, 1px);
   display: inline-block;
   background-color: #b18039;
-  bottom: 0;
+  bottom: 4px;
   position: absolute;
 
   &#bar-1 {

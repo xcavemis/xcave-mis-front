@@ -4,20 +4,20 @@ export const military = {
         id: "RA-4",
         title: "Realidade Aumentada",
         type: 'ar',
-        model: 'Drum.gltf',
+        model: 'boat.gltf',
         ext: 'gltf',
-        scale: 1,
-        scaleFactor: 1,
+        scale: 0.01,
+        scaleFactor: 0.01,
         auto_rotate: true,
         lights: {
-          ambientIntensity: 1.5,
-          pointIntensity: 1.2,
-          directionalIntensity: 2,
+          ambientIntensity: 0.6,
+          pointIntensity: 0.1,
+          directionalIntensity: 0.5,
         },
         camera: {
           x: 0,
-          y: 60,
-          z: 130
+          y: 80,
+          z: 300
         },
         shadow: {
           z: -40

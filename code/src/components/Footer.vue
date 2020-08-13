@@ -81,6 +81,7 @@ export default {
     bottom: -100%;
     width: 100vw;
     transition: bottom 0.8s ease-in-out;
+    z-index: 100;
     &.open {
       bottom: 0;
     }

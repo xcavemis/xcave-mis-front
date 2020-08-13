@@ -12,6 +12,12 @@
         href="javascript:void(0)"
         @click="openAR('heli')"
       >HELICOPTER</a>
+      <a
+        class="default-button black"
+        href="javascript:void(0)"
+        @click="openAR('boat')"
+      >BARCO</a>
+    </div>
     </div>
   </div>
 </template>
@@ -50,6 +56,7 @@ export default {
           ext: 'gltf',
           scale: 1,
           scaleFactor: 1,
+          auto_rotate: true,
           lights: {
             ambientIntensity: 1.5,
             pointIntensity: 1.2,
@@ -64,6 +71,30 @@ export default {
             z: -40
           }
         };
+      } else if (id == 'boat') {
+        this.infoModalContent = {
+          id: "RA-4",
+          title: "Realidade Aumentada",
+          type: 'ar',
+          model: 'boat.gltf',
+          ext: 'gltf',
+          scale: 0.01,
+          scaleFactor: 0.01,
+          auto_rotate: true,
+          lights: {
+            ambientIntensity: 0.6,
+            pointIntensity: 0.1,
+            directionalIntensity: 0.5,
+          },
+          camera: {
+            x: 0,
+            y: 80,
+            z: 300
+          },
+          shadow: {
+            z: -40
+          }
+        }
       } else {
         this.infoModalContent = {
           id: "A-305",
@@ -72,8 +103,9 @@ export default {
           model: 'helicopter.gltf',
           id: 'heli',
           ext: 'gltf',
-          scale: 0.1,
-          scaleFactor: 0.1,
+          scale: 1,
+          scaleFactor: 1,
+          auto_rotate: false,
           lights: {
             ambientIntensity: 0.6,
             pointIntensity: 0.1,
@@ -113,9 +145,7 @@ export default {
     justify-content: space-around;
 
     .default-button {
-      &:first-child {
-        margin-right: 1.5vw;
-      }
+       margin-right: 1.5vw;
     }
   }
 }

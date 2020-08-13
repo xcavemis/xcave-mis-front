@@ -154,7 +154,7 @@ export default {
             this.controls.screenSpacePanning = false;
             this.controls.minDistance = 2;
             this.controls.maxDistance = 500;
-            this.controls.maxPolarAngle = Math.PI / 2;
+            // this.controls.maxPolarAngle = Math.PI / 2;
         } else {
             this.controls = new DeviceOrientationControls(this.camera)
             if (!this.isIOS) this.controls.alphaOffset = - Math.PI / 2
@@ -338,8 +338,7 @@ export default {
         requestAnimationFrame(this.animate);
 
         let delta = this.clock.getDelta();
-
-        if (this.model && !this.isDragging && this.content.auto_rotate) this.model.rotation.y += delta * 0.05
+        if (this.model && !this.isDragging && this.content.auto_rotate) this.model.rotation.y += delta * 0.3
 
         if (this.mixer) this.mixer.update( delta );
 

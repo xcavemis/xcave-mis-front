@@ -264,9 +264,11 @@ export default {
         height: 100%;
     }
     .info-modal__crop {
-        @include set-size(65.8vw, 62.5vh);
+        @include set-size(65.8vw, 535px);
         @include center(absolute);
         overflow: hidden;
+        min-height: 535px;
+        max-width: 1060px;
 
 
         .info-modal__block {
@@ -419,30 +421,30 @@ export default {
             }
             .info-modal__content {
                 @include set-size(33.3%, 100%);
-                padding: 60px 30px 30px 30px;
+                padding: 40px 30px 30px 30px;
                 background-color: $white;
                 text-align: left;
                 position: relative;
                 .info-modal__content-title {
                     font-family: $gar-bold;
-                    @include font-size(32);
+                    @include font-size(24);
                     color: $black;
                     margin-top: 0;
                 }
 
                 .info-modal__content-description {
                     font-family: $mont-medium;
-                    @include font-size(14);
+                    @include font-size(13);
                     line-height: 20px;
                     color: $black;
-                    height: 52%;
+                    height: 72%;
                     overflow-x: hidden;
                     overflow-y: scroll;
                     padding-right: 30px;
 
-                    @include minHeight(730) {
-                        height: 65%;
-                    }
+                    // @include minHeight(730) {
+                    //     height: 65%;
+                    // }
 
                     h2 {
                         margin: 0;

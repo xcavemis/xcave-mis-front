@@ -346,13 +346,32 @@ export default {
       margin-bottom: 15px;
     }
   }
+  @include maxWidth(375) {
+    .auth-header {
+      margin: 20px auto 0 auto;
+    }
+
+    .auth-container {
+      .auth-container__block {
+        margin: 20px auto 0;
+      }
+    }
+
+    .auth__title {
+      @include font-size(20);
+    }
+    .auth__subtitle {
+      @include font-size(10);
+      margin-bottom: 5px;
+    }
+  }
     
   @include maxWidthAndHeight(1920, 750) {
     @include set-size(95vw, 100vh);
     min-height: 100vh;
 
     .auth-header {
-      margin: 20px auto 0 auto;
+      margin: 40px auto 0 auto;
     }
 
     .register-comp {
@@ -368,6 +387,10 @@ export default {
   @include maxWidth(1023) {
     @include set-size(95vw, 75vh);
     min-height: 75vh;
+  }
+
+  @include maxWidth(375) {
+    @include set-size(95vw, 85vh);
   }
 
 }

@@ -4,7 +4,7 @@
             <div class="video-mask">
                 <iframe 
                     class="video-pano__iframe"
-                    :src="`https://hml.exposicaodavinci500anos.com.br/assets/videos/${videoId}/`"
+                    :src="`https://hml.exposicaodavinci500anos.com.br/assets/videos/${videoId}/index.html?skip-loading`"
                     width="1280" 
                     height="720" 
                     frameborder="0" 

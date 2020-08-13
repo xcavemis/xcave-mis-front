@@ -402,7 +402,7 @@ export const mixedGallery = {
       id: "D-341",
       title: "Rolamentos",
       type: 'content',
-      image: ["3-Gallery/D41a.jpg","3-Gallery/D341b.jpg"],
+      image: ["3-Gallery/D341a.jpg","3-Gallery/D341b.jpg"],
       audio: '',
       text: "<h2><em>C&oacute;dice Madrid I, f. 101 v.</em></h2><p>Leonardo identificou o princ&iacute;pio mec&acirc;nico por tr&aacute;s do uso de rolamentos para reduzir a fric&ccedil;&atilde;o. Neste projeto, as tr&ecirc;s bolas esf&eacute;ricas podem mover-se livremente, aninhadas em uma base hemisf&eacute;rica. As bolas espalham a fric&ccedil;&atilde;o criada pela press&atilde;o do eixo vertical. Leonardo observou que s&atilde;o necess&aacute;rias tr&ecirc;s esferas, e n&atilde;o quatro. Quatro esferas se moveriam de forma desigual e produziriam maior resist&ecirc;ncia, tornando o dispositivo menos eficiente. <br />Como muitas das inven&ccedil;&otilde;es de Leonardo, esta tamb&eacute;m ficou esquecida por v&aacute;rios s&eacute;culos: foi somente em 1791 que a ideia foi patenteada por um fabricante de carruagens, no pa&iacute;s de Gales.</p>"
     },

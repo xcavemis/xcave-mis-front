@@ -200,6 +200,10 @@ export default {
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center center;
+
+  @include maxWidth(1023) {
+    height: 95vh;
+  }
   
   .shader-bg {
     // opacity: 0;
@@ -268,7 +272,7 @@ export default {
 
     @include maxWidth(768) {
       width: 95vw;
-      margin-top: 8vh;
+      margin-top: 5vh;
       .first-step__center-content__title {
         width: 80%;
         @include font-size(15);
@@ -298,8 +302,8 @@ export default {
       }
     }
 
-    @include maxHeight(640) {
-      margin-top: 12vh;
+    @include maxWidth(375) {
+      margin-top: 8vh;
       .first-step__center-content__title {
         margin: 0 auto 20px auto;
       }
@@ -415,6 +419,24 @@ export default {
         @include font-size(10);
         margin: 0 0 24px 0;
         width: 40vw;
+      }
+    }
+  }
+  @include maxWidth(375) {
+    .third-step__center-content {
+      .third-step__center-content__title {
+        @include font-size(28);
+        line-height: 28px;
+      }
+      .third-step__center-content__description {
+        @include font-size(14);
+        line-height: 18px;
+      }
+
+      .third-step__center-content__button {
+        @include font-size(9);
+        margin: 0 0 24px 0;
+        width: 38vw;
       }
     }
   }

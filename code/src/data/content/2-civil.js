@@ -112,7 +112,7 @@ export const civil = {
       id: "D-210",
       title: "Odômetro",
       type: 'content',
-      image: ["2-Civil/D2010a.jpg","2-Civil/D2010b.jpg"],
+      image: ["2-Civil/D210a.jpg","2-Civil/D210b.jpg"],
       audio: '',
       text: "<p>Esta m&aacute;quina &eacute; usada para medir dist&acirc;ncias percorridas. O od&ocirc;metro de Leonardo parece um carrinho de m&atilde;o com rodas dentadas presas a ele. Cada vez que a roda do carrinho completa uma rota&ccedil;&atilde;o inteira, ela move a pequena roda vertical um dente &agrave; frente na engrenagem. Por sua vez, a roda horizontal tamb&eacute;m &eacute; movida um dente &agrave; frente e libera uma pedrinha ou bolota de madeira que est&aacute; em um pequeno buraco, para dentro de uma caixa. A dist&acirc;ncia percorrida pode ser calculada contando a quantidade de bolotas ou pedrinhas que foram coletadas na caixa e multiplicando pela circunfer&ecirc;ncia da roda. Este projeto &eacute; uma varia&ccedil;&atilde;o de um instrumento desenhado pelo arquiteto e engenheiro romano Vitruvius.</p>"
     },
@@ -120,7 +120,7 @@ export const civil = {
       id: "D-211",
       title: "Guindastes",
       type: 'content',
-      image: ["2-Civil/D2011a.jpg","2-Civil/D2011b.jpg"],
+      image: ["2-Civil/D211a.jpg","2-Civil/D211b.jpg"],
       audio: '',
       text: "<p>Esta &eacute; uma vers&atilde;o simplifi cada de um guindaste para i&ccedil;ar pilares e colunas. Leonardo baseou-se em projetos previamente desenvolvidos pelo engenheiro italiano Francesco Martini, entre outros.</p><p>A base do pilar &eacute; apoiada em um carrinho de duas rodas que pode ser puxado para a frente por uma corda horizontal ou obl&iacute;qua. A corda horizontal, enrolada ao redor de uma polia acoplada &agrave; manivela, exige menos esfor&ccedil;o, porque a quantidade total de atrito permanece a mesma conforme o pilar &eacute; i&ccedil;ado. No entanto, se for usada uma corda obl&iacute;qua, a for&ccedil;a exercida sobre a corda aumenta progressivamente e, no fi m, todo o peso do pilar ou coluna &eacute; exercido sobre a corda.</p>"
     },

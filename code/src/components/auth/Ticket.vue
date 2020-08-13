@@ -284,7 +284,8 @@ export default {
     }
 
     .ticket-comp__begin-bt {
-      margin-top: 15px;
+      width: 40vw;
+      margin: 15px 0;
     }
   }
 }

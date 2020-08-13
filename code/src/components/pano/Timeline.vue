@@ -98,6 +98,7 @@ export default {
     position: relative;
     cursor: pointer;
     transition: all 0.2s ease-in;
+    
 
     @include minWidth(1024) {
       &:hover {
@@ -112,6 +113,11 @@ export default {
 
     @include maxWidth(1024) {
       @include set-size(10vw, 5vw);
+    }
+    
+    @include maxWidth(375) {
+      @include set-size(32px !important, 15px);
+      border: 1px solid $white;
     }
     
 

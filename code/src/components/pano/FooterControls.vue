@@ -23,7 +23,7 @@
         <img v-if="!liveEnabled" class="footer-controls__button-icon" src="~@/assets/images/icons/play-small-disable.png" />
         <span class="footer-controls__button-label">Live MIS</span>
         <span v-if="!liveEnabled" class="live-status"><span class="desc">PRÓXIMA SESSÃO</span> {{liveStatus}}</span>
-        <span v-if="liveEnabled" class="live-status live-enabled">{{liveStatus}}</span>
+        <span v-if="liveEnabled && $store.getters.period" class="live-status live-enabled">{{liveStatus}}</span>
       </div>
     </div>
     <div class="footer-controls__center">

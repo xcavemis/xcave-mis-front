@@ -19,8 +19,11 @@
         <span class="footer-controls__button-label">Música de Fundo</span>
       </div>
       <div class="footer-controls__left-button live-button" @click="goLive" v-if="isLiveShow">
-        <img class="footer-controls__button-icon" src="~@/assets/images/icons/play-small.png" />
+        <img v-if="liveEnabled" class="footer-controls__button-icon" src="~@/assets/images/icons/play-small.png" />
+        <img v-if="!liveEnabled" class="footer-controls__button-icon" src="~@/assets/images/icons/play-small-disable.png" />
         <span class="footer-controls__button-label">Live MIS</span>
+        <span v-if="!liveEnabled" class="live-status"><span class="desc">PRÓXIMA SESSÃO</span> {{liveStatus}}</span>
+        <span v-if="liveEnabled" class="live-status live-enabled">{{liveStatus}}</span>
       </div>
     </div>
     <div class="footer-controls__center">
@@ -141,22 +144,51 @@ export default {
   data: () => ({
     musicPlaying: true,
     pressedTimer: 0,
-    isLiveShow: false
+    isLiveShow: false,
+    liveStatus: '',
+    liveEnabled: false
   }),
   mounted() {
-    if (this.$store.getters.period) {
-      let isValidPeriod = this.validateTime(this.$store.getters.period.start, this.$store.getters.period.end)
-      if (isValidPeriod && this.$store.getters.webinarLink) {
-        this.isLiveShow = true
+    if (!this.isMobile) {
+      
+      if (this.$store.getters.period) {
+        let isValidPeriod = this.validateTime(this.$store.getters.period.start, this.$store.getters.period.end)
+
+        const start = new Date(this.$store.getters.period.start)
+        const hour = start.getHours()
+        const minutes = start.getMinutes()
+        let day = start.getDate()
+        if (day < 10)  day = `0${day}`
+        let month = start.getMonth() + 1
+        if (month < 10)  month = `0${month}`
+
+        this.liveEnabled = this.isStartTime(start)
+        
+
+        if (isValidPeriod && this.$store.getters.webinarLink) {
+          this.isLiveShow = true
+          if (this.liveEnabled) {
+            this.liveStatus = `PARTICIPE AO VIVO`
+          } else {
+            this.liveStatus = `${hour}:00`
+            // this.liveStatus = `${day}/${month} - ${hour}:00`
+          }
+        } else {
+          this.isLiveShow = false
+        }
+        console.log('liveStatus', this.liveStatus, this.liveEnabled)
       } else {
-        this.isLiveShow = false
+        this.isLiveShow = true
+        this.liveEnabled = true
+        this.liveStatus = ''
       }
-    } else {
-      this.isLiveShow = true
     }
-    window.addEventListener("scroll", this.onScroll);
+    // window.addEventListener("scroll", this.onScroll);
   },
   methods: {
+    isStartTime(start) {
+      return new Date().getTime() - start.getTime() > 0;
+    },
     validateTime(start, end) {
       return new Date(end) - new Date(start) > 0;
     },
@@ -171,6 +203,7 @@ export default {
       });
     },
     goLive() {
+      if (!this.liveEnabled) return
       this.$emit("action", {
         type: "live",
         value: "show",
@@ -260,6 +293,9 @@ export default {
     align-items: center;
     pointer-events: all;
     touch-action: initial;
+     @include maxWidth(1440) {
+       min-width: 310px;
+     }
     .footer-controls__left-button {
       display: flex;
       justify-content: center;
@@ -279,11 +315,64 @@ export default {
       }
 
       .footer-controls__button-label {
-        @include font-size(11);
+        @include font-size(10);
         font-family: $mont-regular;
         color: $white;
-        margin-left: 20px;
+        margin-left: 8px;
         text-shadow: 0px 0px 4px #000000;
+
+      }
+      .live-status {
+        font-family: $mont-regular;
+        color: $white;
+        font-size: 7px;
+        margin-left: 8px;
+
+        > .desc {
+          color: #999999;
+        }
+      }
+
+      .live-enabled {
+        position: relative;
+        padding-left: 15px;
+        color: $white;
+        &:before {
+          content: "";
+          @include set-size(10px, 10px);
+          border-radius: 50%;
+          @include center-y(absolute);
+          left: 0px;
+          background-color: #b00000;
+          animation: pulseLive 1.4s infinite;
+        }
+
+        @keyframes pulseLive {
+          0% {
+            transform: translateY(-50%) scale(1)
+          }
+          50% {
+            transform: translateY(-50%) scale(0.8)
+          }
+          100% {
+            transform: translateY(-50%) scale(1)
+          }
+        }
+      }
+
+      @include maxWidth(1440) {
+        &:first-child {
+          margin: 0 10px;
+
+          .footer-controls__button-label {
+            margin-left: 8px;
+          }
+        }
+
+        .live-status {
+          margin-left: 6px;
+        }
+
       }
     }
   }
@@ -351,7 +440,7 @@ export default {
 
       .footer-controls__right-group__label {
         width: 120px;
-        @include font-size(10);
+        font-size: 9px;
         font-family: $rob-regular;
         color: #999999;
         text-shadow: 0px 0px 4px #000000;

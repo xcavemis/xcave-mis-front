@@ -115,11 +115,14 @@
     </div>
     <div class="footer-controls__right">
       <div class="footer-controls__right-group" @click="openFooter">
+        <div class="footer-controls__right-group__label">SOBRE A EXPOSIÇÃO</div>
         <img
-          class="footer-controls__button-icon icon-small mg-l"
+          class="footer-controls__button-icon icon-small"
           alt="Abrir o rodapé"
           src="~@/assets/images/icons/arrow-down-small.png"
         />
+      </div>
+      <div class="footer-controls__right-group mg-r">
         <img
           class="footer-controls__button-icon"
           alt="Abrir o rodapé"
@@ -316,34 +319,42 @@ export default {
     pointer-events: all;
     touch-action: initial;
 
-    .footer-controls__right-group {
-      display: flex;
-      justify-content: flex-end;
-      align-items: initial;
-      cursor: pointer;
-      .mg-l {
+    .mg-l {
         margin-left: 15px;
       }
       .mg-r {
         margin-right: 15px;
       }
 
-      .footer-controls__button-icon {
-        @include set-size(auto, 45px);
+    .footer-controls__right-group {
+      display: flex;
+      justify-content: flex-end;
+      align-items: initial;
+      cursor: pointer;
+      
 
-        
+      .footer-controls__right-group__label {
+        width: 120px;
+        @include font-size(10);
+        font-family: $rob-regular;
+        color: #999999;
+        text-shadow: 0px 0px 4px #000000;
+      }
+
+      .footer-controls__button-icon {
+        @include set-size(100%, auto);
 
         &.icon-small {
-          @include set-size(14px, 14px);
+          @include set-size(9px, 9px);
           cursor: pointer;
           opacity: 1;
-          transform: translateZ(0) scale(1);
+          transform: rotate(180deg) scale(1);
           transition: all 0.2s ease-in-out;
-          margin-top: 12px;
-          margin-right: 3px;
+          margin-top: -6px;
+          margin-right: 25px;
           &:hover {
-            opacity: 0.6;
-            transform: translateZ(0) scale(1.1);
+            // opacity: 0.6;
+            // transform: translateZ(0) scale(1.1);
           }
         }
 

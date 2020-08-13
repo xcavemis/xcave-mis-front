@@ -22,7 +22,8 @@
         <img v-if="liveEnabled" class="footer-controls__button-icon" src="~@/assets/images/icons/play-small.png" />
         <img v-if="!liveEnabled" class="footer-controls__button-icon" src="~@/assets/images/icons/play-small-disable.png" />
         <span class="footer-controls__button-label">Live MIS</span>
-        <span v-if="!liveEnabled" class="live-status"><span class="desc">PRÓXIMA SESSÃO</span> {{liveStatus}}</span>
+        <!-- <span v-if="!liveEnabled" class="live-status"><span class="desc">PRÓXIMA SESSÃO</span> {{liveStatus}}</span> -->
+        <span v-if="!liveEnabled" class="live-status"><span class="desc">NENHUMA SEÇÃO ATIVA</span></span>
         <span v-if="liveEnabled && $store.getters.period" class="live-status live-enabled">{{liveStatus}}</span>
       </div>
     </div>
@@ -144,13 +145,24 @@ export default {
   data: () => ({
     musicPlaying: true,
     pressedTimer: 0,
-    isLiveShow: false,
+    isLiveShow: true,
     liveStatus: '',
-    liveEnabled: false
+    liveEnabled: false,
+    verifyLiveTimer: 0
   }),
   mounted() {
-    if (!this.isMobile) {
+    // if (!this.isMobile) {
       
+    //   this.verifyLiveStatus()
+    //   clearInterval(this.verifyLiveTimer)
+    //   this.verifyLiveTimer = setInterval(()=>{
+    //     this.verifyLiveStatus()
+    //   }, 1000)
+    // }
+    // window.addEventListener("scroll", this.onScroll);
+  },
+  methods: {
+    verifyLiveStatus(){
       if (this.$store.getters.period) {
         let isValidPeriod = this.validateTime(this.$store.getters.period.start, this.$store.getters.period.end)
 
@@ -176,16 +188,13 @@ export default {
         } else {
           this.isLiveShow = false
         }
-        console.log('liveStatus', this.liveStatus, this.liveEnabled)
+        // console.log('liveStatus', this.liveStatus, this.liveEnabled)
       } else {
         this.isLiveShow = true
         this.liveEnabled = true
         this.liveStatus = ''
       }
-    }
-    // window.addEventListener("scroll", this.onScroll);
-  },
-  methods: {
+    },
     isStartTime(start) {
       return new Date().getTime() - start.getTime() > 0;
     },
@@ -257,6 +266,9 @@ export default {
       this.$router.push("/");
     },
   },
+  beforeDestroy(){
+    clearInterval(this.verifyLiveTimer)
+  }
 };
 </script>
 

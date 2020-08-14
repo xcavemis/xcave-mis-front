@@ -17,7 +17,11 @@
         href="javascript:void(0)"
         @click="openAR('boat')"
       >BARCO</a>
-    </div>
+      <a
+        class="default-button black"
+        href="javascript:void(0)"
+        @click="openAR('bike')"
+      >BIKE</a>
     </div>
   </div>
 </template>
@@ -90,6 +94,30 @@ export default {
             x: 0,
             y: 80,
             z: 300
+          },
+          shadow: {
+            z: -40
+          }
+        }
+      } else if (id == 'bike') {
+        this.infoModalContent = {
+          id: "RA-1",
+          title: "Realidade Aumentada",
+          type: 'ar',
+          model: 'bike.gltf',
+          ext: 'gltf',
+          scale: 1,
+          scaleFactor: 1,
+          auto_rotate: true,
+          lights: {
+            ambientIntensity: 0.8,
+            pointIntensity: 0.6,
+            directionalIntensity: 0.8,
+          },
+          camera: {
+            x: 0,
+            y: 60,
+            z: 130
           },
           shadow: {
             z: -40

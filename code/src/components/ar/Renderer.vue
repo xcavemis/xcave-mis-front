@@ -45,6 +45,9 @@ const THREE = require("three");
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 import { DeviceOrientationControls } from 'three/examples/jsm/controls/DeviceOrientationControls.js';
 import { ShadowMesh } from 'three/examples/jsm/objects/ShadowMesh.js'
+import { Water } from 'three/examples/jsm/objects/Water.js';
+import { Sky } from 'three/examples/jsm/objects/Sky.js';
+import { ObjectControls } from '@/utils/controls/ObjectControls';
 // import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer.js';
 // import { RenderPass } from 'three/examples/jsm/postprocessing/RenderPass.js';
 // import { ShaderPass } from 'three/examples/jsm/postprocessing/ShaderPass.js';
@@ -54,7 +57,7 @@ import { Preloader } from '@/utils/loaders/Preloader';
 import { TextureLoader } from 'three';
 
 export default {
-  props: ['content'],
+  props: ['content', 'sensors'],
   components: {},
   data() {
     return {
@@ -114,11 +117,19 @@ export default {
       this.preloader.debug = false
       this.preloader.addListener('onComplete', this.loadComplete);
       this.preloader.addListener('onProgress', this.loadProgress);
-      this.preloader.queue([
+      const loadQueue = [
         // models
         { name: this.content.id, url: `models/${this.content.model}`, type: this.content.ext },
         { name: 'hdr', url: `textures/rooitou_park_1k.jpg`, type: 'texture' },
-      ])
+      ]
+      if (!this.sensors.camera) {
+        loadQueue.push(
+          { name: 'ground', url: `textures/grasslight-big.jpg`, type: 'texture' },
+          { name: 'water', url: `textures/Water_1_M_Flow.jpg`, type: 'texture' },
+          { name: 'waternormals', url: `textures/waternormals.jpg`, type: 'texture' },
+        )
+      }
+      this.preloader.queue(loadQueue)
     },
     loadProgress(details){  
       // console.log('Preloader loadProgress: ', details.data);
@@ -129,36 +140,115 @@ export default {
       this.setupScene(details.data[this.content.id]);
       // this.$refs.rangeZoom?.addEventListener('input', this.inputChange)
     },
+    buildScenary(){
+
+      console.log(this.content.id)
+      if (this.content.id == 'RA-4') {
+        this.camera = new THREE.PerspectiveCamera( 55, window.innerWidth / window.innerHeight, 1, 20000 );
+        this.camera.position.set( 30, 80, 200 );
+        
+        let waterGeometry = new THREE.PlaneBufferGeometry( 10000, 10000 );
+
+				this.water = new Water(
+					waterGeometry,
+					{
+						textureWidth: 512,
+						textureHeight: 512,
+						waterNormals: new THREE.TextureLoader().load( 'textures/waternormals.jpg', function ( texture ) {
+
+							texture.wrapS = texture.wrapT = THREE.RepeatWrapping;
+
+						} ),
+						alpha: 0.5,
+						sunDirection: new THREE.Vector3(),
+						sunColor: 0xffffff,
+						waterColor: 0x001e0f,
+            distortionScale: 1,
+            size: 0.1,
+            side: THREE.DoubleSide,
+						fog: this.scene.fog !== undefined
+					}
+				);
+
+				this.water.position.y = -37;
+				this.water.rotation.x = - Math.PI / 2;
+
+        this.scene.add( this.water );
+        
+        let sky = new Sky();
+				sky.scale.setScalar( 10000 );
+				this.scene.add( sky );
+
+				let uniforms = sky.material.uniforms;
+
+				uniforms[ 'turbidity' ].value = 10;
+				uniforms[ 'rayleigh' ].value = 2;
+				uniforms[ 'mieCoefficient' ].value = 0.005;
+				uniforms[ 'mieDirectionalG' ].value = 0.8;
+
+				let parameters = {
+					inclination: 0.5,
+					azimuth: 0.5
+				};
+
+				let pmremGenerator = new THREE.PMREMGenerator( this.renderer );
+
+        let sun = new THREE.Vector3();
+        let theta = Math.PI * ( parameters.inclination - 0.5 );
+        let phi = 2 * Math.PI * ( parameters.azimuth - 0.5 );
+
+        sun.x = Math.cos( phi );
+        sun.y = Math.sin( phi ) * Math.sin( theta );
+        sun.z = Math.sin( phi ) * Math.cos( theta );
+
+        sky.material.uniforms[ 'sunPosition' ].value.copy( sun );
+        this.water.material.uniforms[ 'sunDirection' ].value.copy( sun ).normalize();
+
+        this.scene.environment = pmremGenerator.fromScene( sky ).texture;
+      } else {
+        this.scene.background = new THREE.Color( 0xcce0ff );
+        this.scene.fog = new THREE.Fog( 0xcce0ff, 750, 10000 );
+
+        this.camera = new THREE.PerspectiveCamera( 30, window.innerWidth / window.innerHeight, 1, 10000 );
+        this.camera.position.set( 1000, 250, 250 );
+
+        const groundTexture = new THREE.TextureLoader().load( 'textures/grasslight-big.jpg' );
+        groundTexture.wrapS = groundTexture.wrapT = THREE.RepeatWrapping;
+        groundTexture.repeat.set( 25, 25 );
+        groundTexture.anisotropy = 16;
+        groundTexture.encoding = THREE.sRGBEncoding;
+
+        const groundMaterial = new THREE.MeshLambertMaterial( { map: groundTexture } );
+
+        const mesh = new THREE.Mesh( new THREE.PlaneBufferGeometry( 20000, 20000 ), groundMaterial );
+        mesh.position.y = -41;
+        mesh.rotation.x = - Math.PI / 2;
+        mesh.receiveShadow = true;
+        this.scene.add( mesh );
+      }
+    },
     setupScene(_model) {
         // SCENE
         this.scene = new THREE.Scene();
-        // scene.background = new THREE.Color( 0x59472b );
-        // this.scene.fog = new THREE.FogExp2( 0xcccccc, 0.002 );
-
         // RENDERER
-        this.renderer = new THREE.WebGLRenderer( { antialias: true, alpha: true } );
+        this.renderer = new THREE.WebGLRenderer( { antialias: true, alpha: this.sensors.camera } );
         this.renderer.setPixelRatio( window.devicePixelRatio );
         this.renderer.setSize( this.$el.offsetWidth, this.$el.offsetHeight );
         this.$el.appendChild( this.renderer.domElement );
         this.renderer.shadowMap.enabled = true;
-        this.renderer.outputEncoding = THREE.sRGBEncoding;
-
-        // CAMERA
-        this.camera = new THREE.PerspectiveCamera( 60, this.$el.offsetWidth / this.$el.offsetHeight, 1, 1000 );
-        this.camera.position.set( this.isMobile ? this.content.camera.x : -128, this.isMobile ? this.content.camera.y : 129, this.isMobile ? this.content.camera.z : -5 );
-        // CONTROLS
-        if (!this.isMobile) {
-            this.controls = new OrbitControls(this.camera, this.renderer.domElement );
-            this.controls.enableDamping = true;
-            this.controls.dampingFactor = 0.05;
-            this.controls.screenSpacePanning = false;
-            this.controls.minDistance = 2;
-            this.controls.maxDistance = 500;
-            // this.controls.maxPolarAngle = Math.PI / 2;
-        } else {
-            this.controls = new DeviceOrientationControls(this.camera)
-            if (!this.isIOS) this.controls.alphaOffset = - Math.PI / 2
+        if (this.sensors.camera && this.content.id == 'RA-1') {
+          this.renderer.outputEncoding = THREE.sRGBEncoding;
         }
+
+
+        if (!this.sensors.camera) {
+          this.buildScenary()
+        } else {
+          // CAMERA
+          this.camera = new THREE.PerspectiveCamera( 60, this.$el.offsetWidth / this.$el.offsetHeight, 1, 1000 );
+          this.camera.position.set( this.isMobile ? this.content.camera.x : -128, this.isMobile ? this.content.camera.y : 129, this.isMobile ? this.content.camera.z : -5 );
+        }
+
         window.controls = this.controls 
         this.clock = new THREE.Clock()
 
@@ -179,11 +269,34 @@ export default {
         })
         this.scene.add(this.model)
 
+        // CONTROLS
+        if (!this.isMobile || !this.sensors.camera) {
+            this.controls = new OrbitControls(this.camera, this.renderer.domElement );
+            this.controls.enableDamping = true;
+            this.controls.dampingFactor = 0.05;
+            this.controls.screenSpacePanning = false;
+            this.controls.minDistance = 2;
+            this.controls.maxDistance = 500;
+            if (!this.sensors.camera) this.controls.maxPolarAngle = Math.PI / 2;
+        } else {
+            this.controls = new DeviceOrientationControls(this.camera)
+            if (!this.isIOS) this.controls.alphaOffset = - Math.PI / 2
+            
+            const objControls = new ObjectControls(this.camera, this.renderer.domElement, this.model)
+            // objControls.setDistance(8, 200); // set min - max distance for zoom
+            // objControls.setZoomSpeed(5); // set zoom speed
+            objControls.enableVerticalRotation();
+            // objControls.setMaxVerticalRotationAngle(Math.PI / 4, Math.PI / 4);
+            objControls.setRotationSpeed(0.02);
+        }
+
         
         // ANIMATIONS
         const animations = _model.animations
-        this.mixer = new THREE.AnimationMixer( this.model );
-        this.mixer.clipAction( animations[ 0 ] ).play();
+        if (animations && animations.length > 0) {
+          this.mixer = new THREE.AnimationMixer( this.model );
+          this.mixer.clipAction( animations[ 0 ] ).play();
+        }
         
 
         window.addEventListener( 'resize', this.onResizeWindow, false );
@@ -191,45 +304,46 @@ export default {
         // this.stats = new Stats()
         // this.$el.appendChild(this.stats.domElement)
 
-        this.setupLights()
+        if (this.sensors.camera || this.content.id != 'RA-4') this.setupLights()
         this.animate()
         this.$emit('load-complete')
     },
     setupLights(){
-        const ambLight = new THREE.AmbientLight( 0xffffff, this.content.lights.ambientIntensity )
-        this.scene.add( ambLight );
+      const doubleLight =  (!this.sensors.camera && this.content.id == 'RA-1')
+      const ambLight = new THREE.AmbientLight( 0xffffff, doubleLight ? this.content.lights.ambientIntensity * 2 : this.content.lights.ambientIntensity)
+      this.scene.add( ambLight );
 
-        //  SHADOW
-        const pointLight = new THREE.SpotLight( 0xffffff, this.content.lights.pointIntensity );
-        pointLight.position.set( 0, 500, 0 );
-        pointLight.angle = Math.PI * 0.2;
-        pointLight.castShadow = true;
-        pointLight.shadow.camera.near = 200;
-        pointLight.shadow.camera.far = 2000;
-        pointLight.shadow.bias = - 0.000222;
-        pointLight.shadow.mapSize.width = 1024;
-        pointLight.shadow.mapSize.height = 1024;
-        this.scene.add( pointLight );
-        
-       const dirLight = new THREE.DirectionalLight(0xffffff, this.content.lights.directionalIntensity  )
-       this.scene.add(dirLight)
-        var planeGeometry = new THREE.PlaneBufferGeometry( 2000, 2000 );
-        planeGeometry.rotateX( - Math.PI / 2 );
-        var planeMaterial = new THREE.ShadowMaterial( { opacity: 0.15 } );
+      //  SHADOW
+      const pointLight = new THREE.SpotLight( 0xffffff, doubleLight ? this.content.lights.pointIntensity * 2 : this.content.lights.pointIntensity );
+      pointLight.position.set( 0, 500, 0 );
+      pointLight.angle = Math.PI * 0.2;
+      pointLight.castShadow = true;
+      pointLight.shadow.camera.near = 200;
+      pointLight.shadow.camera.far = 2000;
+      pointLight.shadow.bias = - 0.000222;
+      pointLight.shadow.mapSize.width = 1024;
+      pointLight.shadow.mapSize.height = 1024;
+      this.scene.add( pointLight );
+      
+      const dirLight = new THREE.DirectionalLight(0xffffff, doubleLight ? this.content.lights.directionalIntensity * 2 : this.content.lights.directionalIntensity)
+      this.scene.add(dirLight)
+      let planeGeometry = new THREE.PlaneBufferGeometry( 2000, 2000 );
+      planeGeometry.rotateX( - Math.PI / 2 );
+      let planeMaterial = new THREE.ShadowMaterial( { opacity: 0.15 } );
 
-        var plane = new THREE.Mesh( planeGeometry, planeMaterial );
-        // plane.position.y = 0;
-        plane.receiveShadow = true;
-        plane.position.set(0,this.content.shadow.z,0)
-        this.scene.add( plane );
+      let plane = new THREE.Mesh( planeGeometry, planeMaterial );
+      // plane.position.y = 0;
+      plane.receiveShadow = true;
+      plane.position.set(0,this.content.shadow.z,0)
+      this.scene.add( plane );
 
         
     },
     setupGestures(){
 
-      this.$el.addEventListener('touchmove', this.touchDragMove)
-      this.$el.addEventListener('touchend', this.touchDragEnd)
-      this.$el.addEventListener('touchstart', this.touchDragStart)
+      // this.$el.addEventListener('touchmove', this.touchDragMove)
+      // this.$el.addEventListener('touchend', this.touchDragEnd)
+      // this.$el.addEventListener('touchstart', this.touchDragStart)
 
       this.tapPosition = new THREE.Vector2()
 
@@ -258,22 +372,22 @@ export default {
         this.pinchActive = false
       });
 
-      ham.get('rotate').set({ enable: true });
-      ham.on( "rotatemove", ( e ) => {
-        this.pinchActive = true
-        let direction = e.direction
-        let distance = e.distance
-        if ((direction == 2 || direction == 4) && distance > 40) {
-          let rotY = this.iOS ? this.friction : 1.0
-          if (direction == 2) {
-            rotY = this.iOS ? -this.friction : -1.0
-          }
-          let currentRot = new THREE.Vector3(this.model.rotation.x, this.model.rotation.y, this.model.rotation.z)
-          let newRot = new THREE.Vector3(this.model.rotation.x, this.model.rotation.y + rotY, this.model.rotation.z)
-          currentRot.lerp(newRot, 0.1)
-          this.model.rotation.set(currentRot.x, currentRot.y, currentRot.z)
-        }
-      });
+      // ham.get('rotate').set({ enable: true });
+      // ham.on( "rotatemove", ( e ) => {
+      //   this.pinchActive = true
+      //   let direction = e.direction
+      //   let distance = e.distance
+      //   if ((direction == 2 || direction == 4) && distance > 40) {
+      //     let rotY = this.iOS ? this.friction : 1.0
+      //     if (direction == 2) {
+      //       rotY = this.iOS ? -this.friction : -1.0
+      //     }
+      //     let currentRot = new THREE.Vector3(this.model.rotation.x, this.model.rotation.y, this.model.rotation.z)
+      //     let newRot = new THREE.Vector3(this.model.rotation.x, this.model.rotation.y + rotY, this.model.rotation.z)
+      //     currentRot.lerp(newRot, 0.1)
+      //     this.model.rotation.set(currentRot.x, currentRot.y, currentRot.z)
+      //   }
+      // });
 
     },
     touchDragMove(e) {
@@ -341,6 +455,8 @@ export default {
         if (this.model && !this.isDragging && this.content.auto_rotate) this.model.rotation.y += delta * 0.3
 
         if (this.mixer) this.mixer.update( delta );
+
+        if (this.water) this.water.material.uniforms[ 'time' ].value += 1.0 / 60.0;
 
         this.controls?.update()
         

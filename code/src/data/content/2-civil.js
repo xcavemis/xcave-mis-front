@@ -10,9 +10,9 @@ export const civil = {
       scaleFactor: 1,
       auto_rotate: true,
       lights: {
-        ambientIntensity: 1.5,
-        pointIntensity: 1.2,
-        directionalIntensity: 2,
+        ambientIntensity: 0.8,
+        pointIntensity: 0.6,
+        directionalIntensity: 0.8,
       },
       camera: {
         x: 0,

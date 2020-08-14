@@ -4,9 +4,9 @@
       <div class="ar-modal__block">
         <video autoplay="true" muted playsinline width="100%" height="100%" id="video-camera"></video>
         <div class="ar-modal__mask"></div>
-        <Renderer ref="rendererRef" v-if="videoLoaded" :content="content" v-on:load-complete="onModelLoaded"/>
+        <Renderer ref="rendererRef" v-if="videoLoaded" :content="content" :sensors="sensors" v-on:load-complete="onModelLoaded"/>
       </div>
-      <CameraRequestRejection v-if="showRequestWarning"/>
+      <!-- <CameraRequestRejection v-if="showRequestWarning"/> -->
     </div>
     <img class="ar-modal__close" src="~@/assets/images/icons/close.png" @click="hide" alt="Fechar o conteúdo.">
     <Loading ref="arLoadingRef" v-if="loading"/>
@@ -37,6 +37,10 @@ export default {
     return {
       isVideoObject: false,
       showRequestWarning: false,
+      sensors: {
+        camera: false,
+        gyro: false,
+      },
       loading: false,
       videoLoaded: false,
       stream: null,
@@ -81,12 +85,17 @@ export default {
             if (typeof DeviceMotionEvent.requestPermission === 'function') {
             DeviceMotionEvent.requestPermission().then(permissionState => {
                 if (permissionState === 'granted') {
+                  this.sensors.gyro = true
                     // window.addEventListener('deviceorientation', () => {});
                     resolve(true)
                 } else {
-                    resolve(false)
+                  this.sensors.gyro = false
+                  resolve(false)
                 }
-                }).catch(console.error);
+                }).catch(error => {
+                  console.log(error)
+                  this.sensors.gyro = false
+                });
             }
         })
         // console.log('DeviceMotionEvent', DeviceMotionEvent)
@@ -97,22 +106,29 @@ export default {
         const constraints = { video: { facingMode: 'environment' } };
         navigator.mediaDevices.getUserMedia( constraints ).then(( stream ) => {
           this.video.srcObject = stream;
+          this.sensors.camera = true
           this.stream = stream
           this.video.play();
           
-          this.loading = true
-          TweenMax.fromTo('.ar-modal__block', 0.6, { y: '100%' }, { y: '0%', ease: Quad.easeInOut, onComplete: ()=>{
-            this.videoLoaded = true
-            this.$store.dispatch('xr_registered', true)
-          }})
-          TweenMax.set('.ar-modal__mask', { autoAlpha: 0, delay: 0.4 })
+          this.startLoadingScene()
         }).catch(( error ) => {
           this.showRequestWarning = true
+          this.sensors.camera = false
+          this.startLoadingScene()
           console.error( 'Unable to access the camera/webcam.', error );
         });
       } else {
+        this.sensors.camera = false
         console.error( 'MediaDevices interface not available.' );
       }
+    },
+    startLoadingScene(){
+      this.loading = true
+      TweenMax.fromTo('.ar-modal__block', 0.6, { y: '100%' }, { y: '0%', ease: Quad.easeInOut, onComplete: ()=>{
+        this.videoLoaded = true
+        this.$store.dispatch('xr_registered', true)
+      }})
+      TweenMax.set('.ar-modal__mask', { autoAlpha: 0, delay: 0.4 })
     },
     restart(){
       this.video.play();

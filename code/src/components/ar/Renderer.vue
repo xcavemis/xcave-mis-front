@@ -468,10 +468,9 @@ export default {
         this.renderer?.render(this.scene, this.camera);
     },
     onResizeWindow() {
-      if (this.camera) this.camera.updateProjectionMatrix();
       
-      const w = this.$el.innerWidth
-      const h = this.$el.innerHeight
+      const w = this.$el.offsetWidth
+      const h = this.$el.offsetHeight
       if (this.renderer) this.renderer.setSize(w, h );
       if (this.composer) this.composer.setSize(w, h );
       
@@ -482,6 +481,7 @@ export default {
         this.fxaaPass.material.uniforms[ 'resolution' ].value.y = 1 / ( h * pixelRatio );
       }
       
+      if (this.camera) this.camera.updateProjectionMatrix();
 
     },
   },

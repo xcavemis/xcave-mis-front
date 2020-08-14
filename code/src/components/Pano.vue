@@ -44,6 +44,9 @@ export default {
         console.log('content', content)
         if (content.id == 'toggleMap') {
           this.$emit("toggle-map", true)
+        } else if (content.id == 'nextPano' || content.id == 'prevPano') {
+          // let infoData =  this.findContentById(content.id)
+          // this.$emit("info-layer", infoData)
         } else {
           let infoData =  this.findContentById(content.id)
           this.$emit("info-layer", infoData)

@@ -4,6 +4,16 @@ module.exports = {
       filename: '[name].[hash].js'
     },
   },
+  transpileDependencies: [
+    'three',
+    'gsap',
+    'axios',
+    '@vimeo/player',
+    '@panzoom/panzoom',
+    'hammerjs',
+    'splitting',
+    'howler',
+  ],
   devServer: {
     https: true,
   },

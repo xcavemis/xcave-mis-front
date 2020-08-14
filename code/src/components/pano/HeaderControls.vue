@@ -87,7 +87,9 @@ export default {
       }
       this.isUserVisible = !this.isUserVisible
     },
-    goTutorial() {},
+    goTutorial() {
+      this.$emit('go-tutorial')
+    },
     fullscreenChange(e) {
       this.fullscreen = !this.fullscreen;
     },

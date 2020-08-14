@@ -2,7 +2,7 @@
   <div class="experience">
     <!-- <PanolensNew ref="pano" v-if="queueLoaded" v-on:info-layer="onInfoLayer" /> -->
     <Pano ref="pano" v-if="queueLoaded" v-on:toggle-map="toggleMap" v-on:info-layer="onInfoLayer" />
-    <HeaderControls ref="headerControls" v-on:change-pass="onChangePass" v-on:close="changePassClosed"/>
+    <HeaderControls ref="headerControls" v-on:change-pass="onChangePass" v-on:go-tutorial="openTutorial" v-on:close="changePassClosed"/>
     <FooterControls ref="footerControls" v-on:action="onFooterAction" />
     <VideoLive v-if="isVideoLive && !isMobile" video-id="747181165" v-on:close="videoClosed" ref="videoLive" />
     <Video360
@@ -23,6 +23,11 @@
       :video-id="infoModalContent.target"
       v-on:close="videoClosed"
       ref="videoLearn"
+    />
+    <VideoTutorial
+      v-if="isVideoTutorial"
+      v-on:close="videoClosed"
+      ref="videoTutorial"
     />
     <AudioPlayer ref="audioPlayer" v-if="isAudioPlayer" />
     <InfoModal
@@ -57,6 +62,7 @@ import VideoLive from "@/components/VideoLive.vue";
 import Video360 from "@/components/Video360.vue";
 import VideoIntro from "@/components/VideoIntro.vue";
 import VideoLearn from "@/components/VideoLearn.vue";
+import VideoTutorial from "@/components/VideoTutorial.vue";
 import AudioPlayer from "@/components/AudioPlayer.vue";
 import InfoModal from "@/components/InfoModal.vue";
 import Ar from "@/components/Ar.vue";
@@ -71,6 +77,7 @@ export default {
     Video360,
     VideoIntro,
     VideoLearn,
+    VideoTutorial,
     AudioPlayer,
     InfoModal,
     Map,
@@ -82,6 +89,7 @@ export default {
     isVideo360: false,
     isVideoIntro: true,
     isVideoLearn: false,
+    isVideoTutorial: false,
     isInfoModal: false,
     isArModal: false,
     isChangePass: false,
@@ -174,6 +182,7 @@ export default {
       }, 2000)
     },
     videoClosed() {
+      this.isVideoTutorial = false;
       this.isVideoIntro = false;
       this.isVideoLive = false;
       this.isVideo360 = false;
@@ -187,11 +196,21 @@ export default {
       if (this.$refs?.footerControls?.musicPlaying)
         this.$refs?.audioPlayer?.unmute();
     },
+    openTutorial(){
+      return
+      this.isVideoTutorial = true
+      this.$nextTick(() => {
+        if (this.$refs?.footerControls?.musicPlaying) {
+          this.$refs?.audioPlayer?.mute();
+        }
+        this.$refs?.videoTutorial?.show();
+      });
+    },
     changePassClosed() {
       this.isChangePass = false;
     },
     onChangePass() {
-      console.log('onChangePass')
+      // console.log('onChangePass')
       this.isChangePass = true;
       this.$nextTick(()=>{
         this.$refs?.changePass?.show()

@@ -124,14 +124,11 @@ export default {
       const loadQueue = [
         // models
         { name: this.content.id, url: `models/${this.content.model}`, type: this.content.ext },
-        { name: 'hdr', url: `textures/rooitou_park_1k.jpg`, type: 'texture' },
       ]
       if (!this.sensors.camera) {
         loadQueue.push(
           { name: 'ground', url: `textures/grasslight-big.jpg`, type: 'texture' },
-          { name: 'water', url: `textures/Water_1_M_Flow.jpg`, type: 'texture' },
           { name: 'waternormals', url: `textures/waternormals.jpg`, type: 'texture' },
-          { name: 'hardwood', url: `textures/hardwood2_diffuse.jpg`, type: 'texture' },
         )
       }
       this.preloader.queue(loadQueue)

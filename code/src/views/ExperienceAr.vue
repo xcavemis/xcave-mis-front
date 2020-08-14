@@ -106,8 +106,8 @@ export default {
           type: 'ar',
           model: 'bike.gltf',
           ext: 'gltf',
-          scale: 1,
-          scaleFactor: 1,
+          scale: 0.7,
+          scaleFactor: 0.7,
           auto_rotate: true,
           lights: {
             ambientIntensity: 0.8,

@@ -17,11 +17,16 @@
     </div>
     <div class="camera-access-warning" v-if="!sensors.camera"> 
       <div class="camera-access-warning__content">
-          <p class="camera-access-warning__content-text">
-            Esta é uma versão alternativa,<br>para acesso sem o uso de câmera.<br><br>
-            Para acessar a experência completa,<br>habilite o acesso a câmera nas configurações<br>do seu navegador e acesse novamente.  
-          </p> 
-          <a class="default-button white camera-access-warning__content-btn" href="javascript:void(0)" @click="closeWarning">CONTINUAR</a> 
+        <img
+          class="camera-access-warning__logo"
+          src="~@/assets/images/logo-da-vinci.png"
+          alt="LEONARDO DA VINCI – 500 ANOS DE UM GÊNIO"
+        />
+        <p class="camera-access-warning__content-text">
+          Esta é uma versão alternativa,<br>para acesso sem o uso de câmera.<br><br>
+          Para acessar a experiência completa,<br>habilite o acesso a câmera nas configurações<br>do seu navegador e acesse novamente.  
+        </p> 
+        <a class="default-button white camera-access-warning__content-btn" href="javascript:void(0)" @click="closeWarning">CONTINUAR</a> 
       </div>
     </div>
   </div>
@@ -126,6 +131,7 @@ export default {
           { name: 'ground', url: `textures/grasslight-big.jpg`, type: 'texture' },
           { name: 'water', url: `textures/Water_1_M_Flow.jpg`, type: 'texture' },
           { name: 'waternormals', url: `textures/waternormals.jpg`, type: 'texture' },
+          { name: 'hardwood', url: `textures/hardwood2_diffuse.jpg`, type: 'texture' },
         )
       }
       this.preloader.queue(loadQueue)
@@ -142,6 +148,33 @@ export default {
     buildScenary(){
 
       console.log(this.content.id)
+      let sky = new Sky();
+      sky.scale.setScalar( 10000 );
+      this.scene.add( sky );
+
+      let uniforms = sky.material.uniforms;
+
+      uniforms[ 'turbidity' ].value = 3.2;
+      uniforms[ 'rayleigh' ].value = 1.639;
+      uniforms[ 'mieCoefficient' ].value = 0.008;
+      uniforms[ 'mieDirectionalG' ].value = 0.952;
+
+      let parameters = {
+        inclination: 0.4423,
+        azimuth: 0.2472
+      };
+
+      let pmremGenerator = new THREE.PMREMGenerator( this.renderer );
+
+      let sun = new THREE.Vector3();
+      let theta = Math.PI * ( parameters.inclination - 0.5 );
+      let phi = 2 * Math.PI * ( parameters.azimuth - 0.5 );
+
+      sun.x = Math.cos( phi );
+      sun.y = Math.sin( phi ) * Math.sin( theta );
+      sun.z = Math.sin( phi ) * Math.cos( theta );
+
+      sky.material.uniforms[ 'sunPosition' ].value.copy( sun );
       if (this.content.id == 'RA-4') {
         this.camera = new THREE.PerspectiveCamera( 55, window.innerWidth / window.innerHeight, 1, 20000 );
         this.camera.position.set( 30, 80, 200 );
@@ -173,37 +206,9 @@ export default {
 				this.water.rotation.x = - Math.PI / 2;
 
         this.scene.add( this.water );
-        
-        let sky = new Sky();
-				sky.scale.setScalar( 10000 );
-				this.scene.add( sky );
-
-				let uniforms = sky.material.uniforms;
-
-				uniforms[ 'turbidity' ].value = 10;
-				uniforms[ 'rayleigh' ].value = 2;
-				uniforms[ 'mieCoefficient' ].value = 0.005;
-				uniforms[ 'mieDirectionalG' ].value = 0.8;
-
-				let parameters = {
-					inclination: 0.5,
-					azimuth: 0.5
-				};
-
-				let pmremGenerator = new THREE.PMREMGenerator( this.renderer );
-
-        let sun = new THREE.Vector3();
-        let theta = Math.PI * ( parameters.inclination - 0.5 );
-        let phi = 2 * Math.PI * ( parameters.azimuth - 0.5 );
-
-        sun.x = Math.cos( phi );
-        sun.y = Math.sin( phi ) * Math.sin( theta );
-        sun.z = Math.sin( phi ) * Math.cos( theta );
-
-        sky.material.uniforms[ 'sunPosition' ].value.copy( sun );
         this.water.material.uniforms[ 'sunDirection' ].value.copy( sun ).normalize();
 
-        this.scene.environment = pmremGenerator.fromScene( sky ).texture;
+        
       } else {
         this.scene.background = new THREE.Color( 0xcce0ff );
         this.scene.fog = new THREE.Fog( 0xcce0ff, 750, 10000 );
@@ -211,7 +216,7 @@ export default {
         this.camera = new THREE.PerspectiveCamera( 30, window.innerWidth / window.innerHeight, 1, 10000 );
         this.camera.position.set( 1000, 250, 400 );
 
-        const groundTexture = new THREE.TextureLoader().load( 'textures/grasslight-big.jpg' );
+        const groundTexture = new THREE.TextureLoader().load( 'textures/grassdirt-big.jpg' );
         groundTexture.wrapS = groundTexture.wrapT = THREE.RepeatWrapping;
         groundTexture.repeat.set( 25, 25 );
         groundTexture.anisotropy = 16;
@@ -225,6 +230,7 @@ export default {
         mesh.receiveShadow = true;
         this.scene.add( mesh );
       }
+      this.scene.environment = pmremGenerator.fromScene( sky ).texture;
     },
     setupScene(_model) {
         // SCENE
@@ -275,7 +281,7 @@ export default {
             this.controls.dampingFactor = 0.05;
             this.controls.screenSpacePanning = false;
             this.controls.minDistance = 2;
-            this.controls.maxDistance = 500;
+            // this.controls.maxDistance = 500;
             if (!this.sensors.camera) this.controls.maxPolarAngle = Math.PI / 2;
         } else {
             this.controls = new DeviceOrientationControls(this.camera)
@@ -517,9 +523,14 @@ export default {
     background-color: rgba(0,0,0,0.9);
     z-index: 1000;
 
+
     .camera-access-warning__content {
-        width: 100%;
+      width: 100%;
         @include center(absolute);
+        .camera-access-warning__logo {
+          margin: 0 auto 30px auto;
+          width: 35.1vw;
+        }
 
         .camera-access-warning__content-text {
           font-family: $mont-regular;

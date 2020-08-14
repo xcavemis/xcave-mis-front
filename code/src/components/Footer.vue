@@ -14,9 +14,8 @@
       <br>
       A experiência imersiva digital é patrocinada por Cielo e Sabesp; com parceria da TV Cultura; apoio Institucional da Folha; desenvolvimento da experiência digital: Agência EKO e XCAVE Studio; concepção, Grande Exhibitions e Sensory 4 Immersive Experience. Uma realização do MIS Experience e da Secretaria de Economia Criativa do Governo do Estado de São Paulo.
     </p>
-    <a @click="closeFooter">
+    <a @click="closeFooter" class="footer-component__sponsors-close">
       <img
-        class="footer-component__sponsors close"
         src="~@/assets/images/icons/close-info.png"
         alt="Esconder patrocinadores"
       />
@@ -49,7 +48,7 @@ export default {
 .footer-component {
   background-color: $black;
   // padding: 14.1vh 8.27vw 9vh 8.27vw;
-  padding: 2vh 8.27vw 2vh 8.27vw;
+  padding: 6vh 8.27vw 4vh 8.27vw;
   position: relative;
   z-index: 4;
 
@@ -86,12 +85,19 @@ export default {
       bottom: 0;
     }
 
+    .footer-component__sponsors {
+      width: 62vw;
+      margin: 40px auto;
+    }
+
     @include maxWidth(1023) {
       height: calc(100% - 80px);
       overflow-y: auto;
     }
 
-    a {
+
+
+    .footer-component__sponsors-close {
       display: block;
       width: 15px;
       position: absolute;
@@ -99,14 +105,15 @@ export default {
       right: 8vw;
       cursor: pointer;
 
+      img {
+        width: 100%;
+      }
+
       &:hover {
         opacity: 0.7;
       }
       @include maxWidth(768) {
-        a {
-          top: 15vh;
-          width: 32px;
-        }
+        width: 26px;
       }
     }
   }
@@ -141,6 +148,14 @@ export default {
       &.desk {
         display: none;
       }
+    }
+  }
+
+   &__experience {
+
+    .footer-component__sponsors {
+      width: 62vw;
+      margin: 40px auto;
     }
   }
 }

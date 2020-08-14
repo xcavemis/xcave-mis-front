@@ -13,28 +13,17 @@
         <div class="text-masked" v-html="interact_instructions.desktop.line1"></div>
         <div class="text-masked" v-html="interact_instructions.desktop.line2"></div>
       </div>
+
     </div>
-    <!-- <div class="ar-renderer__controls" v-if="!isMobile">
-      <img
-          ref="zoomOutBtn"
-          class="ar-renderer__controls__button-icon"
-          alt="Afastar imagem"
-          @mouseleave="zoomOut($event)"
-          @mousedown="zoomOut($event)"
-          @mouseup="zoomOut($event)"
-          src="~@/assets/images/icons/zoom-out.png"
-      />
-      <input ref="rangeZoom" class="ar-renderer__controls__range-input" type="range" min="0" max="1" step="0.05" value="0"  v-model="sliderZoom">
-      <img
-          ref="zoomInBtn"
-          class="ar-renderer__controls__button-icon"
-          alt="Aproximar imagem"
-          @mouseleave="zoomIn($event)"
-          @mousedown="zoomIn($event)"
-          @mouseup="zoomIn($event)"
-          src="~@/assets/images/icons/zoom-in.png"
-      />
-    </div> -->
+    <div class="camera-access-warning" v-if="!sensors.camera"> 
+      <div class="camera-access-warning__content">
+          <p class="camera-access-warning__content-text">
+            Esta é uma versão alternativa,<br>para acesso sem o uso de câmera.<br><br>
+            Para acessar a experência completa,<br>habilite o acesso a câmera nas configurações<br>do seu navegador e acesse novamente.  
+          </p> 
+          <a class="default-button white camera-access-warning__content-btn" href="javascript:void(0)" @click="closeWarning">CONTINUAR</a> 
+      </div>
+    </div>
   </div>
 </template>
 
@@ -105,12 +94,22 @@ export default {
     show(delay) {
         TweenMax.fromTo(this.model.scale, 0.8, { x: 0, y: 0, z: 0 }, { x: this.content.scale, y: this.content.scale, z: this.content.scale, delay: delay * 0.8, ease: Quad.easeInOut })
         TweenMax.fromTo('.ar-renderer', 0.6, { autoAlpha: 0 }, { autoAlpha: 1, delay: delay, ease: Quad.easeInOut, onComplete: ()=>{
-          TweenMax.to('.tap-instructions__scale-container', 0.6, { autoAlpha: 0, delay: this.isMobile ? 5 : 10, ease: Quad.easeInOut, onComplete: ()=> {
-            this.showInstructions = false
-          }})
+          if (this.sensors.camera) {
+            TweenMax.to('.tap-instructions__scale-container', 0.6, { autoAlpha: 0, delay: this.isMobile ? 5 : 10, ease: Quad.easeInOut, onComplete: ()=> {
+              this.showInstructions = false
+            }})
+          }
         }})
     },
     hide() {
+    },
+    closeWarning(){
+      TweenMax.to('.camera-access-warning', 0.6, { autoAlpha: 0, ease: Quad.easeInOut, onComplete: ()=> {
+        TweenMax.set('.camera-access-warning', { display: 'none' })  
+        TweenMax.to('.tap-instructions__scale-container', 0.6, { autoAlpha: 0, delay: this.isMobile ? 5 : 10, ease: Quad.easeInOut, onComplete: ()=> {
+          this.showInstructions = false
+        }})
+      }})
     },
     setupQueue(){
       this.preloader = new Preloader()
@@ -210,7 +209,7 @@ export default {
         this.scene.fog = new THREE.Fog( 0xcce0ff, 750, 10000 );
 
         this.camera = new THREE.PerspectiveCamera( 30, window.innerWidth / window.innerHeight, 1, 10000 );
-        this.camera.position.set( 1000, 250, 250 );
+        this.camera.position.set( 1000, 250, 400 );
 
         const groundTexture = new THREE.TextureLoader().load( 'textures/grasslight-big.jpg' );
         groundTexture.wrapS = groundTexture.wrapT = THREE.RepeatWrapping;
@@ -509,6 +508,33 @@ export default {
   background-color: transparent;
   z-index: 10;
   opacity: 0;
+
+  .camera-access-warning {
+    @include set-size(100%, 100%);
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: rgba(0,0,0,0.9);
+    z-index: 1000;
+
+    .camera-access-warning__content {
+        width: 100%;
+        @include center(absolute);
+
+        .camera-access-warning__content-text {
+          font-family: $mont-regular;
+          @include font-size(16);
+          line-height: 24px;;
+          color: $white;
+        }
+
+        .camera-access-warning__content-btn {
+          width: 150px;
+          display: block;
+          margin: 32px auto;
+        }
+      }
+    }
 
 
   .tap-instructions__scale-container{

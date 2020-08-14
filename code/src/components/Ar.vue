@@ -1,5 +1,6 @@
 <template>
   <div class="ar-modal user-action-none">
+    <div class="modal-close-hit" @click="hide"></div>
     <div class="ar-modal__crop">
       <div class="ar-modal__block">
         <video autoplay="true" muted playsinline width="100%" height="100%" id="video-camera"></video>

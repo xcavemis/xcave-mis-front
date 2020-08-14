@@ -2,11 +2,10 @@
     <div class="video-learn">
         <section class="video-learn__content">
             <div class="modal-close-hit" @click="hide"></div>
-                <!-- :src="`https://player.vimeo.com/video/${videoId}`"  -->
             <iframe
                 ref="videoPlayer"
+                :src="`https://player.vimeo.com/video/${videoId}`" 
                 class="video-learn__iframe" 
-                :src="`https://player.vimeo.com/video/282358239`" 
                 width="1280" 
                 height="720" 
                 frameborder="0" 

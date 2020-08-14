@@ -43,6 +43,7 @@
                         <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 100 100">
                             <path id="circle" fill="none" stroke="#FFFFFF" stroke-miterlimit="10" d="M50,2.9L50,2.9C76,2.9,97.1,24,97.1,50v0C97.1,76,76,97.1,50,97.1h0C24,97.1,2.9,76,2.9,50v0C2.9,24,24,2.9,50,2.9z"/>
                         </svg>
+                        <div class="loader-2 center" v-if="audioLoading"><span></span></div>
                         AUDIO GUIA
                     </a>
                 </div>
@@ -76,6 +77,7 @@ export default {
         circle: null,
         circleLength: 0,
         isInstructions: true,
+        audioLoading: false,
         imageLoading: true,
         isMobile: navigator.userAgent.toLowerCase().match(/mobile/i),
         isIOS: /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream,
@@ -87,6 +89,9 @@ export default {
         '$store.getters.audioTime': function(val, old) {
             if (val != old) {
                 let calc = this.circleLength - ( val * this.circleLength );
+                if (calc > 0) {
+                    this.audioLoading = false
+                }
                 this.circle.setAttribute('stroke-dashoffset', calc)
             }
         },
@@ -235,6 +240,7 @@ export default {
             
         },
         togglePlay(){
+            this.audioLoading = true
             this.$emit(`${this.isPlaying ? 'pause' : 'play'}-audio`)
             this.isPlaying = !this.isPlaying
         },
@@ -562,5 +568,82 @@ export default {
             }
         }
     }
+
+    
+}
+
+/* Loader 2 */
+.loader-2 {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: block;
+	height: 32px;
+	width: 32px;
+	-webkit-animation: loader-2-1 3s linear infinite;
+	        animation: loader-2-1 3s linear infinite;
+}
+@-webkit-keyframes loader-2-1 {
+	0%   { -webkit-transform: rotate(0deg); }
+	100% { -webkit-transform: rotate(360deg); }
+}
+@keyframes loader-2-1 {
+	0%   { transform: rotate(0deg); }
+	100% { transform: rotate(360deg); }
+}
+.loader-2 span {
+	display: block;
+	position: absolute;
+	top: 0; left: 0;
+	bottom: 0; right: 0;
+	margin: auto;
+	height: 32px;
+	width: 32px;
+	clip: rect(16px, 32px, 32px, 0);
+	-webkit-animation: loader-2-2 1.5s cubic-bezier(0.770, 0.000, 0.175, 1.000) infinite;
+	        animation: loader-2-2 1.5s cubic-bezier(0.770, 0.000, 0.175, 1.000) infinite;
+}
+@-webkit-keyframes loader-2-2 {
+	0%   { -webkit-transform: rotate(0deg); }
+	100% { -webkit-transform: rotate(360deg); }
+}
+@keyframes loader-2-2 {
+	0%   { transform: rotate(0deg); }
+	100% { transform: rotate(360deg); }
+}
+.loader-2 span::before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0; left: 0;
+	bottom: 0; right: 0;
+	margin: auto;
+	height: 32px;
+	width: 32px;
+	border: 3px solid transparent;
+	border-top: 3px solid #FFF;
+	border-radius: 50%;
+	-webkit-animation: loader-2-3 1.5s cubic-bezier(0.770, 0.000, 0.175, 1.000) infinite;
+	        animation: loader-2-3 1.5s cubic-bezier(0.770, 0.000, 0.175, 1.000) infinite;
+}
+@-webkit-keyframes loader-2-3 {
+	0%   { -webkit-transform: rotate(0deg); }
+	100% { -webkit-transform: rotate(360deg); }
+}
+@keyframes loader-2-3 {
+	0%   { transform: rotate(0deg); }
+	100% { transform: rotate(360deg); }
+}
+.loader-2 span::after {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0; left: 0;
+	bottom: 0; right: 0;
+	margin: auto;
+	height: 32px;
+	width: 32px;
+	border: 3px solid rgba(255, 255, 255, .5);
+	border-radius: 50%;
 }
 </style>

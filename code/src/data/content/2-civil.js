@@ -4,7 +4,7 @@ export const civil = {
       id: "RA-1",
       title: "Realidade Aumentada",
       type: 'ar',
-      model: 'Drum.gltf',
+      model: 'bike.gltf',
       ext: 'gltf',
       scale: 1,
       scaleFactor: 1,

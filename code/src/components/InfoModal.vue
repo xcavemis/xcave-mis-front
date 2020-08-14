@@ -1,5 +1,6 @@
 <template>
     <div class="info-modal">
+        <div class="modal-close-hit" @click="hide"></div>
         <div class="info-modal__crop">
             <section class="info-modal__block">
                 <div class="info-modal__preview">

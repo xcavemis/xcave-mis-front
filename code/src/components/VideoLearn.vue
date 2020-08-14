@@ -1,9 +1,12 @@
 <template>
     <div class="video-learn">
         <section class="video-learn__content">
+            <div class="modal-close-hit" @click="hide"></div>
+                <!-- :src="`https://player.vimeo.com/video/${videoId}`"  -->
             <iframe
+                ref="videoPlayer"
                 class="video-learn__iframe" 
-                :src="`https://player.vimeo.com/video/${videoId}`" 
+                :src="`https://player.vimeo.com/video/282358239`" 
                 width="1280" 
                 height="720" 
                 frameborder="0" 
@@ -29,9 +32,22 @@
 
 <script>
 import { TweenMax, Quad } from 'gsap';
-
+import Player from '@vimeo/player';
 export default {
     props: ['videoId'],
+    data:() => ({
+        player: null
+    }),
+    mounted(){
+        this.player = new Player(this.$refs.videoPlayer, {
+            loop: false,
+            autoplay: true
+        });
+
+        this.player.on('play', () => {});
+        this.player.on('ended', this.hide);
+        this.player.setLoop(false).then(function(loop) {});
+    },
     methods: {
         show() {
             TweenMax.set('.video-learn__iframe', { display: 'block' })
@@ -73,6 +89,12 @@ export default {
             transform: translateY(100%);
             z-index: 1;
             margin: 80px auto;
+            min-height: 535px;
+            max-width: 1060px;
+
+            @include minWidth(1680) {
+                max-width: 1280px;
+            }
             
         }
     

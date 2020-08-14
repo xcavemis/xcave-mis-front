@@ -1,6 +1,7 @@
 <template>
     <div class="video-live">
         <section class="video-live__content">
+            <div class="modal-close-hit" @click="hide"></div>
             <!-- <div class="video-live__iframe" v-html="embedPlayer"></div> -->
             <div class="video-live__iframe" ref="iframeContainer"></div>
 

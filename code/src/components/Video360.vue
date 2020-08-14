@@ -1,6 +1,7 @@
 <template>
     <div class="video-pano">
         <section class="video-pano__content">
+            <div class="modal-close-hit" @click="hide"></div>
             <div class="video-mask">
                 <iframe 
                     class="video-pano__iframe"

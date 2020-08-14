@@ -37,6 +37,12 @@ body, html {
 		min-width: 100%;
 	}
 }
+
+.modal-close-hit{
+	@include set-size(100%, 100%);
+	@include center(absolute);
+	background-color: transparent;
+}
 .interface {
 	-moz-user-select: none;
 	-webkit-user-select: none;

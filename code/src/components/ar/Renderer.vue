@@ -281,7 +281,7 @@ export default {
             this.controls.dampingFactor = 0.05;
             this.controls.screenSpacePanning = false;
             this.controls.minDistance = 2;
-            // this.controls.maxDistance = 500;
+            this.controls.maxDistance = 1500;
             if (!this.sensors.camera) this.controls.maxPolarAngle = Math.PI / 2;
         } else {
             this.controls = new DeviceOrientationControls(this.camera)

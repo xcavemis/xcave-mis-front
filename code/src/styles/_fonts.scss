@@ -88,5 +88,23 @@
     font-display: swap;
 }
 
+@font-face {
+    font-family: 'TrajanBold';
+    src: url('~@/assets/fonts/TrajanPro-Bold.woff2') format('woff2'),
+        url('~@/assets/fonts/TrajanPro-Bold.woff') format('woff');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'TrajanRegular';
+    src: url('~@/assets/fonts/TrajanPro-Regular.woff2') format('woff2'),
+        url('~@/assets/fonts/TrajanPro-Regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
 
 

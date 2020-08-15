@@ -303,6 +303,7 @@ export default {
                 .info-modal__preview-image {
                     @include set-size(auto, auto);
                     opacity: 0;
+                    display: block;
                     @include minWidth(1023) {
                         // transition: transform 0.1s linear !important, left 0.1s linear !important;
                         // -webkit-transition: transform 0.1s linear !important, left 0.1s linear !important;
@@ -433,7 +434,7 @@ export default {
                 text-align: left;
                 position: relative;
                 .info-modal__content-title {
-                    font-family: $gar-bold;
+                    font-family: $traj-bold;
                     @include font-size(24);
                     color: $black;
                     margin-top: 0;

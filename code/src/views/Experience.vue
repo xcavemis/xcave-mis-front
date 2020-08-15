@@ -197,7 +197,6 @@ export default {
         this.$refs?.audioPlayer?.unmute();
     },
     openTutorial(){
-      return
       this.isVideoTutorial = true
       this.$nextTick(() => {
         if (this.$refs?.footerControls?.musicPlaying) {

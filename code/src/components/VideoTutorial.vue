@@ -4,7 +4,7 @@
             <div class="modal-close-hit" @click="hide"></div>
             <iframe
                 ref="videoPlayer"
-                src="https://player.vimeo.com/video/282358239" 
+                src="https://player.vimeo.com/video/448012777" 
                 class="video-tutorial__iframe" 
                 width="1280" 
                 height="720" 

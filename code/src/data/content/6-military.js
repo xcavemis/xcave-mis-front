@@ -10,9 +10,9 @@ export const military = {
         scaleFactor: 0.01,
         auto_rotate: true,
         lights: {
-          ambientIntensity: 0.6,
-          pointIntensity: 0.1,
-          directionalIntensity: 0.5,
+          ambientIntensity: 1.3,
+          pointIntensity: 0.5,
+          directionalIntensity: 0.8,
         },
         camera: {
           x: 0,

@@ -320,7 +320,7 @@ export default {
   
   @include maxWidth(1024) {
     max-height: inherit;
-    @include set-size(95vw, 70vh);
+    @include set-size(95vw, 75vh);
     z-index: 1000;
     .auth-header {
       margin: 30px auto 0 auto;
@@ -330,6 +330,7 @@ export default {
       overflow: scroll;
       .auth-container__block {
         width: 90%;
+        max-width: 470px;
         margin: 40px auto 0;
         position: relative;
         transform: inherit;
@@ -346,6 +347,7 @@ export default {
       margin-bottom: 15px;
     }
   }
+  
   @include maxWidth(375) {
     .auth-header {
       margin: 20px auto 0 auto;
@@ -387,6 +389,10 @@ export default {
   @include maxWidth(1023) {
     @include set-size(95vw, 75vh);
     min-height: 75vh;
+  }
+
+  @include maxWidth(414) {
+    @include set-size(95vw, 77vh);
   }
 
   @include maxWidth(375) {

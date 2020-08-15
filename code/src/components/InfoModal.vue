@@ -534,7 +534,7 @@ export default {
 
         @include maxWidth(1024) {
             @include set-size(95vw, 95%);
-
+            max-width: 630px;
             .info-modal__block {
                 justify-content: space-around;
                  align-items: flex-start;

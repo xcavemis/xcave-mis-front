@@ -276,7 +276,7 @@ export default {
     opacity: 0;
   }
 
-  @include maxWidth(1024) {
+  @include maxWidth(1023) {
 
     .login-comp__form {
       margin-bottom: 25px;

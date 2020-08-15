@@ -23,7 +23,7 @@
         <img v-if="!liveEnabled" class="footer-controls__button-icon" src="~@/assets/images/icons/play-small-disable.png" />
         <span class="footer-controls__button-label">Live MIS</span>
         <!-- <span v-if="!liveEnabled" class="live-status"><span class="desc">PRÓXIMA SESSÃO</span> {{liveStatus}}</span> -->
-        <span v-if="!liveEnabled" class="live-status"><span class="desc">NENHUMA SEÇÃO ATIVA</span></span>
+        <span v-if="!liveEnabled" class="live-status"><span class="desc">NENHUMA SESSÃO ATIVA</span></span>
         <span v-if="liveEnabled && $store.getters.period" class="live-status live-enabled">{{liveStatus}}</span>
       </div>
     </div>
@@ -294,7 +294,7 @@ export default {
     pointer-events: none;
   }
 
-  @include maxWidth(1023) {
+  @include maxWidth(1024) {
     background-color: $black;
   }
 
@@ -525,6 +525,7 @@ export default {
       .footer-controls__right-group {
         .footer-controls__button-icon {
           @include set-size(50vw, auto);
+          max-width: 290px;
         }
       }
     }

@@ -163,6 +163,10 @@ export default {
     .header-controls__logo {
       width: 100%;
       margin: 0 auto;
+
+      @include maxWidth(1024) {
+        max-width: 330px;
+      }
     }
   }
   .header-controls__center {
@@ -251,16 +255,13 @@ export default {
       }
     }
   }
+  
   @include maxWidth(1024) {
     justify-content: space-between;
     align-items: flex-start;
 
     .header-controls__mobile {
-      display: block;
-      position: absolute;
-      top: 90px;
-      width: 90%;
-      left: 5%;
+      display: none;
     }
     .header-controls__left {
       width: 45%;
@@ -289,8 +290,22 @@ export default {
         }
       }
     }
+  }
 
-
+  @include maxWidth(768) {
+    .header-controls__mobile {
+      display: block;
+      position: absolute;
+      top: 130px;
+      width: 90%;
+      left: 5%;
+    }
+  }
+  @include maxWidth(767) {
+    .header-controls__mobile {
+      position: absolute;
+      top: 90px;
+    }
   }
 }
 </style>

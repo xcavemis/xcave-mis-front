@@ -62,12 +62,10 @@
           >COMPRAR INGRESSO</a>
         </div>
       </div>
-      <img class="third-step__ad" src="~@/assets/images/adcontainer_vert.png" v-if="!isMobile" />
+      <img class="third-step__ad desk" src="~@/assets/images/adcontainer_vert.png" />
       <img
-        class="third-step__ad"
-        :class="{isMobile: isMobile}"
+        class="third-step__ad mob"
         src="~@/assets/images/adcontainer_hor.png"
-        v-else
       />
     </section>
     <!-- <section class="home-step sponsors">
@@ -217,14 +215,16 @@ export default {
     opacity: 0;
 
     @include maxWidth(1366) {
-      width: 160px;
+      width: 240px;
     }
 
     @include maxWidth(768) {
       @include center-x(absolute);
+      top: 130px;
     }
-    @include maxHeight(640) {
+    @include maxHeight(767) {
       width: 130px;
+      top: 97px;
     }
   }
 
@@ -241,7 +241,7 @@ export default {
       max-width: 480px;
     }
     .first-step__center-content__description {
-      @include font-scale(1366, 1680, 14, 18);
+      @include font-scale(1366, 1680, 14, 17);
       font-family: $rob-regular;
       text-align: center;
       color: $white;
@@ -282,7 +282,7 @@ export default {
       .first-step__center-content__description {
         width: 90%;
         margin: 0 auto;
-        @include font-size(14);
+        @include font-size(13);
         br {
           display: none;
         }
@@ -391,7 +391,7 @@ export default {
       margin-right: 25px;
     }
   }
-  @include maxWidth(1024) {
+  @include maxWidth(1023) {
     height: auto;
     padding: 30px;
     .third-step__center-content {
@@ -443,6 +443,15 @@ export default {
 }
 .third-step__ad {
   &.isMobile {
+    
+  }
+
+  &.desk {
+    display: none;
+  } 
+
+  &.mob {
+    display: block;
     max-width: 730px;
     width: 100%;
   }
@@ -450,6 +459,13 @@ export default {
   @include minWidth(1024) {
     @include center-y(absolute);
     right: 120px;
+
+    &.desk {
+      display: block;
+    } 
+    &.mob {
+      display: none;
+    } 
   }
 }
 

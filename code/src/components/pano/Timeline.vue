@@ -111,7 +111,10 @@ export default {
       }
     }
 
-    @include maxWidth(1024) {
+    @include maxWidth(1023) {
+      @include set-size(6vw, 5vw);
+    }
+    @include maxWidth(767) {
       @include set-size(10vw, 5vw);
     }
     

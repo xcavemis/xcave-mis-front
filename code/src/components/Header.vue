@@ -110,7 +110,7 @@
 }
 @media only screen and (max-width: 992px) {
   .governo-top-btn {
-    margin: 7px 0 0;
+    margin: 7px 10px 0 0;
     font-size: 10px;
     float: right;
   }
@@ -128,6 +128,8 @@
   max-width: 100%;
   @include maxWidth(768) {
     margin: 10px 0 0;
+    width: 380px;
+    float: right;
   }
 }
 .governo-top .gov-social ul li {

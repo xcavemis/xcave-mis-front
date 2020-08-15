@@ -121,14 +121,14 @@ export default {
   },
   methods: {
     onVideoIntroPlayed(e) {
-      console.log('onVideoIntroPlayed')
+      // console.log('onVideoIntroPlayed')
       this.queueLoaded = true
     },
     onVideoIntroEnded(e) {
       this.videoEnded = true;
     },
     panoGoTo(id) {
-      console.log('panoGoTo', id)
+      // console.log('panoGoTo', id)
       this.$refs?.pano?.goToScene(id);
     },
     mapClosed() {
@@ -222,7 +222,7 @@ export default {
       });
     },
     onInfoLayer(params) {
-      console.log("onInfoLayer", params);
+      // console.log("onInfoLayer", params);
       if (params.type == "content") {
         this.infoModalContent = params;
         this.isInfoModal = true;

@@ -1,10 +1,13 @@
 <template>
   <div class="footer-controls">
-    <!-- <a
-      class="default-button footer-controls__logout white"
-      href="javascript:void(0)"
-      @click="logout"
-    >SAIR DA EXPERIÊNCIA</a> -->
+    <div class="footer-controls__console" v-if="isLiveShow && liveEnabled">
+      <p class="footer-controls__console-text">
+        UMA LIVE COM ORIENTADORES<br>
+        DO MIS ESTÁ ACONTENDO<br>
+        NESSE MOMENTO.
+      </p>
+      <a class="footer-controls__console-button" href="javascript:void(0)">ENTRAR NA LIVE</a>
+    </div>
     <div class="footer-controls__grad"></div>
     <div class="footer-controls__left">
       <div class="footer-controls__left-button audio-button" @click="toggleMusic">
@@ -282,6 +285,54 @@ export default {
   z-index: 3;
   pointer-events: none;
   touch-action: none;
+
+  .footer-controls__console{
+    position: absolute;
+    left: 20px;
+    top: calc(-100% - 40px);
+    text-align: left;
+
+    .footer-controls__console-text{
+      position: relative;
+      padding-left: 15px;
+      @include font-size(10);
+      font-family: $mont-medium;
+      color: $white;
+      text-shadow: 0px 0px 4px rgba(0,0,0,0.8);
+      
+
+      &:before {
+        content: "";
+        @include set-size(10px, 10px);
+        border-radius: 50%;
+        position: absolute;
+        top: 7px;
+        left: 0px;
+        background-color: #b00000;
+        animation: pulseLive 1.4s infinite;
+      }
+    }
+    .footer-controls__console-button{
+      @include font-size(9);
+      font-family: $mont-regular;
+      color: $white;
+      text-align: left;
+      border: 2px solid #ac7d3a;
+      padding: 5px 10px;
+      border-radius: 6px;
+      margin-left: 15px;
+      transition: all 0.6s;
+      pointer-events: all;
+      touch-action: initial;
+      text-shadow: 0px 0px 4px rgba(0,0,0,0.5);
+      &:hover {
+        background-color: #ac7d3a;
+        color: $black;
+        text-shadow: 0px 0px 4px rgba(0,0,0,0);
+      }
+    }
+
+  }
   
   .footer-controls__grad {
     @include set-size(100%, 7px);
@@ -357,18 +408,6 @@ export default {
           left: 0px;
           background-color: #b00000;
           animation: pulseLive 1.4s infinite;
-        }
-
-        @keyframes pulseLive {
-          0% {
-            transform: translateY(-50%) scale(1)
-          }
-          50% {
-            transform: translateY(-50%) scale(0.8)
-          }
-          100% {
-            transform: translateY(-50%) scale(1)
-          }
         }
       }
 
@@ -636,6 +675,18 @@ export default {
   }
   to {
     height: 15px;
+  }
+}
+
+@keyframes pulseLive {
+  0% {
+    transform: translateY(-50%) scale(1)
+  }
+  50% {
+    transform: translateY(-50%) scale(0.8)
+  }
+  100% {
+    transform: translateY(-50%) scale(1)
   }
 }
 </style>

@@ -2,7 +2,7 @@
   <div class="pano-comp">
       <!-- :src="`http://169.254.189.77:8081/index.html#media=${panoIndex}`" -->
     <iframe 
-      :src="`https://hml.exposicaodavinci500anos.com.br/assets/panorama-view/index.html#media=${panoIndex}`"
+      :src="`https://hml.exposicaodavinci500anos.com.br/assets/pano-viewer/index.html#media=${panoIndex}`"
       class="pano-comp__iframe"
       width="100%" 
       height="100%" 
@@ -31,7 +31,7 @@ export default {
   watch: {
     "$store.getters.navigateToPano": function (val, old) {
       if (val != old) {
-        console.log('navigateToPano', val)
+        // console.log('navigateToPano', val)
         this.goToScene(val)
       }
     },
@@ -41,7 +41,7 @@ export default {
       
       if(typeof event.data === 'string' && event.data.indexOf('id') > -1) {
         let content = JSON.parse(event.data)
-        console.log('content', content)
+        // console.log('content', content)
         if (content.id == 'toggleMap') {
           this.$emit("toggle-map", true)
         } else if (content.id == 'nextPano' || content.id == 'prevPano') {
@@ -62,7 +62,7 @@ export default {
       this.panoIndex = id
     },
     findContentById(id) {
-      console.log('findContentById: ', data)
+      // console.log('findContentById: ', data)
       for (let i = 0; i < data.scenes.length; i++) {
         if (data.scenes[i].id === id) {
           return data.scenes[i];

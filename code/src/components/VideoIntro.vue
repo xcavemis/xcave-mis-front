@@ -52,7 +52,7 @@ export default {
             });
 
             this.player.getDuration().then((seconds) => { this.videoDuration = seconds })
-            // this.player.setCurrentTime(90).then(function(seconds) {})
+            // this.player.setCurrentTime(93).then(function(seconds) {})
 
             // this.player.getVideoTitle().then(function(title) {
             //     console.log('title:', title);

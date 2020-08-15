@@ -1,10 +1,8 @@
 <template>
   <div class="footer-component" :class="{'footer-component__experience': $route.name == 'Experience'}">
-    <div class="footer-component__line" :class="{'experience': $route.name == 'Experience'}"></div>
+    <div class="footer-component__line" :class="{'experience': $route.name == 'Experience'}" v-if="$route.name != 'Experience'"></div>
+    <h3 class="footer-component__title" v-if="$route.name == 'Experience'">EXPERIÊNCIA IMERSIVA DIGITAL:<br><strong>LEONARDO DA VINCI – 500 ANOS DE UM GÊNIO</strong></h3>
     <p class="footer-component__description" v-if="$route.name == 'Experience'">
-      <br>
-      EXPERIÊNCIA IMERSIVA DIGITAL: <strong>LEONARDO DA VINCI – 500 ANOS DE UM GÊNIO</strong>
-      <br>
       <br>
       O MIS Experience, instituição da Secretaria de Cultura e Economia Criativa do Governo do Estado de São Paulo, inaugura a experiência imersiva digital <strong>Leonardo da Vinci – 500 Anos de um Gênio</strong>. Uma plataforma que possibilita ao visitante conhecer a vida e o legado de Da Vinci por meio de uma experiência interativa inédita no país.
       <br>
@@ -68,6 +66,25 @@ export default {
     strong{
       font-family: $rob-bold;
     }
+
+  }
+  .footer-component__title {
+    text-align: left;
+    @include font-scale(1366, 1680, 24, 32);
+    font-family: $gar-bold;
+    color: $white;
+    width: 62vw;
+    margin: 0 auto;
+
+    @include maxWidth(1023) {
+      width: 90vw;
+      padding-top: 11vh;
+      font-size: 16px;
+    }
+
+    strong{
+      font-family: $gar-bold;
+    }
   }
   a {
     display: none;
@@ -101,8 +118,8 @@ export default {
       display: block;
       width: 15px;
       position: absolute;
-      top: 16px;
-      right: 8vw;
+      top: 32px;
+      right: 32px;
       cursor: pointer;
 
       img {

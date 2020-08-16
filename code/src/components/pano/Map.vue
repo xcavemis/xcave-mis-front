@@ -26,7 +26,14 @@
             <div class="map-comp__text">
                 <img class="info-modal__close" src="~@/assets/images/icons/close-info.png" @click="hide" alt="Fechar o conteúdo.">
                 <h3 class="map-comp__text-title">MAPA INTERATIVO</h3>
-                <p class="map-comp__text-description">Lorem ipsim</p>
+                <p class="map-comp__text-description">
+                    Você pode navegar por todas as áreas da exposição digital através do mapa interativo ao lado.<br><br>
+                    Basta clicar em qualquer um dos pontos ilustrados e você será transportado diretamente para qualquer localização da exposição.<br><br>
+                    Inspire-se com os Códices, ou com as geniais Invenções da area Civil.<br>
+                    Na Galeria Mista onde você pode conhecer além de outras famosas invenções, pinturas e trabalhos de engenharia e anatomia.<br>
+                    Na área Sensorial você pode vivenciar vídeos imersivos.<br>
+                    Conheça também os projetos militares, e finalmente desvende os segredos da Mona Lisa.<br>
+                </p>
             </div>
         </div>
     </div>
@@ -229,12 +236,11 @@ export default {
 
         .map-comp__text-description {
             font-family: $mont-medium;
-            @include font-size(13);
+            @include font-size(14);
             line-height: 20px;
             color: $black;
-            height: 72%;
-            overflow-x: hidden;
-            overflow-y: scroll;
+            height: 90%;
+            overflow: hidden;
             padding-right: 30px;
 
             // @include minHeight(730) {

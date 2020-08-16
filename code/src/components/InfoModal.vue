@@ -434,7 +434,7 @@ export default {
                 text-align: left;
                 position: relative;
                 .info-modal__content-title {
-                    font-family: $traj-bold;
+                    font-family: $gar-bold;
                     @include font-size(24);
                     color: $black;
                     margin-top: 0;

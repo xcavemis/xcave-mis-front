@@ -29,7 +29,14 @@
         />
       </div>
       <div class="header-controls__right-user" @click="toggleUser">
-        <h5 class="user-name">{{userName}}</h5>
+        <h5 class="user-name">
+          {{userName}}
+          <img
+            class="icon-small"
+            alt="Abrir o rodapé"
+            src="~@/assets/images/icons/arrow-up-small.png"
+          />
+        </h5>
         <div class="user-container">
           <a
             class="default-button header-controls__right-logout white change-pass"
@@ -78,8 +85,10 @@ export default {
     toggleUser(e){
       if (!this.isUserVisible) {
         TweenMax.set('.user-container', { display: 'block' })
+        this.$el.querySelector('.icon-small').classList.add('opened')
         TweenMax.fromTo('.user-container', 0.6, { autoAlpha: 0 }, { autoAlpha: 1, ease: Quad.easeInOut })
       } else {
+        this.$el.querySelector('.icon-small').classList.remove('opened')
         TweenMax.fromTo('.user-container', 0.6, { autoAlpha: 1 }, { autoAlpha: 0, ease: Quad.easeInOut, onComplete: ()=> {
           TweenMax.set('.user-container', { display: 'none' })
         }})
@@ -216,6 +225,21 @@ export default {
         color: $white;
         margin-right: 15px;
         text-shadow: 0px 0px 4px #000000;
+        position: relative;
+        padding-left: 15px;
+        .icon-small {
+          position: absolute;
+          @include set-size(9px, 6px);
+          cursor: pointer;
+          opacity: 1;
+          top: 0;
+          left: 0px;
+          transform: rotate(180deg) translateY(-50%);
+          transition: transform 0.4s;
+          &.opened {
+            transform: rotate(0deg) translateY(50%);
+          }
+        }
       } 
       
       .user-container { 

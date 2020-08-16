@@ -112,14 +112,10 @@ export default {
     }
 
     @include maxWidth(1023) {
-      @include set-size(6vw, 5vw);
-    }
-    @include maxWidth(767) {
-      @include set-size(10vw, 5vw);
+      @include set-size(5vw, 5vw);
     }
     
     @include maxWidth(375) {
-      @include set-size(32px !important, 15px);
       border: 1px solid $white;
     }
     
@@ -195,6 +191,16 @@ export default {
   .timeline-comp__divide {
     @include set-size(115px, 2px);
     background-color: $white;
+
+    @include maxWidth(1366) {
+      @include set-size(70px, 2px);
+    }
+    @include maxWidth(768) {
+      @include set-size(50px, 2px);
+    }
+    @include maxWidth(375) {
+      @include set-size(40px, 2px);
+    }
   }
 }
 </style>

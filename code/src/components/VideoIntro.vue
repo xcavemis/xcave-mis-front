@@ -44,7 +44,7 @@ export default {
 
             this.player.on('play', () => {
                 if (this.$store.getters.user && this.$store.getters.user.introShow)  {
-                    TweenMax.to('.video-intro__skip-button', 0.6, { display: 'block', autoAlpha: 1, delay: 5 })
+                    TweenMax.to('.video-intro__skip-button', 0.6, { display: 'block', autoAlpha: 1, delay: 2 })
                 }
             });
             this.player.on('ended', this.onVideoEnded);

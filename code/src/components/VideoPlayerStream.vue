@@ -207,6 +207,7 @@ export default {
         },
         ended() {
             // console.log('ended')
+            this.pause()
             if (this.endedCallback) this.endedCallback();
             window.cancelAnimationFrame(this.update);
             this.$emit('close')

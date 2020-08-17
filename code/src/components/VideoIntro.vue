@@ -45,7 +45,7 @@ export default {
         videoDuration: 95,
         currentPoster: require('@/assets/images/intro-poster.jpg'),
         currentManifestKey: 'intro',
-        showControls: true,
+        showControls: false,
         isMobile: navigator.userAgent.toLowerCase().match(/mobile/i),
     }),
     mounted(){
@@ -86,7 +86,7 @@ export default {
             this.$store.commit("navigateToPano", 1);
             TweenMax.fromTo(this.$el, 1, { autoAlpha: 1 }, { autoAlpha: 0, ease: Quad.easeInOut, delay: 1, onComplete: () => {
                 this.$emit('close')
-                TweenMax.set('.governo-top', { zIndex: 5})
+                TweenMax.set('.governo-top', { zIndex: 5 })
             }})
             
         },

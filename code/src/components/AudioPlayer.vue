@@ -11,13 +11,27 @@ export default {
         dynamicSound: null,
         stopTimer: 0,
         updateTimer: 0,
+        tracks: [
+            '/media/audio/main/t1',
+            '/media/audio/main/t2',
+            '/media/audio/main/t3',
+            '/media/audio/main/t4',
+            '/media/audio/main/t5',
+            '/media/audio/main/t6',
+            '/media/audio/main/t7',
+            '/media/audio/main/t8',
+            '/media/audio/main/t9',
+            '/media/audio/main/t10',
+            '/media/audio/main/t11',
+        ],
+        trackIndex: 9,
         isMobile: navigator.userAgent.toLowerCase().match(/mobile/i),
         isIOS: /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream,
     }),
     mounted(){
         if (!this.isMobile) {
             this.mainSound = new Howl({
-                src: [`${this.default}.mp3`, `${this.default}.ogg`],
+                src: [`${this.tracks[this.trackIndex]}.mp3`],
                 autoplay: true,
                 loop: true,
                 volume: 0.4,
@@ -72,7 +86,26 @@ export default {
             })
         },
         onEnded(){
-
+            this.mainSound?.unload()
+            this.$nextTick(()=>{
+                this.trackIndex++
+                if (this.trackIndex == this.tracks.length) this.trackIndex = 0
+                this.mainSound = new Howl({
+                    src: [`${this.tracks[this.trackIndex]}.mp3`],
+                    autoplay: true,
+                    loop: true,
+                    volume: 0.4,
+                });
+                
+                this.mainSound?.play();
+                this.mainSound?.on('load', () => {
+                    // console.log('mainSound load')
+                });
+                this.mainSound?.on('end', () => {
+                    this.onEnded()
+                });
+                console.log('main track update: ', `${this.tracks[this.trackIndex]}.mp3`)
+            })
         },
         mute(){
             this.mainSound?.fade(1, 0, 0)

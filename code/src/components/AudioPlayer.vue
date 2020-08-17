@@ -11,6 +11,7 @@ export default {
         dynamicSound: null,
         stopTimer: 0,
         updateTimer: 0,
+        muted: false,
         tracks: [
             '/media/audio/main/t1',
             '/media/audio/main/t2',
@@ -94,7 +95,7 @@ export default {
                     src: [`${this.tracks[this.trackIndex]}.mp3`],
                     autoplay: true,
                     loop: true,
-                    volume: 0.4,
+                    volume: this.muted ? 0 : 0.4,
                 });
                 
                 this.mainSound?.play();
@@ -104,13 +105,15 @@ export default {
                 this.mainSound?.on('end', () => {
                     this.onEnded()
                 });
-                console.log('main track update: ', `${this.tracks[this.trackIndex]}.mp3`)
+                // console.log('main track update: ', `${this.tracks[this.trackIndex]}.mp3`)
             })
         },
         mute(){
+            this.muted = true
             this.mainSound?.fade(1, 0, 0)
         },
         unmute(){
+            this.muted = false
             this.mainSound?.fade(0, 0.4, 0)
         },
         destroyDynamic(){

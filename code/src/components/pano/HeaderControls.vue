@@ -168,6 +168,7 @@ export default {
 
   .header-controls__left {
     width: 16.1%;
+    padding-left: 15px;
 
     .header-controls__logo {
       width: 100%;

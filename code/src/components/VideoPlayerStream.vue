@@ -9,6 +9,7 @@
       loop="false"
     ></video>
     <!-- <img src="assets/images/loading.gif" alt="Airmax cloud" class="video-player__anim-container">   -->
+    <img :src="poster" alt="" class="video-player__poster">
     <img src="~@/assets/images/icons/play-big.png" alt="" class="video-player__play-icon" @click="firstPlay">
     <div class="video-controls" v-if="controls">
         <div class="video-controls__buttons" >
@@ -78,10 +79,10 @@ export default {
         },
         async initPlayer() {
             const support = await shaka.Player.probeSupport();
-            console.log('initPlayer', support)
+            // console.log('initPlayer', support)
             // const manifestUri = `/dash/${this.manifestKey}/manifest${support.manifest.mpd ? '.mpd' : '.m3u8'}`;
             const manifestUri = `https://hml.exposicaodavinci500anos.com.br/assets/videos/dash/${this.manifestKey}/manifest${support.manifest.mpd ? '.mpd' : '.m3u8'}`;
-            console.log('initPlayer manifestUri', manifestUri)
+            // console.log('initPlayer manifestUri', manifestUri)
             // console.log(support)
             // Create a Player instance.
             this.shakaPlayer = new shaka.Player(this.$refs.video);
@@ -138,6 +139,7 @@ export default {
             this.seek(timePercentage);
         },
         firstPlay(){
+            TweenMax.to('.video-player__poster', 0.6, { autoAlpha: 0, ease: Quad.easeInOut })
             this.$emit('played')
             if (this.controls) {
                 this.togglePlay()
@@ -246,6 +248,14 @@ export default {
   left: 0;
   z-index: 4;
   background-color: $black;
+}
+
+.video-player__poster {
+    @include set-size(100%, 100%);
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: $black;
 }
 
 .video-player__play-icon {

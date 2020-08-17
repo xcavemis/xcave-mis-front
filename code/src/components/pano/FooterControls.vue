@@ -1,12 +1,12 @@
 <template>
   <div class="footer-controls">
-    <div class="footer-controls__console" v-if="isLiveShow && liveEnabled">
+    <div class="footer-controls__console" v-if="isLiveShow && liveEnabled && $store.getters.period">
       <p class="footer-controls__console-text">
         UMA LIVE COM ORIENTADORES<br>
         DO MIS ESTÁ ACONTENDO<br>
         NESSE MOMENTO.
       </p>
-      <a class="footer-controls__console-button" href="javascript:void(0)">ENTRAR NA LIVE</a>
+      <a class="footer-controls__console-button" @click="goLive" href="javascript:void(0)">ENTRAR NA LIVE</a>
     </div>
     <div class="footer-controls__grad"></div>
     <div class="footer-controls__left">
@@ -25,9 +25,14 @@
         <img v-if="liveEnabled" class="footer-controls__button-icon" src="~@/assets/images/icons/play-small.png" />
         <img v-if="!liveEnabled" class="footer-controls__button-icon" src="~@/assets/images/icons/play-small-disable.png" />
         <span class="footer-controls__button-label">Live MIS</span>
-        <!-- <span v-if="!liveEnabled" class="live-status"><span class="desc">PRÓXIMA SESSÃO</span> {{liveStatus}}</span> -->
-        <span v-if="!liveEnabled" class="live-status"><span class="desc">NENHUMA SESSÃO ATIVA</span></span>
+        <span v-if="!liveEnabled" class="live-status"><span class="desc">PRÓXIMA SESSÃO</span> {{liveStatus}}</span>
+        <!-- <span v-if="!liveEnabled" class="live-status"><span class="desc">NENHUMA SESSÃO ATIVA</span></span> -->
         <span v-if="liveEnabled && $store.getters.period" class="live-status live-enabled">{{liveStatus}}</span>
+      </div>
+      <div class="footer-controls__left-button live-button" @click="goLive" v-if="!isLiveShow">
+        <img class="footer-controls__button-icon" src="~@/assets/images/icons/play-small-disable.png" />
+        <span class="footer-controls__button-label">Live MIS</span>
+        <span class="live-status"><span class="desc">NENHUMA SESSÃO ATIVA</span></span>
       </div>
     </div>
     <div class="footer-controls__center">
@@ -150,18 +155,18 @@ export default {
     pressedTimer: 0,
     isLiveShow: true,
     liveStatus: '',
-    liveEnabled: false,
+    liveEnabled: true,
     verifyLiveTimer: 0
   }),
   mounted() {
-    // if (!this.isMobile) {
-      
-    //   this.verifyLiveStatus()
-    //   clearInterval(this.verifyLiveTimer)
-    //   this.verifyLiveTimer = setInterval(()=>{
-    //     this.verifyLiveStatus()
-    //   }, 1000)
-    // }
+    if (!this.isMobile && this.$store.getters.period != null) {
+      console.log('period', this.$store.getters.period)
+      this.verifyLiveStatus()
+      clearInterval(this.verifyLiveTimer)
+      this.verifyLiveTimer = setInterval(()=>{
+        this.verifyLiveStatus()
+      }, 1000)
+    }
     // window.addEventListener("scroll", this.onScroll);
   },
   methods: {
@@ -178,7 +183,6 @@ export default {
         if (month < 10)  month = `0${month}`
 
         this.liveEnabled = this.isStartTime(start)
-        
 
         if (isValidPeriod && this.$store.getters.webinarLink) {
           this.isLiveShow = true
@@ -190,19 +194,17 @@ export default {
           }
         } else {
           this.isLiveShow = false
+          this.liveEnabled = false
         }
         // console.log('liveStatus', this.liveStatus, this.liveEnabled)
-      } else {
-        this.isLiveShow = true
-        this.liveEnabled = true
-        this.liveStatus = ''
       }
     },
     isStartTime(start) {
       return new Date().getTime() - start.getTime() > 0;
     },
     validateTime(start, end) {
-      return new Date(end) - new Date(start) > 0;
+      // return new Date(end) - new Date(start) > 0;
+      return new Date(end) - new Date(start) > 0 && new Date(end) - new Date() > 0;
     },
     onScroll(e) {
       this.openFooter = window.scrollY > 100;

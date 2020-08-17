@@ -22,6 +22,7 @@
     "minimal-event-emitter": "^1.0.0",
     "preload-js": "^0.6.3",
     "sass": "^1.26.10",
+    "shaka-player": "^3.0.3",
     "splitting": "^1.0.6",
     "three": "^0.118.3",
     "vue": "^2.6.11",

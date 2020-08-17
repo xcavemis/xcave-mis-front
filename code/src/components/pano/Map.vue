@@ -59,7 +59,8 @@ export default {
         show(){
             TweenMax.set('html, body', { overflow: 'hidden' })
             TweenMax.to(this.$el, 0.6, { autoAlpha: 1, ease: Quad.easeInOut } )  
-            TweenMax.fromTo(this.$refs.mapCrop, 0.6, { y: '150%' }, { y: '0%', ease: Quad.easeInOut, delay: 0.3, onComplete: ()=>{
+            // TweenMax.fromTo(this.$refs.mapCrop, 0.6, { y: '150%' }, { y: '0%', ease: Quad.easeInOut, delay: 0.3, onComplete: ()=>{
+            TweenMax.fromTo(this.$refs.mapCrop, 0.6, { autoAlpha: 0 }, { autoAlpha: 1, ease: Quad.easeInOut, delay: 0.3, onComplete: ()=>{
                 this.$nextTick(()=>{
                     this.panzoom = Panzoom(this.$refs.mapContent, {
                         maxScale: 1.8,

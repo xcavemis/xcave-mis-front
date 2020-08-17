@@ -271,11 +271,11 @@ export const mixedGallery = {
     },     
     {
       id: "D-325",    
-      title: "D-325",
+      title: "Madona do Cravo",
       type: 'content',
       image: ["3-Gallery/D325.jpg"],
       audio: '',
-      text: ""
+      text: "<p>Tamanho real: 62 x 47,5 cm<br>Alte Pinakothek, Munique, Alemanha</p>"
     },
     {
       id: "D-326",  

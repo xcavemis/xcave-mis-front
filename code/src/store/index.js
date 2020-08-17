@@ -107,7 +107,7 @@ export default new Vuex.Store({
           period,
           webinarLink
         } = res.data;
-        console.log('Login res', res)
+        // console.log('Login res', res)
 
         localStorage.setItem("user", JSON.stringify(user));
         localStorage.setItem("token", token);
@@ -148,7 +148,7 @@ export default new Vuex.Store({
           endTime,
         } = res.data;
 
-        console.log('create user:', res)
+        // console.log('create user:', res)
 
         localStorage.setItem("user", JSON.stringify(user));
         localStorage.setItem("token", token);
@@ -319,7 +319,7 @@ export default new Vuex.Store({
             'Authorization': `Bearer ${state.token}` 
           }
         });
-        console.log('verifyTicket', res)
+        // console.log('verifyTicket', res)
         return {
           response: res 
         }
@@ -337,7 +337,7 @@ export default new Vuex.Store({
         const res = await api.get(uri, {
           headers: {'Authorization': 'Bearer '+_token }
         });
-        console.log(res)
+        // console.log(res)
         const {
           user,
           access_token: token,

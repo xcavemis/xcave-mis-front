@@ -1,6 +1,7 @@
 <template>
   <article class="home">
     <section class="home-step first-step">
+      <!-- <VideoPlayerStream /> -->
       <!-- <ShaderBg v-if="$route.name == 'Home' && !isMobile" /> -->
       <img
         class="first-step__logo-mis" 
@@ -85,11 +86,13 @@
 import Auth from "@/components/Auth";
 import { TweenMax, Quad } from 'gsap';
 import Splitting from "splitting";
+// import VideoPlayerStream from "@/components/VideoPlayerStream";
 // import ShaderBg from "@/components/ShaderBg";
 export default {
   name: "Home",
   components: { 
     Auth, 
+    // VideoPlayerStream,
     // ShaderBg 
   },
   data: () => ({

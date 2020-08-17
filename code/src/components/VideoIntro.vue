@@ -1,7 +1,15 @@
 <template>
     <div class="video-intro">
         <section class="video-intro__content">
-            <iframe
+            <VideoPlayerStream 
+                v-on:close="onVideoEnded"
+                v-on:played="onVideoIntroPlayed"
+                :manifest-key="currentManifestKey"
+                :poster="currentPoster"
+                :controls="showControls"
+                ref="videoStream"
+            />
+            <!-- <iframe
                 ref="videoPlayer"
                 class="video-intro__iframe" 
                 :src="`https://player.vimeo.com/video/${videoId}`" 
@@ -10,10 +18,10 @@
                 frameborder="0"  
                 allow="autoplay"
                 allowfullscreen>
-            </iframe>
-            <div class="video-intro__block" :class="{'opacity-bg': playing}">
+            </iframe> -->
+            <!-- <div class="video-intro__block" :class="{'opacity-bg': playing}">
                 <img class="video-intro__play" @click="play" src="~@/assets/images/icons/play-big.png" alt="Iniciar o video de introdução."> 
-            </div>
+            </div> -->
             <a
                 class="default-button video-intro__skip-button white"
                 href="javascript:void(0)"
@@ -26,32 +34,40 @@
 <script>
 import { TweenMax, Quad } from 'gsap';
 import Player from '@vimeo/player';
+import VideoPlayerStream from "@/components/VideoPlayerStream";
 export default {
     props: ['videoId'],
+    components: {
+        VideoPlayerStream,
+    },
     data: () => ({
         playing: false,
         videoDuration: 95,
+        currentPoster: require('@/assets/images/intro-poster.jpg'),
+        currentManifestKey: 'intro',
+        showControls: true,
         isMobile: navigator.userAgent.toLowerCase().match(/mobile/i),
     }),
     mounted(){
         TweenMax.set('html, body', { cursor: 'pointer' })
         this.$nextTick(()=>{
             this.show()
-            this.player = new Player(this.$refs.videoPlayer, {
-                loop: false,
-                autoplay: true
-            });
+            // this.player = new Player(this.$refs.videoPlayer, {
+            //     loop: false,
+            //     autoplay: true
+            // });
 
-            this.player.on('play', () => {
-                if (this.$store.getters.user && this.$store.getters.user.introShow)  {
-                    TweenMax.to('.video-intro__skip-button', 0.6, { display: 'block', autoAlpha: 1, delay: 2 })
-                }
-            });
-            this.player.on('ended', this.onVideoEnded);
-            this.player.setLoop(false).then(function(loop) {
-            });
+            // this.player.on('play', () => {
+            //     this.$emit('played')
+            //     if (this.$store.getters.user && this.$store.getters.user.introShow)  {
+            //         TweenMax.to('.video-intro__skip-button', 0.6, { display: 'block', autoAlpha: 1, delay: 2 })
+            //     }
+            // });
+            // this.player.on('ended', this.onVideoEnded);
+            // this.player.setLoop(false).then(function(loop) {
+            // });
 
-            this.player.getDuration().then((seconds) => { this.videoDuration = seconds })
+            // this.player.getDuration().then((seconds) => { this.videoDuration = seconds })
             // this.player.setCurrentTime(93).then(function(seconds) {})
 
             // this.player.getVideoTitle().then(function(title) {
@@ -63,32 +79,32 @@ export default {
         show() {
             TweenMax.set('html, body', { overflow: 'hidden' })
             TweenMax.set('.video-intro', { autoAlpha: 1 })
-            TweenMax.set('.video-intro__play', { autoAlpha: 1 })
-            TweenMax.set('.video-intro__iframe', { y: '0%' })
+            // TweenMax.set('.video-intro__play', { autoAlpha: 1 })
+            // TweenMax.set('.video-intro__iframe', { y: '0%' })
         },
         hide(){
             this.$store.commit("navigateToPano", 1);
             TweenMax.fromTo(this.$el, 1, { autoAlpha: 1 }, { autoAlpha: 0, ease: Quad.easeInOut, delay: 1, onComplete: () => {
                 this.$emit('close')
+                TweenMax.set('.governo-top', { zIndex: 5})
             }})
             
         },
+        onVideoIntroPlayed(){
+            this.$emit('played')
+            if (this.$store.getters.user && this.$store.getters.user.introShow)  {
+                TweenMax.to('.video-intro__skip-button', 0.6, { display: 'block', autoAlpha: 1, delay: 2 })
+            }
+        },  
         skip(e){
+            this.$refs?.videoStream?.skip()
             TweenMax.to('.video-intro__skip-button', 0.4, { autoAlpha: 0, onComplete: ()=>{
-                this.hide()
-                this.player.pause().then(() => {
-                    this.player.destroy().then(function() {})
-                })
+                // this.player.pause().then(() => {
+                //     this.player.destroy().then(function() {})
+                // })
             }})
             
             // this.player.setCurrentTime(this.videoDuration - 1)
-        },
-        play(e){
-            this.playing = true
-            this.player.play()
-            if (!this.isMobile) this.player.setVolume(1);
-            TweenMax.to('.video-intro__play', 0.6, { autoAlpha: 0, ease: Quad.easeInOut })
-            this.$emit('played')
         },
         onVideoEnded(e) {
             this.hide()

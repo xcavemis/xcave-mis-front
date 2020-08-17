@@ -1,6 +1,6 @@
 <template>
   <div class="pano-comp">
-      <!-- :src="`http://169.254.189.77:8081/index.html#media=${panoIndex}`" -->
+      <!-- :src="`http://192.168.15.45:8080/index.html#media=${panoIndex}`" -->
     <iframe 
       :src="`https://hml.exposicaodavinci500anos.com.br/assets/pano-viewer/index.html#media=${panoIndex}`"
       class="pano-comp__iframe"

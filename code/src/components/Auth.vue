@@ -178,7 +178,7 @@ export default {
   max-height: 640px;
   border-radius: 4px;
   overflow: hidden;
-  z-index: 10;
+  z-index: 15;
 
   .auth-bg {
     @include set-size(100%, 100%);

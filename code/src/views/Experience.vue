@@ -99,27 +99,83 @@ export default {
     preloader: null,
     queueLoaded: false,
     videoEnded: false,
+    verifyTokenTimer: 0,
+    countDownTimer: 0,
+    isCountDown: false,
     isMobile: navigator.userAgent.toLowerCase().match(/mobile/i),
     isIOS: /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream,
   }),
   mounted() {
-    this.$store.dispatch("tokenCheck").then((res) => {
-      if (
-        res &&
-        res.status >= 200 &&
-        res.status <= 204 &&
-        res.endTime != null &&
-        this.validateTime(res.endTime)
-      ) {
-        
-      } else {
-      }
-    });
+    this.verifyToken()
     document
       .querySelector(".footer-component")
       .classList.add("footer-component__experience");
   },
   methods: {
+    verifyToken(){
+      this.$store.dispatch("tokenCheck").then((res) => {
+        // console.log('tokenCheck: ', res)
+        if (
+          res &&
+          res.status >= 200 &&
+          res.status <= 204 &&
+          res.endTime != null &&
+          this.validateTime(res.endTime)
+        ) {
+          if (this.getRestHours(res.endTime) < 1 && !this.isCountDown) {
+            clearInterval(this.countDownTimer)
+            this.countDownTimer = setInterval(()=>{
+              this.countDownUpdate(res.endTime)
+            }, process.env.VUE_APP_CRON)
+            this.isCountDown = true
+          }
+          clearTimeout(this.verifyTokenTimer)
+          this.verifyTokenTimer = setTimeout(this.verifyToken, 3000)
+        } else {
+          let message = res.response.data.message
+          this.$store.dispatch("warning", {
+            show: true,
+            text: message,
+          });
+          clearTimeout(this.verifyTokenTimer)
+          this.$router.push({name: 'Home'})
+          this.$store.dispatch("logout");
+        }
+      });
+    },
+    countDownUpdate(end){
+      let countDownDate = new Date(end)
+      let now = new Date().getTime();
+    
+      let distance = countDownDate - now;
+      
+      let minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      let seconds = Math.floor((distance % (1000 * 60)) / 1000);
+      if (minutes < 10) minutes = `0${minutes}`
+      if (seconds < 10) seconds = `0${seconds}`
+      
+      // console.log(minutes + ":" + seconds);
+
+      this.$store.dispatch('countdown', {
+        show: true,
+        time: minutes + "m" + seconds + "s"
+      })
+        
+ 
+    },
+    getRestHours(end){
+       let countDownDate = new Date(end)
+        let now = new Date().getTime();
+      
+        // Find the distance between now and the count down date
+        let distance = countDownDate - now;
+        
+        // Time calculations for days, hours, minutes and seconds
+        let days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        let hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        // console.log('hours', hours)
+        return hours
+    },
     onVideoIntroPlayed(e) {
       // console.log('onVideoIntroPlayed')
       this.queueLoaded = true
@@ -269,7 +325,7 @@ export default {
     onPlayAudio() {
       if (!this.infoModalContent.audioLoaded) {
         this.$refs?.audioPlayer?.playTo(
-          `https://hml.exposicaodavinci500anos.com.br/assets/obras/${this.infoModalContent?.audio}`
+          `${process.env.VUE_APP_ASSETSPATH}/assets/obras/${this.infoModalContent?.audio}`
         );
       } else {
         this.$refs?.audioPlayer?.play();
@@ -280,6 +336,9 @@ export default {
       return new Date(date) - new Date() > 0;
     },
   },
+  beforeDestroy(){
+    clearTimeout(this.verifyTokenTimer)
+  }
 };
 </script>
 

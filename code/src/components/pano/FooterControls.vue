@@ -1,12 +1,24 @@
 <template>
   <div class="footer-controls">
-    <div class="footer-controls__console" v-if="isLiveShow && liveEnabled && $store.getters.period">
-      <p class="footer-controls__console-text">
-        UMA LIVE COM ORIENTADORES<br>
-        DO MIS ESTÁ ACONTENDO<br>
-        NESSE MOMENTO.
-      </p>
-      <a class="footer-controls__console-button" @click="goLive" href="javascript:void(0)">ENTRAR NA LIVE</a>
+    <div class="footer-controls__console-container">
+
+      <div class="footer-controls__console" v-if="$store.getters.countdown.show">
+        <p class="footer-controls__console-text ticket-text">
+          O SEU TICKET VAI EXPIRAR<br>
+          EM {{$store.getters.countdown.time}}.<br>
+          CONTINUE A EXPERIÊNCIA<br>
+          ADQUIRINDO UM NOVO INGRESSO.
+        </p>
+        <a class="footer-controls__console-button ticket-button" target="_blank" href="https://davincidigital.byinti.com/">COMPRAR INGRESSO</a>
+      </div>
+      <div class="footer-controls__console" v-if="isLiveShow && liveEnabled && $store.getters.period">
+        <p class="footer-controls__console-text">
+          UMA LIVE COM ORIENTADORES<br>
+          DO MIS ESTÁ ACONTENDO<br>
+          NESSE MOMENTO.
+        </p>
+        <a class="footer-controls__console-button" @click="goLive" href="javascript:void(0)">ENTRAR NA LIVE</a>
+      </div>
     </div>
     <div class="footer-controls__grad"></div>
     <div class="footer-controls__left">
@@ -288,54 +300,77 @@ export default {
   pointer-events: none;
   touch-action: none;
 
-  .footer-controls__console{
+  .footer-controls__console-container{
     position: absolute;
     left: 20px;
-    top: calc(-100% - 40px);
-    text-align: left;
-
-    .footer-controls__console-text{
-      position: relative;
-      padding-left: 15px;
-      @include font-size(10);
-      font-family: $mont-medium;
-      color: $white;
-      text-shadow: 0px 0px 4px rgba(0,0,0,0.8);
-      
-
-      &:before {
-        content: "";
-        @include set-size(10px, 10px);
-        border-radius: 50%;
-        position: absolute;
-        top: 7px;
-        left: 0px;
-        background-color: #b00000;
-        animation: pulseLive 1.4s infinite;
-      }
-    }
-    .footer-controls__console-button{
-      @include font-size(9);
-      font-family: $mont-regular;
-      color: $white;
+    bottom: 80px;
+    .footer-controls__console{
+      display: block; 
       text-align: left;
-      border: 2px solid #ac7d3a;
-      padding: 5px 10px;
-      border-radius: 6px;
-      margin-left: 15px;
-      transition: all 0.6s;
-      pointer-events: all;
-      touch-action: initial;
-      text-shadow: 0px 0px 4px rgba(0,0,0,0.5);
-      &:hover {
-        background-color: #ac7d3a;
-        color: $black;
-        text-shadow: 0px 0px 4px rgba(0,0,0,0);
-      }
-    }
-
-  }
+      margin-bottom: 15px;;
   
+      .footer-controls__console-text{
+        position: relative;
+        padding-left: 15px;
+        @include font-size(10);
+        font-family: $mont-regular;
+        color: $white;
+        text-shadow: 0px 0px 4px rgba(0,0,0,0.8);
+        
+  
+        &:before {
+          content: "";
+          @include set-size(10px, 10px);
+          border-radius: 50%;
+          position: absolute;
+          top: 7px;
+          left: 0px;
+          background-color: #b00000;
+          animation: pulseLive 1.4s infinite;
+        }
+        &.ticket-text {
+          &:before {
+            background-color: #b18039;
+          }
+        }
+      }
+      .footer-controls__console-button{
+        @include font-size(9);
+        font-family: $mont-regular;
+        color: $white;
+        text-align: left;
+        border: 2px solid #ac7d3a;
+        padding: 5px 10px;
+        border-radius: 6px;
+        margin-left: 15px;
+        transition: all 0.6s;
+        pointer-events: all;
+        touch-action: initial;
+        text-shadow: 0px 0px 4px rgba(0,0,0,0.5);
+        &:hover {
+          background-color: #ac7d3a;
+          color: $black;
+          text-shadow: 0px 0px 4px rgba(0,0,0,0);
+        }
+
+        &.ticket-button {
+          border: 2px solid $white;
+          background-color: $white;
+          color: $black;
+
+          &:hover {
+            background-color: #ac7d3a;
+            border: 2px solid #ac7d3a;
+            color: $black;
+            text-shadow: 0px 0px 4px rgba(0,0,0,0);
+          }
+        }
+      }
+  
+    }
+    
+  }
+
   .footer-controls__grad {
     @include set-size(100%, 7px);
     position: absolute;

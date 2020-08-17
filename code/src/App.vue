@@ -36,14 +36,7 @@ export default {
   //   this.transitionName = toDepth < fromDepth ? 'slide-right' : 'slide-left'
   //   next()
   // },
-  created() {
-    this.$store.dispatch("autoLogin").then((res) => {
-      // console.log("auto login: ", res);
-      if (!this.auth && this.$route.name != "Home") {
-        this.$router.push("/");
-      }
-    });
-  },
+  created() {},
   computed: {
     auth() {
       return this.$store.getters.isAuthenticated;

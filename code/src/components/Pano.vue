@@ -2,7 +2,7 @@
   <div class="pano-comp">
       <!-- :src="`http://192.168.15.45:8080/index.html#media=${panoIndex}`" -->
     <iframe 
-      :src="`https://hml.exposicaodavinci500anos.com.br/assets/pano-viewer/index.html#media=${panoIndex}`"
+      :src="`${assets_path}/assets/pano-viewer/index.html#media=${panoIndex}`"
       class="pano-comp__iframe"
       width="100%" 
       height="100%" 
@@ -26,7 +26,8 @@ export default {
   data: () => ({
     panoIndex: 0,
     iOS: /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream,
-    isPano: false
+    isPano: false,
+    assets_path: process.env.VUE_APP_ASSETSPATH,
   }),
   watch: {
     "$store.getters.navigateToPano": function (val, old) {

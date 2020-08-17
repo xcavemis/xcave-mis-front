@@ -81,7 +81,7 @@ export default {
             const support = await shaka.Player.probeSupport();
             // console.log('initPlayer', support)
             // const manifestUri = `/dash/${this.manifestKey}/manifest${support.manifest.mpd ? '.mpd' : '.m3u8'}`;
-            const manifestUri = `https://hml.exposicaodavinci500anos.com.br/assets/videos/dash/${this.manifestKey}/manifest${support.manifest.mpd ? '.mpd' : '.m3u8'}`;
+            const manifestUri = `${process.env.VUE_APP_ASSETSPATH}/assets/videos/dash/${this.manifestKey}/manifest${support.manifest.mpd ? '.mpd' : '.m3u8'}`;
             // console.log('initPlayer manifestUri', manifestUri)
             // console.log(support)
             // Create a Player instance.
@@ -256,12 +256,21 @@ export default {
     top: 0;
     left: 0;
     background-color: $black;
+    @include maxWidth(1023) {
+        @include set-size(auto, 100%);
+        @include center-x(absolute);
+    }
 }
 
 .video-player__play-icon {
     @include center(absolute);
     @include set-size(7vw, 7vw);
     z-index: 1;
+
+    @include maxWidth(1023) {
+        @include set-size(17vw, 17vw);
+
+    }
 }
 
 .video-player__anim-container {

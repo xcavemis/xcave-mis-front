@@ -32,7 +32,7 @@
     <div class="timeline-comp__divide"></div>
     <div
       class="timeline-comp__marker"
-      @click="goTo('30')"
+      @click="goTo('29')"
       :class="{'visited-current': this.visitedIds['25']}"
     >
       <!-- :class="{'current': $store.getters.navigationStatus.sensorial == 'current', 'visited': $store.getters.navigationStatus.sensorial == 'visited', 'visited-current': $store.getters.navigationStatus.sensorial == 'visited-current'}" -->
@@ -42,7 +42,7 @@
     <div class="timeline-comp__divide"></div>
     <div
       class="timeline-comp__marker"
-      @click="goTo('33')"
+      @click="goTo('32')"
       :class="{'visited-current': this.visitedIds['33']}"
     >
       <!-- :class="{'current': $store.getters.navigationStatus.militar == 'current', 'visited': $store.getters.navigationStatus.militar == 'visited', 'visited-current': $store.getters.navigationStatus.militar == 'visited-current'}" -->

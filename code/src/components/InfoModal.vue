@@ -4,7 +4,7 @@
         <div class="info-modal__crop">
             <section class="info-modal__block">
                 <div class="info-modal__preview">
-                    <img class="info-modal__preview-image" @click="removeInstructions" ref="imageToDrag" :src="`https://hml.exposicaodavinci500anos.com.br/assets/obras/${imgSrc}`" v-if="imgSrc" :alt="content.title">
+                    <img class="info-modal__preview-image" @click="removeInstructions" ref="imageToDrag" :src="`${assets_path}/assets/obras/${imgSrc}`" v-if="imgSrc" :alt="content.title">
                     <!-- <canvas id="canvas-drag" class="info-modal__preview-image"></canvas> -->
                     <div class="info-modal__preview-instructions">
                         <img class="info-modal__preview-icon" src="~@/assets/images/icons/hand.png" @click="hide" alt="CLIQUE E ARRASTE PARA VISUALIZAR">
@@ -70,6 +70,7 @@ export default {
         isPlaying: false,
         mouse: {x: 0, y: 0, oldX: 0, oldY: 0, button: false},
         zoomEl: null,
+        assets_path: process.env.VUE_APP_ASSETSPATH,
         previewElm: null,
         imgSrc: null,
         curreImgIdx: 0,

@@ -5,7 +5,7 @@
             <div class="video-mask">
                 <iframe 
                     class="video-pano__iframe"
-                    :src="`https://hml.exposicaodavinci500anos.com.br/assets/videos/${videoId}/index.html?skip-loading`"
+                    :src="`${assets_path}/assets/videos/${videoId}/index.html?skip-loading`"
                     width="1280" 
                     height="720" 
                     frameborder="0" 
@@ -25,6 +25,9 @@ import { TweenMax, Quad } from 'gsap';
 
 export default {
     props: ['videoId'],
+    data: () => ({
+        assets_path: process.env.VUE_APP_ASSETSPATH,
+    }),
     methods: {
         show() {
             TweenMax.set('html, body', { overflow: 'hidden' })

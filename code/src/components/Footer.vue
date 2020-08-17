@@ -29,6 +29,18 @@
       src="~@/assets/images/footer-sponsors-mobile.png"
       alt="Apoio e patrocínio"
     />
+    <div class="governo-bot bg-color-1" v-if="$route.name != 'Experience'">
+      <div class="governo-bot-content">         
+        <img src="https://www.mis-sp.org.br/assets/site/img/gov-sp-logo-white.png" alt="" class="governo-bot-logo">
+        <div class="governo-bot-links">
+          <ul>
+            <li><a target="_blank" href="http://www.cultura.sp.gov.br/ouvidoria">Ouvidoria</a></li>
+            <li><a target="_blank" href="http://www.transparencia.sp.gov.br/">Transparência</a></li>
+            <li><a target="_blank" href="http://www.sic.sp.gov.br/">SIC</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 <script>
@@ -86,7 +98,7 @@ export default {
       font-family: $gar-bold;
     }
   }
-  a {
+  > a {
     display: none;
   }
 
@@ -174,6 +186,61 @@ export default {
       width: 62vw;
       margin: 40px auto;
     }
+  }
+}
+
+.governo-bot{
+  height:auto;
+  padding-bottom:50px;
+  margin-top: 70px;
+}
+.governo-bot-content{
+  width:100%;max-width:1640px;height:100px;margin:auto;border-bottom:10px solid #fff;border-bottom-right-radius:10px;
+
+  @include maxWidth(1023) {
+    width: 90%;
+  }
+}
+@media only screen and (max-width:600px){
+  .governo-bot-content{
+  height:auto;text-align:right
+  }
+}
+.governo-bot-links{
+  float:right;display:-webkit-box;display:-ms-flexbox;display:flex;height:100%;margin:0 100px
+}
+.governo-bot-links ul{
+  display:-webkit-box;display:-ms-flexbox;display:flex;margin:auto 0 10px
+}
+.governo-bot-links ul li{
+  padding:0 25px;border-right:1px solid #fff
+}
+.governo-bot-links ul li a{
+  font-family: $rob-regular;
+  color:#fff
+}
+.governo-bot-links ul li a:hover{
+  color:#e0e20c
+}
+.governo-bot-links ul li:last-of-type{
+  border-right:none
+}
+@media only screen and (max-width:600px){
+  .governo-bot-links ul{
+    display:block;width:100%
+  }
+}
+@media only screen and (max-width:992px){
+  .governo-bot-links{
+    margin:0;float:none
+  }
+}
+.governo-bot-logo{
+  height:100%;float:right;margin:auto 0 10px;padding:20px 0 10px
+}
+@media only screen and (max-width:600px){
+  .governo-bot-logo{
+    float:none
   }
 }
 </style>

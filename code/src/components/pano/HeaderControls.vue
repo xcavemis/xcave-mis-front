@@ -29,10 +29,17 @@
         />
       </div>
       <div class="header-controls__right-user" @click="toggleUser">
-        <h5 class="user-name">{{userName}}</h5>
+        <h5 class="user-name">
+          {{userName}}
+          <img
+            class="icon-small"
+            alt="Abrir o rodapé"
+            src="~@/assets/images/icons/arrow-up-small.png"
+          />
+        </h5>
         <div class="user-container">
           <a
-            class="default-button header-controls__right-logout white"
+            class="default-button header-controls__right-logout white change-pass"
             href="javascript:void(0)"
             @click="chagePass"
           >TROCA DE SENHA</a>
@@ -44,6 +51,9 @@
         </div>
       </div>
     </div>
+    <div class="header-controls__mobile">
+      <Timeline />
+    </div>
   </div>
 </template>
 
@@ -54,13 +64,22 @@ export default {
   components: {
     Timeline,
   },
+  watch:{
+    '$store.getters.user.name': function(val, old){
+      if (val != old && val.length > 0) {
+        this.userName = `Olá, ${val.split(' ')[0]}`
+      }
+    }
+  },
   data: () => ({
     fullscreen: false,
     userName: '',
     isUserVisible: false,
   }),
   created(){
-    this.userName = `Olá, ${this.$store.getters.user.name.split(' ')[0]}`
+    if (this.$store.getters.user && this.$store.getters.user.name) {
+      this.userName = `Olá, ${this.$store.getters.user.name.split(' ')[0]}`
+    }
   },
   mounted() {
     document.addEventListener("fullscreenchange", this.fullscreenChange);
@@ -73,8 +92,10 @@ export default {
     toggleUser(e){
       if (!this.isUserVisible) {
         TweenMax.set('.user-container', { display: 'block' })
+        this.$el.querySelector('.icon-small').classList.add('opened')
         TweenMax.fromTo('.user-container', 0.6, { autoAlpha: 0 }, { autoAlpha: 1, ease: Quad.easeInOut })
       } else {
+        this.$el.querySelector('.icon-small').classList.remove('opened')
         TweenMax.fromTo('.user-container', 0.6, { autoAlpha: 1 }, { autoAlpha: 0, ease: Quad.easeInOut, onComplete: ()=> {
           TweenMax.set('.user-container', { display: 'none' })
         }})
@@ -82,7 +103,9 @@ export default {
       }
       this.isUserVisible = !this.isUserVisible
     },
-    goTutorial() {},
+    goTutorial() {
+      this.$emit('go-tutorial')
+    },
     fullscreenChange(e) {
       this.fullscreen = !this.fullscreen;
     },
@@ -144,17 +167,28 @@ export default {
   justify-content: space-around;
   align-items: flex-start;
   padding-top: 30px;
+  z-index: 3;
+
+  .header-controls__mobile {
+    display: none;
+  }
 
   .header-controls__left {
     width: 16.1%;
+    padding-left: 15px;
 
     .header-controls__logo {
       width: 100%;
       margin: 0 auto;
+
+      @include maxWidth(1024) {
+        max-width: 330px;
+      }
     }
   }
   .header-controls__center {
     width: 62.4%;
+    min-width: 690px;
   }
   .header-controls__right {
     width: 20%;
@@ -168,7 +202,7 @@ export default {
       cursor: pointer;
       .header-controls__button-label {
         @include font-scale(1366, 1680, 10, 12);
-        font-family: $rob-regular;
+        font-family: $mont-regular;
         color: $white;
         margin-right: 15px;
         text-shadow: 0px 0px 4px #000000;
@@ -185,7 +219,7 @@ export default {
       }
 
       &:first-child {
-        margin-right: 15px;
+        // margin-right: 15px;
       }
     }
 
@@ -199,13 +233,28 @@ export default {
         color: $white;
         margin-right: 15px;
         text-shadow: 0px 0px 4px #000000;
+        position: relative;
+        padding-right: 15px;
+        .icon-small {
+          position: absolute;
+          @include set-size(9px, 6px);
+          cursor: pointer;
+          opacity: 1;
+          top: 0;
+          right: 0px;
+          transform: rotate(180deg) translateY(-50%);
+          transition: transform 0.4s;
+          &.opened {
+            transform: rotate(0deg) translateY(50%);
+          }
+        }
       } 
       
       .user-container { 
         // @include set-size(200px, auto);
         position: absolute;
         bottom: 0;
-        right: 0;
+        right: 5px;
         transform: translateY(100%);
         background-color: rgba(0,0,0,0.5);
         padding: 10px;
@@ -238,16 +287,56 @@ export default {
       }
     }
   }
+  
   @include maxWidth(1024) {
-    justify-content: flex-start;
+    justify-content: space-between;
     align-items: flex-start;
+
+    .header-controls__mobile {
+      display: none;
+    }
     .header-controls__left {
       width: 45%;
       margin-left: 2.5vw;
     }
-    .header-controls__center,
-    .header-controls__right {
+    .header-controls__center{
       display: none;
+    }
+    .header-controls__right {
+      z-index: 10;
+      .header-controls__right-button {
+        display: none;
+      }
+
+      .user-container  {
+        padding: 10px;
+        .change-pass {
+          display: none;
+        }
+
+        .default-button {
+          width: 100px !important;
+          height: 32px !important;
+          line-height: 32px !important;
+          margin: 0  !important;
+        }
+      }
+    }
+  }
+
+  @include maxWidth(768) {
+    .header-controls__mobile {
+      display: block;
+      position: absolute;
+      top: 130px;
+      width: 90%;
+      left: 5%;
+    }
+  }
+  @include maxWidth(767) {
+    .header-controls__mobile {
+      position: absolute;
+      top: 90px;
     }
   }
 }

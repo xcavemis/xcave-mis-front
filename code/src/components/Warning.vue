@@ -1,8 +1,13 @@
 <template>
     <div class="warning-comp">
+        <img
+          class="warning-comp__logo"
+          src="~@/assets/images/logo-da-vinci.png"
+          alt="LEONARDO DA VINCI – 500 ANOS DE UM GÊNIO"
+        />
         <div class="warning-comp__content">
             <p class="warning-comp__content-text" v-html="text"></p> 
-            <a class="default-button black warning-comp__content-btn" href="javascript:void(0)" @click="close">ENTENDI</a> 
+            <a class="default-button white warning-comp__content-btn" href="javascript:void(0)" @click="close">VOLTAR</a> 
         </div>
     </div>
 </template>
@@ -33,6 +38,16 @@ export default {
     left: 0;
     background-color: rgba(0,0,0,0.9);
     z-index: 1000;
+
+    .warning-comp__logo {
+        width: 35.1vw;
+        margin: 40px auto 40px auto;
+        max-width: 480px;
+
+        @include maxWidth(1023) {
+            width: 70vw;
+        }
+    }
 
     .warning-comp__content {
         width: 100%;

@@ -13,15 +13,20 @@ export default new Vuex.Store({
   state: {
     token: null,
     user: null,
+    webinarLink: null,
+    period: null,
     hasHoursAvaliable: null,
     endTime: null,
     loadingShow: false,
     mute: false,
     assets: {},
     models: {},
+    audio_end: false,
     xr_registered: false,
     navigateToPano: '',
+    audioTime: 0,
     warningShow: { show: false, text: '' },
+    countdown: { show: false, time: '' },
     navigationStatus: { 
       codices: 'pending',
       civil: 'pending',
@@ -40,9 +45,11 @@ export default new Vuex.Store({
     },
   },
   mutations: {
-    authUser(state, { token, user, hasHoursAvaliable, endTime }) {
+    authUser(state, { token, user, hasHoursAvaliable, endTime, webinarLink, period }) {
       state.token = token;
       state.user = user;
+      state.webinarLink = webinarLink;
+      state.period = period;
       state.hasHoursAvaliable = hasHoursAvaliable;
       state.endTime = endTime;
     },
@@ -64,11 +71,20 @@ export default new Vuex.Store({
     assets(state, obj) {
       state.assets = obj;
     },
+    audioTime(state, num) {
+      state.audioTime = num;
+    },
+    audio_end(state, bool) {
+      state.audio_end = bool;
+    },
     models(state, obj) {
       state.models = obj;
     },
     warningShow(state, obj) {
       state.warningShow = obj;
+    },
+    countdown(state, obj) {
+      state.countdown = obj;
     },
     navigateToPano(state, id) {
       state.navigateToPano = id;
@@ -91,18 +107,25 @@ export default new Vuex.Store({
           access_token: token,
           hasHoursAvaliable,
           endTime,
+          period,
+          webinarLink
         } = res.data;
+        // console.log('Login res', res)
 
         localStorage.setItem("user", JSON.stringify(user));
         localStorage.setItem("token", token);
         localStorage.setItem("hasHoursAvaliable", hasHoursAvaliable);
         localStorage.setItem("endTime", endTime);
+        localStorage.setItem("webinarLink", webinarLink);
+        localStorage.setItem("period", period);
 
         commit("authUser", {
           token,
           user,
           hasHoursAvaliable,
           endTime,
+          webinarLink,
+          period
         });
         return {
           response: {
@@ -130,7 +153,7 @@ export default new Vuex.Store({
           endTime,
         } = res.data;
 
-        console.log('create user:', res)
+        // console.log('create user:', res)
 
         localStorage.setItem("user", JSON.stringify(user));
         localStorage.setItem("token", token);
@@ -173,6 +196,8 @@ export default new Vuex.Store({
           user,
           hasHoursAvaliable,
           endTime,
+          webinarLink,
+          period
         } = res.data;
 
         // console.log('checkIn user:', res)
@@ -181,12 +206,16 @@ export default new Vuex.Store({
         localStorage.setItem("token", token);
         localStorage.setItem("hasHoursAvaliable", hasHoursAvaliable);
         localStorage.setItem("endTime", endTime);
+        localStorage.setItem("webinarLink", webinarLink);
+        localStorage.setItem("period", period);
 
         commit("authUser", {
           token,
           user,
           hasHoursAvaliable,
           endTime,
+          webinarLink,
+          period
         });
         return {
           response: {
@@ -220,20 +249,24 @@ export default new Vuex.Store({
           user,
           hasHoursAvaliable,
           endTime,
+          webinarLink,
+          period
         } = res.data;
 
 
-        localStorage.setItem("user", JSON.stringify(user));
-        localStorage.setItem("token", token);
-        localStorage.setItem("hasHoursAvaliable", hasHoursAvaliable);
-        localStorage.setItem("endTime", endTime);
+        // localStorage.setItem("user", JSON.stringify(user));
+        // localStorage.setItem("token", token);
+        // localStorage.setItem("hasHoursAvaliable", hasHoursAvaliable);
+        // localStorage.setItem("endTime", endTime);
 
-        commit("authUser", {
-          token,
-          user,
-          hasHoursAvaliable,
-          endTime,
-        });
+        // commit("authUser", {
+        //   token,
+        //   user,
+        //   hasHoursAvaliable,
+        //   endTime,
+        //   webinarLink,
+        //   period
+        // });
         return {
           response: {
             user, 
@@ -265,38 +298,84 @@ export default new Vuex.Store({
         }
       }
     },
-    async tokenCheck({ commit, dispatch, state }) {
-      const uri = "/auth/check";
+    async introShow({ commit, state }, userId) {
+      const uri = `/users/introShow/${userId}`;
       try {
-        const res = await api.get(uri, { 
-          headers: { Authorization: `Bearer ${state.token}` } 
+        const res = await api.put(uri, {
+          "introShow": true
+        }, {
+          headers: {
+            'Authorization': `Bearer ${state.token}`
+          }
         });
+        return {
+          response: res 
+        }
+      } catch (error) {
+        console.log(error);
+        return {
+          response: error?.response
+        }
+      }
+    },
+    async verifyTicket({ commit, state }, data) {
+      const uri = `/checkins/verify/${data.ticketNumber}/${data.userId}`;
+      try {
+        const res = await api.get(uri, {
+          headers: {
+            'Authorization': `Bearer ${state.token}` 
+          }
+        });
+        // console.log('verifyTicket', res)
+        return {
+          response: res 
+        }
+      } catch (error) {
+        console.log(error);
+        return {
+          response: error?.response
+        }
+      }
+    },
+    async tokenCheck({ commit, state }) {
+      const uri = "/auth/check";
+      const _token = state.token ? state.token : localStorage.getItem("token")??null
+      try {
+        const res = await api.get(uri, {
+          headers: {'Authorization': 'Bearer '+_token }
+        });
+        // console.log(res)
         const {
           user,
           access_token: token,
           hasHoursAvaliable,
           endTime,
+          webinarLink,
+          period
         } = res.data;
-        if (user && user != undefined) {
-          localStorage.setItem("user", JSON.stringify(user));
-          localStorage.setItem("token", token);
-          localStorage.setItem("hasHoursAvaliable", hasHoursAvaliable);
-          localStorage.setItem("endTime", endTime);
-          // console.log('tokenCheck user', user)
-          commit("authUser", {
-            token,
-            user,
-            hasHoursAvaliable,
-            endTime,
-          });
-        }
+        // if (user && user != undefined) {
+        //   localStorage.setItem("user", JSON.stringify(user));
+        //   localStorage.setItem("token", token);
+        //   localStorage.setItem("hasHoursAvaliable", hasHoursAvaliable);
+        //   localStorage.setItem("endTime", endTime);
+        //   localStorage.setItem("webinarLink", webinarLink);
+        //   localStorage.setItem("period", period);
+        //   // console.log('tokenCheck user', user)
+        //   commit("authUser", {
+        //     token,
+        //     user,
+        //     hasHoursAvaliable,
+        //     endTime,
+        //     webinarLink,
+        //     period
+        //   });
+        // }
 
         return {
           endTime,
           status: res.status,
         }
       } catch (error) {
-        dispatch('logout')
         return {
           response: error?.response
         }
@@ -311,6 +390,8 @@ export default new Vuex.Store({
       try {
         const hasHoursAvaliable = localStorage.getItem("hasHoursAvaliable");
         const endTime = localStorage.getItem("endTime");
+        const webinarLink = localStorage.getItem("webinarLink");
+        const period = localStorage.getItem("period");
         
         const user = JSON.parse(userStr);
         // console.log('autoLogin user', user)
@@ -319,16 +400,21 @@ export default new Vuex.Store({
           user,
           hasHoursAvaliable,
           endTime,
+          webinarLink,
+          period
         });
         
         return {
           user,
-          endTime
+          hasHoursAvaliable,
+          endTime,
+          webinarLink,
+          period
         }
       } catch (error) {
-        dispatch('logout')
+        // dispatch('logout')
         return {
-          response: error?.response
+          response: error
         }
       }
     },
@@ -338,6 +424,8 @@ export default new Vuex.Store({
       localStorage.removeItem("user");
       localStorage.removeItem("hasHoursAvaliable");
       localStorage.removeItem("endTime");
+      localStorage.removeItem("webinarLink");
+      localStorage.removeItem("period");
     },
     loading({ commit }, bool) {
       commit("loadingShow", bool);
@@ -346,6 +434,12 @@ export default new Vuex.Store({
     mute({ commit }, bool) {
       commit("mute", bool);
       
+    },
+    audioTime({ commit }, num) {
+      commit("audioTime", num);
+    },
+    audio_end({ commit }, bool) {
+      commit("audio_end", bool);
     },
     xr_registered({ commit }, bool) {
       commit("xr_registered", bool);
@@ -358,6 +452,9 @@ export default new Vuex.Store({
     },
     warning({ commit }, obj) {
       commit("warningShow", obj);
+    },
+    countdown({ commit }, obj) {
+      commit("countdown", obj);
     },
     navigateToPano({ commit }, id) {
       commit("navigateToPano", id);
@@ -387,6 +484,12 @@ export default new Vuex.Store({
     user(state) {
       return state.user;
     },
+    webinarLink(state) {
+      return state.webinarLink;
+    },
+    period(state) {
+      return state.period;
+    },
     authorizationHeader(state) {
       return state.token ? { Authorization: `Bearer ${state.token}` } : null;
     },
@@ -396,8 +499,17 @@ export default new Vuex.Store({
     mute(state) {
       return state.mute;
     },
+    audioTime(state) {
+      return state.audioTime;
+    },
+    audio_end(state) {
+      return state.audio_end;
+    },
     warningShow(state) {
       return state.warningShow;
+    },
+    countdown(state) {
+      return state.countdown;
     },
     navigateToPano(state) {
       return state.navigateToPano;

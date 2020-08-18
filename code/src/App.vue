@@ -28,7 +28,8 @@ export default {
     },
   },
   data: () => ({
-    transitionName: 'slide-left'
+    transitionName: 'slide-left',
+    firstAccess: true,
   }),
   // beforeRouteUpdate (to, from, next) {
   //   const toDepth = to.path.split('/').length
@@ -37,12 +38,10 @@ export default {
   //   next()
   // },
   created() {
-    this.$store.dispatch("autoLogin").then((res) => {
-      // console.log("auto login: ", res);
-      if (!this.auth && this.$route.name != "Home") {
-        this.$router.push("/");
-      }
-    });
+    if (this.firstAccess && this.$route.name != "Home") {
+      this.$router.push("/");
+      this.firstAccess = false
+    }
   },
   computed: {
     auth() {
@@ -62,6 +61,8 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
+
+  
 
   .governo-top {
     width: 100vw;

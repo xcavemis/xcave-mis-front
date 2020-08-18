@@ -1,130 +1,84 @@
 export const monalisaColors = {
-    scenes: [
-      {
-        id: "monalisa-colors701",
-        groupId: 'monalisa',
-        src: 'MONA-LISA-COLORS-701',
-        type: "image",
-        name: "monalisa-colors 701",
-        infoHotspots: [
-          {
-            id: "D-701",  
-            title: "D-701",
-            type: 'content',
-            image: "101/la-bele-feroniere.jpg",
-            audio: '101/guide',
-            text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien elit, fermentum aliquet malesuada tempus, aliquet sodales magna. Phasellus ultrices mattis bibendum.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien elit, fermentum aliquet malesuada tempus, aliquet sodales magna. Phasellus ultrices mattis bibendum.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien elit, fermentum aliquet malesuada tempus, aliquet sodales magna. Phasellus ultrices mattis bibendum.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien elit, fermentum aliquet malesuada tempus, aliquet sodales magna. Phasellus ultrices mattis bibendum.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien elit, fermentum aliquet malesuada tempus, aliquet sodales magna. Phasellus ultrices mattis bibendum."
-          },
-        ]
-      },
-      {
-        id: "monalisa-colors702",
-        groupId: 'monalisa',
-        src: 'MONA-LISA-COLORS-702',
-        type: "image",
-        name: "monalisa-colors 702",
-        infoHotspots: [
-          {
-            id: "D-702",
-            title: "D-702",
-            type: 'content',
-            image: "101/la-bele-feroniere.jpg",
-            audio: '101/guide',
-            text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien elit, fermentum aliquet malesuada tempus, aliquet sodales magna. Phasellus ultrices mattis bibendum.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien elit, fermentum aliquet malesuada tempus, aliquet sodales magna. Phasellus ultrices mattis bibendum.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien elit, fermentum aliquet malesuada tempus, aliquet sodales magna. Phasellus ultrices mattis bibendum.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien elit, fermentum aliquet malesuada tempus, aliquet sodales magna. Phasellus ultrices mattis bibendum.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien elit, fermentum aliquet malesuada tempus, aliquet sodales magna. Phasellus ultrices mattis bibendum."
-          },
-          {
-            id: "D-703",
-            title: "D-703",
-            type: 'content',
-            image: "101/la-bele-feroniere.jpg",
-            audio: '101/guide',
-            text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien elit, fermentum aliquet malesuada tempus, aliquet sodales magna. Phasellus ultrices mattis bibendum.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien elit, fermentum aliquet malesuada tempus, aliquet sodales magna. Phasellus ultrices mattis bibendum.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien elit, fermentum aliquet malesuada tempus, aliquet sodales magna. Phasellus ultrices mattis bibendum.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien elit, fermentum aliquet malesuada tempus, aliquet sodales magna. Phasellus ultrices mattis bibendum.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien elit, fermentum aliquet malesuada tempus, aliquet sodales magna. Phasellus ultrices mattis bibendum."
-          },
-          {
-            id: "D-704",
-            title: "D-704",
-            type: 'content',
-            image: "101/la-bele-feroniere.jpg",
-            audio: '101/guide',
-            text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien elit, fermentum aliquet malesuada tempus, aliquet sodales magna. Phasellus ultrices mattis bibendum.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien elit, fermentum aliquet malesuada tempus, aliquet sodales magna. Phasellus ultrices mattis bibendum.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien elit, fermentum aliquet malesuada tempus, aliquet sodales magna. Phasellus ultrices mattis bibendum.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien elit, fermentum aliquet malesuada tempus, aliquet sodales magna. Phasellus ultrices mattis bibendum.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien elit, fermentum aliquet malesuada tempus, aliquet sodales magna. Phasellus ultrices mattis bibendum."
-          },
-          {
-            id: "D-705",
-            title: "D-705",
-            type: 'content',
-            image: "101/la-bele-feroniere.jpg",
-            audio: '101/guide',
-            text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien elit, fermentum aliquet malesuada tempus, aliquet sodales magna. Phasellus ultrices mattis bibendum.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien elit, fermentum aliquet malesuada tempus, aliquet sodales magna. Phasellus ultrices mattis bibendum.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien elit, fermentum aliquet malesuada tempus, aliquet sodales magna. Phasellus ultrices mattis bibendum.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien elit, fermentum aliquet malesuada tempus, aliquet sodales magna. Phasellus ultrices mattis bibendum.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien elit, fermentum aliquet malesuada tempus, aliquet sodales magna. Phasellus ultrices mattis bibendum."
-          },
-        ]
-      },
-      {
-        id: "monalisa-colors703",
-        groupId: 'monalisa',
-        src: 'MONA-LISA-COLORS-703',
-        type: "image",
-        name: "monalisa-colors 703",
-        infoHotspots: [
-          {
-            id: "D-706",  
-            title: "D-706",
-            type: 'content',
-            image: "101/la-bele-feroniere.jpg",
-            audio: '101/guide',
-            text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien elit, fermentum aliquet malesuada tempus, aliquet sodales magna. Phasellus ultrices mattis bibendum.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien elit, fermentum aliquet malesuada tempus, aliquet sodales magna. Phasellus ultrices mattis bibendum.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien elit, fermentum aliquet malesuada tempus, aliquet sodales magna. Phasellus ultrices mattis bibendum.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien elit, fermentum aliquet malesuada tempus, aliquet sodales magna. Phasellus ultrices mattis bibendum.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien elit, fermentum aliquet malesuada tempus, aliquet sodales magna. Phasellus ultrices mattis bibendum."
-          },
-          {
-            id: "D-707",
-            title: "D-707",
-            type: 'content',
-            image: "101/la-bele-feroniere.jpg",
-            audio: '101/guide',
-            text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien elit, fermentum aliquet malesuada tempus, aliquet sodales magna. Phasellus ultrices mattis bibendum.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien elit, fermentum aliquet malesuada tempus, aliquet sodales magna. Phasellus ultrices mattis bibendum.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien elit, fermentum aliquet malesuada tempus, aliquet sodales magna. Phasellus ultrices mattis bibendum.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien elit, fermentum aliquet malesuada tempus, aliquet sodales magna. Phasellus ultrices mattis bibendum.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien elit, fermentum aliquet malesuada tempus, aliquet sodales magna. Phasellus ultrices mattis bibendum."
-          },
-          {
-            id: "D-708",
-            title: "D-708",
-            type: 'content',
-            image: "101/la-bele-feroniere.jpg",
-            audio: '101/guide',
-            text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien elit, fermentum aliquet malesuada tempus, aliquet sodales magna. Phasellus ultrices mattis bibendum.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien elit, fermentum aliquet malesuada tempus, aliquet sodales magna. Phasellus ultrices mattis bibendum.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien elit, fermentum aliquet malesuada tempus, aliquet sodales magna. Phasellus ultrices mattis bibendum.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien elit, fermentum aliquet malesuada tempus, aliquet sodales magna. Phasellus ultrices mattis bibendum.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien elit, fermentum aliquet malesuada tempus, aliquet sodales magna. Phasellus ultrices mattis bibendum."
-          },
-        ]
-      },
-      {
-        id: "monalisa-colors704",
-        groupId: 'monalisa',
-        src: 'MONA-LISA-COLORS-704',
-        type: "image",
-        name: "monalisa-colors 704",
-        infoHotspots: [
-          {
-            id: "D-709",  
-            title: "D-709",
-            type: 'content',
-            image: "101/la-bele-feroniere.jpg",
-            audio: '101/guide',
-            text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien elit, fermentum aliquet malesuada tempus, aliquet sodales magna. Phasellus ultrices mattis bibendum.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien elit, fermentum aliquet malesuada tempus, aliquet sodales magna. Phasellus ultrices mattis bibendum.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien elit, fermentum aliquet malesuada tempus, aliquet sodales magna. Phasellus ultrices mattis bibendum.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien elit, fermentum aliquet malesuada tempus, aliquet sodales magna. Phasellus ultrices mattis bibendum.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien elit, fermentum aliquet malesuada tempus, aliquet sodales magna. Phasellus ultrices mattis bibendum."
-          },
-        ]
-      },
-      {
-        id: "monalisa-colors705",
-        groupId: 'monalisa',
-        src: 'MONA-LISA-COLORS-705',
-        type: "image",
-        name: "monalisa-colors 705",
-        infoHotspots: [
-          {
-            id: "D-710",  
-            title: "D-710",
-            type: 'content',
-            image: "101/la-bele-feroniere.jpg",
-            audio: '101/guide',
-            text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien elit, fermentum aliquet malesuada tempus, aliquet sodales magna. Phasellus ultrices mattis bibendum.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien elit, fermentum aliquet malesuada tempus, aliquet sodales magna. Phasellus ultrices mattis bibendum.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien elit, fermentum aliquet malesuada tempus, aliquet sodales magna. Phasellus ultrices mattis bibendum.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien elit, fermentum aliquet malesuada tempus, aliquet sodales magna. Phasellus ultrices mattis bibendum.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien elit, fermentum aliquet malesuada tempus, aliquet sodales magna. Phasellus ultrices mattis bibendum."
-          },
-        ]
-      },
-    ],
-  };
-  
+  scenes: [
+    {
+      id: "D-701",  
+      title: "REPRODUÇÃO ARTÍSTICA",
+      type: 'content',
+      image: ["7-monalisa-colors/D701a.jpg"],
+      audio: '7-monalisa-colors/A701.mp3',
+      text: "<p>A Mona Lisa &eacute; um enigma que fascinou gera&ccedil;&otilde;es de amantes da arte. A requintada t&eacute;cnica de Leonardo da Vinci e o uso de veladuras coloridas proporcionam uma sutileza crom&aacute;tica admir&aacute;vel, mas esse processo &eacute; imposs&iacute;vel de recriar, tornando a restaura&ccedil;&atilde;o dessa pintura antiga e inestim&aacute;vel um grande desafio. Al&eacute;m disso, as camadas de verniz adicionadas ao longo dos anos se mesclaram aos pigmentos e veladuras, o que significa que qualquer tentativa de remover o verniz pode inadvertidamente alterar a pr&oacute;pria pintura.</p><p>Hoje, com a c&acirc;mera multiespectral de Pascal Cotte e a an&aacute;lise detalhada por computador, podemos penetrar nas camadas da Mona Lisa sem nem mesmo toc&aacute;-la. Conseguimos reproduzir a obra-prima com precis&atilde;o e revelar todos os detalhes de sua hist&oacute;ria. De maneira in&eacute;dita, temos o privil&eacute;gio de ver a Mona Lisa em cores vibrantes &ndash; exatamente como Leonardo pretendia.</p><p><strong>Pigmentos e aglutinantes</strong><br />No s&eacute;culo XV, havia uma grande variedade de pigmentos para pintura, produzidos a partir de rochas e min&eacute;rios naturais. V&aacute;rios deles s&atilde;o descritos no famoso Tratado sobre Pintura de Leonardo da Vinci. Embora as &ldquo;receitas&rdquo; variem entre pa&iacute;ses e at&eacute; entre artistas, os componentes b&aacute;sicos dos pigmentos tendem a permanecer os mesmos. Os pigmentos eram geralmente vendidos na forma de p&oacute;, que ent&atilde;o precisava ser misturado com um aglutinante para poder ser utilizado como tinta.</p><p>At&eacute; o s&eacute;culo XV, utilizava-se o ovo como aglutinante, em uma t&eacute;cnica conhecida como &ldquo;t&ecirc;mpera&rdquo;. Mas, para a Mona Lisa, Leonardo utilizou um novo aglutinante &agrave; base de &oacute;leo, vindo da Holanda, que se pensava ser composto por &oacute;leo de nogueira. Esse novo tipo de aglutinante revolucionaria a pintura, dando origem ao que hoje chamamos simplesmente de tintas a &oacute;leo.</p><p><strong>L&aacute;pis-laz&uacute;li &ndash; mais caro que o ouro</strong><br />O l&aacute;pis-laz&uacute;li &eacute; uma pedra preciosa preciosa azul que tem sido empregada na pintura desde a Idade M&eacute;dia. Ela &eacute; triturada para formar o pigmento ultramarine, que era t&atilde;o caro na &eacute;poca de Leonardo que os pintores costumavam cobrar separadamente de seus clientes ou pediam para que eles o fornecessem. Aparentemente, Leonardo dispunha desse pigmento, pois todo o c&eacute;u &eacute; feito de l&aacute;pis-laz&uacute;li. &Eacute; um pigmento de um azul intenso, e contribui significativamente &agrave; personagem da Mona Lisa.</p><p>Hoje, apenas um fabricante no mundo produz p&oacute; de l&aacute;pis-laz&uacute;li com o grau de pureza daquele utilizado por Leonardo da Vinci, e o quilo custa aproximadamente vinte mil d&oacute;lares. A maioria dos pintores atuais utiliza uma vers&atilde;o sint&eacute;tica do aquamarine, que &eacute; quimicamente id&ecirc;ntico.</p><p><strong>Remo&ccedil;&atilde;o virtual do verniz</strong><br />Por meio do escaneamento multiespectral da Mona Lisa, foi poss&iacute;vel calcular a  curva de resposta espectral' do verniz para cada pixel e subtra&iacute;-la da imagem geral. Isso significa que o efeito do verniz no aspecto de cada pixel p&ocirc;de ser isolado e removido digitalmente, proporcionando uma imagem limpa que representa a apar&ecirc;ncia original da Mona Lisa antes da aplica&ccedil;&atilde;o do verniz. O resultado final &eacute; surpreendente.</p>"
+    },
+    {
+      id: "D-702",
+      title: "SUA HISTÓRIA DE VIDA",
+      type: 'content',
+      image: ["7-monalisa-colors/D702a.jpg","7-monalisa-colors/D702b.jpg","7-monalisa-colors/D702c.jpg"],
+      audio: '',
+      text: "<p><strong>1503 - Floren&ccedil;a</strong><br />No ver&atilde;o de 1503, Leonardo da Vinci come&ccedil;a a trabalhar em La Gioconda, um retrato de Mona (Sra.) Lisa Gherardini, esposa de Francesco del Giocondo. Ela se tornaria seu quadro mais famoso.</p><p><strong>1514 - Roma</strong><br />Estima-se que a Mona Lisa, tamb&eacute;m conhecida como Monna Lisa ou La Gioconda, em italiano, tenha sido conclu&iacute;da em 1514 e, portanto, &eacute; considerada uma pintura do in&iacute;cio do Renascimento.</p><p><strong>1515 - Roma</strong><br />A primeira c&oacute;pia conhecida da Mona Lisa &eacute; produzida nessa &eacute;poca. Essa c&oacute;pia &eacute; mantida atualmente no Museu do Prado, em Madri.</p><p><strong>1516 - Amboise, Fran&ccedil;a</strong><br />Manoir de Cloux (hoje Ch&acirc;teau du Clos Luc&eacute;)<br />O rei Francisco I convida Leonardo a morar em Manoir du Cloux, em Amboise, Fran&ccedil;a. Leonardo aceita e deixa Roma, levando consigo a Mona Lisa.</p><p><strong>1517 - Amboise, Fran&ccedil;a</strong><br />Manoir de Cloux (hoje Ch&acirc;teau du Clos Luc&eacute;)<br />Em 10 de outubro de 1517, Leonardo da Vinci recebe uma visita do cardeal Lu&iacute;s de Arag&atilde;o. Leonardo lhe mostra tr&ecirc;s quadros: S&atilde;o Jo&atilde;o Batista, A Virgem e o Menino com Santa Ana e Mona Lisa. No mesmo ano, Leonardo sofre um derrame.</p><p><strong>1518 - Amboise, Fran&ccedil;a</strong><br />Manoir de Cloux (hoje Ch&acirc;teau du Clos Luc&eacute;)<br />A Mona Lisa &eacute; comprada pelo rei Francisco I pelo valor de 4 mil escudos (equivalente a 1.500.000 euros hoje).</p><p><strong>1519 - Amboise, Fran&ccedil;a</strong><br />Manoir de Cloux (hoje Ch&acirc;teau du Clos Luc&eacute;)<br />Em 2 de maio de 1519, Leonardo morre em Clos Luc&eacute;, Fran&ccedil;a. Ele &eacute; enterrado na capela de Saint-Hubert, no castelo de Amboise. Acredita-se que o rei Francisco I estivesse ao seu lado quando ele morreu, envolvendo a cabe&ccedil;a de Leonardo em seus bra&ccedil;os.</p><p><strong>1659 - Vieux Louvre</strong><br />A Mona Lisa &eacute; transferida de Fontainebleau para o &ldquo;Antigo Louvre&rdquo;, que faz parte do moderno Museu do Louvre.</p><p><strong>1661 - Vieux Louvre</strong><br />A Mona Lisa sobrevive a um inc&ecirc;ndio no Antigo Louvre.</p><p><strong>1685 - Versailles, Cabinet du Roi</strong> <br />Um invent&aacute;rio do pal&aacute;cio do rei Lu&iacute;s XIV lista a Mona Lisa como n&uacute;mero 4.</p><p><strong>1731 - Versailles, Petite Galerie du Roi</strong> <br />A Mona Lisa &eacute; exposta em Versalhes na &ldquo;Pequena Galeria&rdquo;. O abade Guilbert cita uma c&oacute;pia feita em 1600 por Ambroise Dubois, em Fontainebleau.</p><p><strong>1797 - Louvre</strong> <br />A Mona Lisa deixa Versalhes em 15 de julho de 1797 e vai para o Louvre em 1 de agosto de 1797, onde &eacute; marcada com o n&uacute;mero 29 (manuscrito na parte de tr&aacute;s da pintura).</p><p><strong>1798 - Louvre</strong> <br />A Mona Lisa aparece pela primeira vez em um cat&aacute;logo do Louvre como n&uacute;mero 104, p. 84.</p><p><strong>1801 - Tuileries</strong> <br />Napole&atilde;o Bonaparte instrui que o Pal&aacute;cio de Saint-Cloud Tuileries seja decorado. A Mona Lisa &eacute; removida do Louvre para adornar seu quarto. Acredita-se que uma marca pr&oacute;xima ao olho de Mona Lisa, ainda vis&iacute;vel hoje em dia, seja resultado de danos causados pela &aacute;gua sob os cuidados de Napole&atilde;o. A Mona Lisa retornaria, posteriormente, &agrave; sua leg&iacute;tima posi&ccedil;&atilde;o no Louvre.</p><p><strong>1870 - Brest (Arsenal)</strong> <br />Durante a Guerra Franco-Prussiana, o curador do Louvre leva a Mona Lisa ao Arsenal de Brest, um centro militar e naval, para mant&ecirc;-la em seguran&ccedil;a.</p><p><strong>1906 - Louvre</strong><br />A moldura que hoje adorna a Mona Lisa &eacute; doada pela condessa de B&eacute;arn.</p><p><strong>1911 - Casa de Vincenzo Peruggia</strong><br />Em 21 de agosto de 1911, a Mona Lisa &eacute; roubada. Entre os suspeitos est&atilde;o o poeta e dramaturgo Guillaume Apollinaire e o pintor Pablo Picasso, mas o verdadeiro respons&aacute;vel &eacute; o italiano Vincenzo Peruggia, ex-funcion&aacute;rio do Museu do Louvre. Ele esconde o quadro em seu quarto alugado, no n&uacute;mero 5 da Rue de l&rsquo;H&ocirc;pital Saint-Louis, em Paris. Quando a pol&iacute;cia vai at&eacute; o apartamento para verificar seu &aacute;libi, n&atilde;o tem como saber que a pintura que procura est&aacute; literalmente debaixo de seu nariz: escondida debaixo de um cobertor na mesa sobre a qual est&atilde;o preenchendo o relat&oacute;rio.</p><p><strong>1913 - Floren&ccedil;a</strong><br />Ap&oacute;s dois anos e quatro meses, a Mona Lisa &eacute; finalmente encontrada. Depois de manter o quadro escondido em um ba&uacute; em seu apartamento em Paris, Peruggia volta para a It&aacute;lia com ele. Ele finalmente &eacute; desmascarado depois de contactar Alfredo Geri, propriet&aacute;rio de uma galeria de arte em Floren&ccedil;a, na It&aacute;lia, esperando uma recompensa por devolver a pintura ao que considerava sua &ldquo;p&aacute;tria&rdquo;. Geri contacta Giovanni Poggi, diretor da Galeria degli Uffizi, que autentica a pintura. A pol&iacute;cia &eacute; informada e Peruggia &eacute; preso imediatamente no hotel em que hospedava.</p><p><strong>1913 - Roma</strong><br />O quadro &eacute; exposto brevemente em Roma, no Palazzo Farnese, na Galeria Borghese e na Villa Medici antes de retornar &agrave; Fran&ccedil;a, passando por Mil&atilde;o.</p><p><strong>1938-1945 - Movimento durante a Segunda Guerra Mundial</strong><br />Durante a Segunda Guerra Mundial, a Mona Lisa &eacute; deslocada em diversas ocasi&otilde;es para garantir sua seguran&ccedil;a.</p><p><strong>1956 - Louvre</strong> <br />Em 30 de dezembro, Ugo Ungaza Villegas, um jovem boliviano, atira uma pedra na Mona Lisa, removendo uma pequena &aacute;rea de pigmento no cotovelo.</p><p><strong>1962 - Washington e Nova York</strong><br />Ap&oacute;s um acordo com o general De Gaulle, a Mona Lisa viaja para os Estados Unidos e &eacute; exposta em Washington e Nova York, de 14 de dezembro de 1962 a 12 de mar&ccedil;o de 1963. Durante sua visita, ela &eacute; vista por mais de dois milh&otilde;es de pessoas.</p><p><strong>1974 - T&oacute;quio e Moscou</strong> <br />O presidente da Fran&ccedil;a, Georges Pompidou, consente que a Mona Lisa seja exposta em T&oacute;quio e Moscou durante seis semanas, mas declara que, depois disso, ela nunca mais dever&aacute; deixar o pa&iacute;s.</p><p><strong>2004 - Louvre</strong><br />Em 19 de outubro de 2004, Pascal Cotte obt&eacute;m acesso in&eacute;dito &agrave; Mona Lisa no Louvre. Ele trabalha dezoito horas ininterruptas para concluir uma ampla an&aacute;lise multiespectral da pintura. Seriam precisos mais dois anos de trabalho &aacute;rduo, em colabora&ccedil;&atilde;o com o Louvre e com os principais especialistas na Mona Lisa, para ele terminar sua minuciosa pesquisa.</p><p><strong>2005 - Louvre</strong> <br />Em 6 de abril de 2005, a Mona Lisa &eacute; transferida para a Salle des Etats, no Louvre, um sal&atilde;o bem maior, com mais condi&ccedil;&otilde;es de acomodar o grande n&uacute;mero de turistas que a visitam.</p><p><strong>2008 - Paris, Fran&ccedil;a</strong><br />Pascal Cotte finalmente termina a investiga&ccedil;&atilde;o mais detalhada j&aacute; realizada da Mona Lisa, revelando diversos detalhes ocultos e not&aacute;veis do quadro e sua hist&oacute;ria.</p><p><strong>2015 - Paris, Fran&ccedil;a</strong><br />Em outubro de 2004, mais de uma d&eacute;cada ap&oacute;s ter digitalizado a Mona Lisa com sua c&acirc;mera multiespectral, Pascal Cotte apresenta todos os frutos de sua pesquisa.</p>"
+    },
+    {
+      id: "D-703",
+      title: "PRETO E BRANCO COM INFRAVERMELHO",
+      type: 'content',
+      image: ["7-monalisa-colors/D703a.jpg"],
+      audio: '',
+      text: "<p>Aqui vemos mais uma imagem infravermelha da Mona Lisa, desta vez usando luz vis&iacute;vel com comprimentos de onda entre 850 e 950 nan&ocirc;metros. Esta &eacute; uma imagem real, exibida sem modifica&ccedil;&atilde;o.</p>"
+    },
+    {
+      id: "D-704",
+      title: "COR FALSA INVERTIDA COM INFRAVERMELHO",
+      type: 'content',
+      image: ["7-monalisa-colors/D704a.jpg"],
+      audio: '',
+      text: "<p>Quando Pascal Cotte converteu a imagem infravermelha da Mona Lisa em imagens com cores vis&iacute;veis, ele conseguiu criar v&aacute;rias imagens usando diferentes partes do espectro de luz vis&iacute;vel.</p><p>Nesta imagem, Cotte converteu a informa&ccedil;&atilde;o em infravermelho em tons de azul, em vez dos vermelhos e laranjas da imagem anterior, o que revela mais detalhes das &aacute;reas escuras e profundas do quadro.</p><p>Nenhuma descoberta espec&iacute;fica veio da imagem, mas agregou mais um aspecto de uma investiga&ccedil;&atilde;o minuciosa e detalhada, que serviu de base e ajudou a consolidar os 25 &ldquo;segredos&rdquo; que Pascal Cotte conseguiu, por fim, compilar.</p>"
+    },
+    {
+      id: "D-705",
+      title: "COR FALSA COM INFRAVERMELHO",
+      type: 'content',
+      image: ["7-monalisa-colors/D705a.jpg"],
+      audio: '',
+      text: "<p>Aqui nos aprofundamos ainda mais nas camadas que est&atilde;o por tr&aacute;s da Mona Lisaque conhecemos. As propriedades &oacute;pticas do infravermelho permitem que ele penetre al&eacute;m da camada superficial vis&iacute;vel de uma pintura, para revelar detalhes subjacentes que, de outra forma, permaneceriam invis&iacute;veis. O infravermelho n&atilde;o &eacute; vis&iacute;vel ao olho humano, mas pode ser simulado com comprimentos de onda da luz vis&iacute;vel, usando dados cient&iacute;ficos obtidos a partir da c&acirc;mera multiespectral.</p><p>Aqui vemos uma imagem virtual representando os resultados do scanner infravermelho de Cotte.</p><p>Ao olhar para esta imagem, voc&ecirc; efetivamente a v&ecirc; como se seus olhos tivessem a habilidade sobre-humana de detectar o infravermelho. A primeira coisa que voc&ecirc; notar&aacute; &eacute; que o espectro de cores da pintura mudou completamente para vermelhos e laranjas. Mas essa &ldquo;cor falsa&rdquo; &eacute; apenas um efeito do infravermelho. Ele tamb&eacute;m permite que voc&ecirc; veja al&eacute;m da camada superficial vis&iacute;vel.</p><p>Ocultos sob a superf&iacute;cie encontram-se os detalhes dos retoques e restaura&ccedil;&otilde;es, al&eacute;m de desenhos e pigmentos subjacentes. Esses detalhes representam os &ldquo;segredos&rdquo; que Pascal Cotte foi capaz de identificar e analisar para nos proporcionar uma compreens&atilde;o muito mais aprofundada de uma obra de arte complexa e misteriosa.</p>"
+    },
+    {
+      id: "D-706",  
+      title: "UMA IMAGEM COM A COR VERDADEIRA",
+      type: 'content',
+      image: ["7-monalisa-colors/D706a.jpg"],
+      audio: '7-monalisa-colors/A703.mp3',
+      text: "<p>A c&acirc;mera multiespectral de Pascal Cotte nos permitiu identificar com precis&atilde;o os pigmentos utilizados na Mona Lisa, finalmente permitindo que n&oacute;s a v&iacute;ssemos da maneira concebida por Leonardo da Vinci. Ao recriar cada um desses pigmentos com a mesma apar&ecirc;ncia que teriam originalmente, foi poss&iacute;vel gerar uma r&eacute;plica da Mona Lisa que mostra exatamente seu aspecto no momento em que acabara de ser pintada.</p><p>A an&aacute;lise mostrou que o pigmento utilizado para pintar o c&eacute;u &eacute; composto de uma pedra preciosa azul-escura, chamada l&aacute;pis-laz&uacute;li, misturada com branco de chumbo. A pele foi pintada com sulfato de merc&uacute;rio pulverizado, conhecido como vermelh&atilde;o, misturado com o amarelo de chumbo e o branco de chumbo. A tinta usada para as mangas tamb&eacute;m continha branco de chumbo e amarelo de chumbo.</p><p>&Eacute; interessante notar que Leonardo pintou as montanhas de azul. Isso pode parecer estranho a princ&iacute;pio, mas, na verdade, as montanhas s&atilde;o pintadas de azul em todas as pinturas de Leonardo, incluindo a Virgem das Rochas. Em seu Tratado sobre Pintura, Leonardo escreveu: &ldquo;Sabemos que, em uma atmosfera de densidade uniforme, quando observamos as coisas mais distantes, como as montanhas, elas v&atilde;o parecer azuis em consequ&ecirc;ncia da grande quantidade de atmosfera existente entre elas e nossos olhos.&rdquo;</p>"
+    },
+    {
+      id: "D-707",
+      title: "A COR NOS DIAS ATUAIS",
+      type: 'content',
+      image: ["7-monalisa-colors/D707a.jpg"],
+      audio: '7-monalisa-colors/A704.mp3',
+      text: "<p>Esta imagem mostra a Mona Lisa como aparece no Louvre, em Paris, atualmente. H&aacute; uma do&ccedil;ura na luz suave que cai sobre ela do canto superior esquerdo da pintura. Suas m&atilde;os delicadas e o v&eacute;u sutil em sua cabe&ccedil;a tamb&eacute;m contribuem para esse efeito. Uma de suas caracter&iacute;sticas mais marcantes &eacute; seu olhar, que parece nos acompanhar conforme nos deslocamos da esquerda para a direita, mas sem nos encarar diretamente. Esse efeito pode ser um pouco desconcertante e provocou muitas discuss&otilde;es ao longo dos anos.</p><p>A paisagem por tr&aacute;s da jovem &eacute; composta de tr&ecirc;s se&ccedil;&otilde;es horizontais.</p><p>Na altura do seu colo, temos a se&ccedil;&atilde;o &ldquo;constru&iacute;da pelo homem&rdquo;: uma estrada &agrave; direita, um rio e uma ponte &agrave; esquerda.</p><p>Na altura do seu pesco&ccedil;o, a paisagem se torna &ldquo;mais acidentada&rdquo;, com um lago profundo e uma floresta.</p><p>Por fim, em dire&ccedil;&atilde;o ao topo do quadro, vemos a paisagem se tornar ainda mais acidentada, com montanhas rochosas desaparecendo no nevoeiro.</p><p>J&aacute; se disse que o c&eacute;u poderia representar Deus. De fato, muitos acreditam que a paisagem seja muito mais que um plano de fundo, com insinua&ccedil;&otilde;es filos&oacute;ficas mais profundas.</p>"
+    },
+    {
+      id: "D-708",
+      title: "VINTE E CINCO SEGREDOS REVELADOS",
+      type: 'content',
+      image: ["7-monalisa-colors/D708a.jpg","7-monalisa-colors/D708b.jpg"],
+      audio: '',
+      text: "<p>O engenheiro franc&ecirc;s Pascal Cotte est&aacute; entre os poucos privilegiados que tiveram a honra de ver e fotografar a Mona Lisa original no Museu do Louvre, em Paris. A pintura foi removida da moldura para que Cotte pudesse fotograf&aacute;-la com uma resolu&ccedil;&atilde;o extraordin&aacute;ria de 240 megapixels. Essa imagem formou a base para as investiga&ccedil;&otilde;es e an&aacute;lises cient&iacute;ficas da pintura realizadas por Cotte, incluindo a cria&ccedil;&atilde;o de uma enorme c&oacute;pia em infravermelho.</p><p>As propriedades &oacute;pticas da luz infravermelha a permitem penetrar a camada vis&iacute;vel da superf&iacute;cie para revelar desenhos e pigmentos, retoques e restaura&ccedil;&otilde;es nas camadas inferiores. O exame de cada camada fornece informa&ccedil;&otilde;es inesperadas sobre as muitas etapas pelas quais a Mona Lisa passou para se tornar a obra-prima ic&ocirc;nica que conhecemos hoje.</p><p>Revelamos 25 segredos exclusivos sobre a Mona Lisa, escondidos sob sua superf&iacute;cie.</p> <p>1. Toda a placa de &aacute;lamo em que a Mona Lisa foi pintada &eacute; vis&iacute;vel, incluindo os limites da camada pict&oacute;rica e a prepara&ccedil;&atilde;o do gesso, comprovando, pela primeira vez, que a prancha nunca foi cortada.</p><p>2. O topo do c&eacute;u passou por uma restaura&ccedil;&atilde;o, e diversas pequenas altera&ccedil;&otilde;es podem ser observadas.</p><p>3. Uma divis&atilde;o de 11 cm (4,3 pol) na placa foi coberta com duas restaura&ccedil;&otilde;es sobrepostas.</p><p>4. O v&eacute;u que sobre sua cabe&ccedil;a &eacute; composto por duas camadas finas, &agrave;s vezes descrito erroneamente como sendo uma touca.</p><p>5. A mancha no canto do olho, assim como um outro sinal, descoberto no queixo, revelou-se um acidente com verniz. Isso contradiz a teoria de que Mona Lisa tinha colesterol alto.</p><p>6. A express&atilde;o facial da Mona Lisa, particularmente o aspecto de seus olhos, &eacute; muito diferente no original em compara&ccedil;&atilde;o com o que vemos hoje.</p><p>7. A redu&ccedil;&atilde;o das rachaduras nos l&aacute;bios e olhos sugere uma prov&aacute;vel restaura&ccedil;&atilde;o, ou pode refletir o clareamento do verniz pelo tempo.</p><p>8. O rosto de Mona Lisa foi pintado originalmente um pouco mais largo do que aparece hoje, demonstrando que a pintura atual n&atilde;o &eacute; mais a melhor representa&ccedil;&atilde;o de como Leonardo da Vinci concebeu seus tra&ccedil;os e sua express&atilde;o.</p><p>9. Em particular, seu sorriso &eacute; mais expressivo e mais acentuado.</p><p>10. O desenho do v&eacute;u tem uma defini&ccedil;&atilde;o muito maior do que na pintura envelhecida que vemos hoje, demonstrando o esfor&ccedil;o de Leonardo em salientar a borda do v&eacute;u.</p><p>11. Vemos a transpar&ecirc;ncia do v&eacute;u pintado na paisagem por meio de uma t&eacute;cnica de velatura denominada &ldquo;glacis&rdquo;, demonstrando que Leonardo pintou o v&eacute;u depois de concluir a paisagem. Esses dados revelam os detalhes por tr&aacute;s da cria&ccedil;&atilde;o da pintura.</p><p>12. Um entrela&ccedil;ado invis&iacute;vel aparece como evid&ecirc;ncias adicionais de que o v&eacute;u foi pintado posteriormente.</p> <p>13. O desenho preparat&oacute;rio do entrela&ccedil;ado &eacute; identific&aacute;vel.</p>"
+    },
+    {
+      id: "D-709",  
+      title: "O MISTÉRIO DOS CÍLIOS E DAS SOBRANCELHAS",
+      type: 'content',
+      image: ["7-monalisa-colors/D709a.jpg"],
+      audio: '7-monalisa-colors/A705.mp3',
+      text: "<p>Hoje, nem c&iacute;lios nem sobrancelhas s&atilde;o vis&iacute;veis na Mona Lisa.</p><p>Leonardo da Vinci dedicou-se a criar pinturas precisas que reproduziam perfeitamente a natureza. &Eacute; dif&iacute;cil imaginar que ele intencionalmente tenha deixado de fora esses elementos.</p><p>A Mona Lisa poderia ter arrancado as sobrancelhas? Talvez, mas isso n&atilde;o explica a aus&ecirc;ncia de c&iacute;lios. Alguma coisa ainda parece estranha.</p><p>A maioria das publica&ccedil;&otilde;es sobre a Mona Lisa evita o tema da aus&ecirc;ncia das sobrancelhas e c&iacute;lios ou tenta justific&aacute;-la com argumentos contr&aacute;rios ao princ&iacute;pio mais fundamental da obra de Leonardo: reproduzir perfeitamente a natureza.</p><p>Em outubro de 2004, Pascal Cotte fotografou a Mona Lisa no Louvre com sua camera multiespectral patenteada de 240 megapixels. Al&eacute;m das imagens que ele obteve da pintura em sua totalidade, ele registrou uma s&eacute;rie de imagens concentradas exclusivamente no rosto. A resolu&ccedil;&atilde;o dessas fotos, de in&eacute;ditos 1.500 pontos por polegada, revela at&eacute; os m&iacute;nimos detalhes com impressionante defini&ccedil;&atilde;o.</p><p>Em setembro de 2007, Cotte tamb&eacute;m teve o privil&eacute;gio de fotografar o quadro Dama com Arminho em Crac&oacute;via, na Pol&ocirc;nia. Depois de comparar meticulosamente a Dama com Arminho com a Mona Lisa, Cotte foi capaz de identificar pelos nas sobrancelhas da Mona Lisa semelhantes aos da Dama com Arminho. Com essa descoberta pioneira, agora temos provas irrefut&aacute;veis de que Leonardo da Vinci de fato pintou sobrancelhas na Mona Lisa.</p><p>Observe atentamente os olhos e a express&atilde;o da Mona Lisa, com amplia&ccedil;&atilde;o 25 vezes maior que seu tamanho original. Veja com seus pr&oacute;prios olhos o que ficou oculto por s&eacute;culos.</p><p>O que aconteceu com os c&iacute;lios e as sobrancelhas da Mona Lisa?</p><p>Na opini&atilde;o de Cotte, existem tr&ecirc;s hip&oacute;teses:</p><p>1. A tinta extremamente fina usada para os c&iacute;lios e sobrancelhas &ndash; provavelmente uma mistura de terra e &oacute;leo &ndash; pode ter se combinado com a camada de base.</p><p>2. O &oacute;leo e seu respectivo pigmento ficaram transparentes com o tempo. J&aacute; se comprovou que esse processo estaria ocorrendo em outros pontos da pintura, entre eles a coluna da direita.</p><p>3. A tinta dos c&iacute;lios desapareceu com a limpeza do verniz. A pouca presen&ccedil;a de fissuras ao redor dos olhos e da boca sustenta essa hip&oacute;tese.</p>"
+    },
+    {
+      id: "D-710",  
+      title: "A TÉCNICA DO MÉTODO DE AMPLIFICAÇÃO DE CAMADAS - LAM",
+      type: 'content',
+      image: ["7-monalisa-colors/D710a.jpg","7-monalisa-colors/D710b.jpg"],
+      audio: '',
+      text: "<p>O m&eacute;todo de amplifica&ccedil;&atilde;o de camada representa uma extraordin&aacute;ria uni&atilde;o entre ci&ecirc;ncia e arte. Atrav&eacute;s da aplica&ccedil;&atilde;o de princ&iacute;pios f&iacute;sicos complexos, esse m&eacute;todo nos oferece uma perspectiva in&eacute;dita da hist&oacute;ria de obras de arte importantes. Mas como ele funciona?</p><p>Uma c&acirc;mera multiespectral detecta e registra a maneira como a luz de treze comprimentos de onda diferentes reflete na superf&iacute;cie da pintura. Os 3,2 bilh&atilde;o de dados resultantes s&atilde;o analisados e agrupados em imagens LAM para nos ajudar a tirar conclus&otilde;es sobre a ordem em que tintas e outros materiais foram aplicados &agrave; obra de arte.</p><p>A luz &eacute; um fen&ocirc;meno complexo. Os f&iacute;sicos demonstraram que a luz pode se comportar como uma part&iacute;cula ou uma onda, e &eacute; essa capacidade de se comportar como uma onda que permite que alguns comprimentos de onda da luz se propaguem al&eacute;m da superf&iacute;cie de materiais opacos. Quanto maior o comprimento de onda da luz, mais fundo ela &eacute; capaz de penetrar. A luz vermelha penetra mais fundo que a verde, que por sua vez tem maior alcance que a azul. Mas, &eacute; claro, tudo isso &eacute; um pouco mais complicado que parece!</p><p>A maneira como a luz interage com uma pintura tamb&eacute;m depende das propriedades &oacute;pticas individuais de todos os materiais, inclusive os aglutinantes e pigmentos presentes na pintura. Essas propriedades s&atilde;o influenciadas por uma variedade de par&acirc;metros interdependentes, entre os quais a espessura das camadas de pigmentos; a densidade, forma, espectro de absor&ccedil;&atilde;o e &iacute;ndice de refra&ccedil;&atilde;o dos gr&atilde;os dos pigmentos; e os par&acirc;metros f&iacute;sicos do aglutinante, do verniz e da imprimadura.</p><p>Isso significa que a luz de um determinado comprimento de onda penetrar&aacute; diferentes profundidades em diferentes &aacute;reas ou &ldquo;zonas&rdquo; da pintura. As diferentes zonas de uma imagem LAM, portanto, refletem diferentes camadas da pintura, aplicadas em diferentes momentos da vida da pintura.</p><p>&Eacute; basicamente por isso que precisamos empregar ferramentas anal&iacute;ticas para poder realmente extrair informa&ccedil;&otilde;es importantes dos dados brutos. Utilizando ferramentas matem&aacute;ticas de tratamento de sinais (desvio padr&atilde;o, entropia m&aacute;xima, transformada de Fourier, filtra&ccedil;&atilde;o, deconvolu&ccedil;&atilde;o etc.), podemos calcular a cronologia das diversas zonas e camadas de pintura e aproveitar essas informa&ccedil;&otilde;es para compor imagens a respeito do aspecto da pintura em diferentes pontos ao longo da hist&oacute;ria. No caso da Mona Lisa, essa an&aacute;lise produziu um total de 1.650 imagens.</p><p>Na outra parede encontra-se uma perspectiva de v&aacute;rias imagens LAM em diferentes profundidades, aqui mostradas sobrepostas umas &agrave;s outras. Apesar de n&atilde;o conhecermos as qualidades f&iacute;sicas do aglutinante, do verniz e dos pigmentos, pudemos utilizar o conte&uacute;do das imagens e a malha de racahduras (claramente vis&iacute;veis nas imagens da superf&iacute;cie) para propor essa classifica&ccedil;&atilde;o das imagens selecionadas dentre as 1.650 produzidas pelo m&eacute;todo LAM.</p><p>A primeira imagem mostra a superf&iacute;cie, o verniz e a malha de rachaduras da pintura. &Agrave; medida penetramos gradualmente as camadas de tinta, atingimos aproximadamente 1 mm a 1,5 mm de profundidade.</p><p>Concentrar-se em uma &aacute;rea pequena muitas vezes pode facilitar a compreens&atilde;o de como o LAM funciona, no sentido pr&aacute;tico. Vejamos esta &uacute;nica p&eacute;rola do Retrato com p&eacute;rolas, por exemplo. A p&eacute;rola &eacute; vis&iacute;vel em v&aacute;rias das imagens LAM mais superficiais, mas desaparece gradualmente &agrave; medida que o desenho preparat&oacute;rio ganha espa&ccedil;o.</p>"
+    },
+  ],
+};

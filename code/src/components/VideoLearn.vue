@@ -1,7 +1,19 @@
 <template>
     <div class="video-learn">
         <section class="video-learn__content">
-             <iframe
+            <div class="modal-close-hit" @click="hide"></div>
+            <iframe
+                ref="videoPlayer"
+                :src="`https://player.vimeo.com/video/${videoId}`" 
+                class="video-learn__iframe" 
+                width="1280" 
+                height="720" 
+                frameborder="0" 
+                allow="autoplay; 
+                fullscreen" 
+                allowfullscreen>
+            </iframe>
+            <!-- <iframe
                 class="video-learn__iframe"
                 :src="`//www.youtube.com/embed/${videoId}?autoplay=1&rel=0`"
                 width="1280" 
@@ -11,8 +23,7 @@
                 webkitallowfullscreen 
                 mozallowfullscreen 
                 allowfullscreen>
-            </iframe>
-            <!-- <iframe class="video-learn__iframe" src="https://www.fotografofabionunes.com/3dvista/museu-1/" title="W3Schools Free Online Web Tutorials"></iframe> -->
+            </iframe> -->
             <img class="video-learn__close" src="~@/assets/images/icons/close.png" @click="hide" alt="Fechar o video da live."> 
         </section>
     </div>
@@ -20,9 +31,22 @@
 
 <script>
 import { TweenMax, Quad } from 'gsap';
-
+import Player from '@vimeo/player';
 export default {
     props: ['videoId'],
+    data:() => ({
+        player: null
+    }),
+    mounted(){
+        this.player = new Player(this.$refs.videoPlayer, {
+            loop: false,
+            autoplay: true
+        });
+
+        this.player.on('play', () => {});
+        this.player.on('ended', this.hide);
+        this.player.setLoop(false).then(function(loop) {});
+    },
     methods: {
         show() {
             TweenMax.set('.video-learn__iframe', { display: 'block' })
@@ -64,6 +88,12 @@ export default {
             transform: translateY(100%);
             z-index: 1;
             margin: 80px auto;
+            min-height: 535px;
+            max-width: 1060px;
+
+            @include minWidth(1680) {
+                max-width: 1280px;
+            }
             
         }
     

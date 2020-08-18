@@ -52,7 +52,7 @@
 <style lang="scss">
 .governo-top {
   position: relative;
-  z-index: 1;
+  z-index: 13;
   height: 70px;
   background-position: left top;
   background-size: auto 100%;
@@ -65,7 +65,7 @@
   display: flex;
   height: 100%;
 }
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 992px) {
   .governo-top .container {
     display: block;
   }
@@ -108,9 +108,9 @@
     margin-top: 10px;
   }
 }
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 992px) {
   .governo-top-btn {
-    margin: 7px 0 0;
+    margin: 7px 10px 0 0;
     font-size: 10px;
     float: right;
   }
@@ -119,6 +119,7 @@
   display: inline-block;
   padding: 4px 0 0;
   margin: auto 0;
+  max-width: 400px;
 }
 .governo-top .gov-social ul {
   display: -webkit-box;
@@ -127,6 +128,8 @@
   max-width: 100%;
   @include maxWidth(768) {
     margin: 10px 0 0;
+    width: 380px;
+    float: right;
   }
 }
 .governo-top .gov-social ul li {
@@ -152,11 +155,12 @@
   -ms-flex-positive: 3 !important;
   flex-grow: 3 !important;
 }
-@media only screen and (max-width: 992px) {
+@media only screen and (max-width: 1023px) {
   .governo-top .gov-social {
     padding: 0;
     margin-left: 0;
     width: 100%;
+    max-width: 100%;
   }
 }
 @media only screen and (max-width: 1200px) {
@@ -170,9 +174,9 @@
     padding-top: 70px;
   }
 }
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 992px) {
   .governo-top {
-    height: 80px;
+    height: 85px;
     padding-top: 0;
     margin-bottom: 0;
     margin-top: 0;

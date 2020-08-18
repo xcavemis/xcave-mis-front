@@ -51,7 +51,7 @@
             id="pass"
             v-model="formData.pass"
             type="password"
-            placeholder="SENHA"
+            placeholder="******"
             name="pass"
             @blur="checkForm('pass')"
           />
@@ -63,7 +63,7 @@
             id="passConfirm"
             v-model="formData.passConfirm"
             type="password"
-            placeholder="CONFIRMAR SENHA"
+            placeholder="******"
             name="passConfirm"
             @blur="checkForm('passConfirm')"
           />
@@ -75,8 +75,10 @@
         <div class="form-field" :class="{'error-field': genderError.length > 0}">
           <div class="custom-select gender-select">
             <select id="genderSelect" v-model="formData.gender">
-              <option value="1">FEMININO</option>
-              <option value="2">MASCULINO</option>
+              <option value="-1">GÊNERO</option>
+              <option value="Feminino">Feminino</option>
+              <option value="Masculino">Masculino</option>
+              <option value="Outro">Prefiro não informar</option>
             </select>
             <label for="genderSelect" v-if="!formData.gender">GÊNERO</label>
           </div>
@@ -101,7 +103,7 @@
           <input
             id="city"
             v-model="formData.city"
-            type="tel"
+            type="text"
             placeholder="Cidade"
             name="city"
             @blur="checkForm('city')"
@@ -366,7 +368,13 @@ export default {
           this.errors.push("A cidade precisa ter ao menos 3 caracteres.");
           this.cityError = "*A cidade precisa ter ao menos 3 caracteres.";
           this.cityValid = false;
-        } else {
+        } 
+        // else if (!this.containChars(this.formData.city)) {
+        //   this.errors.push("A cidade não pode conter somente números.");
+        //   this.cityError = "*A cidade não pode conter somente números.";
+        //   this.cityValid = false;
+        // }
+         else {
           this.cityError = "";
           this.cityValid = true;
         }
@@ -483,6 +491,16 @@ export default {
         return false;
       }
     },
+    containChars(str){
+      let regExp = new RegExp(/^(?=.*[A-Za-z])[A-Za-z\d]{3,}$/)
+      return str.match(regExp)
+    },
+    blockNumbers(e) {
+      let key = e.keyCode;
+      if (((key >= 48 && key <= 57) && !e.shiftKey)) {
+        e.preventDefault();
+      }
+    }
   },
 };
 </script>

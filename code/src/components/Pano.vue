@@ -1,7 +1,8 @@
 <template>
   <div class="pano-comp">
+      <!-- :src="`http://192.168.15.45:8080/index.html#media=${panoIndex}`" -->
     <iframe 
-      :src="`https://hml.exposicaodavinci500anos.com.br/assets/panorama-view/index.html`"
+      :src="`${assets_path}/assets/pano-viewer/index.html#media=${panoIndex}`"
       class="pano-comp__iframe"
       width="100%" 
       height="100%" 
@@ -10,34 +11,59 @@
       title="MIS - Da Vinci Live" 
       webkitallowfullscreen 
       mozallowfullscreen 
-      allowfullscreen>
+      allowfullscreen
+      allow="accelerometer; gyroscope;"
+      v-if="isPano"
+      >
     </iframe>
   </div>
 </template>
 
 <script>
 import { data } from '@/data/scenes.js';
+
 export default {
-  created() {
-    window.addEventListener('message', event => {
-      console.log(typeof event.data)
-      if(typeof event.data === 'string' && event.data.indexOf('codi') > -1) {
-        let content = event.data.split('_')
-        console.log('message', content, this.findSceneDataById(content[0])); 
-        const scene = this.findSceneDataById(content[0])
-        const id = content[2]
-        const type = content[1]
-        scene.infoHotspots?.map((info) => {
-          if (info?.id == id) {
-            this.$emit("info-layer", info)
-            return
-          }
-        })
+  data: () => ({
+    panoIndex: 0,
+    iOS: /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream,
+    isPano: false,
+    assets_path: process.env.VUE_APP_ASSETSPATH,
+  }),
+  watch: {
+    "$store.getters.navigateToPano": function (val, old) {
+      if (val != old) {
+        // console.log('navigateToPano', val)
+        this.goToScene(val)
       }
-  }); 
+    },
+  },
+  async mounted() {
+    window.addEventListener('message', event => {
+      
+      if(typeof event.data === 'string' && event.data.indexOf('id') > -1) {
+        let content = JSON.parse(event.data)
+        // console.log('content', content)
+        if (content.id == 'toggleMap') {
+          this.$emit("toggle-map", true)
+        } else if (content.id == 'nextPano' || content.id == 'prevPano') {
+          // let infoData =  this.findContentById(content.id)
+          // this.$emit("info-layer", infoData)
+        } else {
+          let infoData =  this.findContentById(content.id)
+          this.$emit("info-layer", infoData)
+        }
+      }
+    }); 
+    this.isPano = true  
+    // setTimeout(()=>{
+    // }, 3000)
   },
   methods: {
-    findSceneDataById(id) {
+    goToScene(id){
+      this.panoIndex = id
+    },
+    findContentById(id) {
+      // console.log('findContentById: ', data)
       for (let i = 0; i < data.scenes.length; i++) {
         if (data.scenes[i].id === id) {
           return data.scenes[i];
@@ -70,11 +96,20 @@ export default {
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
   background-color: $black;
 
+  #viewer { background-color: #FFFFFF; z-index:1; position:absolute; width: 100%; height: 100%; top: 0; }
+  #preloadContainer { z-index:2; position:relative; width:100%; height:100%; opacity:0; transition: opacity 0.5s; -webkit-transition: opacity 0.5s; -moz-transition: opacity 0.5s; -o-transition: opacity 0.5s;}
+
   .pano-comp__iframe {
-    @include set-size(100%, 100%);
+    @include set-size(100%, calc(100% - 70px));
     position: absolute;
-    top: 0;
+    top: 70px;
     left: 0;
+
+    @include maxWidth(1023) {
+      @include set-size(100%, calc(100% - 70px));
+      top: 80px;
+      
+    }
   }
 
   .experience-overlay {

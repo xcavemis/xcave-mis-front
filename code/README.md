@@ -43,3 +43,11 @@ https://s3.console.aws.amazon.com/s3/buckets/xcave-mis-assets/assets/?region=sa-
 
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
+
+
+### Convert .mp4 to dash
+MP4Box for .mpd
+MP4Box -dash 4000 -rap -bs-switching no -profile live -out manifest.mpd ./video_240.mp4
+
+FFMPEG for .m3u8
+ffmpeg -i video1080p.mp4 -codec: copy -bsf:v h264_mp4toannexb -start_number 0 -hls_time 10 -hls_list_size 0 -f hls manifest1080p.m3u8

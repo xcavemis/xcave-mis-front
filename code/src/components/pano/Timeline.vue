@@ -2,54 +2,60 @@
   <div class="timeline-comp">
     <div
       class="timeline-comp__marker"
-      @click="goTo('codices101')"
-      :class="{'current': $store.getters.navigationStatus.codices == 'current', 'visited': $store.getters.navigationStatus.codices == 'visited', 'visited-current': $store.getters.navigationStatus.codices == 'visited-current'}"
+      @click="goTo('1')"
+      :class="{'visited-current': this.visitedIds['1']}"
     >
+      <!-- :class="{'current': $store.getters.navigationStatus.codices == 'current', 'visited': $store.getters.navigationStatus.codices == 'visited', 'visited-current': $store.getters.navigationStatus.codices == 'visited-current'}" -->
       <div class="timeline-comp__marker-icon"></div>
       <p class="timeline-comp__marker-label">Códices</p>
     </div>
     <div class="timeline-comp__divide"></div>
     <div
       class="timeline-comp__marker"
-      @click="goTo('civil201')"
-      :class="{'current': $store.getters.navigationStatus.civil == 'current', 'visited': $store.getters.navigationStatus.civil == 'visited', 'visited-current': $store.getters.navigationStatus.civil == 'visited-current'}"
+      @click="goTo('4')"
+      :class="{'visited-current':  this.visitedIds['4']}"
     >
+      <!-- :class="{'current': $store.getters.navigationStatus.civil == 'current', 'visited': $store.getters.navigationStatus.civil == 'visited', 'visited-current': $store.getters.navigationStatus.civil == 'visited-current'}" -->
       <div class="timeline-comp__marker-icon"></div>
       <p class="timeline-comp__marker-label">Civil</p>
     </div>
     <div class="timeline-comp__divide"></div>
     <div
       class="timeline-comp__marker"
-      @click="goTo('mixed301')"
-      :class="{'current': $store.getters.navigationStatus.mixed == 'current', 'visited': $store.getters.navigationStatus.mixed == 'visited', 'visited-current': $store.getters.navigationStatus.mixed == 'visited-current'}"
+      @click="goTo('9')"
+      :class="{'visited-current': this.visitedIds['9']}"
     >
+      <!-- :class="{'current': $store.getters.navigationStatus.mixed == 'current', 'visited': $store.getters.navigationStatus.mixed == 'visited', 'visited-current': $store.getters.navigationStatus.mixed == 'visited-current'}" -->
       <div class="timeline-comp__marker-icon"></div>
       <p class="timeline-comp__marker-label">Galeria Mista</p>
     </div>
     <div class="timeline-comp__divide"></div>
     <div
       class="timeline-comp__marker"
-      @click="goTo('projection501')"
-      :class="{'current': $store.getters.navigationStatus.sensorial == 'current', 'visited': $store.getters.navigationStatus.sensorial == 'visited', 'visited-current': $store.getters.navigationStatus.sensorial == 'visited-current'}"
+      @click="goTo('29')"
+      :class="{'visited-current': this.visitedIds['25']}"
     >
+      <!-- :class="{'current': $store.getters.navigationStatus.sensorial == 'current', 'visited': $store.getters.navigationStatus.sensorial == 'visited', 'visited-current': $store.getters.navigationStatus.sensorial == 'visited-current'}" -->
       <div class="timeline-comp__marker-icon"></div>
       <p class="timeline-comp__marker-label">Sensorial</p>
     </div>
     <div class="timeline-comp__divide"></div>
     <div
       class="timeline-comp__marker"
-      @click="goTo('military601')"
-      :class="{'current': $store.getters.navigationStatus.militar == 'current', 'visited': $store.getters.navigationStatus.militar == 'visited', 'visited-current': $store.getters.navigationStatus.militar == 'visited-current'}"
+      @click="goTo('32')"
+      :class="{'visited-current': this.visitedIds['33']}"
     >
+      <!-- :class="{'current': $store.getters.navigationStatus.militar == 'current', 'visited': $store.getters.navigationStatus.militar == 'visited', 'visited-current': $store.getters.navigationStatus.militar == 'visited-current'}" -->
       <div class="timeline-comp__marker-icon"></div>
       <p class="timeline-comp__marker-label">Militar</p>
     </div>
     <div class="timeline-comp__divide"></div>
     <div
       class="timeline-comp__marker"
-      @click="goTo('monalisa-colors701')"
-      :class="{'current': $store.getters.navigationStatus.monalisa == 'current', 'visited': $store.getters.navigationStatus.monalisa == 'visited', 'visited-current': $store.getters.navigationStatus.monalisa == 'visited-current'}"
+      @click="goTo('39')"
+      :class="{'visited-current': this.visitedIds['39']}"
     >
+      <!-- :class="{'current': $store.getters.navigationStatus.monalisa == 'current', 'visited': $store.getters.navigationStatus.monalisa == 'visited', 'visited-current': $store.getters.navigationStatus.monalisa == 'visited-current'}" -->
       <div class="timeline-comp__marker-icon"></div>
       <p class="timeline-comp__marker-label">Monalisa</p>
     </div>
@@ -58,9 +64,20 @@
 
 <script>
 export default {
+  data: () => ({
+    visitedIds: {
+      '1': false,
+      '4': false,
+      '9': false,
+      '25': false,
+      '33': false,
+      '39': false,
+    }
+  }),
   methods: {
     goTo(id) {
       this.$store.commit("navigateToPano", id);
+      // this.visitedIds[id] = true
     },
   },
 };
@@ -81,14 +98,27 @@ export default {
     position: relative;
     cursor: pointer;
     transition: all 0.2s ease-in;
-    &:hover {
-      transform: translateZ(0);
+    
 
-      border-color: $orange;
-      .timeline-comp__marker-label {
-        color: $orange;
+    @include minWidth(1024) {
+      &:hover {
+        transform: translateZ(0);
+
+        border-color: $orange;
+        .timeline-comp__marker-label {
+          color: $orange;
+        }
       }
     }
+
+    @include maxWidth(1023) {
+      @include set-size(5vw, 5vw);
+    }
+    
+    @include maxWidth(375) {
+      border: 1px solid $white;
+    }
+    
 
     .timeline-comp__marker-icon {
       @include set-size(5px, 5px);
@@ -99,9 +129,9 @@ export default {
     }
     .timeline-comp__marker-label {
       width: 90px;
-      @include font-scale(1366, 1680, 10, 14);
+      @include font-scale(1366, 1680, 10, 13);
       @include center-x(absolute);
-      font-family: $rob-regular;
+      font-family: $mont-regular;
       color: #999999;
       transition: color 0.6s $ease-in-out;
       bottom: -100%;
@@ -109,6 +139,10 @@ export default {
 
       @include minWidth(1680) {
         margin-bottom: -3px;
+      }
+
+      @include maxWidth(1024) {
+        bottom: -7.5vw;
       }
     }
 
@@ -157,6 +191,16 @@ export default {
   .timeline-comp__divide {
     @include set-size(115px, 2px);
     background-color: $white;
+
+    @include maxWidth(1366) {
+      @include set-size(70px, 2px);
+    }
+    @include maxWidth(768) {
+      @include set-size(50px, 2px);
+    }
+    @include maxWidth(375) {
+      @include set-size(40px, 2px);
+    }
   }
 }
 </style>

@@ -10,16 +10,35 @@ export default {
         mainSound: null,
         dynamicSound: null,
         stopTimer: 0,
+        updateTimer: 0,
+        muted: false,
+        tracks: [
+            '/media/audio/main/t1',
+            '/media/audio/main/t2',
+            '/media/audio/main/t3',
+            '/media/audio/main/t4',
+            '/media/audio/main/t5',
+            '/media/audio/main/t6',
+            '/media/audio/main/t7',
+            '/media/audio/main/t8',
+            '/media/audio/main/t9',
+            '/media/audio/main/t10',
+            '/media/audio/main/t11',
+        ],
+        trackIndex: 9,
+        isMobile: navigator.userAgent.toLowerCase().match(/mobile/i),
+        isIOS: /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream,
     }),
     mounted(){
-        this.mainSound = new Howl({
-            src: [`${this.default}.mp3`, `${this.default}.ogg`],
-            autoplay: true,
-            loop: true,
-            volume: 1,
-            onend: this.onEnded,
-        });
-        this.mainSound?.seek(30)
+        if (!this.isMobile) {
+            this.mainSound = new Howl({
+                src: [`${this.tracks[this.trackIndex]}.mp3`],
+                autoplay: true,
+                loop: true,
+                volume: 0.4,
+                onend: this.onEnded,
+            });
+        }
     },
     methods: {
         play(){
@@ -45,27 +64,67 @@ export default {
                 this.dynamicSound = new Howl({
                     src: [`${path}`, `${path}`],
                     autoplay: true,
-                    volume: 1,
+                    volume: 10,
                 });
                 
                 this.dynamicSound?.play();
-                // console.log('playTo', this.dynamicSound, path)
+                this.$store.commit('audio_end', false)
+                clearInterval(this.updateTimer)
+                this.updateTimer = setInterval(()=>{
+                    if (!this.$store.getters.audio_ended && this.dynamicSound) {
+                        let currentTime = this.dynamicSound?.seek();
+                        let maxduration = this.dynamicSound?.duration();
+                        let calc = currentTime / maxduration;
+                        this.$store.commit('audioTime', !isNaN(calc) ? calc : 0)
+                    }
+                }, 250)
                 this.dynamicSound?.on('load', () => {
                     // console.log('dynamicSOund load')
+                });
+                this.dynamicSound?.on('end', () => {
+                    this.$store.commit('audio_end', true)
                 });
             })
         },
         onEnded(){
-
+            this.mainSound?.unload()
+            this.$nextTick(()=>{
+                this.trackIndex++
+                if (this.trackIndex == this.tracks.length) this.trackIndex = 0
+                this.mainSound = new Howl({
+                    src: [`${this.tracks[this.trackIndex]}.mp3`],
+                    autoplay: true,
+                    loop: true,
+                    volume: this.muted ? 0 : 0.4,
+                });
+                
+                this.mainSound?.play();
+                this.mainSound?.on('load', () => {
+                    // console.log('mainSound load')
+                });
+                this.mainSound?.on('end', () => {
+                    this.onEnded()
+                });
+                // console.log('main track update: ', `${this.tracks[this.trackIndex]}.mp3`)
+            })
         },
         mute(){
+            this.muted = true
             this.mainSound?.fade(1, 0, 0)
         },
         unmute(){
-            this.mainSound?.fade(0, 1, 0)
+            this.muted = false
+            this.mainSound?.fade(0, 0.4, 0)
         },
+        destroyDynamic(){
+            clearInterval(this.updateTimer)
+            this.dynamicSound?.stop()
+            this.dynamicSound?.unload()
+            this.dynamicSound = null
+        }
     },
     beforeDestroy(){
+        clearInterval(this.updateTimer)
         this.mainSound?.stop()
         this.mainSound = null
         this.dynamicSound?.stop()

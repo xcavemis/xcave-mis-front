@@ -1,7 +1,8 @@
 <template>
   <article class="home">
     <section class="home-step first-step">
-      <ShaderBg />
+      <!-- <VideoPlayerStream /> -->
+      <!-- <ShaderBg v-if="$route.name == 'Home' && !isMobile" /> -->
       <img
         class="first-step__logo-mis" 
         src="~@/assets/images/logo-mis-exp.png"
@@ -14,7 +15,7 @@
           alt="LEONARDO DA VINCI – 500 ANOS DE UM GÊNIO"
         />
         <p class="first-step__center-content__description" >
-          Embarque numa experiência única e transporte-se para o incrível mundo de um dos maiores inventores de todos os tempos. Nessa versão digital você poderá ver todas as obras em detalhes, terá também acesso à vídeos especiais com informações importantes sobre o Gênio. Com a compra do ingresso você ajuda a manter as atividades do MIS Experience.
+          Transporte-se para o incrível mundo de um dos maiores gênios de todos os tempos, Leonardo Da Vinci. Uma experiência multissensorial com animações gráficas em alta definição, realidade aumentada, lives educativas, imagens em alta resolução, áudio e vídeos. Conheça a história completa, em detalhes, da vida do mestre Da Vinci, em um ambiente digital e imersivo. Ao comprar o ingresso você ajuda a manter as atividades do MIS Experience.
         </p>
         <div class="first-step__center-content__buttons">
           <a
@@ -24,12 +25,12 @@
           >INICIAR EXPERIÊNCIA</a>
           <a
             class="default-button first-step__center-content__button black"
-            href="https://www.sympla.com.br/teste-mis-davinci-digital-v1__904158"
+            href="https://davincidigital.byinti.com/"
             target="_blank"
           >COMPRAR INGRESSO</a>
         </div>
+        <!-- <img class="first-step__ad" src="~@/assets/images/adcontainer_hor.png" /> -->
       </div>
-      <img class="first-step__ad" src="~@/assets/images/adcontainer_hor.png" />
     </section>
     <section class="home-step second-step"></section>
     <section class="home-step third-step">
@@ -39,31 +40,33 @@
           <br />500 Anos de um Gênio
         </h1>
         <p class="third-step__center-content__description">
-          O MIS Experience – criado pelo Governo do Estado de São Paulo, por meio da Secretaria de Cultura e Economia Criativa, e pelo Museu da Imagem e do Som, em parceria com a TV Cultura – inaugura com a exposição Leonardo da Vinci – 500 Anos de um Gênio. Uma experiência imersiva, que possibilitará ao visitante conhecer a vida e o legado de Da Vinci por meio de uma exclusiva galeria com projeções, capaz de promover uma experiência interativa inédita no país. A exposição é patrocinada pelo Bradesco, Cielo, Fiat, Pirelli, Sabesp e Vale.
+          O MIS Experience, instituição da Secretaria de Cultura e Economia Criativa do Governo do Estado de São Paulo, apresenta a exposição digital <strong>Leonardo Da Vinci: 500 Anos de um Gênio</strong>. De modo totalmente imersivo, o visitante conhece a vida e o legado do artista italiano por meio de uma experiência inédita no país.
           <br />
-          <br />A mostra, considerada a investigação mais completa e detalhada sobre o trabalho de Leonardo da Vinci, apresenta 18 áreas temáticas que conta a trajetória do grande gênio renascentista e traz réplicas de máquinas desenhadas pelo artista italiano. Os visitantes terão uma experiência multissensorial com animações gráficas em alta definição, combinadas com um conteúdo multimídia e narrativa em áudio, o que permitirá ao público uma vivência divertida, educativa e esclarecedora a pessoas de todas as idades e interesses, sejam elas amantes de arte e da história. Os visitantes também terão a oportunidade de conhecer, pela primeira vez, a mente do homem que lançou as bases para algumas das invenções mais notáveis da sociedade moderna, como o helicóptero, o automóvel, o submarino, o paraquedas e a bicicleta.
+          <br />Criada em parceria com o <strong>Museo Leonardo Da Vinci</strong>, de Roma, em colaboração com diversos especialistas e historiadores da Itália e da França, a exposição é desenvolvida pela <strong>Grande Exhibitions</strong>, empresa sediada em Melbourne, na Austrália, com escritórios no Reino Unido e nos EUA.
           <br />
-          <br />Criada em parceria com o Museo Leonardo da Vinci, em Roma, e contando com a colaboração de diversos especialistas e historiadores da Itália e da França, a exposição é criada pela Grande Exhibitions, empresa sediada em Melbourne, na Austrália, com escritórios no Reino Unido e nos EUA.
+          <br />Esta é a mais completa e detalhada mostra sobre o trabalho de <strong>Leonardo Da Vinci</strong>. São 18 áreas temáticas, que contam a trajetória do grande gênio renascentista, apresentando réplicas de máquinas que foram desenhadas pelo artista. Os visitantes têm a oportunidade de conhecer a mente do homem que lançou as bases para algumas das invenções mais notáveis da sociedade moderna, como o helicóptero, o automóvel, o submarino, o paraquedas e a bicicleta. O conteúdo apresentado permite uma experiência multissensorial com animações gráficas em alta definição, combinadas com uma plataforma digital. Assim, o público, de todas as idades, pode vivenciar a história de maneira divertida, educativa e esclarecedora.
           <br />
-          <br />Leonardo da Vinci - 500 Anos de um Gênio traz ainda os Segredos de Mona Lisa – uma análise da pintura mais famosa do mundo, realizada no Museu do Louvre por Pascal Cotte, renomado engenheiro, pesquisador e fotógrafo de obras de arte.
+          <br /><strong>Leonardo da Vinci - 500 Anos de um Gênio</strong>, ainda apresenta os <strong>Segredos de Mona Lisa</strong> – uma análise da pintura mais famosa do mundo, realizada no <strong>Museu do Louvre</strong> por Pascal Cotte, renomado engenheiro, pesquisador e fotógrafo de obras de arte.
+          <br />
+          <br />A experiência imersiva digital é patrocinada por Cielo e Sabesp; com parceria da TV Cultura; apoio Institucional da Folha; desenvolvimento da experiência digital: Agência EKO e XCAVE Studio; concepção, Grande Exhibitions e Sensory 4 Immersive Experience. Uma realização do MIS Experience e da Secretaria de Economia Criativa do Governo do Estado de São Paulo.
         </p>
-        <a
-          class="default-button third-step__center-content__button white"
-          href="javascript:void(0)"
-          @click="goTo"
-        >INICIAR EXPERIÊNCIA</a>
-        <a
-          class="default-button third-step__center-content__button orange"
-          href="https://www.sympla.com.br/teste-mis-davinci-digital-v1__904158"
-          target="_blank"
-        >COMPRAR INGRESSO</a>
+        <div class="third-step__center-content__buttons">
+          <a
+            class="default-button third-step__center-content__button white"
+            href="javascript:void(0)"
+            @click="goTo"
+          >INICIAR EXPERIÊNCIA</a>
+          <a
+            class="default-button third-step__center-content__button orange"
+            href="https://davincidigital.byinti.com/"
+            target="_blank"
+          >COMPRAR INGRESSO</a>
+        </div>
       </div>
-      <img class="third-step__ad" src="~@/assets/images/adcontainer_vert.png" v-if="!isMobile" />
+      <img class="third-step__ad desk" src="~@/assets/images/adcontainer_vert.png" />
       <img
-        class="third-step__ad"
-        :class="{isMobile: isMobile}"
+        class="third-step__ad mob"
         src="~@/assets/images/adcontainer_hor.png"
-        v-else
       />
     </section>
     <!-- <section class="home-step sponsors">
@@ -83,18 +86,21 @@
 import Auth from "@/components/Auth";
 import { TweenMax, Quad } from 'gsap';
 import Splitting from "splitting";
-import ShaderBg from "@/components/ShaderBg";
+// import VideoPlayerStream from "@/components/VideoPlayerStream";
+// import ShaderBg from "@/components/ShaderBg";
 export default {
   name: "Home",
   components: { 
     Auth, 
-    ShaderBg 
+    // VideoPlayerStream,
+    // ShaderBg 
   },
   data: () => ({
     authShow: false,
     isMobile: window.innerWidth < 1024,
   }),
   mounted(){
+    TweenMax.set('html, body', { overflow: 'auto' })
     this.$nextTick(()=>{
       this.show()
     })
@@ -104,22 +110,24 @@ export default {
       
       this.splittingTitle = Splitting({
         target: this.$el.querySelector(".first-step__center-content .first-step__center-content__description"),
-        by: "chars",
+        by: "lines",
       });
-      TweenMax.fromTo(this.$el, 1, { autoAlpha: 0 }, { autoAlpha: 1, delay: 0.4, ease: Quad.easeInOut, onComplete: ()=> {
+      TweenMax.fromTo(this.$el, 1, { autoAlpha: 0 }, { autoAlpha: 1, delay: 0.6, ease: Quad.easeInOut, onComplete: ()=> {
 
         TweenMax.fromTo('.governo-top', 0.6, { y: '-100%' }, { y: '0%', delay: 0.8, ease: Quad.easeInOut })
         TweenMax.fromTo('.first-step__logo-mis', 0.6, { autoAlpha: 0 }, { autoAlpha: 1, delay: 0.4, ease: Quad.easeInOut })
         TweenMax.fromTo('.first-step__center-content .first-step__center-content__title', 0.6, { autoAlpha: 0 }, { autoAlpha: 1, delay: 0.6, ease: Quad.easeInOut})
-        this.splittingTitle[0].chars.map((char) => {
+        TweenMax.fromTo('.first-step__center-content .first-step__center-content__description', 1, { autoAlpha: 0 }, { autoAlpha: 1, delay: 0.8, ease: Quad.easeInOut})
+        // TweenMax.fromTo('.first-step__ad', 0.6, { autoAlpha: 0 }, { autoAlpha: 1, delay: 1.4, ease: Quad.easeInOut})
+        this.splittingTitle[0].lines.map((line, index) => {
           TweenMax.fromTo(
-            char,
+            line,
               0.6,
               { autoAlpha: 0 },
-              { autoAlpha: 1, ease: Quad.easeInOut, delay: 0.8 + Math.random() * 0.8 }
+              { autoAlpha: 1, ease: Quad.easeInOut, delay: 0.8 + (index / 10) }
           );
         })
-        TweenMax.staggerFromTo('.first-step__center-content .first-step__center-content__button', 0.6, { y: '100%' }, { y: '0%', ease: Quad.easeInOut, delay: 1.6}, 0.1, ()=>{
+        TweenMax.staggerFromTo('.first-step__center-content .first-step__center-content__button', 0.6, { y: '150%' }, { y: '0%', ease: Quad.easeInOut, delay: 1.2}, 0.1, ()=>{
           // setTimeout(()=>{
           //   document.querySelector('.first-step__center-content__button.white').classList.add('pulse')
           // }, 1000)
@@ -127,6 +135,7 @@ export default {
       }})
     },
     goTo() {
+      
       this.$store.dispatch("tokenCheck").then((res) => {
         if (
           res &&
@@ -135,14 +144,34 @@ export default {
           res.endTime != null &&
           this.validateTime(res.endTime)
         ) {
-          this.$router.push("/experience");
-        } else {
-          TweenMax.set('html, body', { overflowY: 'hidden'})
-          this.authShow = true;
-          this.$nextTick(() => {
-            this.$refs?.authComp?.show();
+          this.$store.dispatch("autoLogin").then((res) => {
+            // console.log('autoLogin home', res)
+            if (res &&
+                res.user &&
+                res.hasHoursAvaliable
+              ) {
+                this.$router.push("/experience");
+            } else {
+              this.showAuth()
+            }
           });
+        } else {
+          this.showAuth()
         }
+      });
+      // document.body.scrollTo(0,0)
+      // TweenMax.set('html, body', { overflowY: 'hidden', delay: 0.6})
+      // this.authShow = true;
+      // this.$nextTick(() => {
+      //   this.$refs?.authComp?.show();
+      // });
+    },
+    showAuth(){
+      document.body.scrollTo(0,0)
+      TweenMax.set('html, body', { overflowY: 'hidden', delay: 0.6})
+      this.authShow = true;
+      this.$nextTick(() => {
+        this.$refs?.authComp?.show();
       });
     },
     onAuthClosed(){
@@ -186,6 +215,10 @@ export default {
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center center;
+
+  @include maxWidth(1023) {
+    height: 95vh;
+  }
   
   .shader-bg {
     // opacity: 0;
@@ -198,9 +231,17 @@ export default {
     left: 103px;
     opacity: 0;
 
-    @include maxWidth(1023) {
-      width: 160px;
+    @include maxWidth(1366) {
+      width: 240px;
+    }
+
+    @include maxWidth(768) {
       @include center-x(absolute);
+      top: 130px;
+    }
+    @include maxHeight(767) {
+      width: 130px;
+      top: 97px;
     }
   }
 
@@ -208,14 +249,16 @@ export default {
     @include center(absolute);
     width: 80vw;
     max-width: 900px;
+    margin-top: 5vh;
 
     .first-step__center-content__title {
       width: 35.1vw;
       margin: 0 auto 40px auto;
       opacity: 0;
+      max-width: 480px;
     }
     .first-step__center-content__description {
-      @include font-scale(1366, 1680, 14, 18);
+      @include font-scale(1366, 1680, 14, 17);
       font-family: $rob-regular;
       text-align: center;
       color: $white;
@@ -223,6 +266,7 @@ export default {
       text-shadow: 0px 0px 4px #000000;
       line-height: 1.2;
       .word {
+        opacity: 0;
         .char {
           opacity: 0;
         }
@@ -239,13 +283,13 @@ export default {
 
       .first-step__center-content__button {
         min-width: 150px;
-        transform: translateY(100%);
+        transform: translateY(150%);
       }
     }
 
-    @include maxWidth(1024) {
+    @include maxWidth(768) {
       width: 95vw;
-      margin-top: 3vh;
+      margin-top: 5vh;
       .first-step__center-content__title {
         width: 80%;
         @include font-size(15);
@@ -255,7 +299,7 @@ export default {
       .first-step__center-content__description {
         width: 90%;
         margin: 0 auto;
-        @include font-size(14);
+        @include font-size(13);
         br {
           display: none;
         }
@@ -274,16 +318,48 @@ export default {
         }
       }
     }
+
+    @include maxWidth(375) {
+      margin-top: 8vh;
+      .first-step__center-content__title {
+        margin: 0 auto 20px auto;
+      }
+
+      .first-step__center-content__description {
+        @include font-size(12);
+      }
+
+      .first-step__center-content__buttons {
+        margin-top: 3vh;
+        // display: block;
+        .first-step__center-content__button {
+          min-width: 0;
+          width: 45%;
+          @include font-size(10);
+          padding: 15px;
+          // display: block;
+          margin: 0 auto 5px auto;
+        }
+      }
+    }
   }
   .first-step__ad {
-    position: absolute;
+    // position: absolute;
+    margin-top: 10vh;
     max-width: 730px;
     width: 90%;
+    opacity: 0;
+    @include maxHeight(700) {
+      margin-top: 7vh;
+    }
+    @include maxHeight(580) {
+      max-width: 500px;
+    }
 
-    @include center-x(absolute);
-    bottom: 70px;
+    // @include center-x(absolute);
+    // bottom: 70px;
     @include minWidth(1440) {
-      bottom: 50px;
+      // bottom: 50px;
     }
   }
 }
@@ -321,13 +397,18 @@ export default {
       // line-height: 30px;
       color: $white;
       margin: 36px 0;
+
+      strong{
+        font-family: $rob-bold;
+      }
     }
+   
 
     .third-step__center-content__button {
       margin-right: 25px;
     }
   }
-  @include maxWidth(1024) {
+  @include maxWidth(1023) {
     height: auto;
     padding: 30px;
     .third-step__center-content {
@@ -346,16 +427,49 @@ export default {
         line-height: 20px;
       }
 
+       .third-step__center-content__buttons {
+          display: flex;
+          justify-content: space-around;
+       }
+
       .third-step__center-content__button {
         @include font-size(10);
-        margin: 0 5px 24px 0;
+        margin: 0 0 24px 0;
         width: 40vw;
+      }
+    }
+  }
+  @include maxWidth(375) {
+    .third-step__center-content {
+      .third-step__center-content__title {
+        @include font-size(28);
+        line-height: 28px;
+      }
+      .third-step__center-content__description {
+        @include font-size(14);
+        line-height: 18px;
+      }
+
+      .third-step__center-content__button {
+        @include font-size(9);
+        margin: 0 0 24px 0;
+        width: 38vw;
       }
     }
   }
 }
 .third-step__ad {
+  opacity: 0;
   &.isMobile {
+    
+  }
+
+  &.desk {
+    display: none;
+  } 
+
+  &.mob {
+    display: block;
     max-width: 730px;
     width: 100%;
   }
@@ -363,6 +477,13 @@ export default {
   @include minWidth(1024) {
     @include center-y(absolute);
     right: 120px;
+
+    &.desk {
+      display: block;
+    } 
+    &.mob {
+      display: none;
+    } 
   }
 }
 

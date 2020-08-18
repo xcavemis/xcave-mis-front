@@ -1,148 +1,90 @@
 export const monalisaLayers = {
-    scenes: [
-      {
-        id: "monalisa-layers801",
-        groupId: 'monalisa',
-        src: 'MONA-LISA-LAYERS-801',
-        type: "image",
-        name: "monalisa-layers 801",
-        infoHotspots: [
-          {
-            id: "V-801",
-            title: "CIVIL V801",
-            target: "ZslmBjaWYtI",
-            type: 'learn',
-          },
-          {
-            id: "D-801",  
-            title: "D-801",
-            type: 'content',
-            image: "101/la-bele-feroniere.jpg",
-            audio: '101/guide',
-            text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien elit, fermentum aliquet malesuada tempus, aliquet sodales magna. Phasellus ultrices mattis bibendum.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien elit, fermentum aliquet malesuada tempus, aliquet sodales magna. Phasellus ultrices mattis bibendum.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien elit, fermentum aliquet malesuada tempus, aliquet sodales magna. Phasellus ultrices mattis bibendum.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien elit, fermentum aliquet malesuada tempus, aliquet sodales magna. Phasellus ultrices mattis bibendum.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien elit, fermentum aliquet malesuada tempus, aliquet sodales magna. Phasellus ultrices mattis bibendum."
-          },
-          {
-            id: "D-802",  
-            title: "D-802",
-            type: 'content',
-            image: "101/la-bele-feroniere.jpg",
-            audio: '101/guide',
-            text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien elit, fermentum aliquet malesuada tempus, aliquet sodales magna. Phasellus ultrices mattis bibendum.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien elit, fermentum aliquet malesuada tempus, aliquet sodales magna. Phasellus ultrices mattis bibendum.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien elit, fermentum aliquet malesuada tempus, aliquet sodales magna. Phasellus ultrices mattis bibendum.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien elit, fermentum aliquet malesuada tempus, aliquet sodales magna. Phasellus ultrices mattis bibendum.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien elit, fermentum aliquet malesuada tempus, aliquet sodales magna. Phasellus ultrices mattis bibendum."
-          },
-        ]
-      },
-      {
-        id: "monalisa-layers802",
-        groupId: 'monalisa',
-        src: 'MONA-LISA-LAYERS-802',
-        type: "image",
-        name: "monalisa-layers 802",
-        infoHotspots: [
-          {
-            id: "V-801",  
-            title: "CIVIL V801",
-            target: "ZslmBjaWYtI",
-            type: 'learn',
-          },
-          {
-            id: "D-805",  
-            title: "D-805",
-            type: 'content',
-            image: "101/la-bele-feroniere.jpg",
-            audio: '101/guide',
-            text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien elit, fermentum aliquet malesuada tempus, aliquet sodales magna. Phasellus ultrices mattis bibendum.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien elit, fermentum aliquet malesuada tempus, aliquet sodales magna. Phasellus ultrices mattis bibendum.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien elit, fermentum aliquet malesuada tempus, aliquet sodales magna. Phasellus ultrices mattis bibendum.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien elit, fermentum aliquet malesuada tempus, aliquet sodales magna. Phasellus ultrices mattis bibendum.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien elit, fermentum aliquet malesuada tempus, aliquet sodales magna. Phasellus ultrices mattis bibendum."
-          },
-          {
-            id: "D-806",  
-            title: "D-806",
-            type: 'content',
-            image: "101/la-bele-feroniere.jpg",
-            audio: '101/guide',
-            text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien elit, fermentum aliquet malesuada tempus, aliquet sodales magna. Phasellus ultrices mattis bibendum.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien elit, fermentum aliquet malesuada tempus, aliquet sodales magna. Phasellus ultrices mattis bibendum.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien elit, fermentum aliquet malesuada tempus, aliquet sodales magna. Phasellus ultrices mattis bibendum.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien elit, fermentum aliquet malesuada tempus, aliquet sodales magna. Phasellus ultrices mattis bibendum.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien elit, fermentum aliquet malesuada tempus, aliquet sodales magna. Phasellus ultrices mattis bibendum."
-          },
-          {
-            id: "D-807",  
-            title: "D-807",
-            type: 'content',
-            image: "101/la-bele-feroniere.jpg",
-            audio: '101/guide',
-            text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien elit, fermentum aliquet malesuada tempus, aliquet sodales magna. Phasellus ultrices mattis bibendum.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien elit, fermentum aliquet malesuada tempus, aliquet sodales magna. Phasellus ultrices mattis bibendum.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien elit, fermentum aliquet malesuada tempus, aliquet sodales magna. Phasellus ultrices mattis bibendum.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien elit, fermentum aliquet malesuada tempus, aliquet sodales magna. Phasellus ultrices mattis bibendum.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien elit, fermentum aliquet malesuada tempus, aliquet sodales magna. Phasellus ultrices mattis bibendum."
-          },
-        ]
-      },
-      {
-        id: "monalisa-layers803",
-        groupId: 'monalisa',
-        src: 'MONA-LISA-LAYERS-803',
-        type: "image",
-        name: "monalisa-layers 803",
-        infoHotspots: [
-          {
-            id: "V-801",  
-            title: "CIVIL V801",
-            target: "ZslmBjaWYtI",
-            type: 'learn',
-          },
-          {
-            id: "D-803",    
-            title: "D-803",
-            type: 'content',
-            image: "101/la-bele-feroniere.jpg",
-            audio: '101/guide',
-            text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien elit, fermentum aliquet malesuada tempus, aliquet sodales magna. Phasellus ultrices mattis bibendum.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien elit, fermentum aliquet malesuada tempus, aliquet sodales magna. Phasellus ultrices mattis bibendum.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien elit, fermentum aliquet malesuada tempus, aliquet sodales magna. Phasellus ultrices mattis bibendum.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien elit, fermentum aliquet malesuada tempus, aliquet sodales magna. Phasellus ultrices mattis bibendum.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien elit, fermentum aliquet malesuada tempus, aliquet sodales magna. Phasellus ultrices mattis bibendum."
-          },
-          {
-            id: "D-804",  
-            title: "D-804",
-            type: 'content',
-            image: "101/la-bele-feroniere.jpg",
-            audio: '101/guide',
-            text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien elit, fermentum aliquet malesuada tempus, aliquet sodales magna. Phasellus ultrices mattis bibendum.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien elit, fermentum aliquet malesuada tempus, aliquet sodales magna. Phasellus ultrices mattis bibendum.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien elit, fermentum aliquet malesuada tempus, aliquet sodales magna. Phasellus ultrices mattis bibendum.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien elit, fermentum aliquet malesuada tempus, aliquet sodales magna. Phasellus ultrices mattis bibendum.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien elit, fermentum aliquet malesuada tempus, aliquet sodales magna. Phasellus ultrices mattis bibendum."
-          },
-        ]
-      },
-      {
-        id: "monalisa-layers804",
-        groupId: 'monalisa',
-        src: 'MONA-LISA-LAYERS-804',
-        type: "image",
-        name: "monalisa-layers 804",
-        infoHotspots: [
-          {
-            id: "D-808",  
-            title: "D-808",
-            type: 'content',
-            image: "101/la-bele-feroniere.jpg",
-            audio: '101/guide',
-            text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien elit, fermentum aliquet malesuada tempus, aliquet sodales magna. Phasellus ultrices mattis bibendum.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien elit, fermentum aliquet malesuada tempus, aliquet sodales magna. Phasellus ultrices mattis bibendum.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien elit, fermentum aliquet malesuada tempus, aliquet sodales magna. Phasellus ultrices mattis bibendum.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien elit, fermentum aliquet malesuada tempus, aliquet sodales magna. Phasellus ultrices mattis bibendum.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien elit, fermentum aliquet malesuada tempus, aliquet sodales magna. Phasellus ultrices mattis bibendum."
-          },
-        ]
-      },
-      {
-        id: "monalisa-layers805",
-        groupId: 'monalisa',
-        src: 'MONA-LISA-LAYERS-805',
-        type: "image",
-        name: "monalisa-layers 805",
-        infoHotspots: [
-          {
-            id: "D-809",  
-            title: "D-809",
-            type: 'content',
-            image: "101/la-bele-feroniere.jpg",
-            audio: '101/guide',
-            text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien elit, fermentum aliquet malesuada tempus, aliquet sodales magna. Phasellus ultrices mattis bibendum.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien elit, fermentum aliquet malesuada tempus, aliquet sodales magna. Phasellus ultrices mattis bibendum.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien elit, fermentum aliquet malesuada tempus, aliquet sodales magna. Phasellus ultrices mattis bibendum.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien elit, fermentum aliquet malesuada tempus, aliquet sodales magna. Phasellus ultrices mattis bibendum.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien elit, fermentum aliquet malesuada tempus, aliquet sodales magna. Phasellus ultrices mattis bibendum."
-          },
-        ]
-      },
-      {
-        id: "monalisa-layers806",
-        groupId: 'monalisa',
-        src: 'MONA-LISA-LAYERS-806',
-        type: "image",
-        name: "monalisa-layers 806",
-        infoHotspots: []
-      },
-    ],
-  };
-  
+  scenes: [
+    {
+      id: "V-801",
+      title: "CIVIL V801",
+      target: "ZslmBjaWYtI",
+      type: 'learn',
+    },
+    {
+      id: "D-801",  
+      title: "Câmera Multiespectral",
+      type: 'content',
+      image: ["8-monalisa-layers/D801a.jpg","8-monalisa-layers/D801b.jpg","8-monalisa-layers/D801c.jpg","8-monalisa-layers/D801d.jpg"],
+      audio: '',
+      text: "<p>Reunimos hoje o maior n&uacute;mero de informa&ccedil;&otilde;es sobre a Mona Lisa gra&ccedil;as &agrave;s novas tecnologias, que nos proporcionam descobertas sem precedentes sobre o hist&oacute;rico dessa pintura. A primeira c&acirc;mera multiespectral de alta defini&ccedil;&atilde;o foi inventada pelo engenheiro e cientista &oacute;ptico franc&ecirc;s Pascal Cotte.</p><p>O sistema utiliza proje&ccedil;&atilde;o de luz e uma c&acirc;mera de 240 megapixels para analisar cada pigmento de uma pintura, permitindo a cria&ccedil;&atilde;o de vers&otilde;es digitais que revelam suas verdadeiras cores originais. Ele tamb&eacute;m &eacute; capaz de digitalizar pinturas utilizando diferentes comprimentos de onda de luz para revelar suas v&aacute;rias camadas, incluindo o que foi pintado em camadas inferiores.</p><p>Al&eacute;m da Mona Lisa, Pascal Cotte fez o escaneamento de outra obra-prima de Da Vinci, Dama com arminho. Sua empresa, a Lumi&egrave;re Technology, tamb&eacute;m digitalizou pinturas de Rubens, G&eacute;ricault, Delacroix, Rembrandt, Chagall, Fragonard, Picasso, Monet, David, Renoir e Van Gogh, contabilizando mais de 1.500 obras de arte de cole&ccedil;&otilde;es particulares e p&uacute;blicas de todo o mundo.</p><p>Recentemente, essa tecnologia demonstrou que La Bella Principessa, que antes acreditava-se tratar de um retrato do in&iacute;cio do s&eacute;culo XIX, era na verdade uma obra perdida de Leonardo da Vinci.</p><p>A tecnologia tamb&eacute;m tem sido uma etapa fundamental do sucesso do projeto europeu Crisatel, dedicado &agrave; conserva&ccedil;&atilde;o de obras de arte. O projeto Crisatel estabeleceu um novo padr&atilde;o mundial para a digitaliza&ccedil;&atilde;o de documentos pict&oacute;ricos, permitindo que a arte seja preservada e a documentada para as gera&ccedil;&otilde;es futuras.</p>"
+    },
+    {
+      id: "D-802",  
+      title: "RÉPLICA DE MONA LISA",
+      type: 'content',
+      image: ["8-monalisa-layers/D802a.jpg"],
+      audio: "8-monalisa-layers/A801.mp3",
+      text: "<p>Aqui voc&ecirc; v&ecirc; a apar&ecirc;ncia atual da Mona Lisa, com as cores e tamanho reais, exatamente como Pascal Cotte a viu quando fotografou a verdadeira Mona Lisa no Museu do Louvre, em Paris, Fran&ccedil;a.</p><p>Poucas pinturas s&atilde;o t&atilde;o valorizadas e protegidas quanto a Mona Lisa. Mantida em uma sala climatizada atr&aacute;s de uma redoma de vidro &agrave; prova de balas, poucos tiveram o privil&eacute;gio de v&ecirc;-la de perto. Pascal Cotte est&aacute; entre os poucos curadores, restauradores e especialistas que tiveram essa incr&iacute;vel honra &ndash; para ele, foi a realiza&ccedil;&atilde;o de um sonho.</p><p>Essa r&eacute;plica nos oferece uma rara oportunidade de descobrir o que a parte de tr&aacute;s da pintura revela sobre a viva e tumultuada hist&oacute;ria da Mona Lisa.</p><p>Onde a placa se partiu, dois grampos foram originalmente utilizados para repar&aacute;-la. Apenas o grampo inferior permaneceu, e como e quando o clipe superior, de cor bege, foi perdido, permanece um mist&eacute;rio.</p><p>Entre os escritos e reparos, observe o endere&ccedil;o &ldquo;Au garde des Tableaux &agrave; Versailles&hellip; bureau du Directeur&ldquo; (ao guardi&atilde;o de pinturas de Versalhes... escrit&oacute;rio do Diretor). A data prov&aacute;vel remonta &agrave; &eacute;poca em que Lu&iacute;s XIV, o propriet&aacute;rio da pintura na &eacute;poca, mudou-a do Pal&aacute;cio de Fontainebleau para sua nova resid&ecirc;ncia, o Pal&aacute;cio de Versalhes.</p><p>No canto superior esquerdo, &eacute; poss&iacute;vel ler a palavra Joconde, o nome franc&ecirc;s da Mona Lisa.</p><p>No canto inferior direito, &eacute; vis&iacute;vel o selo vermelho do Mus&eacute;e Royal(Museu Real). A flor de lis &eacute; o s&iacute;mbolo do rei franc&ecirc;s, enquanto o n&uacute;mero 316 se refere &agrave; posi&ccedil;&atilde;o da Mona Lisa na cole&ccedil;&atilde;o do museu.</p><p>No meio do painel, &eacute; poss&iacute;vel identificar o n&uacute;mero 29. Este &eacute; o n&uacute;mero da Mona Lisa na lista de pinturas que foram transferidas de Versalhes para o Louvre. No entanto, a data e o significado da letra H acima dele s&atilde;o desconhecidos.</p>"
+    },
+    {
+      id: "D-803",    
+      title: "RÉPLICA DE MONA LISA",
+      type: 'content',
+      image: ["8-monalisa-layers/D803a.jpg"],
+      audio: '8-monalisa-layers/A802.mp3',
+      text: "<p>Aqui voc&ecirc; v&ecirc; a apar&ecirc;ncia atual da Mona Lisa, com as cores e tamanho reais, exatamente como Pascal Cotte a viu quando fotografou a verdadeira Mona Lisa no Museu do Louvre, em Paris, Fran&ccedil;a.</p><p>Poucas pinturas s&atilde;o t&atilde;o valorizadas e protegidas quanto a Mona Lisa. Mantida em uma sala climatizada atr&aacute;s de uma redoma de vidro &agrave; prova de balas, poucos tiveram o privil&eacute;gio de v&ecirc;-la de perto. Pascal Cotte est&aacute; entre os poucos curadores, restauradores e especialistas que tiveram essa incr&iacute;vel honra &ndash; para ele, foi a realiza&ccedil;&atilde;o de um sonho.</p><p>Essa r&eacute;plica nos oferece uma rara oportunidade de descobrir o que a parte de tr&aacute;s da pintura revela sobre a viva e tumultuada hist&oacute;ria da Mona Lisa.</p><p>Onde a placa se partiu, dois grampos foram originalmente utilizados para repar&aacute;-la. Apenas o grampo inferior permaneceu, e como e quando o clipe superior, de cor bege, foi perdido, permanece um mist&eacute;rio.</p><p>Entre os escritos e reparos, observe o endere&ccedil;o &ldquo;Au garde des Tableaux &agrave; Versailles&hellip; bureau du Directeur&ldquo; (ao guardi&atilde;o de pinturas de Versalhes... escrit&oacute;rio do Diretor). A data prov&aacute;vel remonta &agrave; &eacute;poca em que Lu&iacute;s XIV, o propriet&aacute;rio da pintura na &eacute;poca, mudou-a do Pal&aacute;cio de Fontainebleau para sua nova resid&ecirc;ncia, o Pal&aacute;cio de Versalhes.</p><p>No canto superior esquerdo, &eacute; poss&iacute;vel ler a palavra Joconde, o nome franc&ecirc;s da Mona Lisa.</p><p>No canto inferior direito, &eacute; vis&iacute;vel o selo vermelho do Mus&eacute;e Royal(Museu Real). A flor de lis &eacute; o s&iacute;mbolo do rei franc&ecirc;s, enquanto o n&uacute;mero 316 se refere &agrave; posi&ccedil;&atilde;o da Mona Lisa na cole&ccedil;&atilde;o do museu.</p><p>No meio do painel, &eacute; poss&iacute;vel identificar o n&uacute;mero 29. Este &eacute; o n&uacute;mero da Mona Lisa na lista de pinturas que foram transferidas de Versalhes para o Louvre. No entanto, a data e o significado da letra H acima dele s&atilde;o desconhecidos.</p>"
+    },
+    {
+      id: "D-804",  
+      title: "VOCÊ SABIA?",
+      type: 'content',
+      image: ["8-monalisa-layers/D804a.jpg"],
+      audio: '',
+      text: "<p>O tamanho real da Mona Lisa &eacute; de 77 x 53 cm (30,31 x 20,87 pol.).</p><p>Mona &eacute; a ortografia empregada nos pa&iacute;ses de l&iacute;ngua inglesa; Monna &eacute; italiano e, na verdade, &eacute; a grafia recomendada pelo Louvre.</p><p>A Mona Lisa &eacute; conhecida como La Joconde na Fran&ccedil;a e La Gioconda na It&aacute;lia.<br />A obra-prima est&aacute; exposta no Museu do Louvre, em Paris, como 'Retrato de Lisa Gherardini, esposa de Francesco del Giocondo'.</p><p>Aos olhos de Leonardo, a Mona Lisa n&atilde;o est&aacute; conclu&iacute;da. Ele come&ccedil;ou a pint&aacute;-la em 1503, e acredita-se que a tenha conclu&iacute;do em 1514, mas ele nunca pareceu muito satisfeito. Ele a manteve at&eacute; sua morte, em 1519, continuamente retocando e reformulando-a.</p><p>Leonardo levou Mona Lisa da It&aacute;lia para a Fran&ccedil;a em 1516, quando o rei Francisco I o convidou para trabalhar no que hoje &eacute; conhecido como Chateau du Clos Luc&eacute;, em Amboise. Em 1518, o rei comprou a pintura por 4.000 escudos, e assim ela chegou em m&atilde;os francesas &ndash; n&atilde;o italianas.<br />No in&iacute;cio do s&eacute;culo XIX, a Mona Lisa chegou a ser propriedade de Napole&atilde;o Bonaparte. Ele pendurou a pintura em seu quarto e tamb&eacute;m no banheiro, e por isso o verniz pr&oacute;ximo aos olhos e ao queixo chegou a ser danificado pela &aacute;gua.</p><p>Em 1911, um italiano que trabalhava no Louvre roubou a Mona Lisa e a escondeu por dois anos. Na &eacute;poca, ningu&eacute;m sabia quem a havia roubado, e a busca se espalhou pelos quatro cantos do mundo. Suspeitou-se at&eacute; mesmo de Pablo Picasso, que foi interrogado pela pol&iacute;cia. O ladr&atilde;o, Vincenzo Peruggia, foi pego ao tentar vend&ecirc;-la para a Galeria Uffizi, em Floren&ccedil;a, com a inten&ccedil;&atilde;o de devolv&ecirc;-la ao seu &ldquo;leg&iacute;timo lar&rdquo;. Ele foi saudado na It&aacute;lia pelo patriotismo, onde cumpriu poucos meses de pris&atilde;o pelo crime. Apenas recentemente uma pequena mancha de tinta laranja foi encontrada na Mona Lisa, supostamente feita por Peruggia, que tamb&eacute;m pintava pr&eacute;dios.</p><p>At&eacute; meados do s&eacute;culo XIX, a Mona Lisa n&atilde;o era uma pintura famosa. Ela conquistou amplo reconhecimento somente quando artistas do emergente movimento simbolista a descobriram e a associaram a suas ideias a respeito da m&iacute;stica feminina.</p><p>Em 1956, a parte inferior da pintura foi seriamente danificada quando algu&eacute;m a imergiu em &aacute;cido. No dia 30 de dezembro do mesmo ano, Ugo Ungaza Villegas, um jovem boliviano, danificou-a ainda mais ao atirar uma pedra na pintura.</p> <p>De dezembro de 1962 a mar&ccedil;o de 1963, o governo franc&ecirc;s emprestou a Mona Lisa aos Estados Unidos, para ser exibida na Galeria Nacional de Arte de Washington, D.C., e no Metropolitan Museum of Art, em Nova York.</p><p>Hoje, a Mona Lisa &eacute; considerada valiosa demais para ser transportada, e &eacute; mantida permanentemente atr&aacute;s de uma redoma de vidro &agrave; prova de balas no Louvre.</p>"
+    },
+    {
+      id: "D-805",  
+      title: "ESBOÇO DE RETRATO",
+      type: 'content',
+      image: ["8-monalisa-layers/D805a.jpg","8-monalisa-layers/D805b.jpg","8-monalisa-layers/D805c.jpg"], 
+      audio: '',
+      text: "<p>A primeira pintura na tela que agora ostenta a Mona Lisa parece ter sido um experimento. Apesar dos esbo&ccedil;os preparat&oacute;rios, os planos de Leonardo n&atilde;o estavam estabelecidos em definitivo. Existem, por exemplo, pelo menos duas vers&otilde;es do apoio de bra&ccedil;o. Embora o processo LAM permita amplificar as imagens das camadas inferiores, ele n&atilde;o &eacute; capaz de recriar o que n&atilde;o existe mais. Vislumbramos apenas o que restou: aquilo que Leonardo involuntariamente abandonou. Por isso, &eacute; dif&iacute;cil saber se Leonardo concluiu ou n&atilde;o esse &ldquo;esbo&ccedil;o&rdquo; de retrato inicial.</p><p><strong>Tamanho e posi&ccedil;&atilde;o</strong><br />O tamanho da cabe&ccedil;a, rosto, m&atilde;os, manga direita e apoio de bra&ccedil;o parece confirmar que o retrato inicial era maior do que o Retrato de Lisa Gherardini. Tudo o que resta do apoio de bra&ccedil;o &eacute; uma pequena linha curva na borda direita da pintura, no mesmo n&iacute;vel do cotovelo esquerdo &ndash; mas, mesmo com t&atilde;o poucos detalhes, fica claro que sua posi&ccedil;&atilde;o n&atilde;o &eacute; compat&iacute;vel com a posi&ccedil;&atilde;o das m&atilde;os de Mona Lisa.</p><p>&Eacute; imposs&iacute;vel saber ao certo qual era a inten&ccedil;&atilde;o de Leonardo com este retrato original, mas Cotte acredita que ele pode representar um esbo&ccedil;o para a segunda camada, Retrato com P&eacute;rolas. Da mesma forma, n&atilde;o se pode estabelecer a data exata de sua cria&ccedil;&atilde;o, embora certamente deva ser anterior a outubro de 1503, quando o Retrato de Lisa Gherardini foi mencionado pela primeira vez por escrito.</p><p><strong>Contornos do rosto e do nariz</strong><br />Os contornos do rosto s&atilde;o pouco mais que uma sombra fantasmag&oacute;rica. Podemos ver uma faixa preta ao redor da cabe&ccedil;a, cujos contornos borrados s&atilde;o maiores que os do retrato atual. A &aacute;rea encontra-se parcialmente apagada, demonstrando a inten&ccedil;&atilde;o de Leonardo de alterar a pintura com um segundo projeto de retrato.</p><p>A posi&ccedil;&atilde;o dos olhos pode ser deduzida por aproxima&ccedil;&atilde;o a partir da &aacute;rea escurecida, que fica logo acima de sua posi&ccedil;&atilde;o no retrato final da Mona Lisa. Essas observa&ccedil;&otilde;es, por sua vez, nos ajudam a deduzir a posi&ccedil;&atilde;o do nariz. A ponta do nariz corresponde exatamente ao n&iacute;vel do horizonte levemente curvado, cujo contorno &eacute; claramente vis&iacute;vel aqui.</p><p><strong>A m&atilde;o direita</strong><br />A m&atilde;o direita no retrato inicial aparece em v&aacute;rias imagens LAM, e est&aacute; posicionada abaixo do n&iacute;vel da m&atilde;o direita de Mona Lisa. Seu contorno &eacute; bem mais n&iacute;tido que o contorno da cabe&ccedil;a, e demonstra a presen&ccedil;a de apenas tr&ecirc;s dedos. O &uacute;ltimo dedo desaparece, apagado por Leonardo e encoberto pela repintura.</p><p>A m&atilde;o direita &eacute; bem maior no esbo&ccedil;o do retrato do que na atual Mona Lisa, o que coincide com os planos para um retrato maior. Os dedos sem d&uacute;vida terminavam no apoio de bra&ccedil;o que, como j&aacute; vimos, estava posicionado mais abaixo em rela&ccedil;&atilde;o &agrave; imagem final. A compara&ccedil;&atilde;o com a m&atilde;o direita menor da Mona Lisa dissipa qualquer d&uacute;vida quanto &agrave; autenticidade dessa descoberta not&aacute;vel. Os dedos da m&atilde;o esquerda estendem-se para baixo, como se segurassem um len&ccedil;o ou xale por sobre os joelhos.</p>"
+    },
+    {
+      id: "D-806",  
+      title: "QUEM FOI MONA LISA?",
+      type: 'content',
+      image: ["8-monalisa-layers/D806a.jpg"],
+      audio: '',
+      text: "<p>A Mona Lisa &eacute; um dos grandes mist&eacute;rios da humanidade. Apesar de ser observada por mais de nove milh&otilde;es de admiradores todos os anos, em muitos aspectos ela permanece um enigma. Somente agora, s&eacute;culos depois de Leonardo da Vinci concluir sua obra-prima, uma nova e extraordin&aacute;ria tecnologia nos permite penetrar mais profundamente nas muitas camadas &ndash; e segredos &ndash; ocultos sob a superf&iacute;cie da pintura mais famosa do mundo. Essa investiga&ccedil;&atilde;o revelou o que podem ser consideradas as descobertas mais inesperadas e not&aacute;veis da hist&oacute;ria da arte.</p><p>Hoje sabemos que a Mona Lisa como a conhecemos n&atilde;o &eacute; Lisa Gherardini, esposa de Francesco del Giocondo. Ma verdade, a imagem cl&aacute;ssica de Lisa Gherardini &eacute; apenas o terceiro de quatro retratos sobrepostos. Nossas descobertas pioneiras a respeito do que est&aacute; por sobre e abaixo do Retrato de Lisa Gherardini marcam o in&iacute;cio de uma nova fase na hist&oacute;ria da pintura, e at&eacute; mesmo na pr&oacute;pria hist&oacute;ria da arte.</p><p>Esta exposi&ccedil;&atilde;o destr&oacute;i o mito e muda nossa vis&atilde;o da obra. Trata-se de um enorme salto no que diz respeito ao conhecimento e &agrave; hist&oacute;ria da arte. Em outubro de 2004, mais de uma d&eacute;cada ap&oacute;s ter digitalizado a Mona Lisa com sua c&acirc;mera multiespectral, Pascal Cotte apresenta todos os frutos de sua pesquisa.</p><p><strong>Quatro retratos em um</strong><br />A identidade da Mona Lisa sempre incomodou os historiadores. O Louvre sustenta que o retrato foi pintado por volta de 1503 e retrata Lisa Gherardini, esposa do rico comerciante florentino Francesco del Giocondo. No entanto, Leonardo disse em 1517 que ele havia pintado o retrato a pedido de Giuliano de&rsquo; Medici, seu patrono em Roma, de 1513 a 1516 &ndash; um homem sem nenhuma liga&ccedil;&atilde;o conhecida com Lisa Gherardini. Como se v&ecirc;, pode haver uma boa raz&atilde;o para essa incerteza. Gra&ccedil;as &agrave; tecnologia conhecida como M&eacute;todo de Amplifica&ccedil;&atilde;o de Camadas (LAM), sabemos agora que Leonardo de fato pintou diferentes vers&otilde;es do retrato, sobrepondo-as umas &agrave;s outras.</p><p>Finalmente, a pesquisa de Cotte reconciliou os relatos conflitantes sobre a identidade de Mona Lisa, mostrando que Leonardo pintou a Mona Lisa em quatro etapas principais:<br />1. Um esbo&ccedil;o inicial de uma desconhecida, ligeiramente maior que o representado na camada final, mas com uma postura semelhante.<br />2. Um segundo Retrato com P&eacute;rolas, que apagou o rascunho original e que se acredita ser uma deusa, santa ou a Madona.<br />3. O retrato de Lisa Gherardini, visto por seus concidad&atilde;os e descrito pelo artista Giorgio Vasari em 1550, com roupas e penteado &agrave; moda florentina de 1502-1506.<br />4. A Mona Lisa que conhecemos hoje, com a cabe&ccedil;a e o olhar voltados para o espectador, os ombros inclinados para a direita e um v&eacute;u adicionado ao redor da cabe&ccedil;a e do corpo para mascarar o vestido e o penteado anteriores.</p>"
+    },
+    {
+      id: "D-807",  
+      title: "RETRATO COM PÉROLAS",
+      type: 'content',
+      image: ["8-monalisa-layers/D807a.jpg","8-monalisa-layers/D807b.jpg","8-monalisa-layers/D807c.jpg","8-monalisa-layers/D807d.jpg","8-monalisa-layers/D807e.jpg","8-monalisa-layers/D807f.jpg","8-monalisa-layers/D807g.jpg"],
+      audio: '',
+      text: "<p>A segunda camada da Mona Lisa foi apelidada de Retrato com P&eacute;rolas. Os resultados combinados da emiss&atilde;o de raios-x, realizados pelo Louvre e pelo processo LAM, confirmam a presen&ccedil;a de um toucado volumoso com p&eacute;rolas, que n&atilde;o tem liga&ccedil;&atilde;o com o Retrato de Lisa Gherardini ou com a Mona Lisa como a conhecemos hoje. Esses tipos elaborados de toucados eram utilizados com frequ&ecirc;ncia ao retratar Madonas no norte da It&aacute;lia no in&iacute;cio do s&eacute;culo XVI. <br />O toucado parece ter sido deixado inacabado, depois meticulosamente coberto enquanto Leonardo pintava a camada seguinte.</p><p><strong>Apoio de bra&ccedil;o modificado</strong><br />O apoio de bra&ccedil;o descoberto no esbo&ccedil;o de retrato foi modificado no Retrato com P&eacute;rolas. O retrato geral era menor, o que obrigou Leonardo a reduzir o tamanho do apoio de bra&ccedil;o. No Retrato com P&eacute;rolas sua dimens&atilde;o era semelhante ao encontrado no Retrato de Lisa Gherardini, e pode ter sido o primeiro fundamento da Mona Lisa atual.</p><p><strong>Um grampo de cabelo</strong><br />Na por&ccedil;&atilde;o superior direita da cabe&ccedil;a de Mona Lisa, podemos ver agora um grampo de cabelo. Sua posi&ccedil;&atilde;o sugere que provavelmente foi usado para manter um penteado do in&iacute;cio do s&eacute;culo XVI ou para fixar um toucado ou acess&oacute;rio.</p><p><strong>Outros onze grampos ou p&eacute;rolas</strong><br />Um exame atento de milhares de imagens LAM revelou progressivamente outros onze grampos ou p&eacute;rolas ao redor da cabe&ccedil;a de Mona Lisa. Tra&ccedil;os de cabe&ccedil;as de pequenas pinos tamb&eacute;m s&atilde;o vis&iacute;veis. Eles foram usados para afixar toucados e v&eacute;us de pano e costumam aparecer em retratos com toucados da &eacute;poca.</p><p>Resumo de todas as descobertas relativas ao toucdo com p&eacute;rolas.</p><p>Exemplo de toucado com p&eacute;rolas. Madona com crian&ccedil;a e dois anjos (ca. 1460-1465) - detalhe, Fra Filippo Lippi (1406-1469), t&ecirc;mpera sobre painel, 95 x 62 cm (37,5 x 24,5 pol.), Galeria Uffizi, Floren&ccedil;a (inv. 1890 n&ordm; 1598).</p><p>A m&atilde;o esquerda<br />No esbo&ccedil;o para o retrato, apenas os dedos indicador e m&eacute;dio estavam vis&iacute;veis, abaixados para segurar o xale. No Retrato com P&eacute;rolas, observa-se que os dedos anelar e m&iacute;nimo acompanham esse movimento. A ponta do dedo anelar &eacute; levemente percept&iacute;vel, &agrave; sombra do dedo m&iacute;nimo pousado contra o apoio de bra&ccedil;o.</p><p>Pentagrama<br />As zonas mais escuras da pintura revelaram diversas estrelas de cinco pontas abaixo do apoio de bra&ccedil;o. Elas eram conhecidas como s&iacute;mbolos da pureza celestial, e &eacute; comum encontrar nas pinturas florentinas do per&iacute;odo de 1490 a 1520 estrelas no vestido ou no manto da Virgem Maria. Esse &eacute; um ind&iacute;cio importante, pois sugere que este retrato era de uma deusa, santa ou Madona.</p>"
+    },
+    {
+      id: "D-808",  
+      title: "RETRATO DE LISA GHERARDINI",
+      type: 'content',
+      image: ["8-monalisa-layers/D808.jpg","8-monalisa-layers/D808a.jpg","8-monalisa-layers/D808b.jpg","8-monalisa-layers/D808c.jpg","8-monalisa-layers/D808d.jpg","8-monalisa-layers/D808e.jpg"],
+      audio: '',
+      text: "<p>Imagens in&eacute;ditas revelam detalhes surpreendentes na terceira camada de tinta, permitindo descobrir o verdadeiro Retrato de Lisa Gherardini. Nada &ndash; nenhum texto ou teoria, por mais criativa ou exc&ecirc;ntrica &ndash; poderia nos preparar para tal revela&ccedil;&atilde;o: a Mona Lisa que vemos hoje n&atilde;o &eacute; o retrato de Lisa Gherardini, esposa do rico comerciante florentino Francesco del Giocondo.</p><p>N&atilde;o s&oacute; outro retrato fora pintado sobre o de Lisa Gherardini, mas seu retrato, por sua vez, havia sido pintado sobre outros dois retratos. Nunca saberemos por que Leonardo abandonou o Retrato com P&eacute;rolas. Mas ele manteve muitas de suas caracter&iacute;sticas ao transform&aacute;-lo no Retrato de Lisa Gherardini.</p><p>Pascal Cotte estabeleceu a cronologia das diversas camadas de tinta e comp&ocirc;s uma recria&ccedil;&atilde;o realista do aut&ecirc;ntico Retrato de Lisa Gherardini. Seu rosto &eacute; mais feminino que o de Mona Lisa e tem uma postura diferente, voltada para a direita. Suas roupas e penteado (la foggia alla francese) refletem a moda florentina dos anos de 1502 a 1507. Seu penteado &eacute; preso por uma rede e uma faixa bordada em torno da testa, sem o v&eacute;u escuro que aparece na Mona Lisa de hoje. Seu vestido &eacute; enfeitado com belas fitas amarradas e aberturas que revelam o chemisier que veste por baixo.</p><p>Seu retrato seguia o padr&atilde;o cl&aacute;ssico da esposa de um dignat&aacute;rio, t&iacute;pico das classes altas florentinas. A extraordin&aacute;ria descoberta de um Retrato de Lisa Gherardini, separado e distinto da atual Mona Lisa, concilia as diversas teorias existentes sobre a hist&oacute;ria desse s&iacute;mbolo da arte ocidental.</p><p><strong>Toucado</strong><br />As imagens LAM (M&eacute;todo de Amplifica&ccedil;&atilde;o de Camadas) revelam uma &aacute;rea de luz no cabelo que provavelmente corresponde a uma reticela sottile, uma rede de cabelo muito fina, caracter&iacute;stico dos toucados da &eacute;poca. As imagens LAM tamb&eacute;m mostram um contorno bem diferente dos cabelos ao longo da parte superior da testa em compara&ccedil;&atilde;o com a atual Mona Lisa. Uma linha acentuada no ombro esquerdo representa o contorno dos cabelos de Lisa Gherardini, cuja posi&ccedil;&atilde;o sugere que ela usava um toucado t&iacute;pico da &eacute;poca.</p><p><strong>V&eacute;u</strong><br />A tran&ccedil;a no retrato de Lisa Gherardini abarca o contorno dos cabelos, envolvendo a testa. A posi&ccedil;&atilde;o do cabelo &eacute; definida pela posi&ccedil;&atilde;o da cabe&ccedil;a, que est&aacute; voltada para a direita. O contorno dos cabelos da Mona Lisa, por outro lado, segue um outro sentido, com a ponta do v&eacute;u paralela a ele. Essa &eacute; mais uma evid&ecirc;ncia fundamental que confirma que a Mona Lisa final n&atilde;o &eacute;, de fato, o Retrato de Lisa Gherardini original.</p><p><strong>Cruzes nos olhos</strong><br />Com a ajuda da tecnologia LAM, podemos ver duas cruzes em forma de X, uma no centro de cada olho. Essas marcas eram frequentemente utilizadas pelos artistas para marcar o ponto em que as p&aacute;lpebras est&atilde;o mais afastadas, correspondendo ao centro do olho. A posi&ccedil;&atilde;o dessas cruzes n&atilde;o corresponde aos centros dos olhos de Mona Lisa &ndash; o do olho esquerdo fica particularmente distante da marca. Esse &eacute; um claro ind&iacute;cio de que, na verdade, as cruzes marcavam a posi&ccedil;&atilde;o dos olhos de um retrato anterior &ndash; ou seja, a vers&atilde;o original do Retrato de Lisa Gherardini.</p><p>Mangas<br />A finestrelle (abertura) da manga esquerda &eacute; a caracter&iacute;stica mais clara, quase vis&iacute;vel at&eacute; mesmo na Mona Lisa atual. A imagem LAM tamb&eacute;m revela uma tran&ccedil;a decorativa ao lado da parte superior da abertura da manga, e os resqu&iacute;cios parcialmente apagados de uma refinada fita com la&ccedil;os duplos (nastri) segurando a manga de sua roupa.</p>"
+    },
+    {
+      id: "D-809",  
+      title: "MONA LISA",
+      type: 'content',
+      image: ["8-monalisa-layers/D809a.jpg","8-monalisa-layers/D809b.jpg","8-monalisa-layers/D809c.jpg","8-monalisa-layers/D809d.jpg","8-monalisa-layers/D809e.jpg","8-monalisa-layers/D809f.jpg","8-monalisa-layers/D809g.jpg"],
+      audio: '8-monalisa-layers/A803.mp3',
+      text: "<p>A transforma&ccedil;&atilde;o do Retrato de Lisa Gherardini na Mona Lisa n&atilde;o foi o resultado de meros pentimenti (pequenas corre&ccedil;&otilde;es e ajustes). Leonardo refez a pintura de uma maneira &uacute;nica e inovadora, como somente ele seria capaz. Ele n&atilde;o pintou um retrato completamente novo, mas transformou o antigo. Empregando finas camadas de tinta transl&uacute;cida, ele alterou o Retrato de Lisa Gherardini sem jamais apag&aacute;-lo completamente. O Retrato de Lisa Gherardini se combina e interage com a camada de tinta da superf&iacute;cie para moldar nossa percep&ccedil;&atilde;o final da obra not&aacute;vel que conhecemos como Mona Lisa.</p><p>Leonardo utilizou velaturas de ocre para a metamorfose do rosto e hazinhavre transl&uacute;cido para o v&eacute;u que cobre o toucado e o vestido. Enquanto o Retrato de Lisa Gherardini est&aacute; desbotado e parcialmente encoberto, partes dele continuam vis&iacute;veis e oferecem elementos importantes &agrave; nossa percep&ccedil;&atilde;o visual da Mona Lisa. Essa t&eacute;cnica revolucion&aacute;ria de pintura em camadas provavelmente constitui um fator importante na impress&atilde;o de mist&eacute;rio que h&aacute; tempos tem sido atribu&iacute;da &agrave; Mona Lisa.</p><p><strong>Sombreado</strong><br />O volume do toucado de Lisa Gherardini, combinado com seu penteado foggia alla francese e o v&eacute;u de reticela sottile, &eacute; maior que o de Mona Lisa. Na verdade, os dois contornos est&atilde;o separados em aproximadamente 6 mm, no ponto mais distante. Para criar o novo contorno, agora menor, e ocultar o antigo, Leonardo recorreu a seus sombreados caracter&iacute;sticos.</p><p>Imagem LAM mostrando os detalhes dos delicados sombreados no lado esquerdo da cabe&ccedil;a</p><p><strong>Metamorfose</strong><br />A transforma&ccedil;&atilde;o do rosto foi a opera&ccedil;&atilde;o mais complexa da pintura final. Evid&ecirc;ncias cient&iacute;ficas mostram que as sombras do rosto foram feitas com camadas de velatura, uma tinta transl&uacute;cida. Cada camada de velatura continha bem poucos pigmentos do mesmo tipo, e seu efeito em conjunto servia para aumentar a aparente satura&ccedil;&atilde;o da cor e a profundidade do retratado.</p><p>Imagens LAM destacando v&aacute;rios aspectos da transforma&ccedil;&atilde;o facial</p><p><strong>Sobrancelhas</strong><br />A aparente aus&ecirc;ncia de sobrancelhas na Mona Lisa sempre incomodou os historiadores da arte, pois Leonardo da Vinci era conhecido por prestar muita aten&ccedil;&atilde;o aos detalhes ao desenhar ou pintar, at&eacute; o &uacute;ltimo fio de cabelo. Todos os seus retratos, tanto os desenhos como as pinturas, ostentam c&iacute;lios e sobrancelhas.</p><p>Isso tamb&eacute;m &eacute; v&aacute;lido para a Mona Lisa, com a descoberta de suas sobrancelhas em imagens multiespectrais realizadas em outubro de 2007. As imagens LAM agora nos fornecem ainda mais detalhes de como e quando suas sobrancelhas foram pintadas. Elas est&atilde;o perfeitamente alinhadas com o arco corrigido da testa de Mona Lisa, mas se sobrep&otilde;em &agrave;s &oacute;rbitas dos olhos de Lisa Gherardini. Isso demonstra que as sobrancelhas recentemente descobertas de fato pertencem &agrave; Mona Lisa, e n&atilde;o ao Retrato de Lisa Gherardini original.</p><p><strong>O v&eacute;u &ldquo;inventado&rdquo;</strong><br />Depois de transformar o rosto e o toucado, Leonardo teve que ocultar o vestido de Lisa Gherardini, ou pelo menos torn&aacute;-lo irreconhec&iacute;vel. Ent&atilde;o, ele inventou &ndash; no mais fiel sentido da palavra &ndash; um v&eacute;u para cobrir a cabe&ccedil;a, os bra&ccedil;os e o vestido, o que lhe permitiu mudar a dire&ccedil;&atilde;o dos ombros. Leonardo criou o v&eacute;u para enganar o espectador &ndash; e conseguiu manter essa ilus&atilde;o por mais de cinco s&eacute;culos.</p><p>Os historiadores da moda h&aacute; muito sustentam que o v&eacute;u de Mona Lisa n&atilde;o tem precedentes: um v&eacute;u desse tipo nunca esteve na moda, nem sequer existiu. De fato, nenhum v&eacute;u desse tipo foi observado em outros retratos do per&iacute;odo. Todas as evid&ecirc;ncias indicam que o v&eacute;u de Mona Lisa n&atilde;o passa de uma cria&ccedil;&atilde;o oportunista: um artif&iacute;cio para a transforma&ccedil;&atilde;o.</p><p><strong>A m&atilde;o esquerda</strong><br />Com o advento da t&eacute;cnica LAM, conquistamos importantes avan&ccedil;os em nossa compreens&atilde;o da Mona Lisa. Um dos maiores mist&eacute;rios que agora pode ser solucionado &eacute; o posicionamento incomum de suas m&atilde;os. Os dedos da m&atilde;o esquerda de Mona Lisa parecem segurar o manto que cobre seus joelhos; no entanto, sempre pareceu haver algo de inusitado nessa postura.</p><p>Agora entendemos que isso reflete a decis&atilde;o de Leonardo de abandonar sua ideia original &ndash; a m&atilde;o esquerda segurando algo nos joelhos &ndash; para evocar, ao contr&aacute;rio, um estado de esp&iacute;rito calmo e relaxado, como retratado no rosto sorridente e sereno de Mona Lisa. Os dedos indicador e m&eacute;dio foram repintados em uma posi&ccedil;&atilde;o ligeiramente mais alta, e a m&atilde;o direita foi retratada em completo repouso, para transmitir essa apar&ecirc;ncia tranquila e relaxada.</p>"
+    },
+	{
+      id: "D-810",  
+      title: "UMA DUPLA IDENTIDADE",
+      type: 'content',
+      image: ["8-monalisa-layers/D810a.jpg"],
+      audio: '',
+      text: "<p>No Retrato de Lisa Gherardini, Leonardo usou t&eacute;cnicas tradicionais que aprendeu enquanto era aprendiz no ateli&ecirc; do artista florentino Andrea del Verrocchio.</p><p>Mas ele modificou e moldou essas t&eacute;cnicas para torn&aacute;-las suas, notadamente usando as m&atilde;os e os dedos em contato direto com a tinta para dar nuances tonais. De fato, numerosas impress&otilde;es de m&atilde;os foram encontradas na obra.</p><p>Mas para a transforma&ccedil;&atilde;o do Retrato de Lisa Gherardini em Mona Lisa, Leonardo usou camadas de velatura transparente e pigmento. Esse foi o &aacute;pice de sua genialidade e se tornou o amplo segredo da Mona Lisa: uma nova t&eacute;cnica pict&oacute;rica que transfigurava e mesclava dois retratos em um s&oacute;.</p><p>Quase quinhentos anos ap&oacute;s sua morte, a genialidade de Leonardo da Vinci permanece, &agrave; medida que o artista continua a nos surpreender de novas e extraordin&aacute;rias maneiras.</p>"
+    },
+  ],
+};

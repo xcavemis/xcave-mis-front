@@ -1,26 +1,55 @@
 <template>
   <div class="footer-controls">
-    <a
-      class="default-button footer-controls__logout white"
-      href="javascript:void(0)"
-      @click="logout"
-    >SAIR DA EXPERIÊNCIA</a>
+    <div class="footer-controls__console-container">
+
+      <div class="footer-controls__console" v-if="$store.getters.countdown.show">
+        <p class="footer-controls__console-text ticket-text">
+          O SEU TICKET VAI EXPIRAR<br>
+          EM {{$store.getters.countdown.time}}.<br>
+          CONTINUE A EXPERIÊNCIA<br>
+          ADQUIRINDO UM NOVO INGRESSO.
+        </p>
+        <a class="footer-controls__console-button ticket-button" target="_blank" href="https://davincidigital.byinti.com/">COMPRAR INGRESSO</a>
+      </div>
+      <div class="footer-controls__console" v-if="isLiveShow && liveEnabled && $store.getters.period">
+        <p class="footer-controls__console-text">
+          UMA LIVE COM O EDUCATIVO<br>
+          DO MIS EXPERIENCE<br>
+          ACONTECE NESTE MOMENTO.
+        </p>
+        <a class="footer-controls__console-button" @click="goLive" href="javascript:void(0)">ENTRAR NA LIVE</a>
+      </div>
+    </div>
+    <div class="footer-controls__grad"></div>
     <div class="footer-controls__left">
-      <div class="footer-controls__left-button" @click="toggleMusic">
+      <div class="footer-controls__left-button audio-button" @click="toggleMusic">
         <div class="footer-controls__button-icon sound-bar">
-          <div id="bar-1" class="bar" :class="{'no-anim': !this.musicPlaying}"></div>
+          <!-- <div id="bar-1" class="bar" :class="{'no-anim': !this.musicPlaying}"></div> -->
           <div id="bar-2" class="bar" :class="{'no-anim': !this.musicPlaying}"></div>
           <div id="bar-3" class="bar" :class="{'no-anim': !this.musicPlaying}"></div>
           <div id="bar-4" class="bar" :class="{'no-anim': !this.musicPlaying}"></div>
-          <div id="bar-5" class="bar" :class="{'no-anim': !this.musicPlaying}"></div>
-          <div id="bar-6" class="bar" :class="{'no-anim': !this.musicPlaying}"></div>
+          <!-- <div id="bar-5" class="bar" :class="{'no-anim': !this.musicPlaying}"></div> -->
+          <!-- <div id="bar-6" class="bar" :class="{'no-anim': !this.musicPlaying}"></div> -->
         </div>
         <span class="footer-controls__button-label">Música de Fundo</span>
       </div>
-      <!-- <div class="footer-controls__left-button live-button" @click="goLive">
+      <div class="footer-controls__left-button live-button" @click="goLive" v-if="isLiveShow && this.$store.getters.period != null">
+        <img v-if="liveEnabled" class="footer-controls__button-icon" src="~@/assets/images/icons/play-small.png" />
+        <img v-if="!liveEnabled" class="footer-controls__button-icon" src="~@/assets/images/icons/play-small-disable.png" />
+        <span class="footer-controls__button-label">Live MIS</span>
+        <span v-if="!liveEnabled" class="live-status"><span class="desc">PRÓXIMA SESSÃO</span> {{liveStatus}}</span>
+        <!-- <span v-if="!liveEnabled" class="live-status"><span class="desc">NENHUMA SESSÃO ATIVA</span></span> -->
+        <span v-if="liveEnabled && $store.getters.period" class="live-status live-enabled">{{liveStatus}}</span>
+      </div>
+      <div class="footer-controls__left-button live-button" @click="goLive" v-if="!isLiveShow && this.$store.getters.period != null">
+        <img class="footer-controls__button-icon" src="~@/assets/images/icons/play-small-disable.png" />
+        <span class="footer-controls__button-label">Live MIS</span>
+        <span class="live-status"><span class="desc">NENHUMA SESSÃO ATIVA</span></span>
+      </div>
+      <div class="footer-controls__left-button live-button" @click="goLive" v-if="isLiveShow && this.$store.getters.period == null">
         <img class="footer-controls__button-icon" src="~@/assets/images/icons/play-small.png" />
-        <span class="footer-controls__button-label">Live</span>
-      </div> -->
+        <span class="footer-controls__button-label">Live MIS</span>
+      </div>
     </div>
     <div class="footer-controls__center">
       <div class="footer-controls__center-group">
@@ -115,15 +144,18 @@
     </div>
     <div class="footer-controls__right">
       <div class="footer-controls__right-group" @click="openFooter">
+        <div class="footer-controls__right-group__label">SOBRE A EXPOSIÇÃO</div>
         <img
-          class="footer-controls__button-icon icon-small mg-l mg-r"
+          class="footer-controls__button-icon icon-small"
           alt="Abrir o rodapé"
-          src="~@/assets/images/icons/arrow-down-small.png"
+          src="~@/assets/images/icons/arrow-up-small.png"
         />
+      </div>
+      <div class="footer-controls__right-group mg-r">
         <img
-          class="footer-controls__button-icon mg-l mg-r"
+          class="footer-controls__button-icon"
           alt="Abrir o rodapé"
-          src="~@/assets/images/logo-mis-exp.png"
+          src="~@/assets/images/logo-mis-exp-gov.svg"
         />
       </div>
     </div>
@@ -137,11 +169,59 @@ export default {
   data: () => ({
     musicPlaying: true,
     pressedTimer: 0,
+    isLiveShow: true,
+    liveStatus: '',
+    liveEnabled: true,
+    verifyLiveTimer: 0
   }),
   mounted() {
-    window.addEventListener("scroll", this.onScroll);
+    if (!this.isMobile && this.$store.getters.period != null) {
+      console.log('period', this.$store.getters.period)
+      this.verifyLiveStatus()
+      clearInterval(this.verifyLiveTimer)
+      this.verifyLiveTimer = setInterval(()=>{
+        this.verifyLiveStatus()
+      }, 1000)
+    }
+    // window.addEventListener("scroll", this.onScroll);
   },
   methods: {
+    verifyLiveStatus(){
+      if (this.$store.getters.period) {
+        let isValidPeriod = this.validateTime(this.$store.getters.period.start, this.$store.getters.period.end)
+
+        const start = new Date(this.$store.getters.period.start)
+        const hour = start.getHours()
+        const minutes = start.getMinutes()
+        let day = start.getDate()
+        if (day < 10)  day = `0${day}`
+        let month = start.getMonth() + 1
+        if (month < 10)  month = `0${month}`
+
+        this.liveEnabled = this.isStartTime(start)
+
+        if (isValidPeriod && this.$store.getters.webinarLink) {
+          this.isLiveShow = true
+          if (this.liveEnabled) {
+            this.liveStatus = `PARTICIPE AO VIVO`
+          } else {
+            this.liveStatus = `${hour}:00`
+            // this.liveStatus = `${day}/${month} - ${hour}:00`
+          }
+        } else {
+          this.isLiveShow = false
+          this.liveEnabled = false
+        }
+        // console.log('liveStatus', this.liveStatus, this.liveEnabled)
+      }
+    },
+    isStartTime(start) {
+      return new Date().getTime() - start.getTime() > 0;
+    },
+    validateTime(start, end) {
+      // return new Date(end) - new Date(start) > 0;
+      return new Date(end) - new Date(start) > 0 && new Date(end) - new Date() > 0;
+    },
     onScroll(e) {
       this.openFooter = window.scrollY > 100;
     },
@@ -153,6 +233,7 @@ export default {
       });
     },
     goLive() {
+      if (!this.liveEnabled) return
       this.$emit("action", {
         type: "live",
         value: "show",
@@ -206,22 +287,119 @@ export default {
       this.$router.push("/");
     },
   },
+  beforeDestroy(){
+    clearInterval(this.verifyLiveTimer)
+  }
 };
 </script>
 
 <style lang="scss">
 .footer-controls {
   @include set-size(100%, 70px);
-  background-color: $black;
+  background-color: transparent;
   display: flex;
   justify-content: space-around;
   align-items: flex-start;
+  z-index: 3;
+  pointer-events: none;
+  touch-action: none;
+
+  .footer-controls__console-container{
+    position: absolute;
+    left: 20px;
+    bottom: 80px;
+    .footer-controls__console{
+      display: block; 
+      text-align: left;
+      margin-bottom: 15px;;
+  
+      .footer-controls__console-text{
+        position: relative;
+        padding-left: 15px;
+        @include font-size(10);
+        font-family: $mont-regular;
+        color: $white;
+        text-shadow: 0px 0px 4px rgba(0,0,0,0.8);
+        
+  
+        &:before {
+          content: "";
+          @include set-size(10px, 10px);
+          border-radius: 50%;
+          position: absolute;
+          top: 7px;
+          left: 0px;
+          background-color: #b00000;
+          animation: pulseLive 1.4s infinite;
+        }
+        &.ticket-text {
+          &:before {
+            background-color: #b18039;
+          }
+        }
+      }
+      .footer-controls__console-button{
+        @include font-size(9);
+        font-family: $mont-regular;
+        color: $white;
+        text-align: left;
+        border: 2px solid #ac7d3a;
+        padding: 5px 10px;
+        border-radius: 6px;
+        margin-left: 15px;
+        transition: all 0.6s;
+        pointer-events: all;
+        touch-action: initial;
+        text-shadow: 0px 0px 4px rgba(0,0,0,0.5);
+        &:hover {
+          background-color: #ac7d3a;
+          color: $black;
+          text-shadow: 0px 0px 4px rgba(0,0,0,0);
+        }
+
+        &.ticket-button {
+          border: 2px solid $white;
+          background-color: $white;
+          color: $black;
+
+          &:hover {
+            background-color: #ac7d3a;
+            border: 2px solid #ac7d3a;
+            color: $black;
+            text-shadow: 0px 0px 4px rgba(0,0,0,0);
+          }
+        }
+      }
+  
+    }
+    
+  }
+
+  .footer-controls__grad {
+    @include set-size(100%, 7px);
+    position: absolute;
+    top: -5px;
+    left: 0;
+    background: black;
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.7) 55%, rgba(0, 0, 0, 1) 100%);
+    touch-action: none;
+    pointer-events: none;
+  }
+
+  @include maxWidth(1024) {
+    background-color: $black;
+  }
 
   .footer-controls__left {
-    @include set-size(16.1%, 100%);
+    @include set-size(25%, 100%);
     display: flex;
     justify-content: flex-start;
     align-items: center;
+    pointer-events: all;
+    touch-action: initial;
+     @include maxWidth(1440) {
+       min-width: 310px;
+     }
     .footer-controls__left-button {
       display: flex;
       justify-content: center;
@@ -233,23 +411,71 @@ export default {
       }
 
       &:first-child {
-        margin-right: 15px;
+        margin: 0 15px;
+
+        .footer-controls__button-label {
+          margin-left: 10px;
+        }
       }
 
       .footer-controls__button-label {
-        @include font-scale(1366, 1680, 10, 12);
-        font-family: $rob-regular;
+        @include font-size(10);
+        font-family: $mont-regular;
         color: $white;
-        margin-left: 15px;
+        margin-left: 8px;
         text-shadow: 0px 0px 4px #000000;
+
+      }
+      .live-status {
+        font-family: $mont-regular;
+        color: $white;
+        font-size: 7px;
+        margin-left: 8px;
+
+        > .desc {
+          color: #999999;
+        }
+      }
+
+      .live-enabled {
+        position: relative;
+        padding-left: 15px;
+        color: $white;
+        &:before {
+          content: "";
+          @include set-size(10px, 10px);
+          border-radius: 50%;
+          @include center-y(absolute);
+          left: 0px;
+          background-color: #b00000;
+          animation: pulseLive 1.4s infinite;
+        }
+      }
+
+      @include maxWidth(1440) {
+        &:first-child {
+          margin: 0 10px;
+
+          .footer-controls__button-label {
+            margin-left: 8px;
+          }
+        }
+
+        .live-status {
+          margin-left: 6px;
+        }
+
       }
     }
   }
   .footer-controls__center {
-    @include set-size(62.4%, 100%);
+    @include set-size(40%, 100%);
     display: flex;
     justify-content: center;
     align-items: center;
+    opacity: 0;
+    pointer-events: none;
+    touch-action: none;
 
     .footer-controls__center-group {
       display: flex;
@@ -283,35 +509,70 @@ export default {
     }
   }
   .footer-controls__right {
-    @include set-size(16.1%, 100%);
+    @include set-size(30%, 100%);
     display: flex;
-    justify-content: center;
+    justify-content: flex-end;
     align-items: center;
+    pointer-events: all;
+    touch-action: initial;
 
-    .footer-controls__right-group {
-      display: flex;
-      justify-content: center;
-      align-items: initial;
-      cursor: pointer;
-      .mg-l {
+    .mg-l {
         margin-left: 15px;
       }
       .mg-r {
         margin-right: 15px;
       }
 
+    .footer-controls__right-group {
+      display: flex;
+      justify-content: flex-end;
+      align-items: initial;
+      cursor: pointer;
+      
+
+      .footer-controls__right-group__label {
+        width: 120px;
+        font-size: 9px;
+        font-family: $rob-regular;
+        color: #999999;
+        text-shadow: 0px 0px 4px #000000;
+      }
+
       .footer-controls__button-icon {
-        @include set-size(110px, auto);
+        @include set-size(100%, auto);
+
+        .cls-1,.cls-3{
+          fill:#fff;
+        }
+        .cls-2{
+          fill:#231f20;
+        }
+        .cls-3{
+          fill-rule:evenodd;
+        }
 
         &.icon-small {
-          @include set-size(14px, 14px);
+          @include set-size(9px, 6px);
           cursor: pointer;
           opacity: 1;
-          transform: translateZ(0) scale(1);
+          transform: scale(1);
           transition: all 0.2s ease-in-out;
+          margin-top: -6px;
+          margin-right: 25px;
           &:hover {
-            opacity: 0.6;
-            transform: translateZ(0) scale(1.1);
+            // opacity: 0.6;
+            // transform: translateZ(0) scale(1.1);
+          }
+        }
+
+        @include maxWidth(1200) {
+          @include set-size(auto, 30px);
+
+          .footer-controls__right-group__label {
+            @include set-size(40vw, auto);
+          }
+          &.icon-small {
+            // margin-top: 7px;
           }
         }
       }
@@ -333,15 +594,25 @@ export default {
     }
     .footer-controls__left,
     .footer-controls__right {
-      width: 50%;
-
+      width: 100vw;
+      justify-content: space-between;
+      
+      .audio-button,
       .live-button {
         display: none;
+      }
+
+      .footer-controls__right-group {
+        .footer-controls__button-icon {
+          @include set-size(50vw, auto);
+          max-width: 290px;
+        }
       }
     }
 
     .footer-controls__left {
       margin-left: 2.5vw;
+      display: none;
     }
   }
 }
@@ -359,7 +630,7 @@ export default {
   @include set-size(2px, 1px);
   display: inline-block;
   background-color: #b18039;
-  bottom: 0;
+  bottom: 4px;
   position: absolute;
 
   &#bar-1 {
@@ -445,6 +716,18 @@ export default {
   }
   to {
     height: 15px;
+  }
+}
+
+@keyframes pulseLive {
+  0% {
+    transform: translateY(-50%) scale(1)
+  }
+  50% {
+    transform: translateY(-50%) scale(0.8)
+  }
+  100% {
+    transform: translateY(-50%) scale(1)
   }
 }
 </style>

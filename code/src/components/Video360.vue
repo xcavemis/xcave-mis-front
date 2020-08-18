@@ -1,10 +1,11 @@
 <template>
     <div class="video-pano">
         <section class="video-pano__content">
+            <div class="modal-close-hit" @click="hide"></div>
             <div class="video-mask">
                 <iframe 
                     class="video-pano__iframe"
-                    :src="`https://hml.exposicaodavinci500anos.com.br/assets/videos/${videoId}/`"
+                    :src="`${assets_path}/assets/videos/${videoId}/index.html?skip-loading`"
                     width="1280" 
                     height="720" 
                     frameborder="0" 
@@ -24,6 +25,9 @@ import { TweenMax, Quad } from 'gsap';
 
 export default {
     props: ['videoId'],
+    data: () => ({
+        assets_path: process.env.VUE_APP_ASSETSPATH,
+    }),
     methods: {
         show() {
             TweenMax.set('html, body', { overflow: 'hidden' })
@@ -63,12 +67,22 @@ export default {
             @include set-size(90vw, 80vh);
             overflow: hidden;
             margin: 80px auto;
+
+             @include maxWidth(1023) {
+                @include set-size(100vw, 100vh);
+                margin-top: 0vh;
+            }
         }
         .video-pano__iframe {
             @include set-size(90vw, 88vh);
             transform: translateY(100%);
             z-index: 1;
             margin-top: -8vh;
+
+            @include maxWidth(1023) {
+                @include set-size(100vw, 100vh);
+                margin-top: 0vh;
+            }
         }
     
         .video-pano__close {

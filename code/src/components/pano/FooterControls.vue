@@ -13,9 +13,9 @@
       </div>
       <div class="footer-controls__console" v-if="isLiveShow && liveEnabled && $store.getters.period">
         <p class="footer-controls__console-text">
-          UMA LIVE COM ORIENTADORES<br>
-          DO MIS ESTÁ ACONTENDO<br>
-          NESSE MOMENTO.
+          UMA LIVE COM O EDUCATIVO<br>
+          DO MIS EXPERIENCE<br>
+          ACONTECE NESTE MOMENTO.
         </p>
         <a class="footer-controls__console-button" @click="goLive" href="javascript:void(0)">ENTRAR NA LIVE</a>
       </div>

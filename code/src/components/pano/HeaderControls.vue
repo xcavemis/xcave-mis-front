@@ -227,14 +227,14 @@ export default {
         margin-right: 15px;
         text-shadow: 0px 0px 4px #000000;
         position: relative;
-        padding-left: 15px;
+        padding-right: 15px;
         .icon-small {
           position: absolute;
           @include set-size(9px, 6px);
           cursor: pointer;
           opacity: 1;
           top: 0;
-          left: 0px;
+          right: 0px;
           transform: rotate(180deg) translateY(-50%);
           transition: transform 0.4s;
           &.opened {

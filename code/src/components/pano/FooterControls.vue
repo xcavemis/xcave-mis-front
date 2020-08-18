@@ -182,6 +182,11 @@ export default {
       this.verifyLiveTimer = setInterval(()=>{
         this.verifyLiveStatus()
       }, 1000)
+    } else {
+      clearInterval(this.verifyLiveTimer)
+      this.verifyLiveTimer = setInterval(()=>{
+        console.log(this.checkLiveTime())
+      }, 1000)
     }
     // window.addEventListener("scroll", this.onScroll);
   },
@@ -214,6 +219,14 @@ export default {
         }
         // console.log('liveStatus', this.liveStatus, this.liveEnabled)
       }
+    },
+    checkLiveTime() {
+      var d = new Date();
+      var hours = d.getHours();
+      var mins = d.getMinutes();
+      var day = d.getDay();
+      // https://stackoverflow.com/questions/9081220/how-to-check-if-current-time-falls-within-a-specific-range-on-a-week-day-using-j
+      return (day >= 2 && day <= 5) && (hours >= 13 && hours <= 15 && (mins >= 15 && mins <= 59))
     },
     isStartTime(start) {
       return new Date().getTime() - start.getTime() > 0;

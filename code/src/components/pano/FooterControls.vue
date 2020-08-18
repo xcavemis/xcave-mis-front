@@ -11,7 +11,7 @@
         </p>
         <a class="footer-controls__console-button ticket-button" target="_blank" href="https://davincidigital.byinti.com/">COMPRAR INGRESSO</a>
       </div> -->
-      <div class="footer-controls__console" v-if="isLiveShow && liveEnabled && $store.getters.period">
+      <div class="footer-controls__console" v-if="(isLiveShow && liveEnabled && $store.getters.period) || (isLiveShow && !this.$store.getters.period && commonUserLiveEnabled)">
         <p class="footer-controls__console-text">
           UMA LIVE COM O EDUCATIVO<br>
           DO MIS EXPERIENCE<br>
@@ -175,7 +175,7 @@ export default {
     isLiveShow: true,
     liveStatus: '',
     liveEnabled: true,
-    commonUserLiveEnabled: true,
+    commonUserLiveEnabled: false,
     verifyLiveTimer: 0
   }),
   mounted() {

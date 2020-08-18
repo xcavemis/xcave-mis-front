@@ -225,6 +225,7 @@ export default {
       var hours = d.getHours();
       var mins = d.getMinutes();
       var day = d.getDay();
+      //  terça a sexta (13h15 e 17h45) e três aos finais de semana (13h30, 15h e 16h30).
       // https://stackoverflow.com/questions/9081220/how-to-check-if-current-time-falls-within-a-specific-range-on-a-week-day-using-j
       return (day >= 2 && day <= 5) && (hours >= 13 && hours <= 15 && (mins >= 15 && mins <= 59))
     },

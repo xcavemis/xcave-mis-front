@@ -33,7 +33,7 @@
         </div>
         <span class="footer-controls__button-label">Música de Fundo</span>
       </div>
-      <div class="footer-controls__left-button live-button" @click="goLive" v-if="isLiveShow">
+      <div class="footer-controls__left-button live-button" @click="goLive" v-if="isLiveShow && this.$store.getters.period != null">
         <img v-if="liveEnabled" class="footer-controls__button-icon" src="~@/assets/images/icons/play-small.png" />
         <img v-if="!liveEnabled" class="footer-controls__button-icon" src="~@/assets/images/icons/play-small-disable.png" />
         <span class="footer-controls__button-label">Live MIS</span>
@@ -41,10 +41,14 @@
         <!-- <span v-if="!liveEnabled" class="live-status"><span class="desc">NENHUMA SESSÃO ATIVA</span></span> -->
         <span v-if="liveEnabled && $store.getters.period" class="live-status live-enabled">{{liveStatus}}</span>
       </div>
-      <div class="footer-controls__left-button live-button" @click="goLive" v-if="!isLiveShow">
+      <div class="footer-controls__left-button live-button" @click="goLive" v-if="!isLiveShow && this.$store.getters.period != null">
         <img class="footer-controls__button-icon" src="~@/assets/images/icons/play-small-disable.png" />
         <span class="footer-controls__button-label">Live MIS</span>
         <span class="live-status"><span class="desc">NENHUMA SESSÃO ATIVA</span></span>
+      </div>
+      <div class="footer-controls__left-button live-button" @click="goLive" v-if="isLiveShow && this.$store.getters.period == null">
+        <img class="footer-controls__button-icon" src="~@/assets/images/icons/play-small.png" />
+        <span class="footer-controls__button-label">Live MIS</span>
       </div>
     </div>
     <div class="footer-controls__center">

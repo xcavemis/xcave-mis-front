@@ -84,7 +84,7 @@ export default {
             }})
         },
         mouseWheelEvent(event) {
-            console.log('mousewheel')
+            // console.log('mousewheel')
             this.panzoom.zoomWithWheel(event)
             event.preventDefault();
         },

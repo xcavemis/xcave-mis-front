@@ -57,7 +57,7 @@
       </p>
       <a
         class="default-button black"
-        href="https://davincidigital.test.byinti.com/"
+        href="https://davincidigital.byinti.com/"
         target="_blank"
       >COMPRAR INGRESSO DIGITAL</a>
     </div>
@@ -171,7 +171,7 @@ export default {
       };
       this.$store.dispatch("verifyTicket", formData).then((e) => {
         const { status, data, endTime } = e?.response;
-          console.log('RES verify ticket: ', e.response)
+          // console.log('RES verify ticket: ', e.response)
         if (status >= 200 && status <= 204) {
           this.$store.dispatch("loading", false);
           this.ticketIsValid = true

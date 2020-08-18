@@ -64,6 +64,13 @@ export default {
   components: {
     Timeline,
   },
+  watch:{
+    '$store.getters.user.name': function(val, old){
+      if (val != old && val.length > 0) {
+        this.userName = `Olá, ${val.split(' ')[0]}`
+      }
+    }
+  },
   data: () => ({
     fullscreen: false,
     userName: '',

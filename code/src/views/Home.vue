@@ -29,7 +29,7 @@
             target="_blank"
           >COMPRAR INGRESSO</a>
         </div>
-        <img class="first-step__ad" src="~@/assets/images/adcontainer_hor.png" />
+        <!-- <img class="first-step__ad" src="~@/assets/images/adcontainer_hor.png" /> -->
       </div>
     </section>
     <section class="home-step second-step"></section>
@@ -118,7 +118,7 @@ export default {
         TweenMax.fromTo('.first-step__logo-mis', 0.6, { autoAlpha: 0 }, { autoAlpha: 1, delay: 0.4, ease: Quad.easeInOut })
         TweenMax.fromTo('.first-step__center-content .first-step__center-content__title', 0.6, { autoAlpha: 0 }, { autoAlpha: 1, delay: 0.6, ease: Quad.easeInOut})
         TweenMax.fromTo('.first-step__center-content .first-step__center-content__description', 1, { autoAlpha: 0 }, { autoAlpha: 1, delay: 0.8, ease: Quad.easeInOut})
-        TweenMax.fromTo('.first-step__ad', 0.6, { autoAlpha: 0 }, { autoAlpha: 1, delay: 1.4, ease: Quad.easeInOut})
+        // TweenMax.fromTo('.first-step__ad', 0.6, { autoAlpha: 0 }, { autoAlpha: 1, delay: 1.4, ease: Quad.easeInOut})
         this.splittingTitle[0].lines.map((line, index) => {
           TweenMax.fromTo(
             line,
@@ -145,7 +145,7 @@ export default {
           this.validateTime(res.endTime)
         ) {
           this.$store.dispatch("autoLogin").then((res) => {
-            console.log('autoLogin home', res)
+            // console.log('autoLogin home', res)
             if (res &&
                 res.user &&
                 res.hasHoursAvaliable
@@ -459,6 +459,7 @@ export default {
   }
 }
 .third-step__ad {
+  opacity: 0;
   &.isMobile {
     
   }

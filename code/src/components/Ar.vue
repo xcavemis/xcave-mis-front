@@ -94,7 +94,7 @@ export default {
                   resolve(false)
                 }
                 }).catch(error => {
-                  console.log(error)
+                  // console.log(error)
                   this.sensors.gyro = false
                 });
             }

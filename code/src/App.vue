@@ -28,7 +28,8 @@ export default {
     },
   },
   data: () => ({
-    transitionName: 'slide-left'
+    transitionName: 'slide-left',
+    firstAccess: true,
   }),
   // beforeRouteUpdate (to, from, next) {
   //   const toDepth = to.path.split('/').length
@@ -36,7 +37,12 @@ export default {
   //   this.transitionName = toDepth < fromDepth ? 'slide-right' : 'slide-left'
   //   next()
   // },
-  created() {},
+  created() {
+    if (this.firstAccess && this.$route.name != "Home") {
+      this.$router.push("/");
+      this.firstAccess = false
+    }
+  },
   computed: {
     auth() {
       return this.$store.getters.isAuthenticated;

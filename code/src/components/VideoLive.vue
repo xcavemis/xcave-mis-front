@@ -28,26 +28,26 @@ export default {
         
     },
     mounted(){
-        console.log('webinarLink', this.$store.getters.webinarLink)
-        console.log('period', this.$store.getters.period)
+        // console.log('webinarLink', this.$store.getters.webinarLink)
+        // console.log('period', this.$store.getters.period)
         this.$nextTick(()=>{
             // this.buildMeeting()
         })
     },
     methods: {
         buildMeeting(){
-            console.log('webinarLink', this.$store.getters.webinarLink)
+            // console.log('webinarLink', this.$store.getters.webinarLink)
             axios.get(`https://vimeo.com/api/oembed.json?url=${this.$store.getters.webinarLink}`)
             .then((res) => {
                 const { data, status } = res
                 if (status && status == 200) {
-                    console.log('vimeo live res: ', res)
+                    // console.log('vimeo live res: ', res)
                     this.$store.dispatch('loading', false)
                     this.embedPlayer = data.html
                 }
             }).catch(function (error) {
                 // handle error
-                console.log(error);
+                // console.log(error);
                 this.$store.dispatch('loading', false)
             })
             

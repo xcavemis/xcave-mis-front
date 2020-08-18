@@ -126,11 +126,11 @@ export default {
             clearInterval(this.countDownTimer)
             this.countDownTimer = setInterval(()=>{
               this.countDownUpdate(res.endTime)
-            }, process.env.VUE_APP_CRON)
+            }, 1000)
             this.isCountDown = true
           }
           clearTimeout(this.verifyTokenTimer)
-          this.verifyTokenTimer = setTimeout(this.verifyToken, 3000)
+          this.verifyTokenTimer = setTimeout(this.verifyToken, process.env.VUE_APP_CRON)
         } else {
           let message = res.response.data.message
           this.$store.dispatch("warning", {
@@ -224,7 +224,7 @@ export default {
     },
     videoIntroClosed() {
       this.isVideoIntro = false;
-      if (!this.$store.getters.user.introShow) {
+      if (this.$store.getters.user && !this.$store.getters.user.introShow) {
         this.$store.dispatch("introShow", this.$store.getters.user.id).then((e) => {
           // console.log('introShow response', e)
         });

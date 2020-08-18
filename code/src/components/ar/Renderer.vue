@@ -137,14 +137,14 @@ export default {
       // console.log('Preloader loadProgress: ', details.data);
     },
     loadComplete(details){  
-      console.log('Preloader complete: ', details);
+      // console.log('Preloader complete: ', details);
       this.loadedData = details.data
       this.setupScene(details.data[this.content.id]);
       // this.$refs.rangeZoom?.addEventListener('input', this.inputChange)
     },
     buildScenary(){
 
-      console.log(this.content.id)
+      // console.log(this.content.id)
       let sky = new Sky();
       sky.scale.setScalar( 10000 );
       this.scene.add( sky );
@@ -447,7 +447,7 @@ export default {
       }
     },
     inputChange(event) {
-     console.log('inputChange', event.target.valueAsNumber)
+    //  console.log('inputChange', event.target.valueAsNumber)
     },
     
     animate() {

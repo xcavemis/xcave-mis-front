@@ -98,7 +98,7 @@ export const mixedGallery = {
       type: 'content',
       image: ["3-Gallery/D303.jpg"],
       audio: '',
-      text: "<p>Na parte inferior deste f&oacute;lio, temos o desenho de um aparelho que indica se uma m&aacute;quina voadora est&aacute; voando nivelada ao horizonte ou em &acirc;ngulo. Uma linha de prumo com uma pequena bola na extremidade est&aacute; pendurada dentro de um recipiente no formato de sino, para proteg&ecirc;-la da interfer&ecirc;ncia do vento.</p><p>O piloto verifi ca o &acirc;ngulo da linha de prumo para determinar se a m&aacute;quina est&aacute; voando inclinada ou horizontalmente. Aparelhos semelhantes que utilizam um prumo para medir o grau de inclina&ccedil;&atilde;o de um declive s&atilde;o muito utilizados hoje em dia.</p><p>Na parte superior, vemos desenhos relacionados a pesos e escalas, e experimentos para medi&ccedil;&atilde;o da resist&ecirc;ncia de parafusos.</p>"
+      text: "<p>Na parte inferior deste f&oacute;lio, temos o desenho de um aparelho que indica se uma m&aacute;quina voadora est&aacute; voando nivelada ao horizonte ou em &acirc;ngulo. Uma linha de prumo com uma pequena bola na extremidade est&aacute; pendurada dentro de um recipiente no formato de sino, para proteg&ecirc;-la da interfer&ecirc;ncia do vento.</p><p>O piloto verifica o &acirc;ngulo da linha de prumo para determinar se a m&aacute;quina est&aacute; voando inclinada ou horizontalmente. Aparelhos semelhantes que utilizam um prumo para medir o grau de inclina&ccedil;&atilde;o de um declive s&atilde;o muito utilizados hoje em dia.</p><p>Na parte superior, vemos desenhos relacionados a pesos e escalas, e experimentos para medi&ccedil;&atilde;o da resist&ecirc;ncia de parafusos.</p>"
     },
     {
       id: "D-304",
@@ -171,7 +171,7 @@ export const mixedGallery = {
       type: 'content',
       image: ["3-Gallery/D312a.jpg","3-Gallery/D312b.jpg"],
       audio: '',
-      text: "<h2><em>Manoscritto B, f. 80 r.</em></ph2><p>Neste projeto, o piloto deve ficar reto no centro de uma m&aacute;quina enorme. O piloto precisa usar os bra&ccedil;os, pernas e at&eacute; mesmo a cabe&ccedil;a para mover os mecanismos deslizantes para cima e para baixo para fazer essa m&aacute;quina al&ccedil;ar voo. Leonardo estava utilizando todas as partes do corpo humano na tentativa de maximizar a fonte de energia. <br />A m&aacute;quina tem doze metros de comprimento com uma envergadura de asa de 24 metros e h&aacute; uma escada retr&aacute;til de doze metros com amortecedores. <br />Leonardo decidiu ser necess&aacute;rio ter dois pares de asas que batessem &ldquo;cruzadas, da mesma maneira como um cavalo se movimenta&rdquo;.</p>"
+      text: "<h2><em>Manoscritto B, f. 80 r.</em></h2><p>Neste projeto, o piloto deve ficar reto no centro de uma m&aacute;quina enorme. O piloto precisa usar os bra&ccedil;os, pernas e at&eacute; mesmo a cabe&ccedil;a para mover os mecanismos deslizantes para cima e para baixo para fazer essa m&aacute;quina al&ccedil;ar voo. Leonardo estava utilizando todas as partes do corpo humano na tentativa de maximizar a fonte de energia. <br />A m&aacute;quina tem doze metros de comprimento com uma envergadura de asa de 24 metros e h&aacute; uma escada retr&aacute;til de doze metros com amortecedores. <br />Leonardo decidiu ser necess&aacute;rio ter dois pares de asas que batessem &ldquo;cruzadas, da mesma maneira como um cavalo se movimenta&rdquo;.</p>"
     },
     {
       id: "D-313",
@@ -201,7 +201,7 @@ export const mixedGallery = {
       id: "D-316",
       title: "Instrumentos musicais, e parta marcar o tempo",
       type: 'content',
-      image: ["3-Gallery/D316.jpg"],
+      image: ["3-Gallery/D316a.jpg","3-Gallery/D316b.jpg"],
       audio: '3-Gallery/A304.mp3',
       text: "<p>Entre as artes criativas, o gosto de Leonardo pela m&uacute;sica era superado apenas pela pintura. Ele era um respeitado m&uacute;sico, tinha uma bela voz e era muito talentoso ao tocar a lira da braccio, uma esp&eacute;cie de antecessor do violino.</p><p>Infelizmente, muitos de seus escritos sobre m&uacute;sica, incluindo seu Tratado sobre M&uacute;sica, foram perdidos. Leonardo se mudou para Mil&atilde;o em 1482, esperando receber o apoio do Duque Ludovico de Sforza, o Moro. Ele impressionou o Duque com seu talento para a m&uacute;sica, dire&ccedil;&atilde;o teatral e cenografia. Uma de suas espetaculares cria&ccedil;&otilde;es, Dan&ccedil;a dos Planetas, era t&atilde;o bela que um cortes&atilde;o escreveu &ldquo;A princ&iacute;pio, acredit&aacute;vamos estar vendo o Para&iacute;so&rdquo;.</p><p>Leonardo aplicou a teoria mec&acirc;nica e observa&ccedil;&otilde;es sobre ac&uacute;stica a seus projetos de desenvolvimento de novos instrumentos musicais. Muitas de suas ideias baseavam-se em instrumentos j&aacute; existentes, entre eles o piano port&aacute;til, a bateria mec&acirc;nica e a flauta dupla. Um registro em particular conta com onze projetos diferentes de baterias, muitos deles analisando como o tom poderia ser alterado ao longo da apresenta&ccedil;&atilde;o.</p><p>Ele tamb&eacute;m tinha grande interesse pela &oacute;ptica, os efeitos da luz, reflexos, sombras e magnifica&ccedil;&atilde;o. Leonardo projetou um tipo de holofote para o teatro e descobriu que era poss&iacute;vel, com o uso de lentes e espelhos, avistar os planetas e a lua.</p><p>Alguns dos desenhos t&eacute;cnicos mais bonitos de Leonardo referem-se aos rel&oacute;gios. Ele utilizou molas, pesos e engrenagens para aprimorar os instrumentos existentes de medi&ccedil;&atilde;o do tempo.</p><p><strong>&ldquo;O poeta est&aacute; muito abaixo do pintor na representa&ccedil;&atilde;o do que se pode ver, e muito abaixo do m&uacute;sico na representa&ccedil;&atilde;o do que n&atilde;o se pode ver.&rdquo; &ndash; <em>Leonardo da Vinci</em></strong></p>"
     },
@@ -249,7 +249,7 @@ export const mixedGallery = {
       id: "D-322",  
       title: "Arte Renascentista",
       type: 'content',
-      image: ["3-Gallery/D322.jpg"],
+      image: ["3-Gallery/D322a.jpg","3-Gallery/D322b.jpg"],
       audio: '',
       text: "<p>Leonardo, assim como Michelangelo, Rafael e Ticiano, fez parte do Renascentismo italiano. A maioria de suas<br />pinturas e esculturas foi executada em Floren&ccedil;a e Mil&atilde;o, entre os anos de 1473 e 1513, mas grande parte de seu<br />trabalho foi perdida.</p><p>Leonardo trabalhou em pelo menos 25 pinturas, mas muitas delas hoje s&atilde;o apenas c&oacute;pias. Cerca de 6 mil<br />p&aacute;ginas de anota&ccedil;&otilde;es e desenhos ainda existem, mas acad&ecirc;micos acreditam que esse n&uacute;mero represente menos<br />da metade e, talvez, at&eacute; mesmo um quarto de tudo que existia at&eacute; sua morte.</p><p>Para Leonardo, a arte n&atilde;o era poss&iacute;vel sem a ci&ecirc;ncia. Segundo ele, a verdade sobre o mundo s&oacute; poderia ser<br />aprendida atrav&eacute;s de observa&ccedil;&otilde;es meticulosas, e todas as teorias deveriam ser testadas e aplicadas no mundo real.<br />Seu trabalho art&iacute;stico est&aacute;, por isso mesmo, fundamentado em uma fus&atilde;o de observa&ccedil;&otilde;es cient&iacute;ficas e<br />experimenta&ccedil;&otilde;es cautelosas. Ele era fascinado pela luz e pela sombra e pelos efeitos criados por diferentes<br />fontes de luz refletidas em rostos e objetos, assim como pelos efeitos da perspectiva em paisagens distantes.</p><p>Leonardo fazia uma constante autocr&iacute;tica de sua t&eacute;cnica art&iacute;stica e retificava suas pinturas, e sua obstinada sede<br />de conhecimento e a busca pela perfei&ccedil;&atilde;o o distinguiam de seus contempor&acirc;neos.</p><p>As obras de arte aqui expostas s&atilde;o reprodu&ccedil;&otilde;es em tamanho natural de suas pinturas florentinas a &oacute;leo, pois os<br />originais s&atilde;o considerados muito valiosos para serem retirados dos locais permanentes.</p><p>&ldquo;A arte nunca &eacute; conclu&iacute;da, apenas abandonada.&rdquo; &ndash; Leonardo da Vinci<br /><br /></p>"
     },
@@ -331,7 +331,7 @@ export const mixedGallery = {
       type: 'content',
       image: ["3-Gallery/D332a.jpg","3-Gallery/D332b.jpg"],
       audio: '3-Gallery/A311.mp3',
-      text: "<p>Tamanho real: 199 x 122 cm<br />The National Gallery, Londres, Reino Unido<br />Museu do Louvre, Paris, França</p>"
+      text: "<p>Tamanho real: 199 x 122 cm<br />(1) The National Gallery, Londres, Reino Unido<br />(2) Museu do Louvre, Paris, França</p>"
     },
     {
       id: "D-333",
@@ -459,7 +459,7 @@ export const mixedGallery = {
       title: "La belle ferronnière",
       type: 'content',
       image: ["3-Gallery/D348.jpg"],
-      audio: '3-Gallery/A312.mp3',
+      audio: '',
       text: "<p>Tamanho real: 62 x 44 cm<br />Museu do Louvre, Paris, França</p>"
     },
     {

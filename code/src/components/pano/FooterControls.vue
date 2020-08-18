@@ -2,7 +2,7 @@
   <div class="footer-controls">
     <div class="footer-controls__console-container">
 
-      <div class="footer-controls__console" v-if="$store.getters.countdown.show">
+      <!-- <div class="footer-controls__console" v-if="$store.getters.countdown.show">
         <p class="footer-controls__console-text ticket-text">
           O SEU TICKET VAI EXPIRAR<br>
           EM {{$store.getters.countdown.time}}.<br>
@@ -10,7 +10,7 @@
           ADQUIRINDO UM NOVO INGRESSO.
         </p>
         <a class="footer-controls__console-button ticket-button" target="_blank" href="https://davincidigital.byinti.com/">COMPRAR INGRESSO</a>
-      </div>
+      </div> -->
       <div class="footer-controls__console" v-if="isLiveShow && liveEnabled && $store.getters.period">
         <p class="footer-controls__console-text">
           UMA LIVE COM O EDUCATIVO<br>
@@ -46,7 +46,7 @@
         <span class="footer-controls__button-label">Live MIS</span>
         <span class="live-status"><span class="desc">NENHUMA SESSÃO ATIVA</span></span>
       </div>
-      <div class="footer-controls__left-button live-button" @click="goLive" v-if="isLiveShow && this.$store.getters.period == null">
+      <div class="footer-controls__left-button live-button" @click="goLive" v-if="isLiveShow && !this.$store.getters.period">
         <img class="footer-controls__button-icon" src="~@/assets/images/icons/play-small.png" />
         <span class="footer-controls__button-label">Live MIS</span>
       </div>

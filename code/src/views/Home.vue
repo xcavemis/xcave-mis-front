@@ -136,35 +136,32 @@ export default {
     },
     goTo() {
       
-      this.$store.dispatch("tokenCheck").then((res) => {
-        if (
-          res &&
-          res.status >= 200 &&
-          res.status <= 204 &&
-          res.endTime != null &&
-          this.validateTime(res.endTime)
-        ) {
-          this.$store.dispatch("autoLogin").then((res) => {
-            // console.log('autoLogin home', res)
-            if (res &&
-                res.user &&
-                res.hasHoursAvaliable
-              ) {
-                this.$router.push("/experience");
-            } else {
-              this.showAuth()
-            }
-          });
-        } else {
-          this.showAuth()
-        }
-      });
-      // document.body.scrollTo(0,0)
-      // TweenMax.set('html, body', { overflowY: 'hidden', delay: 0.6})
-      // this.authShow = true;
-      // this.$nextTick(() => {
-      //   this.$refs?.authComp?.show();
+      // this.$store.dispatch("tokenCheck").then((res) => {
+      //   if (
+      //     res &&
+      //     res.status >= 200 &&
+      //     res.status <= 204 &&
+      //     res.endTime != null &&
+      //     this.validateTime(res.endTime)
+      //   ) {
+      //     this.$store.dispatch("autoLogin").then((res) => {
+      //       // console.log('autoLogin home', res)
+      //       if (res && res.user && res.hasHoursAvaliable) {
+      //         this.$router.push("/experience");
+      //       } else {
+      //         this.showAuth()
+      //       }
+      //     });
+      //   } else {
+      //     this.showAuth()
+      //   }
       // });
+      document.body.scrollTo(0,0)
+      TweenMax.set('html, body', { overflowY: 'hidden', delay: 0.6})
+      this.authShow = true;
+      this.$nextTick(() => {
+        this.$refs?.authComp?.show();
+      });
     },
     showAuth(){
       document.body.scrollTo(0,0)

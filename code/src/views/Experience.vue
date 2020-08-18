@@ -122,13 +122,14 @@ export default {
           res.endTime != null &&
           this.validateTime(res.endTime)
         ) {
-          if (this.getRestHours(res.endTime) < 1 && !this.isCountDown) {
-            clearInterval(this.countDownTimer)
-            this.countDownTimer = setInterval(()=>{
-              this.countDownUpdate(res.endTime)
-            }, 1000)
-            this.isCountDown = true
-          }
+          // console.log(this.getRestHours(res.endTime))
+          // if (this.getRestHours(res.endTime) < 1 && !this.isCountDown) {
+          //   clearInterval(this.countDownTimer)
+          //   this.countDownTimer = setInterval(()=>{
+          //     this.countDownUpdate(res.endTime)
+          //   }, 1000)
+          //   this.isCountDown = true
+          // }
           clearTimeout(this.verifyTokenTimer)
           this.verifyTokenTimer = setTimeout(this.verifyToken, process.env.VUE_APP_CRON)
         } else {

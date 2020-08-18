@@ -570,6 +570,13 @@ export default {
                 }
             }
         }
+
+        @include maxWidth(374) {
+            .info-modal__block {
+                height: 80%;
+                margin-top: 50px;
+            }
+        }
     }
 
     

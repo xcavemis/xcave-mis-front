@@ -50,6 +50,7 @@ export default {
             duration: 0,
             time: 0,
             playing: false,
+            isMobile: navigator.userAgent.toLowerCase().match(/mobile/i),
             isIOS: /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream,
             playerLayer: true,
         } 
@@ -81,7 +82,7 @@ export default {
             const support = await shaka.Player.probeSupport();
             // console.log('initPlayer', support)
             // const manifestUri = `/dash/${this.manifestKey}/manifest${support.manifest.mpd ? '.mpd' : '.m3u8'}`;
-            const manifestUri = `${process.env.VUE_APP_ASSETSPATH}/assets/videos/dash/${this.manifestKey}/manifest${support.manifest.mpd ? '.mpd' : '.m3u8'}`;
+            const manifestUri = `${process.env.VUE_APP_ASSETSPATH}/assets/videos/dash/${this.manifestKey}${this.isMobile ? '/mob' : ''}/manifest${support.manifest.mpd ? '.mpd' : '.m3u8'}`;
             // console.log('initPlayer manifestUri', manifestUri)
             // console.log(support)
             // Create a Player instance.

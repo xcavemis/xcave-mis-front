@@ -47,8 +47,11 @@
         <span class="live-status"><span class="desc">NENHUMA SESSÃO ATIVA</span></span>
       </div>
       <div class="footer-controls__left-button live-button" @click="goLive" v-if="isLiveShow && !this.$store.getters.period">
-        <img class="footer-controls__button-icon" src="~@/assets/images/icons/play-small.png" />
+        <img v-if="!commonUserLiveEnabled" class="footer-controls__button-icon" src="~@/assets/images/icons/play-small-disable.png" />
+        <img v-if="commonUserLiveEnabled" class="footer-controls__button-icon" src="~@/assets/images/icons/play-small.png" />
         <span class="footer-controls__button-label">Live MIS</span>
+        <span v-if="commonUserLiveEnabled" class="live-status live-enabled">PARTICIPE AO VIVO</span>
+        <span v-if="!commonUserLiveEnabled" class="live-status"><span class="desc">NENHUMA SESSÃO ATIVA</span></span>
       </div>
     </div>
     <div class="footer-controls__center">
@@ -172,6 +175,7 @@ export default {
     isLiveShow: true,
     liveStatus: '',
     liveEnabled: true,
+    commonUserLiveEnabled: true,
     verifyLiveTimer: 0
   }),
   mounted() {
@@ -185,7 +189,7 @@ export default {
     } else {
       clearInterval(this.verifyLiveTimer)
       this.verifyLiveTimer = setInterval(()=>{
-        console.log(this.checkLiveTime())
+        this.commonUserLiveEnabled = this.checkLiveTime()
       }, 1000)
     }
     // window.addEventListener("scroll", this.onScroll);
@@ -221,13 +225,29 @@ export default {
       }
     },
     checkLiveTime() {
-      var d = new Date();
-      var hours = d.getHours();
-      var mins = d.getMinutes();
-      var day = d.getDay();
+      const d = new Date();
+      const hours = d.getHours();
+      const mins = d.getMinutes();
+      const day = d.getDay();
+
+      const weekDay = (day >= 2 && day <= 5)
+      const weekendDay = (day == 0 || day == 6)
+      const firstWeekLive = (hours == 13 && mins >= 15) || (hours == 14 && mins <= 15)
+      const secondWeekLive = (hours == 17 && mins >= 45) || (hours == 18 && mins <= 45)
+      const firstWeekendLive = (hours == 13 && mins >= 30) || (hours == 14 && mins <= 30)
+      const secondWeekendLive = (hours == 15 && mins <= 59)
+      const thirdWeekendLive = (hours == 16 && mins >= 30) || (hours == 17 && mins <= 30)
       //  terça a sexta (13h15 e 17h45) e três aos finais de semana (13h30, 15h e 16h30).
       // https://stackoverflow.com/questions/9081220/how-to-check-if-current-time-falls-within-a-specific-range-on-a-week-day-using-j
-      return (day >= 2 && day <= 5) && (hours >= 13 && hours <= 15 && (mins >= 15 && mins <= 59))
+
+      // console.log('weekDay', weekDay)
+      // console.log('firstWeekLive', firstWeekLive)
+      // console.log('secondWeekLive', secondWeekLive)
+      // console.log('weekendDay', weekendDay)
+      // console.log('firstWeekendLive', firstWeekendLive)
+      // console.log('secondWeekendLive', secondWeekendLive)
+      // console.log('thirdWeekendLive', thirdWeekendLive)
+      return  (weekDay && (firstWeekLive || secondWeekLive)) || weekendDay && (firstWeekendLive || secondWeekendLive || thirdWeekendLive)
     },
     isStartTime(start) {
       return new Date().getTime() - start.getTime() > 0;
@@ -247,7 +267,7 @@ export default {
       });
     },
     goLive() {
-      if (!this.liveEnabled) return
+      if (!this.liveEnabled || !this.commonUserLiveEnabled) return
       this.$emit("action", {
         type: "live",
         value: "show",
@@ -402,6 +422,10 @@ export default {
 
   @include maxWidth(1024) {
     background-color: $black;
+  }
+  @include maxWidth(374) {
+    height: 50px;
+
   }
 
   .footer-controls__left {

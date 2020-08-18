@@ -144,6 +144,10 @@ export default {
       @include maxWidth(1024) {
         bottom: -7.5vw;
       }
+      @include maxWidth(374) {
+        bottom: -9.5vw;
+        font-size: 9px;
+      }
     }
 
     &.current {

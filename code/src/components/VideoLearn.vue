@@ -94,6 +94,10 @@ export default {
             @include minWidth(1680) {
                 max-width: 1280px;
             }
+            @include maxWidth(1023) {
+                @include set-size(90vw, 70vh !important);
+                min-height: 70vh;
+            }
             
         }
     

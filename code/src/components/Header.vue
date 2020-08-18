@@ -183,4 +183,9 @@
     background-size: auto 37px;
   }
 }
+@media only screen and (max-width: 374px) {
+  .governo-top {
+    height: 75px;
+  }
+}
 </style>

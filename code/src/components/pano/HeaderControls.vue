@@ -339,5 +339,20 @@ export default {
       top: 90px;
     }
   }
+  @include maxWidth(374) {
+
+    .header-controls__mobile {
+      top: 70px;
+    }
+
+    .header-controls__left {
+      width: 45%;
+      margin-left: 0;
+    }
+    .header-controls__right {
+      width: 45%;
+      justify-content: flex-end;
+    }
+  }
 }
 </style>

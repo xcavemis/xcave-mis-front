@@ -176,7 +176,9 @@ export default {
     },
     onVideoIntroPlayed(e) {
       // console.log('onVideoIntroPlayed')
-      this.queueLoaded = true
+      setTimeout(()=>{
+        this.queueLoaded = true
+      }, 10000)
     },
     onVideoIntroEnded(e) {
       this.videoEnded = true;
@@ -208,19 +210,22 @@ export default {
       this.isVideoLearn = false;
     },
     videoIntroClosed() {
+      this.queueLoaded = true
       this.isVideoIntro = false;
-      if (this.$store.getters.user && !this.$store.getters.user.introShow) {
-        this.$store.dispatch("introShow", this.$store.getters.user.id).then((e) => {
-          // console.log('introShow response', e)
-        });
-      }
-      setTimeout(()=>{
-        this.isAudioPlayer = true
-        this.$nextTick(()=>{
-          if (this.$refs?.footerControls?.musicPlaying)
-            this.$refs?.audioPlayer?.unmute();
-        })
-      }, 2000)
+      this.$nextTick(()=>{
+        if (this.$store.getters.user && !this.$store.getters.user.introShow) {
+          this.$store.dispatch("introShow", this.$store.getters.user.id).then((e) => {
+            // console.log('introShow response', e)
+          });
+        }
+        setTimeout(()=>{
+          this.isAudioPlayer = true
+          this.$nextTick(()=>{
+            if (this.$refs?.footerControls?.musicPlaying)
+              this.$refs?.audioPlayer?.unmute();
+          })
+        }, 2000)
+      })
     },
     videoClosed() {
       this.isVideoTutorial = false;
@@ -331,6 +336,7 @@ export default {
 .experience {
   @include set-size(100%, 100%);
   position: relative;
+  background-color: $black;
   @include maxWidth(1023) {
     overflow: hidden;
   }

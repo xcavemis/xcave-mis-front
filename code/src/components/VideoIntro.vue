@@ -85,7 +85,7 @@ export default {
         hide(){
             this.$store.commit("navigateToPano", 1);
             TweenMax.fromTo(this.$el, 1, { autoAlpha: 1 }, { autoAlpha: 0, ease: Quad.easeInOut, delay: 1, onComplete: () => {
-                this.$emit('close')
+                this.$emit('close') 
                 TweenMax.set('.governo-top', { zIndex: 5 })
             }})
             

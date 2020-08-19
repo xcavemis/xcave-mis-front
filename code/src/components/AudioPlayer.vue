@@ -25,7 +25,7 @@ export default {
             '/media/audio/main/t10',
             '/media/audio/main/t11',
         ],
-        trackIndex: 9,
+        trackIndex: 0,
         isMobile: navigator.userAgent.toLowerCase().match(/mobile/i),
         isIOS: /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream,
     }),

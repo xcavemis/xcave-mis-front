@@ -122,8 +122,9 @@ export default {
           res.endTime != null &&
           this.validateTime(res.endTime)
         ) {
+          // console.log('res date: ', new Date(res.endTime))
           // console.log(this.getRestHours(res.endTime))
-          // if (this.getRestHours(res.endTime) < 1 && !this.isCountDown) {
+          // if (this.getRestHours(res.endTime) < 1 && !this.isCountDown && !this.isMobile) {
           //   clearInterval(this.countDownTimer)
           //   this.countDownTimer = setInterval(()=>{
           //     this.countDownUpdate(res.endTime)
@@ -131,7 +132,7 @@ export default {
           //   this.isCountDown = true
           // }
           clearTimeout(this.verifyTokenTimer)
-          this.verifyTokenTimer = setTimeout(this.verifyToken, process.env.VUE_APP_CRON)
+          this.verifyTokenTimer = setTimeout(this.verifyToken, 10000)
         } else {
           let message = res.response.data.message
           this.$store.dispatch("warning", {

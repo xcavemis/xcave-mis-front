@@ -75,6 +75,10 @@ export default {
   /* width */
   &::-webkit-scrollbar {
     width: 3px;
+
+    @include maxWidth(1023) {
+      width: 0px;
+    }
   }
 
   /* Track */

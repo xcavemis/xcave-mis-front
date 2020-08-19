@@ -355,7 +355,7 @@ export default {
   width: 100%;
 
   @include maxWidth(1023) {
-    height: 100%;
+    // height: 100%;
   }
 }
 </style>

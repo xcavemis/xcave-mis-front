@@ -2,6 +2,10 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import axios from "axios";
 import router from "@/router";
+import createPlugin from 'logrocket-vuex';
+import LogRocket from 'logrocket';
+
+const logrocketPlugin = createPlugin(LogRocket);
 
 Vue.use(Vuex)
 
@@ -529,4 +533,5 @@ export default new Vuex.Store({
     },
   },
   modules: {},
+  plugins: [logrocketPlugin]
 })

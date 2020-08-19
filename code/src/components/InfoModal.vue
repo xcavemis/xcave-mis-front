@@ -466,7 +466,10 @@ export default {
 
                     /* width */
                     &::-webkit-scrollbar {
-                     width: 10px;
+                         width: 10px;
+                        @include maxWidth(1023) {
+                            width: 2px;
+                        }
                     }
 
                     /* Track */
@@ -568,6 +571,13 @@ export default {
                         bottom: 0;
                     }
                 }
+            }
+        }
+
+        @include maxWidth(374) {
+            .info-modal__block {
+                height: 80%;
+                margin-top: 50px;
             }
         }
     }

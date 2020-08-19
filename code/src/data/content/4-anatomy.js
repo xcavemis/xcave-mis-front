@@ -11,7 +11,7 @@ export const anatomy = {
       title: "Estudos de Anatomia",
       type: 'content',
       image: ["4-Anatomy/D401a.jpg","4-Anatomy/D401b.jpg","4-Anatomy/D401c.jpg"],
-      audio: '4-Anatomy/A403.mp3',
+      audio: '4-Anatomy/A401.mp3',
       text: "<p>O artista Leonardo da Vinci buscou dominar a anatomia do corpo humano. Ele enxergava o corpo como uma m&aacute;quina compacta e perfeita, capaz de uma profus&atilde;o de movimentos. Suas anota&ccedil;&otilde;es incluem muitos desenhos retratando os princ&iacute;pios mec&acirc;nicos determinantes ao movimento humano.</p><p>Ele dissecou e desenhou mais de trinta homens e mulheres, de todas as idades, para entender a beleza das propor&ccedil;&otilde;es humanas e o funcionamento dos m&uacute;sculos e tend&otilde;es quando o corpo se locomove. Como a disseca&ccedil;&atilde;o de seres humanos era proibida, Leonardo trabalhava secreta e apressadamente.</p><p>Leonardo desenhou as rugas e deforma&ccedil;&otilde;es da idade avan&ccedil;ada, bem como a for&ccedil;a da juventude. Ele foi o primeiro a descobrir a aterosclerose, endurecimento das art&eacute;rias. Tamb&eacute;m retratou a feiura, com suas caracter&iacute;sticas desagrad&aacute;veis e, por vezes, repulsivas. Em seus desenhos, o belo e o feio eram utilizados para representar a ideia de que tanto o bem quanto o mal s&atilde;o partes inerentes da humanidade.</p><p>Seus desenhos detalhados da anatomia foram uma incr&iacute;vel realiza&ccedil;&atilde;o. Tr&ecirc;s s&eacute;culos e meio mais tarde, definiram o estilo e o formato do importante atlas de anatomia cl&iacute;nica para estudantes, Gray&acute;s Anatomy.</p><p><strong>&ldquo;O p&eacute; humano &eacute; uma obra de arte e uma obra-prima da engenharia.&rdquo; &ndash;<em> Leonardo da Vinci</em></strong></p>"
     },
     {
@@ -19,16 +19,16 @@ export const anatomy = {
       title: "Madonna Litta",
       type: 'content',
       image: ["4-Anatomy/D402.jpg"],
-      audio: '4-Anatomy/A401.mp3',
+      audio: '4-Anatomy/A402.mp3',
       text: "<p>Tamanho real: 42 x 33 cm<br />Museu Hermitage, São Petersburgo, Rússia</p>"
     },
     {
       id: "D-403",  
       title: "A Anunciação",
-    type: 'content',
-    image: ["4-Anatomy/D403.jpg"],
-    audio: '4-Anatomy/A402.mp3',
-    text: "<p>Tamanho real: 98 x 217 cm<br />Galleria degli U zi, Florença, Itália</p>"
+      type: 'content',
+      image: ["4-Anatomy/D403.jpg"],
+      audio: '4-Anatomy/A403.mp3',
+      text: "<p>Tamanho real: 98 x 217 cm<br />Galleria degli U zi, Florença, Itália</p>"
     },
     {
       id: "D-404",    
@@ -48,7 +48,7 @@ export const anatomy = {
     },
     {
       id: "D-406",  
-      title: "Uma nova experiência em exposições",
+      title: "Uma Nova Experiência em Exposições",
       type: 'content',
       image: ["4-Anatomy/D406.jpg"],
       audio: '',

@@ -31,12 +31,6 @@ export default {
     transitionName: 'slide-left',
     firstAccess: true,
   }),
-  // beforeRouteUpdate (to, from, next) {
-  //   const toDepth = to.path.split('/').length
-  //   const fromDepth = from.path.split('/').length
-  //   this.transitionName = toDepth < fromDepth ? 'slide-right' : 'slide-left'
-  //   next()
-  // },
   created() {
     if (this.firstAccess && this.$route.name != "Home") {
       this.$router.push("/");
@@ -75,6 +69,10 @@ export default {
   /* width */
   &::-webkit-scrollbar {
     width: 3px;
+
+    @include maxWidth(1023) {
+      width: 0px;
+    }
   }
 
   /* Track */

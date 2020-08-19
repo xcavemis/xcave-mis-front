@@ -6,8 +6,8 @@ export const civil = {
       type: 'ar',
       model: 'bike.gltf',
       ext: 'gltf',
-      scale: 1,
-      scaleFactor: 1,
+      scale: .01,
+      scaleFactor: .01,
       auto_rotate: true,
       lights: {
         ambientIntensity: 0.8,

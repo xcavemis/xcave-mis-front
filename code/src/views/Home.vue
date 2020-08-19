@@ -29,6 +29,7 @@
             target="_blank"
           >COMPRAR INGRESSO</a>
         </div>
+        <!-- <iframe class="first-step__ad" src="https://exposicaodavinci500anos.com.br/assets/banners/main-banner/cielo_adserver__cnn_superlink_728x90.html" frameborder="0"></iframe> -->
         <!-- <img class="first-step__ad" src="~@/assets/images/adcontainer_hor.png" /> -->
       </div>
     </section>

@@ -5,7 +5,7 @@
             <div class="video-mask">
                 <iframe 
                     class="video-pano__iframe"
-                    :src="`${assets_path}/assets/videos/${videoId}/index.html?skip-loading`"
+                    :src="`${assets_path}/assets/videos/${videoId}/index.html`"
                     width="1280" 
                     height="720" 
                     frameborder="0" 

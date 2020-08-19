@@ -44,7 +44,7 @@ export default {
         playing: false,
         videoDuration: 95,
         currentPoster: require('@/assets/images/intro-poster.jpg'),
-        currentManifestKey: 'intro',
+        currentManifestKey: 'intro-final',
         showControls: false,
         isMobile: navigator.userAgent.toLowerCase().match(/mobile/i),
     }),

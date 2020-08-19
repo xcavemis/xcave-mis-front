@@ -6,7 +6,7 @@
     </h3>
     <div v-if="!ticketIsValid">
       <h3 class="auth__title">VALIDE SEU TICKET</h3>
-      <h4 class="auth__subtitle auth__subtitle-desc">Digite seu código de acesso</h4>
+      <h4 class="auth__subtitle auth__subtitle-desc">Digite seu código QRCode</h4>
     </div>
     <div v-if="ticketIsValid">
       <h3 class="auth__title">TUDO PRONTO.</h3>
@@ -22,7 +22,7 @@
           name="code"
           @blur="checkForm('code')"
         />
-        <label for="code">CÓDIGO DO TICKET</label>
+        <label for="code">Código QR Code</label>
         <small class="error-message" v-html="codeError"></small>
       </div>
       <div class="buttons-container" v-if="!ticketIsValid">

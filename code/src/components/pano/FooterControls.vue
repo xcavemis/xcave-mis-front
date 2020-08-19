@@ -1,6 +1,6 @@
 <template>
   <div class="footer-controls">
-    <div class="footer-controls__console-container">
+    <div class="footer-controls__console-container" v-if="!isMobile">
 
       <!-- <div class="footer-controls__console" v-if="$store.getters.countdown.show">
         <p class="footer-controls__console-text ticket-text">
@@ -176,7 +176,8 @@ export default {
     liveStatus: '',
     liveEnabled: true,
     commonUserLiveEnabled: false,
-    verifyLiveTimer: 0
+    verifyLiveTimer: 0,
+    isMobile: navigator.userAgent.toLowerCase().match(/mobile/i),
   }),
   mounted() {
     if (!this.isMobile && this.$store.getters.period != null) {
@@ -187,10 +188,12 @@ export default {
         this.verifyLiveStatus()
       }, 1000)
     } else {
-      clearInterval(this.verifyLiveTimer)
-      this.verifyLiveTimer = setInterval(()=>{
-        this.commonUserLiveEnabled = this.checkLiveTime()
-      }, 1000)
+      if (!this.isMobile) {
+        clearInterval(this.verifyLiveTimer)
+        this.verifyLiveTimer = setInterval(()=>{
+          this.commonUserLiveEnabled = this.checkLiveTime()
+        }, 1000)
+      }
     }
     // window.addEventListener("scroll", this.onScroll);
   },

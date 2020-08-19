@@ -42,10 +42,6 @@
     <Map ref="map" v-if="isMap && !isMobile" v-on:navigate-to="panoGoTo" v-on:map-close="mapClosed" />
     <Ar :content="infoModalContent" ref="arModal" v-if="isArModal" v-on:close="arClosed" />
     
-    <!-- <video v-if="!videoEnded" class="video-intro" autoplay muted ref="videoIntro">
-    <source src="media/videos/da-vinci-intro-small.mp4" type="video/mp4">-->
-    <!-- <source src="mov_bbb.ogg" type="video/ogg"> -->
-    <!-- </video> -->
     <ChangePass ref="changePass" v-if="isChangePass" v-on:close="changePassClosed"/>
   </div>
 </template>
@@ -132,7 +128,7 @@ export default {
           //   this.isCountDown = true
           // }
           clearTimeout(this.verifyTokenTimer)
-          this.verifyTokenTimer = setTimeout(this.verifyToken, 10000)
+          this.verifyTokenTimer = setTimeout(this.verifyToken, process.env.VUE_APP_CRON * 60000)
         } else {
           let message = res.response.data.message
           this.$store.dispatch("warning", {
@@ -204,19 +200,6 @@ export default {
       } else if (params.type == "music") {
         this.$refs?.audioPlayer[params.value ? "unmute" : "mute"]();
       } 
-      // else if (params.type == "map") {
-      //   this.isMap = true;
-      //   this.$nextTick(() => {
-      //     this.$refs?.map[params.value]();
-      //   });
-      // } 
-      // else if (params.type == "navigate") {
-      //   this.$refs?.pano[params.value]();
-      // } else if (params.type == "zoom") {
-      //   this.$refs?.pano[params.value]();
-      // } else if (params.type == "move") {
-      //   this.$refs?.pano[params.value]();
-      // }
     },
     arClosed() {
       this.isArModal = false;

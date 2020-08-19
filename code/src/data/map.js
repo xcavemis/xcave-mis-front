@@ -152,14 +152,14 @@ export const mapData = {
             y: '67.5%',
             type: 'light',
         },
-        {
-            id: 'mixed312', 
-            class: "",
-            title: 'Galeria Mista 12',
-            x: '10.7%',
-            y: '67.8%',
-            type: 'light',
-        },
+        // {
+        //     id: 'mixed312', 
+        //     class: "",
+        //     title: 'Galeria Mista 12',
+        //     x: '10.7%',
+        //     y: '67.8%',
+        //     type: 'light',
+        // },
         {
             id: 'mixed313', 
             class: "",
@@ -386,6 +386,7 @@ export const mapData = {
         },
         {
             id: 'monalisa-layers806', 
+            class: "invert",
             title: 'Mona Lisa Layers 06',
             x: '93.6%',
             y: '76.1%',

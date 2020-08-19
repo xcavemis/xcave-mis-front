@@ -31,12 +31,6 @@ export default {
     transitionName: 'slide-left',
     firstAccess: true,
   }),
-  // beforeRouteUpdate (to, from, next) {
-  //   const toDepth = to.path.split('/').length
-  //   const fromDepth = from.path.split('/').length
-  //   this.transitionName = toDepth < fromDepth ? 'slide-right' : 'slide-left'
-  //   next()
-  // },
   created() {
     if (this.firstAccess && this.$route.name != "Home") {
       this.$router.push("/");

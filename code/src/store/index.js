@@ -5,6 +5,7 @@ import router from "@/router";
 import createPlugin from 'logrocket-vuex';
 import LogRocket from 'logrocket';
 
+
 const logrocketPlugin = createPlugin(LogRocket);
 
 Vue.use(Vuex)
@@ -122,6 +123,12 @@ export default new Vuex.Store({
         localStorage.setItem("endTime", endTime);
         localStorage.setItem("webinarLink", webinarLink);
         localStorage.setItem("period", period);
+
+        LogRocket.identify(user.id, {
+          name: user.name,
+          email: user.email,
+          checkIns: user.checkIns
+        });
 
         commit("authUser", {
           token,

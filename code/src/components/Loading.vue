@@ -2,15 +2,6 @@
     <div class="loading-comp">
         <div class="loading-comp__content">
             <div class="loader"></div>
-            <!-- <svg class="loading-comp__content-icon" xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 80 80">
-                <g id="Group_22" data-name="Group 22" transform="translate(-11253 -786)">
-                    <rect id="Rectangle_21" data-name="Rectangle 21" width="80" height="80" transform="translate(11253 786)" fill="none"/>
-                    <circle id="Ellipse_7" data-name="Ellipse 7" cx="10" cy="10" r="10" transform="translate(11283 786)" fill="#dca036"/>
-                    <circle id="Ellipse_8" data-name="Ellipse 8" cx="10" cy="10" r="10" transform="translate(11313 816)" fill="#dca036"/>
-                    <circle id="Ellipse_9" data-name="Ellipse 9" cx="10" cy="10" r="10" transform="translate(11253 816)" fill="#dca036"/>
-                    <circle id="Ellipse_10" data-name="Ellipse 10" cx="10" cy="10" r="10" transform="translate(11283 846)" fill="#dca036"/>
-                </g>
-            </svg>     -->
             <p class="loading-comp__content-text">
                 <!-- <strong>CARREGANDO</strong><br> -->
             </p>  

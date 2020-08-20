@@ -9,8 +9,7 @@
                 width="1280" 
                 height="720" 
                 frameborder="0" 
-                allow="autoplay; 
-                fullscreen" 
+                allow="autoplay;" 
                 allowfullscreen>
             </iframe>
             <img class="video-tutorial__close" src="~@/assets/images/icons/close.png" @click="hide" alt="Fechar o video da live."> 
@@ -32,9 +31,9 @@ export default {
                 autoplay: true
             });
     
-            this.player.on('play', () => {});
-            this.player.on('ended', this.hide);
-            this.player.setLoop(false).then(function(loop) {});
+            this.player?.on('play', () => {});
+            this.player?.on('ended', this.hide);
+            this.player?.setLoop(false).then(function(loop) {});
         })
     },
     methods: {
@@ -55,7 +54,12 @@ export default {
             TweenMax.fromTo('.video-tutorial', 0.6, { autoAlpha: 1 }, { autoAlpha: 0, ease: Quad.easeInOut, delay: 0.3 })
             
         },
-    }    
+    },
+    beforeDestroy(){
+        this.player?.pause().then(() => {})
+        this.player?.destroy().then(function() {})
+        this.player = null
+    }       
 }
 </script>
 

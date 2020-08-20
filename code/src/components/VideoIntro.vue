@@ -72,14 +72,14 @@ export default {
                 controls: false,
             });
 
-            this.player.on('play', () => {
+            this.player?.on('play', () => {
                 // console.log('intro play')
                 this.onVideoIntroPlayed()
             });
-            this.player.on('ended', this.onVideoEnded);
-            this.player.setLoop(false).then(function(loop) {});
+            this.player?.on('ended', this.onVideoEnded);
+            this.player?.setLoop(false).then(function(loop) {});
 
-            this.player.getDuration().then((seconds) => { this.videoDuration = seconds })
+            this.player?.getDuration().then((seconds) => { this.videoDuration = seconds })
             // this.player.setCurrentTime(90).then(function(seconds) {})
 
         })
@@ -132,8 +132,11 @@ export default {
         }
     },
     beforeDestroy(){
-        this.player?.destroy().then(function() {})
-        this.player = null
+        if (this.player) {
+            this.player.off('ended', this.onVideoEnded);
+            this.player?.destroy()
+            this.player = null
+        }
     }    
 }
 </script>

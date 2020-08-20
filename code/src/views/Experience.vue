@@ -1,6 +1,5 @@
 <template>
   <div class="experience">
-    <!-- <PanolensNew ref="pano" v-if="queueLoaded" v-on:info-layer="onInfoLayer" /> -->
     <Pano ref="pano" v-if="queueLoaded" v-on:toggle-map="toggleMap" v-on:info-layer="onInfoLayer" />
     <HeaderControls ref="headerControls" v-on:change-pass="onChangePass" v-on:go-tutorial="openTutorial" v-on:close="changePassClosed"/>
     <FooterControls ref="footerControls" v-on:action="onFooterAction" />
@@ -48,7 +47,6 @@
 
 <script>
 // @ is an alias to /src
-// import { Preloader } from '@/utils/loaders/Preloader';
 import ChangePass from "@/components/auth/ChangePass";
 import Pano from "@/components/Pano.vue";
 import FooterControls from "@/components/pano/FooterControls.vue";
@@ -275,8 +273,7 @@ export default {
         this.infoModalContent = params;
         this.isInfoModal = true;
         this.$nextTick(() => {
-          if (this.$refs?.footerControls?.musicPlaying)
-            this.$refs?.audioPlayer?.mute();
+          if (this.$refs?.footerControls?.musicPlaying) this.$refs?.audioPlayer?.mute();
           this.$refs?.infoModal?.show();
         });
       } else if (params.type == "ar") {
@@ -289,16 +286,14 @@ export default {
         this.infoModalContent = params;
         this.isVideo360 = true;
         this.$nextTick(() => {
-          if (this.$refs?.footerControls?.musicPlaying)
-            this.$refs?.audioPlayer?.mute();
+          if (this.$refs?.footerControls?.musicPlaying) this.$refs?.audioPlayer?.mute();
           this.$refs?.video360?.show();
         });
       } else if (params.type == "learn") {
         this.infoModalContent = params;
         this.isVideoLearn = true;
         this.$nextTick(() => {
-          if (this.$refs?.footerControls?.musicPlaying)
-            this.$refs?.audioPlayer?.mute();
+          if (this.$refs?.footerControls?.musicPlaying) this.$refs?.audioPlayer?.mute();
           this.$refs?.videoLearn?.show();
         });
       }

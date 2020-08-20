@@ -57,9 +57,6 @@
 import { TweenMax, Quad } from 'gsap';
 import Panzoom from '@panzoom/panzoom';
 import Loading from '@/components/Loading';
-// import { dragAndZoom } from '@/components/pano/DragAndZoom';
-// import { view } from '@/components/pano/DragAndZoom';
-    // require('@/components/pano/DragAndZoom')
 
 export default {
     props: ['content'],
@@ -142,16 +139,17 @@ export default {
                 // startY:-this.$el.offsetHeight / 2,
                 contain: 'outside',
             })
-            this.$refs.imageToDrag.addEventListener('panzoomchange', (event) => {
-                if (this.isInstructions && (event.detail.x != 0 || event.detail.y != 0 || event.detail.scale != 1)) this.removeInstructions()
-                // console.log(event.detail) // => { x: 0, y: 0, scale: 1 }
-            })
+            this.$refs.imageToDrag.addEventListener('panzoomchange', this.panzoomChange)
             
             // window.addEventListener('wheel', this.panzoom.zoomWithWheel)
             if (!this.isMobile) {
                 this.previewElm.addEventListener('wheel', this.mouseWheelEvent)
                 this.$refs.rangeZoom?.addEventListener('input', this.inputChange)
             }
+        },
+        panzoomChange(event) {
+            if (this.isInstructions && (event.detail.x != 0 || event.detail.y != 0 || event.detail.scale != 1)) this.removeInstructions()
+            // console.log(event.detail) // => { x: 0, y: 0, scale: 1 }
         },
         zoomIn(e){
             if (e.type == "mousedown") {
@@ -190,6 +188,7 @@ export default {
         },
         updateSrc(){
             this.imageLoading = true
+            this.$refs?.imageToDrag?.removeEventListener('load', this.setInitialSize)
             TweenMax.to(this.$refs.imageToDrag, 0.4, { autoAlpha: 0, ease: Quad.easeInOut, onComplete: ()=>{
                 this.imgSrc = this.content.image[this.curreImgIdx]
                 this.$nextTick(()=>{
@@ -256,6 +255,9 @@ export default {
         this.$refs.rangeZoom?.removeEventListener('input', this.inputChange)
         this.previewElm?.removeEventListener('mouseover', this.onOverPreview, false)
         this.previewElm?.removeEventListener('mouseout', this.onOutPreview, false)
+        this.$refs?.imageToDrag?.removeEventListener('load', this.setInitialSize)
+        this.$refs.imageToDrag?.removeEventListener('load', this.onImageLoaded)
+        this.$refs?.imageToDrag?.removeEventListener('panzoomchange', this.panzoomChange)
     }
 }
 </script>

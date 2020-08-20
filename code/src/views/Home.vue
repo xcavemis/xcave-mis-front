@@ -145,9 +145,9 @@ export default {
           res.endTime != null &&
           this.validateTime(res.endTime)
         ) {
-          console.log('tokenCheck home', res)
+          // console.log('tokenCheck home', res)
           this.$store.dispatch("autoLogin").then((res) => {
-            console.log('autoLogin home', res)
+            // console.log('autoLogin home', res)
             if (res && res.user && res.hasHoursAvaliable) {
               this.$router.push("/experience");
             } else {

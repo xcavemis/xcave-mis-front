@@ -136,7 +136,6 @@ export default {
       }})
     },
     goTo() {
-      
       this.$store.dispatch("tokenCheck").then((res) => {
         if (
           res &&

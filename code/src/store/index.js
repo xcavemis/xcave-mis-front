@@ -135,7 +135,7 @@ export default new Vuex.Store({
           }
         }
       } catch (error) {
-        // console.log(error?.response);
+        console.log('error', error);
         return {
           response: error?.response
         }
@@ -326,26 +326,31 @@ export default new Vuex.Store({
     async tokenCheck({ commit, state }) {
       const uri = "/auth/check";
       const _token = state.token ? state.token : localStorage.getItem("token")??null
+      // const _token = localStorage.getItem("token")
       try {
         const res = await api.get(uri, {
           headers: {'Authorization': 'Bearer '+_token }
         });
         // console.log(res)
         const {
-          user,
           access_token: token,
-          hasHoursAvaliable,
-          endTime,
-          webinarLink,
-          period
+          endTime
         } = res.data;
         return {
           endTime,
           status: res.status,
         }
       } catch (error) {
-        return {
-          response: error?.response
+        if (error.response) {
+            console.log(error.response.data);
+            console.log(error.response.status);
+            return error.response
+        } else if (error.request) {
+          console.log(error.request);
+          return error.request
+        } else {
+          console.log('Error', error);
+          return error
         }
       }
     },

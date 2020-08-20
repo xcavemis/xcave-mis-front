@@ -15,12 +15,13 @@
 
 	.error-message {
 		color: $warning-color;
-		font-family: $rob-regular;
-		@include font-size(11);
+		font-family: $rob-bold;
+		@include font-size(9);
 		background-color: transparent;
 		position: absolute;
-		bottom: -16px;
+		bottom: -13px;
 		left: 11px;
+		text-transform: uppercase;
 		// padding: 0 0.325rem;
 
 		@include minWidth($min-width) {

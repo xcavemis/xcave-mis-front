@@ -152,7 +152,7 @@ export default {
         } else {
           const code = res?.data?.statusCode;
           const message = res?.data?.message;
-          console.log('res', res)
+          // console.log('res', res)
           if (code == 401 || code == 403 || code == 409) {
             this.$store.dispatch("warning", {
               show: true,
@@ -166,7 +166,7 @@ export default {
             /*
              * sem conexão a verificação passa ser pelo endTime local
             */
-            console.log('res', res)
+            // console.log('res', res)
             let endTime = localStorage.getItem("endTime");
             if (!endTime || endTime < Date.now()) {
               this.$store.dispatch("warning", {
@@ -218,7 +218,7 @@ export default {
         return hours
     },
     onVideoIntroPlayed(e) {
-      console.log('onVideoIntroPlayed')
+      // console.log('onVideoIntroPlayed')
       setTimeout(()=>{
         this.queueLoaded = true
       }, 2000)

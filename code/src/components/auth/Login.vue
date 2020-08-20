@@ -165,12 +165,12 @@ export default {
 
       if (type == "email") {
         if (!this.formData.email) {
-          this.errors.push("O email é obrigatório.");
-          this.emailError = "*O email é obrigatório.";
+          this.errors.push("O e-mail é obrigatório.");
+          this.emailError = "*O e-mail é obrigatório.";
           this.emailValid = false;
         } else if (!this.validEmail(this.formData.email)) {
-          this.errors.push("Utilize um email válido.");
-          this.emailError = "*Utilize um email válido.";
+          this.errors.push("E-mail inválido.");
+          this.emailError = "*E-mail inválido.";
           this.emailValid = false;
         } else {
           this.emailError = "";

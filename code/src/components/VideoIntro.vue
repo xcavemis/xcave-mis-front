@@ -32,9 +32,9 @@
             </iframe>
             <!-- <iframe src="https://player.vimeo.com/video/448904011?app_id=122963" width="240" height="426" frameborder="0" allow="autoplay; fullscreen" allowfullscreen title="INTRO-5V"></iframe> -->
             
-            <div class="video-intro__block" :class="{'opacity-bg': playing}">
+            <!-- <div class="video-intro__block" :class="{'opacity-bg': playing}">
                 <img class="video-intro__play" @click="play($event)" src="~@/assets/images/icons/play-big.png" alt="Iniciar o video de introdução."> 
-            </div>
+            </div> -->
             <a
                 class="default-button video-intro__skip-button white"
                 href="javascript:void(0)"
@@ -76,6 +76,7 @@ export default {
                 // console.log('intro play')
                 this.onVideoIntroPlayed()
             });
+            this.player?.setVolume(1).then(function(volume) {});
             this.player?.on('ended', this.onVideoEnded);
             this.player?.setLoop(false).then(function(loop) {});
 
@@ -88,7 +89,7 @@ export default {
         show() {
             TweenMax.set('html, body', { overflow: 'hidden' })
             TweenMax.set('.video-intro', { autoAlpha: 1 })
-            TweenMax.set('.video-intro__play', { autoAlpha: 1 })
+            // TweenMax.set('.video-intro__play', { autoAlpha: 1 })
             // TweenMax.set('.video-intro__iframe', { y: '0%' })
         },
         hide(){
@@ -113,7 +114,7 @@ export default {
         },
         play(e){
             this.player.play().then(() => {
-                this.hidePlay()
+                // this.hidePlay()
             })
         },
         skip(e){

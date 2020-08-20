@@ -365,8 +365,8 @@ export default {
           this.cityError = "*A cidade é obrigatória.";
           this.cityValid = false;
         } else if (this.formData.city.length < 2) {
-          this.errors.push("A cidade precisa ter ao menos 3 caracteres.");
-          this.cityError = "*A cidade precisa ter ao menos 3 caracteres.";
+          this.errors.push("Cidade inválida.");
+          this.cityError = "*Cidade inválida.";
           this.cityValid = false;
         } 
         // else if (!this.containChars(this.formData.city)) {
@@ -397,12 +397,12 @@ export default {
 
       if (type == "email") {
         if (!this.formData.email) {
-          this.errors.push("O email é obrigatório.");
-          this.emailError = "*O email é obrigatório.";
+          this.errors.push("O e-mail é obrigatório.");
+          this.emailError = "*O e-mail é obrigatório.";
           this.emailValid = false;
         } else if (!this.validEmail(this.formData.email)) {
-          this.errors.push("Utilize um email válido.");
-          this.emailError = "*Utilize um email válido.";
+          this.errors.push("E-mail inválido.");
+          this.emailError = "*E-mail inválido.";
           this.emailValid = false;
         } else {
           this.emailError = "";
@@ -416,8 +416,8 @@ export default {
           this.phoneError = "*O telefone é obrigatório.";
           this.phoneValid = false;
         } else if (this.formData.phone.length < 10) {
-          this.errors.push("Utilize um telefone válido.");
-          this.phoneError = "*Utilize um telefone válido.";
+          this.errors.push("Telefone inválido.");
+          this.phoneError = "*Telefone inválido.";
           this.phoneValid = false;
         } else {
           this.phoneError = "";

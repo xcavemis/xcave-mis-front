@@ -342,14 +342,14 @@ export default new Vuex.Store({
         }
       } catch (error) {
         if (error.response) {
-            console.log(error.response.data);
-            console.log(error.response.status);
+            // console.log(error.response.data);
+            // console.log(error.response.status);
             return error.response
         } else if (error.request) {
-          console.log(error.request);
+          // console.log(error.request);
           return error.request
         } else {
-          console.log('Error', error);
+          // console.log('Error', error);
           return error
         }
       }

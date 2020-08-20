@@ -175,10 +175,10 @@ export default {
         return hours
     },
     onVideoIntroPlayed(e) {
-      // console.log('onVideoIntroPlayed')
+      console.log('onVideoIntroPlayed')
       setTimeout(()=>{
         this.queueLoaded = true
-      }, 10000)
+      }, 2000)
     },
     onVideoIntroEnded(e) {
       this.videoEnded = true;
@@ -200,7 +200,9 @@ export default {
           this.$refs?.videoLive?.show();
         });
       } else if (params.type == "music") {
-        this.$refs?.audioPlayer[params.value ? "unmute" : "mute"]();
+        if (this.$refs?.audioPlayer){
+          this.$refs?.audioPlayer[params.value ? "unmute" : "mute"]();
+        }
       } 
     },
     arClosed() {

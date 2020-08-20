@@ -390,16 +390,17 @@ export default new Vuex.Store({
       try {
         const hasHoursAvaliable = localStorage.getItem("hasHoursAvaliable");
         const endTime = localStorage.getItem("endTime");
-        // const webinarLink = localStorage.getItem("webinarLink");
-        // const period = localStorage.getItem("period");
+        const webinarLink = localStorage.getItem("webinarLink");
+        const period = localStorage.getItem("period");
         
         const user = JSON.parse(userStr);
-        // console.log('autoLogin user', user)
         commit("authUser", {
           token,
           user,
           hasHoursAvaliable,
           endTime,
+          webinarLink,
+          period
         });
         
         return {

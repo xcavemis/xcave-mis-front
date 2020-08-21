@@ -65,6 +65,11 @@ export default {
         border-radius: 8px;
         opacity: 0;
 
+        @include maxWidth(768) {
+            width: 80vw;
+            padding: 40px;
+        }
+
         .warning-comp__close {
             position: absolute;
             top: 10px;

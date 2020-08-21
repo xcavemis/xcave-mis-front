@@ -5,7 +5,7 @@
             <!-- <div class="video-live__iframe" v-html="embedPlayer"></div> -->
             <!-- <iframe class="video-live__iframe" :src="`${$store.getters.webinarLink}/embed`" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe> -->
             <div class="embeds-container">
-                <iframe class="video-live__iframe" :src="`${$store.getters.webinarLink}/embed`" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
+                <iframe ref="iframeEmbed" class="video-live__iframe" :src="`${$store.getters.webinarLink}/embed`" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
                 <iframe class="video-live__chat" :src="`${$store.getters.webinarLink}/chat`" width="400" height="600" frameborder="0"></iframe>
             </div>
             <img class="video-live__close" src="~@/assets/images/icons/close.png" @click="hide" alt="Fechar o video da live.">
@@ -31,6 +31,10 @@ export default {
         // console.log('webinarLink', this.$store.getters.webinarLink)
         // console.log('period', this.$store.getters.period)
         this.$nextTick(()=>{
+            // this.$refs.iframeEmbed.addEventListener('load', ()=>{
+            //     console.log('embedLoad')
+            //     this.$store.dispatch('loading', false)
+            // })
             // this.buildMeeting()
         })
     },

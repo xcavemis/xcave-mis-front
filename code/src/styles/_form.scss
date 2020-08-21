@@ -120,16 +120,29 @@
 		transform-origin: left bottom;
 	}
 
-	// ::-moz-placeholder,
-	// :-moz-placeholder,
+	::-moz-placeholder{
+		opacity: 0;
+		transition: inherit;
+		color: #aaadb4;
+	}
+	:-moz-placeholder {
+		opacity: 0;
+		transition: inherit;
+		color: #aaadb4;
+	}
+
 	::-webkit-input-placeholder {
 		opacity: 0;
 		transition: inherit;
 		color: #aaadb4;
 	}
 
-	// input:focus::-moz-placeholder,
-	// input:focus:-moz-placeholder,
+	input:focus::-moz-placeholder {
+		opacity: 1;
+	}
+	input:focus:-moz-placeholder {
+		opacity: 1;
+	}
 	input:focus::-webkit-input-placeholder {
 		opacity: 1;
 	}

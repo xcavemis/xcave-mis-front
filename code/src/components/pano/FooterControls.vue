@@ -11,7 +11,7 @@
         </p>
         <a class="footer-controls__console-button ticket-button" target="_blank" href="https://davincidigital.byinti.com/">COMPRAR INGRESSO</a>
       </div> -->
-      <div class="footer-controls__console" v-if="(isLiveShow && liveEnabled && $store.getters.period) || (isLiveShow && !this.$store.getters.period && commonUserLiveEnabled)">
+      <div class="footer-controls__console" v-if="(isLiveShow && liveEnabled && $store.getters.period && $store.getters.period.end) || (isLiveShow && (!this.$store.getters.period || (this.$store.getters.period && !this.$store.getters.period.end)) && commonUserLiveEnabled)">
         <p class="footer-controls__console-text">
           UMA LIVE COM O EDUCATIVO<br>
           DO MIS EXPERIENCE<br>
@@ -33,7 +33,7 @@
         </div>
         <span class="footer-controls__button-label">Música de Fundo</span>
       </div>
-      <div class="footer-controls__left-button live-button" @click="goLive" v-if="isLiveShow && this.$store.getters.period != null">
+      <div class="footer-controls__left-button live-button" @click="goLive" v-if="isLiveShow && this.$store.getters.period && this.$store.getters.period.end">
         <img v-if="liveEnabled" class="footer-controls__button-icon" src="~@/assets/images/icons/play-small.png" />
         <img v-if="!liveEnabled" class="footer-controls__button-icon" src="~@/assets/images/icons/play-small-disable.png" />
         <span class="footer-controls__button-label">Live MIS</span>
@@ -41,12 +41,12 @@
         <!-- <span v-if="!liveEnabled" class="live-status"><span class="desc">NENHUMA SESSÃO ATIVA</span></span> -->
         <span v-if="liveEnabled && $store.getters.period" class="live-status live-enabled">{{liveStatus}}</span>
       </div>
-      <div class="footer-controls__left-button live-button" @click="goLive" v-if="!isLiveShow && this.$store.getters.period != null">
+      <div class="footer-controls__left-button live-button" @click="goLive" v-if="!isLiveShow && this.$store.getters.period && this.$store.getters.period.end">
         <img class="footer-controls__button-icon" src="~@/assets/images/icons/play-small-disable.png" />
         <span class="footer-controls__button-label">Live MIS</span>
         <span class="live-status"><span class="desc">NENHUMA SESSÃO ATIVA</span></span>
       </div>
-      <div class="footer-controls__left-button live-button" @click="goLive" v-if="isLiveShow && !this.$store.getters.period">
+      <div class="footer-controls__left-button live-button" @click="goLive" v-if="isLiveShow && (!this.$store.getters.period || (this.$store.getters.period && !this.$store.getters.period.end))">
         <img v-if="!commonUserLiveEnabled" class="footer-controls__button-icon" src="~@/assets/images/icons/play-small-disable.png" />
         <img v-if="commonUserLiveEnabled" class="footer-controls__button-icon" src="~@/assets/images/icons/play-small.png" />
         <span class="footer-controls__button-label">Live MIS</span>
@@ -180,7 +180,7 @@ export default {
     isMobile: navigator.userAgent.toLowerCase().match(/mobile/i),
   }),
   mounted() {
-    if (!this.isMobile && this.$store.getters.period != null) {
+    if (!this.isMobile && this.$store.getters.period && this.$store.getters.period.end) {
       console.log('period', this.$store.getters.period)
       this.verifyLiveStatus()
       clearInterval(this.verifyLiveTimer)
@@ -199,7 +199,7 @@ export default {
   },
   methods: {
     verifyLiveStatus(){
-      if (this.$store.getters.period) {
+      if (this.$store.getters.period && this.$store.getters.period.end) {
         let isValidPeriod = this.validateTime(this.$store.getters.period.start, this.$store.getters.period.end)
 
         const start = new Date(this.$store.getters.period.start)

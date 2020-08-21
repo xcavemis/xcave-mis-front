@@ -104,13 +104,13 @@ export default {
         onVideoIntroPlayed(){
             this.playing = true
             this.$emit('played')
-            TweenMax.to('.video-intro__play', 0.6, { autoAlpha: 0, ease: Quad.easeInOut})
+            // TweenMax.to('.video-intro__play', 0.6, { autoAlpha: 0, ease: Quad.easeInOut})
             if (this.$store.getters.user && this.$store.getters.user.introShow)  {
                 TweenMax.to('.video-intro__skip-button', 0.6, { display: 'block', autoAlpha: 1, delay: 3 })
             }
         },  
         hidePlay(){
-            TweenMax.to('.video-intro__play', 0.6, { autoAlpha: 0, ease: Quad.easeInOut})
+            // TweenMax.to('.video-intro__play', 0.6, { autoAlpha: 0, ease: Quad.easeInOut})
         },
         play(e){
             this.player.play().then(() => {

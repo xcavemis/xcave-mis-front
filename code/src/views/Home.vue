@@ -20,14 +20,15 @@
         <div class="first-step__center-content__buttons">
           <a
             class="default-button first-step__center-content__button white"
-            href="javascript:void(0)"
-            @click="goTo"
-          >INICIAR EXPERIÊNCIA</a>
-          <a
-            class="default-button first-step__center-content__button black"
             href="https://davincidigital.byinti.com/"
             target="_blank"
+            @click="gtagTrigger('comprar-home-1')"
           >COMPRAR INGRESSO</a>
+          <a
+            class="default-button first-step__center-content__button black"
+            href="javascript:void(0)"
+            @click="goTo"
+          >ACESSAR EXPERIÊNCIA</a>
         </div>
         <!-- <iframe class="first-step__ad" src="https://exposicaodavinci500anos.com.br/assets/banners/main-banner/cielo_adserver__cnn_superlink_728x90.html" frameborder="0"></iframe> -->
         <!-- <img class="first-step__ad" src="~@/assets/images/adcontainer_hor.png" /> -->
@@ -54,14 +55,15 @@
         <div class="third-step__center-content__buttons">
           <a
             class="default-button third-step__center-content__button white"
-            href="javascript:void(0)"
-            @click="goTo"
-          >INICIAR EXPERIÊNCIA</a>
-          <a
-            class="default-button third-step__center-content__button orange"
             href="https://davincidigital.byinti.com/"
             target="_blank"
+            @click="gtagTrigger('comprar-home-2')"
           >COMPRAR INGRESSO</a>
+          <a
+            class="default-button third-step__center-content__button black"
+            href="javascript:void(0)"
+            @click="goTo"
+          >ACESSAR EXPERIÊNCIA</a>
         </div>
       </div>
       <img class="third-step__ad desk" src="~@/assets/images/adcontainer_vert.png" />
@@ -107,6 +109,9 @@ export default {
     })
   },
   methods: {
+    gtagTrigger(val){
+      window.gtagEvent('interaction', 'click', val)
+    },
     show(){ 
       
       this.splittingTitle = Splitting({
@@ -136,6 +141,7 @@ export default {
       }})
     },
     goTo() {
+      window.gtagEvent('interaction', 'click', 'iniciar-experiencia')
       this.$store.dispatch("tokenCheck").then((res) => {
         if (
           res &&
@@ -267,7 +273,7 @@ export default {
     }
 
     .first-step__center-content__buttons {
-      width: 328px;
+      width: 350px;
       margin: 40px auto 0 auto;
       display: flex;
       justify-content: space-between;

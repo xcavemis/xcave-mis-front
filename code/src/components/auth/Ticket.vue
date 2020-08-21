@@ -175,6 +175,7 @@ export default {
         if (status >= 200 && status <= 204) {
           this.$store.dispatch("loading", false);
           this.ticketIsValid = true
+          window.gtagEvent('callback', 'event', 'ticket-valido')
         } else {
           let message = data.message;
           this.$store.dispatch("warning", {
@@ -197,6 +198,7 @@ export default {
         if (status >= 200 && status <= 204) {
           this.$router.push("/experience");
           this.$store.dispatch("loading", false);
+          window.gtagEvent('callback', 'event', 'ticket-checkin')
         } else {
           let message = data.message;
           this.$store.dispatch("warning", {

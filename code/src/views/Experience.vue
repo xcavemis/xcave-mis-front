@@ -100,6 +100,7 @@ export default {
     isIOS: /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream,
   }),
   mounted() {
+    window.gtagPageView('Experience', this.$route.path)
     this.verifyToken()
     // localStorage.setItem("token", 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEwMiwiaXAiOiIxNzcuNjIuMTQ5LjE4NiIsInVzZXJuYW1lIjoibWFyeXRpbXBvbmVAZ21haWwuY29tIiwicm9sZSI6IlVTRVIiLCJoYXNIb3Vyc0F2YWxpYWJsZSI6ZmFsc2UsImVuZFRpbWUiOm51bGwsImhhc0NoZWNrSW5zIjp0cnVlLCJwZXJpb2QiOm51bGwsIndlYmluYXJMaW5rIjoiaHR0cHM6Ly92aW1lby5jb20vZXZlbnQvMjMyNDI3IiwiaW50cm9TaG93Ijp0cnVlLCJpYXQiOjE1OTc5MzY5MjgsImV4cCI6MTU5ODAyMzMyOH0.JhKmBlBBIkbiAaOI79o3VAwF94N_XoXdUH4diALL2KQ');
     document
@@ -398,6 +399,10 @@ export default {
     position: absolute;
     left: 0;
     top: 70px;
+
+    @include maxWidth(768) {
+      top: 65px;
+    }
   }
 }
 </style>

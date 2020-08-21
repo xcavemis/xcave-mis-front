@@ -288,6 +288,7 @@ export default {
         if (status >= 200 && status <= 204) {
           this.$store.dispatch("loading", false);
           this.$emit("go-ticket");
+          window.gtagEvent('callback', 'event', 'cadastro-ir-ticket')
         } else {
           let message = data.message;
           if (status == 409) {

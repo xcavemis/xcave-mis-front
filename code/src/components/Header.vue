@@ -176,7 +176,7 @@
 }
 @media only screen and (max-width: 992px) {
   .governo-top {
-    height: 85px;
+    height: 75px;
     padding-top: 0;
     margin-bottom: 0;
     margin-top: 0;

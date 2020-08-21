@@ -2,8 +2,8 @@
   <div class="login-comp">
     <h3 class="auth__title">LOGIN</h3>
     <h4 class="auth__subtitle">
-      Insira os seus dados de usuário e faça
-      <br />login para acessar a experiência.
+      Caso já tenha um ingresso, insira seus<br />
+      dados de usuário abaixo e faça login.
     </h4>
     <form class="login-comp__form">
       <div class="form-field" :class="{'error-field': emailError.length > 0}">
@@ -136,9 +136,11 @@ export default {
       TweenMax.to(this.$el, 0.6, { autoAlpha: 0, ease: Quad.easeInOut })
     },
     goToRegister() {
+      window.gtagEvent('interaction', 'click', 'login-registar')
       this.$emit("go-register");
     },
     goToRecovery() {
+      window.gtagEvent('interaction', 'click', 'login-recuperar-senha')
       this.$emit("go-recovery");
     },
     checkForm(type) {
@@ -194,8 +196,10 @@ export default {
         if (status >= 200 && status <= 204) {
           if (this.validateTime(endTime)) {
             this.$router.push("/experience");
+            window.gtagEvent('callback', 'event', 'login-ir-experiencia')
           } else {
             this.$emit("go-ticket");
+            window.gtagEvent('callback', 'event', 'login-ir-ticket')
           }
           this.$store.dispatch("loading", false);
         } else {

@@ -32,9 +32,9 @@
             </iframe>
             <!-- <iframe src="https://player.vimeo.com/video/448904011?app_id=122963" width="240" height="426" frameborder="0" allow="autoplay; fullscreen" allowfullscreen title="INTRO-5V"></iframe> -->
             
-            <!-- <div class="video-intro__block" :class="{'opacity-bg': playing}">
+            <div class="video-intro__block" :class="{'opacity-bg': playing}">
                 <img class="video-intro__play" @click="play($event)" src="~@/assets/images/icons/play-big.png" alt="Iniciar o video de introdução."> 
-            </div> -->
+            </div>
             <a
                 class="default-button video-intro__skip-button white"
                 href="javascript:void(0)"
@@ -89,7 +89,7 @@ export default {
         show() {
             TweenMax.set('html, body', { overflow: 'hidden' })
             TweenMax.set('.video-intro', { autoAlpha: 1 })
-            // TweenMax.set('.video-intro__play', { autoAlpha: 1 })
+            TweenMax.set('.video-intro__play', { autoAlpha: 1 })
             // TweenMax.set('.video-intro__iframe', { y: '0%' })
         },
         hide(){
@@ -104,17 +104,17 @@ export default {
         onVideoIntroPlayed(){
             this.playing = true
             this.$emit('played')
-            // TweenMax.to('.video-intro__play', 0.6, { autoAlpha: 0, ease: Quad.easeInOut})
+            TweenMax.to('.video-intro__play', 0.6, { autoAlpha: 0, ease: Quad.easeInOut})
             if (this.$store.getters.user && this.$store.getters.user.introShow)  {
                 TweenMax.to('.video-intro__skip-button', 0.6, { display: 'block', autoAlpha: 1, delay: 3 })
             }
         },  
         hidePlay(){
-            // TweenMax.to('.video-intro__play', 0.6, { autoAlpha: 0, ease: Quad.easeInOut})
+            TweenMax.to('.video-intro__play', 0.6, { autoAlpha: 0, ease: Quad.easeInOut})
         },
         play(e){
             this.player.play().then(() => {
-                // this.hidePlay()
+                this.hidePlay()
             })
         },
         skip(e){

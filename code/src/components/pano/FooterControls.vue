@@ -622,6 +622,11 @@ export default {
             // margin-top: 7px;
           }
         }
+         @include maxWidth(768) {
+          &.icon-small {
+            margin-top: 2px;
+          }
+        }
       }
     }
   }
@@ -629,6 +634,8 @@ export default {
     display: none;
   }
   @include maxWidth(1024) {
+    height: 50px;
+
     .footer-controls__logout {
       display: block;
 

@@ -5,7 +5,7 @@
       <router-view />
     </transition>
     <Loading v-if="$store.getters.loadingShow" />
-    <Warning v-if="$store.getters.warningShow.show" :text="$store.getters.warningShow.text" />
+    <Warning ref="warning" v-if="$store.getters.warningShow.show" :text="$store.getters.warningShow.text" />
     <Footer />
   </div>
 </template>
@@ -23,6 +23,15 @@ export default {
       if (to !== from) {
         if (!this.auth && to.name != "Home") {
           this.$router.push("/");
+        }
+      }
+    },
+    '$store.getters.warningShow.show': function(val, old){
+      if (val != old) {
+        if (val == true) {
+          this.$nextTick(()=>{
+            this.$refs?.warning?.show()
+          })
         }
       }
     },

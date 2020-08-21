@@ -51,9 +51,9 @@
         </div>
       </div>
     </div>
-    <div class="header-controls__mobile">
+    <!-- <div class="header-controls__mobile">
       <Timeline />
-    </div>
+    </div> -->
   </div>
 </template>
 

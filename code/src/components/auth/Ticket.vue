@@ -59,6 +59,7 @@
         class="default-button black"
         href="https://davincidigital.byinti.com/"
         target="_blank"
+        @click="gtagTrigger('comprar-final')"
       >COMPRAR INGRESSO DIGITAL</a>
     </div>
   </div>
@@ -92,6 +93,9 @@ export default {
     this.$nextTick(this.show);
   },
   methods: {
+    gtagTrigger(val){
+      window.gtagEvent('interaction', 'click', val)
+    },
     show() {
       TweenMax.set(this.$el, { autoAlpha: 1 })
       window.scrollTo(0, 0);
@@ -175,6 +179,7 @@ export default {
         if (status >= 200 && status <= 204) {
           this.$store.dispatch("loading", false);
           this.ticketIsValid = true
+          window.gtagEvent('callback', 'event', 'ticket-valido')
         } else {
           let message = data.message;
           this.$store.dispatch("warning", {
@@ -197,6 +202,7 @@ export default {
         if (status >= 200 && status <= 204) {
           this.$router.push("/experience");
           this.$store.dispatch("loading", false);
+          window.gtagEvent('callback', 'event', 'ticket-checkin')
         } else {
           let message = data.message;
           this.$store.dispatch("warning", {

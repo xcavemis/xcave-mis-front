@@ -146,7 +146,7 @@ export default new Vuex.Store({
           }
         }
       } catch (error) {
-        // console.log(error?.response);
+        console.log('error', error);
         return {
           response: error?.response
         }
@@ -264,20 +264,6 @@ export default new Vuex.Store({
           period
         } = res.data;
 
-
-        // localStorage.setItem("user", JSON.stringify(user));
-        // localStorage.setItem("token", token);
-        // localStorage.setItem("hasHoursAvaliable", hasHoursAvaliable);
-        // localStorage.setItem("endTime", endTime);
-
-        // commit("authUser", {
-        //   token,
-        //   user,
-        //   hasHoursAvaliable,
-        //   endTime,
-        //   webinarLink,
-        //   period
-        // });
         return {
           response: {
             user, 
@@ -351,44 +337,31 @@ export default new Vuex.Store({
     async tokenCheck({ commit, state }) {
       const uri = "/auth/check";
       const _token = state.token ? state.token : localStorage.getItem("token")??null
+      // const _token = localStorage.getItem("token")
       try {
         const res = await api.get(uri, {
           headers: {'Authorization': 'Bearer '+_token }
         });
         // console.log(res)
         const {
-          user,
           access_token: token,
-          hasHoursAvaliable,
-          endTime,
-          webinarLink,
-          period
+          endTime
         } = res.data;
-        // if (user && user != undefined) {
-        //   localStorage.setItem("user", JSON.stringify(user));
-        //   localStorage.setItem("token", token);
-        //   localStorage.setItem("hasHoursAvaliable", hasHoursAvaliable);
-        //   localStorage.setItem("endTime", endTime);
-        //   localStorage.setItem("webinarLink", webinarLink);
-        //   localStorage.setItem("period", period);
-        //   // console.log('tokenCheck user', user)
-        //   commit("authUser", {
-        //     token,
-        //     user,
-        //     hasHoursAvaliable,
-        //     endTime,
-        //     webinarLink,
-        //     period
-        //   });
-        // }
-
         return {
           endTime,
           status: res.status,
         }
       } catch (error) {
-        return {
-          response: error?.response
+        if (error.response) {
+            // console.log(error.response.data);
+            // console.log(error.response.status);
+            return error.response
+        } else if (error.request) {
+          // console.log(error.request);
+          return error.request
+        } else {
+          // console.log('Error', error);
+          return error
         }
       }
     },
@@ -401,16 +374,17 @@ export default new Vuex.Store({
       try {
         const hasHoursAvaliable = localStorage.getItem("hasHoursAvaliable");
         const endTime = localStorage.getItem("endTime");
-        // const webinarLink = localStorage.getItem("webinarLink");
-        // const period = localStorage.getItem("period");
+        const webinarLink = localStorage.getItem("webinarLink");
+        const period = localStorage.getItem("period");
         
         const user = JSON.parse(userStr);
-        // console.log('autoLogin user', user)
         commit("authUser", {
           token,
           user,
           hasHoursAvaliable,
           endTime,
+          webinarLink,
+          period
         });
         
         return {

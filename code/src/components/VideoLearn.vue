@@ -9,21 +9,9 @@
                 width="1280" 
                 height="720" 
                 frameborder="0" 
-                allow="autoplay; 
-                fullscreen" 
+                allow="autoplay;" 
                 allowfullscreen>
             </iframe>
-            <!-- <iframe
-                class="video-learn__iframe"
-                :src="`//www.youtube.com/embed/${videoId}?autoplay=1&rel=0`"
-                width="1280" 
-                height="720" 
-                frameborder="0" 
-                title="MIS - Da Vinci Live" 
-                webkitallowfullscreen 
-                mozallowfullscreen 
-                allowfullscreen>
-            </iframe> -->
             <img class="video-learn__close" src="~@/assets/images/icons/close.png" @click="hide" alt="Fechar o video da live."> 
         </section>
     </div>
@@ -43,9 +31,9 @@ export default {
             autoplay: true
         });
 
-        this.player.on('play', () => {});
-        this.player.on('ended', this.hide);
-        this.player.setLoop(false).then(function(loop) {});
+        this.player?.on('play', () => {});
+        this.player?.on('ended', this.hide);
+        this.player?.setLoop(false).then(function(loop) {});
     },
     methods: {
         show() {
@@ -65,7 +53,13 @@ export default {
             TweenMax.fromTo('.video-learn', 0.6, { autoAlpha: 1 }, { autoAlpha: 0, ease: Quad.easeInOut, delay: 0.3 })
             
         },
-    }    
+    },
+    beforeDestroy(){
+        if (this.player) {
+            this.player?.destroy()
+            this.player = null
+        }
+    }  
 }
 </script>
 

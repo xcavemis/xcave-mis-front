@@ -1,27 +1,40 @@
 <template>
     <div class="video-intro">
-        <section class="video-intro__content">
-            <VideoPlayerStream 
+        <section class="video-intro__content" @click="hidePlay">
+            <!-- <VideoPlayerStream 
                 v-on:close="onVideoEnded"
                 v-on:played="onVideoIntroPlayed"
                 :manifest-key="currentManifestKey"
                 :poster="currentPoster"
                 :controls="showControls"
                 ref="videoStream"
-            />
-            <!-- <iframe
+            /> -->
+            <!-- <div class="video-intro__iframe" v-html="videoSrc"></div> -->
+            <iframe
+                v-if="!isMobile"
                 ref="videoPlayer"
                 class="video-intro__iframe" 
-                :src="`https://player.vimeo.com/video/${videoId}`" 
+                :src="`https://player.vimeo.com/video/448902595?app_id=122963?autoplay=1&loop=0`" 
                 width="100%" 
                 height="100%" 
                 frameborder="0"  
                 allow="autoplay"
-                allowfullscreen>
-            </iframe> -->
-            <!-- <div class="video-intro__block" :class="{'opacity-bg': playing}">
-                <img class="video-intro__play" @click="play" src="~@/assets/images/icons/play-big.png" alt="Iniciar o video de introdução."> 
-            </div> -->
+                webkitallowfullscreen mozallowfullscreen allowfullscreen>
+            </iframe>
+            <iframe
+                v-if="isMobile"
+                ref="videoPlayer"
+                class="video-intro__iframe" 
+                :src="`https://player.vimeo.com/video/448904011?app_id=122963?autoplay=1&loop=0`" 
+                width="100%" 
+                height="100%" 
+                frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen>
+            </iframe>
+            <!-- <iframe src="https://player.vimeo.com/video/448904011?app_id=122963" width="240" height="426" frameborder="0" allow="autoplay; fullscreen" allowfullscreen title="INTRO-5V"></iframe> -->
+            
+            <div class="video-intro__block" :class="{'opacity-bg': playing}">
+                <img class="video-intro__play" @click="play($event)" src="~@/assets/images/icons/play-big.png" alt="Iniciar o video de introdução."> 
+            </div>
             <a
                 class="default-button video-intro__skip-button white"
                 href="javascript:void(0)"
@@ -34,14 +47,15 @@
 <script>
 import { TweenMax, Quad } from 'gsap';
 import Player from '@vimeo/player';
-import VideoPlayerStream from "@/components/VideoPlayerStream";
+// import VideoPlayerStream from "@/components/VideoPlayerStream";
 export default {
     props: ['videoId'],
     components: {
-        VideoPlayerStream,
+        // VideoPlayerStream,
     },
     data: () => ({
         playing: false,
+        videoSrc: '',
         videoDuration: 95,
         currentPoster: require('@/assets/images/intro-poster.jpg'),
         currentManifestKey: 'intro-final',
@@ -52,37 +66,34 @@ export default {
         TweenMax.set('html, body', { cursor: 'pointer' })
         this.$nextTick(()=>{
             this.show()
-            // this.player = new Player(this.$refs.videoPlayer, {
-            //     loop: false,
-            //     autoplay: true
-            // });
+            this.player = new Player(this.$refs.videoPlayer, {
+                loop: false,
+                autoplay: true,
+                controls: false,
+            });
 
-            // this.player.on('play', () => {
-            //     this.$emit('played')
-            //     if (this.$store.getters.user && this.$store.getters.user.introShow)  {
-            //         TweenMax.to('.video-intro__skip-button', 0.6, { display: 'block', autoAlpha: 1, delay: 2 })
-            //     }
-            // });
-            // this.player.on('ended', this.onVideoEnded);
-            // this.player.setLoop(false).then(function(loop) {
-            // });
+            this.player?.on('play', () => {
+                // console.log('intro play')
+                this.onVideoIntroPlayed()
+            });
+            this.player?.setVolume(1).then(function(volume) {});
+            this.player?.on('ended', this.onVideoEnded);
+            this.player?.setLoop(false).then(function(loop) {});
 
-            // this.player.getDuration().then((seconds) => { this.videoDuration = seconds })
-            // this.player.setCurrentTime(93).then(function(seconds) {})
+            this.player?.getDuration().then((seconds) => { this.videoDuration = seconds })
+            // this.player.setCurrentTime(90).then(function(seconds) {})
 
-            // this.player.getVideoTitle().then(function(title) {
-            //     console.log('title:', title);
-            // });
         })
     },
     methods: {
         show() {
             TweenMax.set('html, body', { overflow: 'hidden' })
             TweenMax.set('.video-intro', { autoAlpha: 1 })
-            // TweenMax.set('.video-intro__play', { autoAlpha: 1 })
+            TweenMax.set('.video-intro__play', { autoAlpha: 1 })
             // TweenMax.set('.video-intro__iframe', { y: '0%' })
         },
         hide(){
+            // console.log('intro end')
             this.$store.commit("navigateToPano", 1);
             TweenMax.fromTo(this.$el, 1, { autoAlpha: 1 }, { autoAlpha: 0, ease: Quad.easeInOut, delay: 1, onComplete: () => {
                 this.$emit('close') 
@@ -91,23 +102,41 @@ export default {
             
         },
         onVideoIntroPlayed(){
+            this.playing = true
             this.$emit('played')
+            TweenMax.to('.video-intro__play', 0.6, { autoAlpha: 0, ease: Quad.easeInOut})
             if (this.$store.getters.user && this.$store.getters.user.introShow)  {
-                TweenMax.to('.video-intro__skip-button', 0.6, { display: 'block', autoAlpha: 1, delay: 2 })
+                TweenMax.to('.video-intro__skip-button', 0.6, { display: 'block', autoAlpha: 1, delay: 3 })
             }
         },  
+        hidePlay(){
+            TweenMax.to('.video-intro__play', 0.6, { autoAlpha: 0, ease: Quad.easeInOut})
+        },
+        play(e){
+            this.player.play().then(() => {
+                this.hidePlay()
+            })
+        },
         skip(e){
-            this.$refs?.videoStream?.skip()
+            // this.$refs?.videoStream?.skip()
             TweenMax.to('.video-intro__skip-button', 0.4, { autoAlpha: 0, onComplete: ()=>{
-                // this.player.pause().then(() => {
-                //     this.player.destroy().then(function() {})
-                // })
+                this.player.pause().then(() => {
+                    this.player.destroy().then(function() {})
+                })
             }})
+            this.hide()
             
-            // this.player.setCurrentTime(this.videoDuration - 1)
+            // this.player.setCurrentTime(this.videoDuration-1)
         },
         onVideoEnded(e) {
             this.hide()
+        }
+    },
+    beforeDestroy(){
+        if (this.player) {
+            this.player.off('ended', this.onVideoEnded);
+            this.player?.destroy()
+            this.player = null
         }
     }    
 }
@@ -155,6 +184,17 @@ export default {
 
         @include maxWidth(1023) {
             height: 100%;
+
+            .video-intro__iframe {
+                @include set-size(100%, 100%);
+            }
+        }
+        @include maxWidth(414) {
+
+            .video-intro__iframe {
+                margin-top: -5%;
+                @include set-size(105%, 120%);
+            }
         }
 
         .video-intro__block {
@@ -165,8 +205,13 @@ export default {
             background-color: rgba(0,0,0,0.5);
             z-index: 1;
             transition: background-color 1s linear;
+            pointer-events: none;
+            touch-action: none;
+            
             &.opacity-bg {
                 background-color: rgba(0,0,0,0);
+                pointer-events: all;
+                touch-action: all;
             }
 
             .video-intro__play {
@@ -175,8 +220,10 @@ export default {
                 z-index: 10;
                 cursor: pointer;
                 opacity: 0;
-                // pointer-events: none;
-                // touch-action: none;
+                @include maxWidth(1023) {
+                    pointer-events: none;
+                    touch-action: none;
+                }
             }
         }
     }

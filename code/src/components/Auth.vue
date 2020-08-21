@@ -356,6 +356,7 @@ export default {
     .auth-container {
       .auth-container__block {
         margin: 20px auto 0;
+        max-width: 80vw;
       }
     }
 

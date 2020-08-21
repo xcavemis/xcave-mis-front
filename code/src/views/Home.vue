@@ -20,14 +20,15 @@
         <div class="first-step__center-content__buttons">
           <a
             class="default-button first-step__center-content__button white"
-            href="javascript:void(0)"
-            @click="goTo"
-          >INICIAR EXPERIÊNCIA</a>
-          <a
-            class="default-button first-step__center-content__button black"
             href="https://davincidigital.byinti.com/"
             target="_blank"
+            @click="gtagTrigger('comprar-home-1')"
           >COMPRAR INGRESSO</a>
+          <a
+            class="default-button first-step__center-content__button black"
+            href="javascript:void(0)"
+            @click="goTo"
+          >ACESSAR EXPERIÊNCIA</a>
         </div>
         <!-- <iframe class="first-step__ad" src="https://exposicaodavinci500anos.com.br/assets/banners/main-banner/cielo_adserver__cnn_superlink_728x90.html" frameborder="0"></iframe> -->
         <!-- <img class="first-step__ad" src="~@/assets/images/adcontainer_hor.png" /> -->
@@ -54,14 +55,15 @@
         <div class="third-step__center-content__buttons">
           <a
             class="default-button third-step__center-content__button white"
-            href="javascript:void(0)"
-            @click="goTo"
-          >INICIAR EXPERIÊNCIA</a>
-          <a
-            class="default-button third-step__center-content__button orange"
             href="https://davincidigital.byinti.com/"
             target="_blank"
+            @click="gtagTrigger('comprar-home-2')"
           >COMPRAR INGRESSO</a>
+          <a
+            class="default-button third-step__center-content__button black"
+            href="javascript:void(0)"
+            @click="goTo"
+          >ACESSAR EXPERIÊNCIA</a>
         </div>
       </div>
       <img class="third-step__ad desk" src="~@/assets/images/adcontainer_vert.png" />
@@ -107,6 +109,9 @@ export default {
     })
   },
   methods: {
+    gtagTrigger(val){
+      window.gtagEvent('interaction', 'click', val)
+    },
     show(){ 
       
       this.splittingTitle = Splitting({
@@ -136,33 +141,29 @@ export default {
       }})
     },
     goTo() {
-      
-      // this.$store.dispatch("tokenCheck").then((res) => {
-      //   if (
-      //     res &&
-      //     res.status >= 200 &&
-      //     res.status <= 204 &&
-      //     res.endTime != null &&
-      //     this.validateTime(res.endTime)
-      //   ) {
-      //     this.$store.dispatch("autoLogin").then((res) => {
-      //       // console.log('autoLogin home', res)
-      //       if (res && res.user && res.hasHoursAvaliable) {
-      //         this.$router.push("/experience");
-      //       } else {
-      //         this.showAuth()
-      //       }
-      //     });
-      //   } else {
-      //     this.showAuth()
-      //   }
-      // });
-      document.body.scrollTo(0,0)
-      TweenMax.set('html, body', { overflowY: 'hidden', delay: 0.6})
-      this.authShow = true;
-      this.$nextTick(() => {
-        this.$refs?.authComp?.show();
+      window.gtagEvent('interaction', 'click', 'iniciar-experiencia')
+      this.$store.dispatch("tokenCheck").then((res) => {
+        if (
+          res &&
+          res.status >= 200 &&
+          res.status <= 204 &&
+          res.endTime != null &&
+          this.validateTime(res.endTime)
+        ) {
+          // console.log('tokenCheck home', res)
+          this.$store.dispatch("autoLogin").then((res) => {
+            // console.log('autoLogin home', res)
+            if (res && res.user && res.hasHoursAvaliable) {
+              this.$router.push("/experience");
+            } else {
+              this.showAuth()
+            }
+          });
+        } else {
+          this.showAuth()
+        }
       });
+      // this.showAuth()
     },
     showAuth(){
       document.body.scrollTo(0,0)
@@ -272,7 +273,7 @@ export default {
     }
 
     .first-step__center-content__buttons {
-      width: 328px;
+      width: 350px;
       margin: 40px auto 0 auto;
       display: flex;
       justify-content: space-between;
@@ -337,6 +338,20 @@ export default {
           padding: 15px;
           // display: block;
           margin: 0 auto 5px auto;
+        }
+      }
+    }
+    @include maxWidth(374) {
+      .first-step__center-content__buttons {
+        width: 100%;
+        flex-wrap: wrap;
+        flex-flow: column;
+
+        .first-step__center-content__button {
+          width: 60%;
+          &:first-child{
+            margin-bottom: 15px;
+          }
         }
       }
     }
@@ -452,6 +467,21 @@ export default {
         @include font-size(9);
         margin: 0 0 24px 0;
         width: 38vw;
+      }
+    }
+    @include maxWidth(374) {
+      .third-step__center-content__buttons {
+        width: 100%;
+        align-items: center;
+        flex-wrap: wrap;
+        flex-flow: column;
+
+        .third-step__center-content__button {
+          width: 60%;
+          &:first-child{
+            margin-bottom: 15px;
+          }
+        }
       }
     }
   }

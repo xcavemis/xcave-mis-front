@@ -1,6 +1,6 @@
 <template>
   <div class="footer-controls">
-    <div class="footer-controls__console-container">
+    <div class="footer-controls__console-container" v-if="!isMobile">
 
       <!-- <div class="footer-controls__console" v-if="$store.getters.countdown.show">
         <p class="footer-controls__console-text ticket-text">
@@ -11,7 +11,7 @@
         </p>
         <a class="footer-controls__console-button ticket-button" target="_blank" href="https://davincidigital.byinti.com/">COMPRAR INGRESSO</a>
       </div> -->
-      <div class="footer-controls__console" v-if="(isLiveShow && liveEnabled && $store.getters.period) || (isLiveShow && !this.$store.getters.period && commonUserLiveEnabled)">
+      <div class="footer-controls__console" v-if="(isLiveShow && liveEnabled && $store.getters.period && $store.getters.period.end) || (isLiveShow && (!this.$store.getters.period || (this.$store.getters.period && !this.$store.getters.period.end)) && commonUserLiveEnabled)">
         <p class="footer-controls__console-text">
           UMA LIVE COM O EDUCATIVO<br>
           DO MIS EXPERIENCE<br>
@@ -33,7 +33,7 @@
         </div>
         <span class="footer-controls__button-label">Música de Fundo</span>
       </div>
-      <div class="footer-controls__left-button live-button" @click="goLive" v-if="isLiveShow && this.$store.getters.period != null">
+      <div class="footer-controls__left-button live-button" @click="goLive" v-if="isLiveShow && this.$store.getters.period && this.$store.getters.period.end">
         <img v-if="liveEnabled" class="footer-controls__button-icon" src="~@/assets/images/icons/play-small.png" />
         <img v-if="!liveEnabled" class="footer-controls__button-icon" src="~@/assets/images/icons/play-small-disable.png" />
         <span class="footer-controls__button-label">Live MIS</span>
@@ -41,12 +41,12 @@
         <!-- <span v-if="!liveEnabled" class="live-status"><span class="desc">NENHUMA SESSÃO ATIVA</span></span> -->
         <span v-if="liveEnabled && $store.getters.period" class="live-status live-enabled">{{liveStatus}}</span>
       </div>
-      <div class="footer-controls__left-button live-button" @click="goLive" v-if="!isLiveShow && this.$store.getters.period != null">
+      <div class="footer-controls__left-button live-button" @click="goLive" v-if="!isLiveShow && this.$store.getters.period && this.$store.getters.period.end">
         <img class="footer-controls__button-icon" src="~@/assets/images/icons/play-small-disable.png" />
         <span class="footer-controls__button-label">Live MIS</span>
         <span class="live-status"><span class="desc">NENHUMA SESSÃO ATIVA</span></span>
       </div>
-      <div class="footer-controls__left-button live-button" @click="goLive" v-if="isLiveShow && !this.$store.getters.period">
+      <div class="footer-controls__left-button live-button" @click="goLive" v-if="isLiveShow && (!this.$store.getters.period || (this.$store.getters.period && !this.$store.getters.period.end))">
         <img v-if="!commonUserLiveEnabled" class="footer-controls__button-icon" src="~@/assets/images/icons/play-small-disable.png" />
         <img v-if="commonUserLiveEnabled" class="footer-controls__button-icon" src="~@/assets/images/icons/play-small.png" />
         <span class="footer-controls__button-label">Live MIS</span>
@@ -156,7 +156,7 @@
       </div>
       <div class="footer-controls__right-group mg-r">
         <img
-          class="footer-controls__button-icon"
+          class="footer-controls__button-icon logos-img"
           alt="Abrir o rodapé"
           src="~@/assets/images/logo-mis-exp-gov.svg"
         />
@@ -176,10 +176,11 @@ export default {
     liveStatus: '',
     liveEnabled: true,
     commonUserLiveEnabled: false,
-    verifyLiveTimer: 0
+    verifyLiveTimer: 0,
+    isMobile: navigator.userAgent.toLowerCase().match(/mobile/i),
   }),
   mounted() {
-    if (!this.isMobile && this.$store.getters.period != null) {
+    if (!this.isMobile && this.$store.getters.period && this.$store.getters.period.end) {
       console.log('period', this.$store.getters.period)
       this.verifyLiveStatus()
       clearInterval(this.verifyLiveTimer)
@@ -187,16 +188,18 @@ export default {
         this.verifyLiveStatus()
       }, 1000)
     } else {
-      clearInterval(this.verifyLiveTimer)
-      this.verifyLiveTimer = setInterval(()=>{
-        this.commonUserLiveEnabled = this.checkLiveTime()
-      }, 1000)
+      if (!this.isMobile) {
+        clearInterval(this.verifyLiveTimer)
+        this.verifyLiveTimer = setInterval(()=>{
+          this.commonUserLiveEnabled = this.checkLiveTime()
+        }, 1000)
+      }
     }
     // window.addEventListener("scroll", this.onScroll);
   },
   methods: {
     verifyLiveStatus(){
-      if (this.$store.getters.period) {
+      if (this.$store.getters.period && this.$store.getters.period.end) {
         let isValidPeriod = this.validateTime(this.$store.getters.period.start, this.$store.getters.period.end)
 
         const start = new Date(this.$store.getters.period.start)
@@ -238,8 +241,6 @@ export default {
       const secondWeekendLive = (hours == 15 && mins <= 59)
       const thirdWeekendLive = (hours == 16 && mins >= 30) || (hours == 17 && mins <= 30)
       //  terça a sexta (13h15 e 17h45) e três aos finais de semana (13h30, 15h e 16h30).
-      // https://stackoverflow.com/questions/9081220/how-to-check-if-current-time-falls-within-a-specific-range-on-a-week-day-using-j
-
       // console.log('weekDay', weekDay)
       // console.log('firstWeekLive', firstWeekLive)
       // console.log('secondWeekLive', secondWeekLive)
@@ -603,14 +604,27 @@ export default {
           }
         }
 
+
+        &.logos-img{
+          min-width: 220px;
+        }
+
         @include maxWidth(1200) {
           @include set-size(auto, 30px);
+          &.logos-img{
+            min-width: 160px;
+          }
 
           .footer-controls__right-group__label {
             @include set-size(40vw, auto);
           }
           &.icon-small {
             // margin-top: 7px;
+          }
+        }
+         @include maxWidth(768) {
+          &.icon-small {
+            margin-top: 2px;
           }
         }
       }
@@ -620,6 +634,8 @@ export default {
     display: none;
   }
   @include maxWidth(1024) {
+    height: 50px;
+
     .footer-controls__logout {
       display: block;
 

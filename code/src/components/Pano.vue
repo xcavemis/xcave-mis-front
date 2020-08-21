@@ -2,7 +2,7 @@
   <div class="pano-comp">
       <!-- :src="`http://192.168.15.45:8080/index.html#media=${panoIndex}`" -->
     <iframe 
-      :src="`${assets_path}/assets/panorama-final/index.html#media=${panoIndex}`"
+      :src="`${assets_path}/assets/pano-no-rotate/index.html#media=${panoIndex}`"
       class="pano-comp__iframe"
       width="100%" 
       height="100%" 

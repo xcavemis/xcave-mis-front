@@ -1,6 +1,5 @@
 <template>
   <div class="experience">
-    <!-- <PanolensNew ref="pano" v-if="queueLoaded" v-on:info-layer="onInfoLayer" /> -->
     <Pano ref="pano" v-if="queueLoaded" v-on:toggle-map="toggleMap" v-on:info-layer="onInfoLayer" />
     <HeaderControls ref="headerControls" v-on:change-pass="onChangePass" v-on:go-tutorial="openTutorial" v-on:close="changePassClosed"/>
     <FooterControls ref="footerControls" v-on:action="onFooterAction" />
@@ -48,7 +47,6 @@
 
 <script>
 // @ is an alias to /src
-// import { Preloader } from '@/utils/loaders/Preloader';
 import ChangePass from "@/components/auth/ChangePass";
 import Pano from "@/components/Pano.vue";
 import FooterControls from "@/components/pano/FooterControls.vue";
@@ -102,15 +100,46 @@ export default {
     isIOS: /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream,
   }),
   mounted() {
+    window.gtagPageView('Experience', this.$route.path)
     this.verifyToken()
+    // localStorage.setItem("token", 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEwMiwiaXAiOiIxNzcuNjIuMTQ5LjE4NiIsInVzZXJuYW1lIjoibWFyeXRpbXBvbmVAZ21haWwuY29tIiwicm9sZSI6IlVTRVIiLCJoYXNIb3Vyc0F2YWxpYWJsZSI6ZmFsc2UsImVuZFRpbWUiOm51bGwsImhhc0NoZWNrSW5zIjp0cnVlLCJwZXJpb2QiOm51bGwsIndlYmluYXJMaW5rIjoiaHR0cHM6Ly92aW1lby5jb20vZXZlbnQvMjMyNDI3IiwiaW50cm9TaG93Ijp0cnVlLCJpYXQiOjE1OTc5MzY5MjgsImV4cCI6MTU5ODAyMzMyOH0.JhKmBlBBIkbiAaOI79o3VAwF94N_XoXdUH4diALL2KQ');
     document
       .querySelector(".footer-component")
       .classList.add("footer-component__experience");
   },
   methods: {
-    verifyToken(){
+    // verifyToken(){
+    //   console.log('hasTime', this.$store.getters.hasTime)
+    //   this.$store.dispatch("tokenCheck").then((res) => {
+    //     // console.log('tokenCheck: ', res)
+    //     if (
+    //       res &&
+    //       res.status >= 200 &&
+    //       res.status <= 204 &&
+    //       res.endTime != null &&
+    //       this.validateTime(res.endTime)
+    //     ) {
+    //       clearTimeout(this.verifyTokenTimer)
+    //       // this.verifyTokenTimer = setTimeout(this.verifyToken, process.env.VUE_APP_CRON * 60000)
+    //       this.verifyTokenTimer = setTimeout(this.verifyToken, 3000)
+    //     } else {
+    //       if (res && res.error && res.error.data) {
+    //         let message = res.error.data.message
+    //         this.$store.dispatch("warning", {
+    //           show: true,
+    //           text: message,
+    //         });
+    //         clearTimeout(this.verifyTokenTimer)
+    //         this.$router.push({name: 'Home'})
+    //         this.$store.dispatch("logout");
+    //       } else {
+    //         this.verifyTokenTimer = setTimeout(3000)
+    //       }
+    //     }
+    //   });
+    // },
+    verifyToken() {
       this.$store.dispatch("tokenCheck").then((res) => {
-        // console.log('tokenCheck: ', res)
         if (
           res &&
           res.status >= 200 &&
@@ -118,26 +147,41 @@ export default {
           res.endTime != null &&
           this.validateTime(res.endTime)
         ) {
-          // console.log('res date: ', new Date(res.endTime))
-          // console.log(this.getRestHours(res.endTime))
-          // if (this.getRestHours(res.endTime) < 1 && !this.isCountDown && !this.isMobile) {
-          //   clearInterval(this.countDownTimer)
-          //   this.countDownTimer = setInterval(()=>{
-          //     this.countDownUpdate(res.endTime)
-          //   }, 1000)
-          //   this.isCountDown = true
-          // }
-          clearTimeout(this.verifyTokenTimer)
-          this.verifyTokenTimer = setTimeout(this.verifyToken, process.env.VUE_APP_CRON * 60000)
+          clearTimeout(this.verifyTokenTimer);
+          this.verifyTokenTimer = setTimeout(this.verifyToken, process.env.VUE_APP_CRON * 60000);
+          // this.verifyTokenTimer = setTimeout(this.verifyToken, 3000);
         } else {
-          let message = res.response.data.message
-          this.$store.dispatch("warning", {
-            show: true,
-            text: message,
-          });
-          clearTimeout(this.verifyTokenTimer)
-          this.$router.push({name: 'Home'})
-          this.$store.dispatch("logout");
+          const code = res?.data?.statusCode;
+          const message = res?.data?.message;
+          // console.log('res', res)
+          if (code == 401 || code == 403 || code == 409) {
+            this.$store.dispatch("warning", {
+              show: true,
+              text: message,
+            });
+            clearTimeout(this.verifyTokenTimer);
+            this.$router.push({ name: "Home" });
+            this.$store.dispatch("logout");
+          } else {
+            //TODO tratar erro de coxão e possiveis erros de servidor EX: 500, 501, 503
+            /*
+             * sem conexão a verificação passa ser pelo endTime local
+            */
+            // console.log('res', res)
+            let endTime = localStorage.getItem("endTime");
+            if (!endTime || endTime < Date.now()) {
+              this.$store.dispatch("warning", {
+                show: true,
+                text: "Tempo de acesso esgotado, <br/>para continuar, por favor adquira um novo ingresso.",
+              });
+              clearTimeout(this.verifyTokenTimer);
+              this.$router.push({ name: "Home" });
+              this.$store.dispatch("logout");
+            } else {
+              clearTimeout(this.verifyTokenTimer);
+              this.verifyTokenTimer = setTimeout(this.verifyToken, 30000);
+            }
+          }
         }
       });
     },
@@ -178,7 +222,7 @@ export default {
       // console.log('onVideoIntroPlayed')
       setTimeout(()=>{
         this.queueLoaded = true
-      }, 10000)
+      }, 2000)
     },
     onVideoIntroEnded(e) {
       this.videoEnded = true;
@@ -200,7 +244,9 @@ export default {
           this.$refs?.videoLive?.show();
         });
       } else if (params.type == "music") {
-        this.$refs?.audioPlayer[params.value ? "unmute" : "mute"]();
+        if (this.$refs?.audioPlayer){
+          this.$refs?.audioPlayer[params.value ? "unmute" : "mute"]();
+        }
       } 
     },
     arClosed() {
@@ -273,8 +319,7 @@ export default {
         this.infoModalContent = params;
         this.isInfoModal = true;
         this.$nextTick(() => {
-          if (this.$refs?.footerControls?.musicPlaying)
-            this.$refs?.audioPlayer?.mute();
+          if (this.$refs?.footerControls?.musicPlaying) this.$refs?.audioPlayer?.mute();
           this.$refs?.infoModal?.show();
         });
       } else if (params.type == "ar") {
@@ -287,16 +332,14 @@ export default {
         this.infoModalContent = params;
         this.isVideo360 = true;
         this.$nextTick(() => {
-          if (this.$refs?.footerControls?.musicPlaying)
-            this.$refs?.audioPlayer?.mute();
+          if (this.$refs?.footerControls?.musicPlaying) this.$refs?.audioPlayer?.mute();
           this.$refs?.video360?.show();
         });
       } else if (params.type == "learn") {
         this.infoModalContent = params;
         this.isVideoLearn = true;
         this.$nextTick(() => {
-          if (this.$refs?.footerControls?.musicPlaying)
-            this.$refs?.audioPlayer?.mute();
+          if (this.$refs?.footerControls?.musicPlaying) this.$refs?.audioPlayer?.mute();
           this.$refs?.videoLearn?.show();
         });
       }
@@ -356,6 +399,10 @@ export default {
     position: absolute;
     left: 0;
     top: 70px;
+
+    @include maxWidth(768) {
+      top: 65px;
+    }
   }
 }
 </style>

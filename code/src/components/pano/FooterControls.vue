@@ -156,7 +156,7 @@
       </div>
       <div class="footer-controls__right-group mg-r">
         <img
-          class="footer-controls__button-icon"
+          class="footer-controls__button-icon logos-img"
           alt="Abrir o rodapé"
           src="~@/assets/images/logo-mis-exp-gov.svg"
         />
@@ -241,8 +241,6 @@ export default {
       const secondWeekendLive = (hours == 15 && mins <= 59)
       const thirdWeekendLive = (hours == 16 && mins >= 30) || (hours == 17 && mins <= 30)
       //  terça a sexta (13h15 e 17h45) e três aos finais de semana (13h30, 15h e 16h30).
-      // https://stackoverflow.com/questions/9081220/how-to-check-if-current-time-falls-within-a-specific-range-on-a-week-day-using-j
-
       // console.log('weekDay', weekDay)
       // console.log('firstWeekLive', firstWeekLive)
       // console.log('secondWeekLive', secondWeekLive)
@@ -606,8 +604,16 @@ export default {
           }
         }
 
+
+        &.logos-img{
+          min-width: 220px;
+        }
+
         @include maxWidth(1200) {
           @include set-size(auto, 30px);
+          &.logos-img{
+            min-width: 160px;
+          }
 
           .footer-controls__right-group__label {
             @include set-size(40vw, auto);

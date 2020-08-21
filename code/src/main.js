@@ -3,8 +3,8 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 
-import LogRocket from 'logrocket';
-LogRocket.init('92trlv/mis-davincidigital');
+// import LogRocket from 'logrocket';
+// LogRocket.init('92trlv/mis-davincidigital');
 
 Vue.config.productionTip = false
 

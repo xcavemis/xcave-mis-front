@@ -59,6 +59,7 @@
         class="default-button black"
         href="https://davincidigital.byinti.com/"
         target="_blank"
+        @click="gtagTrigger('comprar-final')"
       >COMPRAR INGRESSO DIGITAL</a>
     </div>
   </div>
@@ -92,6 +93,9 @@ export default {
     this.$nextTick(this.show);
   },
   methods: {
+    gtagTrigger(val){
+      window.gtagEvent('interaction', 'click', val)
+    },
     show() {
       TweenMax.set(this.$el, { autoAlpha: 1 })
       window.scrollTo(0, 0);

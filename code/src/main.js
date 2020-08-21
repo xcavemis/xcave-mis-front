@@ -2,14 +2,17 @@ import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
 import store from './store'
-import { gsap } from "gsap";
+
+// import LogRocket from 'logrocket';
+// LogRocket.init('92trlv/mis-davincidigital');
 
 Vue.config.productionTip = false
 
 window.gtagEvent = function(category, action, label){
   gtag('event', action, {
     'event_category': category,
-    'event_label': label
+    'event_label': label,
+    'value': label,
   });
 };
 window.gtagPageView = function(title, path){

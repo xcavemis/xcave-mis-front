@@ -341,6 +341,20 @@ export default {
         }
       }
     }
+    @include maxWidth(374) {
+      .first-step__center-content__buttons {
+        width: 100%;
+        flex-wrap: wrap;
+        flex-flow: column;
+
+        .first-step__center-content__button {
+          width: 60%;
+          &:first-child{
+            margin-bottom: 15px;
+          }
+        }
+      }
+    }
   }
   .first-step__ad {
     // position: absolute;
@@ -453,6 +467,21 @@ export default {
         @include font-size(9);
         margin: 0 0 24px 0;
         width: 38vw;
+      }
+    }
+    @include maxWidth(374) {
+      .third-step__center-content__buttons {
+        width: 100%;
+        align-items: center;
+        flex-wrap: wrap;
+        flex-flow: column;
+
+        .third-step__center-content__button {
+          width: 60%;
+          &:first-child{
+            margin-bottom: 15px;
+          }
+        }
       }
     }
   }

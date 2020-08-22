@@ -50,6 +50,11 @@
           >SAIR</a>
         </div>
       </div>
+      <div class="header-controls__right-burger" @click="toggleMenu">
+        <div class="burger-line"></div>
+        <div class="burger-line"></div>
+        <div class="burger-line"></div>
+      </div>
     </div>
     <!-- <div class="header-controls__mobile">
       <Timeline />
@@ -75,6 +80,8 @@ export default {
     fullscreen: false,
     userName: '',
     isUserVisible: false,
+    isMobile: navigator.userAgent.toLowerCase().match(/mobile/i),
+    isIOS: /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream,
   }),
   created(){
     if (this.$store.getters.user && this.$store.getters.user.name) {
@@ -82,13 +89,18 @@ export default {
     }
   },
   mounted() {
-    document.addEventListener("fullscreenchange", this.fullscreenChange);
-    document.addEventListener("mozfullscreenchange", this.fullscreenChange);
-    document.addEventListener("webkitfullscreenchange", this.fullscreenChange);
-    document.addEventListener("msfullscreenchange", this.fullscreenChange);
+    if(!this.isMobile) {
+      document.addEventListener("fullscreenchange", this.fullscreenChange);
+      document.addEventListener("mozfullscreenchange", this.fullscreenChange);
+      document.addEventListener("webkitfullscreenchange", this.fullscreenChange);
+      document.addEventListener("msfullscreenchange", this.fullscreenChange);
+    }
     TweenMax.to('.governo-top', 0.6, { y: '0%', ease: Quad.easeInOut })
   },
   methods: {
+    toggleMenu(e){
+      this.$emit('toggle-menu')
+    },
     toggleUser(e){
       if (!this.isUserVisible) {
         TweenMax.set('.user-container', { display: 'block' })
@@ -223,6 +235,10 @@ export default {
       }
     }
 
+    .header-controls__right-burger {
+      display: none;
+    }
+
     .header-controls__right-user {
       cursor: pointer;
       position: relative;
@@ -298,14 +314,46 @@ export default {
     .header-controls__left {
       width: 45%;
       margin-left: 2.5vw;
+      padding: 0;
     }
     .header-controls__center{
       display: none;
     }
     .header-controls__right {
       z-index: 10;
+      width: 45px;
+      .header-controls__right-user,
       .header-controls__right-button {
         display: none;
+      }
+
+      .header-controls__right-burger {
+        display: block;
+        @include set-size(32px, 32px);
+
+        .burger-line {
+          @include set-size(32px, 3px);
+          display: block;
+          background-color: $white;
+          margin-bottom: 6px;
+          transition: transform 0.6s $ease-in-out;
+          &:first-child{
+            margin-top: 6px;
+          }
+        }
+
+        &.opened {
+          .burger-line {
+            
+            &:first-child{
+              transform: translateY(9px);
+            }
+            &:last-child{
+              transform: translateY(-9px);
+            }
+          }
+
+        }
       }
 
       .user-container  {

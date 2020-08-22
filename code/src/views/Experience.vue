@@ -1,9 +1,9 @@
 <template>
   <div class="experience">
     <Pano ref="pano" v-if="queueLoaded" v-on:toggle-map="toggleMap" v-on:info-layer="onInfoLayer" />
-    <HeaderControls ref="headerControls" v-on:change-pass="onChangePass" v-on:go-tutorial="openTutorial" v-on:close="changePassClosed"/>
+    <HeaderControls ref="headerControls" v-on:change-pass="onChangePass" v-on:go-tutorial="openTutorial" v-on:toggle-menu="onToggleMobileMenu" v-on:close="changePassClosed"/>
     <FooterControls ref="footerControls" v-on:action="onFooterAction" />
-    <VideoLive v-if="isVideoLive && !isMobile" video-id="747181165" v-on:close="videoClosed" ref="videoLive" />
+    <VideoLive v-if="isVideoLive" video-id="747181165" v-on:close="videoClosed" ref="videoLive" />
     <Video360
       v-if="isVideo360"
       :video-id="infoModalContent.target"
@@ -42,6 +42,7 @@
     <Ar :content="infoModalContent" ref="arModal" v-if="isArModal" v-on:close="arClosed" />
     
     <ChangePass ref="changePass" v-if="isChangePass" v-on:close="changePassClosed"/>
+    <MobileMenu ref="menuMobile" v-on:go-live="onFooterAction" v-on:go-tutorial="openTutorial" />
   </div>
 </template>
 
@@ -59,6 +60,7 @@ import VideoLearn from "@/components/VideoLearn.vue";
 import VideoTutorial from "@/components/VideoTutorial.vue";
 import AudioPlayer from "@/components/AudioPlayer.vue";
 import InfoModal from "@/components/InfoModal.vue";
+import MobileMenu from "@/components/MobileMenu.vue";
 import Ar from "@/components/Ar.vue";
 import { data } from "@/data/scenes.js";
 export default {
@@ -76,6 +78,7 @@ export default {
     InfoModal,
     Map,
     Ar,
+    MobileMenu,
     ChangePass,
   },
   data: () => ({
@@ -96,48 +99,18 @@ export default {
     verifyTokenTimer: 0,
     countDownTimer: 0,
     isCountDown: false,
+    isMobileMenuOpen: false,
     isMobile: navigator.userAgent.toLowerCase().match(/mobile/i),
     isIOS: /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream,
   }),
   mounted() {
     window.gtagPageView('Experience', this.$route.path)
     this.verifyToken()
-    // localStorage.setItem("token", 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEwMiwiaXAiOiIxNzcuNjIuMTQ5LjE4NiIsInVzZXJuYW1lIjoibWFyeXRpbXBvbmVAZ21haWwuY29tIiwicm9sZSI6IlVTRVIiLCJoYXNIb3Vyc0F2YWxpYWJsZSI6ZmFsc2UsImVuZFRpbWUiOm51bGwsImhhc0NoZWNrSW5zIjp0cnVlLCJwZXJpb2QiOm51bGwsIndlYmluYXJMaW5rIjoiaHR0cHM6Ly92aW1lby5jb20vZXZlbnQvMjMyNDI3IiwiaW50cm9TaG93Ijp0cnVlLCJpYXQiOjE1OTc5MzY5MjgsImV4cCI6MTU5ODAyMzMyOH0.JhKmBlBBIkbiAaOI79o3VAwF94N_XoXdUH4diALL2KQ');
     document
       .querySelector(".footer-component")
       .classList.add("footer-component__experience");
   },
   methods: {
-    // verifyToken(){
-    //   console.log('hasTime', this.$store.getters.hasTime)
-    //   this.$store.dispatch("tokenCheck").then((res) => {
-    //     // console.log('tokenCheck: ', res)
-    //     if (
-    //       res &&
-    //       res.status >= 200 &&
-    //       res.status <= 204 &&
-    //       res.endTime != null &&
-    //       this.validateTime(res.endTime)
-    //     ) {
-    //       clearTimeout(this.verifyTokenTimer)
-    //       // this.verifyTokenTimer = setTimeout(this.verifyToken, process.env.VUE_APP_CRON * 60000)
-    //       this.verifyTokenTimer = setTimeout(this.verifyToken, 3000)
-    //     } else {
-    //       if (res && res.error && res.error.data) {
-    //         let message = res.error.data.message
-    //         this.$store.dispatch("warning", {
-    //           show: true,
-    //           text: message,
-    //         });
-    //         clearTimeout(this.verifyTokenTimer)
-    //         this.$router.push({name: 'Home'})
-    //         this.$store.dispatch("logout");
-    //       } else {
-    //         this.verifyTokenTimer = setTimeout(3000)
-    //       }
-    //     }
-    //   });
-    // },
     verifyToken() {
       this.$store.dispatch("tokenCheck").then((res) => {
         if (
@@ -217,6 +190,9 @@ export default {
         let hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
         // console.log('hours', hours)
         return hours
+    },
+    onToggleMobileMenu(){
+      this.$refs?.menuMobile[this.$refs?.menuMobile.opened ? 'hide' : 'show']()
     },
     onVideoIntroPlayed(e) {
       // console.log('onVideoIntroPlayed')

@@ -3,10 +3,10 @@
         <div class="menu-mobile-hit" @click="hide"></div>
         <div class="menu-mobile__content">
            <ul class="menu-mobile__items">
-                <li class="menu-mobile__item" @click="goLive">Live</li>
-                <li class="menu-mobile__item" @click="goTutorial">Tutorial</li>
+                <li class="menu-mobile__item" @click="goLive"><img class="menu-mobile__item-icon" src="~@/assets/images/icons/play-small.png" /><div class="menu-mobile__item-title">Live MIS</div></li>
+                <li class="menu-mobile__item" @click="goTutorial"><img class="menu-mobile__item-icon" src="~@/assets/images/icons/tutorial.png" /><div class="menu-mobile__item-title">Tutorial</div></li>
                 <li class="menu-mobile__item">
-                    Mapa
+                    <img class="menu-mobile__item-icon" src="~@/assets/images/icons/map.png" /><div class="menu-mobile__item-title">Mapa</div>
                     <ul class="mobile-item__map">
                         <li class="mobile-item__map-item" @click="goPano(1)">Códices</li>
                         <li class="mobile-item__map-item" @click="goPano(4)">Civil</li>
@@ -16,10 +16,9 @@
                         <li class="mobile-item__map-item" @click="goPano(39)">Monalisa</li>
                     </ul>
                 </li>
-                <li class="menu-mobile__item" @click="logout">Sair</li>
+                <li class="menu-mobile__item" @click="logout"><img class="menu-mobile__item-icon" src="~@/assets/images/icons/logout.png" /><div class="menu-mobile__item-title">Sair</div></li>
            </ul>
         </div>
-         <img class="menu-mobile__close" src="~@/assets/images/icons/close.png" @click="hide" alt="Fechar o menu.">
     </div>
 </template>
 <script>
@@ -114,15 +113,30 @@ export default {
                 text-align: left;
                 padding: 15px 0 15px 15px;
 
+                @include maxWidth(375) {
+                    padding: 10px 0 10px 15px;
+                }
+
                 &:last-child {
                     border-bottom: none;
+                }
+
+                .menu-mobile__item-title {
+                    display: inline-block;
+                    margin-top: -15px;
+                    vertical-align: middle;
+                }
+
+                .menu-mobile__item-icon {
+                    width: 24px;
+                    margin-right: 10px;
                 }
             }
         } 
         
         .mobile-item__map {
             @include set-size(100%, 100%);
-            padding: 0 0 0 15px;
+            padding: 0 0 0 45px;
             .mobile-item__map-item {
                 // border-bottom: 1px solid $white;
                 color: $white;

@@ -128,10 +128,10 @@ export default {
                 align-items: flex-start;
             }
             .video-live__iframe {
-                @include set-size(100%, 44%);
+                @include set-size(100%, 40.5%);
             }
             .video-live__chat {
-                @include set-size(100%, 56%);
+                @include set-size(100%, 59.5%);
             }
         }
     

@@ -22,7 +22,8 @@ import { TweenMax, Quad } from 'gsap';
 import Player from '@vimeo/player';
 export default {
     data:() => ({
-        player: null
+        player: null,
+        isMobile: navigator.userAgent.toLowerCase().match(/mobile/i),
     }),
     mounted(){
         this.$nextTick(()=>{
@@ -41,16 +42,27 @@ export default {
             TweenMax.set('.video-tutorial__iframe', { display: 'block' })
             TweenMax.set('html, body', { overflow: 'hidden' })
             TweenMax.fromTo('.video-tutorial', 0.6, { autoAlpha: 0 }, { autoAlpha: 1, ease: Quad.easeInOut })
-            TweenMax.fromTo('.video-tutorial__iframe', 0.6, { y: '100%' }, { y: '0%', ease: Quad.easeInOut, delay: 0.3 })
             TweenMax.fromTo('.video-tutorial__close', 0.6, { scale: 0 }, { scale: 1, ease: Quad.easeInOut, delay: 0.8 })
+            if (this.isMobile) {
+                TweenMax.fromTo('.video-tutorial__iframe', 0.6, { autoAlpha: 0 }, { autoAlpha: 1, ease: Quad.easeInOut, delay: 0.3 })
+            } else {
+                TweenMax.fromTo('.video-tutorial__iframe', 0.6, { y: '100%' }, { y: '0%', ease: Quad.easeInOut, delay: 0.3 })
+            }
         },
         hide(){
             TweenMax.set('html, body', { overflow: 'auto' })
             TweenMax.fromTo('.video-tutorial__close', 0.4, { scale: 1 }, { scale: 0, ease: Quad.easeInOut })
-            TweenMax.fromTo('.video-tutorial__iframe', 0.6, { y: '0%' }, { y: '100%', ease: Quad.easeInOut, delay: 0.3, onComplete: () => {
-                TweenMax.set('.video-tutorial__iframe', { display: 'none' })
-                this.$emit('close')
-            }})
+            if (this.isMobile) {
+                TweenMax.fromTo('.video-tutorial__iframe', 0.6, { autoAlpha: 1 }, { autoAlpha: 0, ease: Quad.easeInOut, delay: 0.3 , onComplete: () => {
+                    TweenMax.set('.video-tutorial__iframe', { display: 'none' })
+                    this.$emit('close')
+                }})
+            } else {
+                TweenMax.fromTo('.video-tutorial__iframe', 0.6, { y: '0%' }, { y: '100%', ease: Quad.easeInOut, delay: 0.3, onComplete: () => {
+                    TweenMax.set('.video-tutorial__iframe', { display: 'none' })
+                    this.$emit('close')
+                }})
+            }
             TweenMax.fromTo('.video-tutorial', 0.6, { autoAlpha: 1 }, { autoAlpha: 0, ease: Quad.easeInOut, delay: 0.3 })
             
         },
@@ -87,6 +99,12 @@ export default {
 
             @include minWidth(1680) {
                 max-width: 1280px;
+            }
+            @include maxWidth(768) {
+                min-height: 0%;
+                height: 40.5%;
+                margin: 0;
+                @include center(absolute);
             }
             
         }

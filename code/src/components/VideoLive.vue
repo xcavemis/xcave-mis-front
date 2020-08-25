@@ -97,6 +97,7 @@ export default {
                 @include set-size(100% !important, 100% !important);
             }
             
+            
         }
         .video-live__chat {
             @include set-size(25vw, 80vh);
@@ -117,6 +118,21 @@ export default {
             display: flex;
             align-content: space-around;
             align-items: center;
+        }
+
+        @include maxWidth(1023) {
+            .embeds-container {
+                @include set-size(90vw, 70%);
+                flex-wrap: wrap;
+                flex-flow: column;
+                align-items: flex-start;
+            }
+            .video-live__iframe {
+                @include set-size(100%, 40.5%);
+            }
+            .video-live__chat {
+                @include set-size(100%, 59.5%);
+            }
         }
     
         .video-live__close {

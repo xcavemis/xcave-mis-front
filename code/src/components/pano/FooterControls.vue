@@ -11,7 +11,8 @@
         </p>
         <a class="footer-controls__console-button ticket-button" target="_blank" href="https://davincidigital.byinti.com/">COMPRAR INGRESSO</a>
       </div> -->
-      <div class="footer-controls__console" v-if="(isLiveShow && liveEnabled && $store.getters.period && $store.getters.period.end) || (isLiveShow && (!this.$store.getters.period || (this.$store.getters.period && !this.$store.getters.period.end)) && commonUserLiveEnabled)">
+      <!-- <div class="footer-controls__console" v-if="(isLiveShow && liveEnabled && $store.getters.period && $store.getters.period.end) || (isLiveShow && (!this.$store.getters.period || (this.$store.getters.period && !this.$store.getters.period.end)) && commonUserLiveEnabled)"> -->
+      <div class="footer-controls__console" v-if="(isLiveShow && liveEnabled && $store.getters.period && $store.getters.period.end)">
         <p class="footer-controls__console-text">
           UMA LIVE COM O EDUCATIVO<br>
           DO MIS EXPERIENCE<br>
@@ -47,11 +48,8 @@
         <span class="live-status"><span class="desc">NENHUMA SESSÃO ATIVA</span></span>
       </div>
       <div class="footer-controls__left-button live-button" @click="goLive" v-if="isLiveShow && (!this.$store.getters.period || (this.$store.getters.period && !this.$store.getters.period.end))">
-        <img v-if="!commonUserLiveEnabled" class="footer-controls__button-icon" src="~@/assets/images/icons/play-small-disable.png" />
-        <img v-if="commonUserLiveEnabled" class="footer-controls__button-icon" src="~@/assets/images/icons/play-small.png" />
+        <img class="footer-controls__button-icon" src="~@/assets/images/icons/play-small.png" />
         <span class="footer-controls__button-label">Live MIS</span>
-        <span v-if="commonUserLiveEnabled" class="live-status live-enabled">PARTICIPE AO VIVO</span>
-        <span v-if="!commonUserLiveEnabled" class="live-status"><span class="desc">NENHUMA SESSÃO ATIVA</span></span>
       </div>
     </div>
     <div class="footer-controls__center">
@@ -188,12 +186,12 @@ export default {
         this.verifyLiveStatus()
       }, 1000)
     } else {
-      if (!this.isMobile) {
-        clearInterval(this.verifyLiveTimer)
-        this.verifyLiveTimer = setInterval(()=>{
-          this.commonUserLiveEnabled = this.checkLiveTime()
-        }, 1000)
-      }
+      // if (!this.isMobile) {
+      //   clearInterval(this.verifyLiveTimer)
+      //   this.verifyLiveTimer = setInterval(()=>{
+      //     this.commonUserLiveEnabled = this.checkLiveTime()
+      //   }, 1000)
+      // }
     }
     // window.addEventListener("scroll", this.onScroll);
   },
@@ -268,7 +266,7 @@ export default {
       });
     },
     goLive() {
-      if (!this.liveEnabled || !this.commonUserLiveEnabled) return
+      if (!this.liveEnabled) return
       this.$emit("action", {
         type: "live",
         value: "show",

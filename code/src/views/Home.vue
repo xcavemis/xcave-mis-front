@@ -31,7 +31,9 @@
           >ACESSAR EXPERIÊNCIA</a>
         </div>
         <!-- <iframe class="first-step__ad" src="https://exposicaodavinci500anos.com.br/assets/banners/main-banner/cielo_adserver__cnn_superlink_728x90.html" frameborder="0"></iframe> -->
-        <!-- <img class="first-step__ad" src="~@/assets/images/adcontainer_hor.png" /> -->
+        <a href="http://www.sabesp.com.br/" target="_blank">
+          <img class="first-step__ad" src="~@/assets/images/banner-sabesp.jpg" />
+        </a>
       </div>
     </section>
     <section class="home-step second-step"></section>
@@ -124,7 +126,7 @@ export default {
         TweenMax.fromTo('.first-step__logo-mis', 0.6, { autoAlpha: 0 }, { autoAlpha: 1, delay: 0.4, ease: Quad.easeInOut })
         TweenMax.fromTo('.first-step__center-content .first-step__center-content__title', 0.6, { autoAlpha: 0 }, { autoAlpha: 1, delay: 0.6, ease: Quad.easeInOut})
         TweenMax.fromTo('.first-step__center-content .first-step__center-content__description', 1, { autoAlpha: 0 }, { autoAlpha: 1, delay: 0.8, ease: Quad.easeInOut})
-        // TweenMax.fromTo('.first-step__ad', 0.6, { autoAlpha: 0 }, { autoAlpha: 1, delay: 1.4, ease: Quad.easeInOut})
+        TweenMax.fromTo('.first-step__ad', 0.6, { autoAlpha: 0 }, { autoAlpha: 1, delay: 1.4, ease: Quad.easeInOut})
         this.splittingTitle[0].lines.map((line, index) => {
           TweenMax.fromTo(
             line,

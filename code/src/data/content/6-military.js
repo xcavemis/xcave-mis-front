@@ -25,14 +25,14 @@ export const military = {
       },
       {
         id: "V-601",
-        title: "CIVIL V601",
-        target: "hPTMhqEJj5s",
+        title: "MILITAR V601",
+        target: "448119117",
         type: 'learn',
       },
       {
         id: "V-602",
-        title: "CIVIL V602",
-        target: "fj2rmSWKviE",
+        title: "MILITAR V602",
+        target: "448120333",
         type: 'learn',
       },
       {

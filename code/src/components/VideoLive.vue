@@ -5,8 +5,9 @@
             <!-- <div class="video-live__iframe" v-html="embedPlayer"></div> -->
             <!-- <iframe class="video-live__iframe" :src="`${$store.getters.webinarLink}/embed`" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe> -->
             <div class="embeds-container">
-                <iframe ref="iframeEmbed" class="video-live__iframe" :src="`${$store.getters.webinarLink}/embed`" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
-                <iframe class="video-live__chat" :src="`${$store.getters.webinarLink}/chat`" width="400" height="600" frameborder="0"></iframe>
+                <iframe ref="iframeEmbed" id="clickmeetingFlashroomIframe" class="video-live__iframe" src="https://associacaodopacodasartes405.clickmeeting.com/test-live-mis/?popup=off&lang=pt&xlang=pt" frameborder="0" allow="microphone; camera; fullscreen; autoplay" allowfullscreen></iframe> -->
+                <!-- <iframe ref="iframeEmbed" class="video-live__iframe" :src="`${$store.getters.webinarLink}/embed`" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
+                <iframe class="video-live__chat" :src="`${$store.getters.webinarLink}/chat`" width="400" height="600" frameborder="0"></iframe> -->
             </div>
             <img class="video-live__close" src="~@/assets/images/icons/close.png" @click="hide" alt="Fechar o video da live.">
         </section>
@@ -30,6 +31,7 @@ export default {
     mounted(){
         // console.log('webinarLink', this.$store.getters.webinarLink)
         // console.log('period', this.$store.getters.period)
+        // Econtrar o di da sala: https://embed.clickmeeting.com/embed_conference.html?r=1715791524516298&w=1024&h=768
         this.$nextTick(()=>{
             // this.$refs.iframeEmbed.addEventListener('load', ()=>{
             //     console.log('embedLoad')
@@ -41,19 +43,20 @@ export default {
     methods: {
         buildMeeting(){
             // console.log('webinarLink', this.$store.getters.webinarLink)
-            axios.get(`https://vimeo.com/api/oembed.json?url=${this.$store.getters.webinarLink}`)
-            .then((res) => {
-                const { data, status } = res
-                if (status && status == 200) {
-                    // console.log('vimeo live res: ', res)
-                    this.$store.dispatch('loading', false)
-                    this.embedPlayer = data.html
-                }
-            }).catch(function (error) {
-                // handle error
-                // console.log(error);
-                this.$store.dispatch('loading', false)
-            })
+           
+           // axios.get(`https://vimeo.com/api/oembed.json?url=${this.$store.getters.webinarLink}`)
+            // .then((res) => {
+            //     const { data, status } = res
+            //     if (status && status == 200) {
+            //         console.log('vimeo live res: ', res)
+            //         this.$store.dispatch('loading', false)
+            //         // this.embedPlayer = data.html
+            //     }
+            // }).catch(function (error) {
+            //     // handle error
+            //     // console.log(error);
+            //     this.$store.dispatch('loading', false)
+            // })
             
         },
         show() {
@@ -88,7 +91,8 @@ export default {
         @include center(absolute);
         overflow: hidden;
         .video-live__iframe {
-            @include set-size(65vw, 80vh);
+            @include set-size(100%, 80vh);
+            // @include set-size(65vw, 80vh);
             // transform: translateY(100%);
             z-index: 1;
             // margin: 80px auto;

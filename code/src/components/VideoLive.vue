@@ -5,7 +5,7 @@
             <!-- <div class="video-live__iframe" v-html="embedPlayer"></div> -->
             <!-- <iframe class="video-live__iframe" :src="`${$store.getters.webinarLink}/embed`" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe> -->
             <div class="embeds-container">
-                <iframe ref="iframeEmbed" id="clickmeetingFlashroomIframe" class="video-live__iframe" src="https://associacaodopacodasartes405.clickmeeting.com/test-live-mis/?popup=off&lang=pt&xlang=pt" frameborder="0" allow="microphone; camera; fullscreen; autoplay" allowfullscreen></iframe> -->
+                <iframe ref="iframeEmbed" id="clickmeetingFlashroomIframe" class="video-live__iframe" src="https://associacaodopacodasartes405.clickmeeting.com/test-live-mis/?popup=off&lang=pt&xlang=pt" frameborder="0" allow="microphone; camera; fullscreen; autoplay" allowfullscreen></iframe>
                 <!-- <iframe ref="iframeEmbed" class="video-live__iframe" :src="`${$store.getters.webinarLink}/embed`" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
                 <iframe class="video-live__chat" :src="`${$store.getters.webinarLink}/chat`" width="400" height="600" frameborder="0"></iframe> -->
             </div>
@@ -132,7 +132,8 @@ export default {
                 align-items: flex-start;
             }
             .video-live__iframe {
-                @include set-size(100%, 40.5%);
+                // @include set-size(100%, 40.5%);
+                @include set-size(100%, 100%);
             }
             .video-live__chat {
                 @include set-size(100%, 59.5%);

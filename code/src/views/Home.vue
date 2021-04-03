@@ -18,12 +18,12 @@
           Transporte-se para o incrível mundo de um dos maiores gênios de todos os tempos, Leonardo Da Vinci. Uma experiência multissensorial com animações gráficas em alta definição, realidade aumentada, lives educativas, imagens em alta resolução, áudio e vídeos. Conheça a história completa, em detalhes, da vida do mestre Da Vinci, em um ambiente digital e imersivo. Ao comprar o ingresso você ajuda a manter as atividades do MIS Experience.
         </p>
         <div class="first-step__center-content__buttons">
-          <a
+          <!-- <a
             class="default-button first-step__center-content__button white"
             href="https://davincidigital.byinti.com/"
             target="_blank"
             @click="gtagTrigger('comprar-home-1')"
-          >COMPRAR INGRESSO</a>
+          >COMPRAR INGRESSO</a> -->
           <a
             class="default-button first-step__center-content__button black"
             href="javascript:void(0)"
@@ -55,12 +55,12 @@
           <br />A experiência imersiva digital é patrocinada por Cielo e Sabesp; com parceria da TV Cultura; apoio Institucional da Folha; desenvolvimento da experiência digital: Agência EKO e XCAVE Studio; concepção, Grande Exhibitions e Sensory 4 Immersive Experience. Uma realização do MIS Experience e da Secretaria de Economia Criativa do Governo do Estado de São Paulo.
         </p>
         <div class="third-step__center-content__buttons">
-          <a
+          <!-- <a
             class="default-button third-step__center-content__button white"
             href="https://davincidigital.byinti.com/"
             target="_blank"
             @click="gtagTrigger('comprar-home-2')"
-          >COMPRAR INGRESSO</a>
+          >COMPRAR INGRESSO</a> -->
           <a
             class="default-button third-step__center-content__button black"
             href="javascript:void(0)"
@@ -83,7 +83,7 @@
         <a class="banner__center-content__button" href="https://www.sympla.com.br/" target="_blank">COMPRAR INGRESSO</a>
       </div>
     </section>-->
-    <Auth ref="authComp" v-if="authShow" v-on:closed="onAuthClosed" />
+    <!-- <Auth ref="authComp" v-if="authShow" v-on:closed="onAuthClosed" /> -->
   </article>
 </template>
 
@@ -144,27 +144,29 @@ export default {
     },
     goTo() {
       window.gtagEvent('interaction', 'click', 'iniciar-experiencia')
-      this.$store.dispatch("tokenCheck").then((res) => {
-        if (
-          res &&
-          res.status >= 200 &&
-          res.status <= 204 &&
-          res.endTime != null &&
-          this.validateTime(res.endTime)
-        ) {
-          // console.log('tokenCheck home', res)
-          this.$store.dispatch("autoLogin").then((res) => {
-            // console.log('autoLogin home', res)
-            if (res && res.user && res.hasHoursAvaliable) {
-              this.$router.push("/experience");
-            } else {
-              this.showAuth()
-            }
-          });
-        } else {
-          this.showAuth()
-        }
-      });
+      this.$router.push("/experience");
+      console.log('goTo')
+      // this.$store.dispatch("tokenCheck").then((res) => {
+      //   if (
+      //     res &&
+      //     res.status >= 200 &&
+      //     res.status <= 204 &&
+      //     res.endTime != null &&
+      //     this.validateTime(res.endTime)
+      //   ) {
+      //     // console.log('tokenCheck home', res)
+      //     this.$store.dispatch("autoLogin").then((res) => {
+      //       // console.log('autoLogin home', res)
+      //       if (res && res.user && res.hasHoursAvaliable) {
+      //         this.$router.push("/experience");
+      //       } else {
+      //         this.showAuth()
+      //       }
+      //     });
+      //   } else {
+      //     this.showAuth()
+      //   }
+      // });
       // this.showAuth()
     },
     showAuth(){
@@ -278,7 +280,8 @@ export default {
       width: 350px;
       margin: 40px auto 0 auto;
       display: flex;
-      justify-content: space-between;
+      // justify-content: space-between;
+      justify-content: center;
       align-items: center;
       overflow: hidden;
 

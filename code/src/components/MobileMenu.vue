@@ -16,7 +16,7 @@
                         <li class="mobile-item__map-item" @click="goPano(39)">Monalisa</li>
                     </ul>
                 </li>
-                <li class="menu-mobile__item" @click="logout"><img class="menu-mobile__item-icon" src="~@/assets/images/icons/logout.png" /><div class="menu-mobile__item-title">Sair</div></li>
+                <!-- <li class="menu-mobile__item" @click="logout"><img class="menu-mobile__item-icon" src="~@/assets/images/icons/logout.png" /><div class="menu-mobile__item-title">Sair</div></li> -->
            </ul>
         </div>
     </div>

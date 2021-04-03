@@ -28,7 +28,7 @@
           src="~@/assets/images/icons/fullscreen-exit.png"
         />
       </div>
-      <div class="header-controls__right-user" @click="toggleUser">
+      <!-- <div class="header-controls__right-user" @click="toggleUser">
         <h5 class="user-name">
           {{userName}}
           <img
@@ -49,7 +49,7 @@
             @click="logout"
           >SAIR</a>
         </div>
-      </div>
+      </div> -->
       <div class="header-controls__right-burger" @click="toggleMenu">
         <div class="burger-line"></div>
         <div class="burger-line"></div>
@@ -205,13 +205,17 @@ export default {
   .header-controls__right {
     width: 20%;
     display: flex;
-    justify-content: space-between;
+    // justify-content: space-between;
+    justify-content: flex-end;
     align-items: center;
+    padding-right: 15px;
+
     .header-controls__right-button {
       display: flex;
       justify-content: space-between;
       align-items: center;
       cursor: pointer;
+      margin-left: 15px;
       .header-controls__button-label {
         @include font-scale(1366, 1680, 10, 12);
         font-family: $mont-regular;

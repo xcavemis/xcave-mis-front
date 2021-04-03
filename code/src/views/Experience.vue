@@ -105,7 +105,7 @@ export default {
   }),
   mounted() {
     window.gtagPageView('Experience', this.$route.path)
-    this.verifyToken()
+    // this.verifyToken()
     document
       .querySelector(".footer-component")
       .classList.add("footer-component__experience");

@@ -19,13 +19,13 @@ import Warning from "@/components/Warning";
 export default {
   components: { Header, Footer, Loading, Warning },
   watch: {
-    $route(to, from) {
-      if (to !== from) {
-        if (!this.auth && to.name != "Home") {
-          this.$router.push("/");
-        }
-      }
-    },
+    // $route(to, from) {
+    //   if (to !== from) {
+    //     if (!this.auth && to.name != "Home") {
+    //       this.$router.push("/");
+    //     }
+    //   }
+    // },
     '$store.getters.warningShow.show': function(val, old){
       if (val != old) {
         if (val == true) {

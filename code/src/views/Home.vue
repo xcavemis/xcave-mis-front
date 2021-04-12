@@ -15,7 +15,7 @@
           alt="LEONARDO DA VINCI – 500 ANOS DE UM GÊNIO"
         />
         <p class="first-step__center-content__description" >
-          Transporte-se para o incrível mundo de um dos maiores gênios de todos os tempos, Leonardo Da Vinci. Uma experiência multissensorial com animações gráficas em alta definição, realidade aumentada, lives educativas, imagens em alta resolução, áudio e vídeos. Conheça a história completa, em detalhes, da vida do mestre Da Vinci, em um ambiente digital e imersivo. Ao comprar o ingresso você ajuda a manter as atividades do MIS Experience.
+          Transporte-se para o incrível mundo de um dos maiores gênios de todos os tempos, Leonardo Da Vinci. Uma experiência multissensorial com animações gráficas em alta definição, realidade aumentada, lives educativas, imagens em alta resolução, áudio e vídeos. Conheça a história completa, em detalhes, da vida do mestre Da Vinci, em um ambiente digital e imersivo.
         </p>
         <div class="first-step__center-content__buttons">
           <!-- <a

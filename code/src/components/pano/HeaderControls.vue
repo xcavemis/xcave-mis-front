@@ -1,6 +1,6 @@
 <template>
   <div class="header-controls">
-    <div class="header-controls__left">
+    <div class="header-controls__left" @click="goToHome">
       <img
         class="header-controls__logo"
         src="~@/assets/images/logo-da-vinci.png"
@@ -98,6 +98,9 @@ export default {
     TweenMax.to('.governo-top', 0.6, { y: '0%', ease: Quad.easeInOut })
   },
   methods: {
+    goToHome(){
+      this.$router.push('/')
+    },
     toggleMenu(e){
       this.$emit('toggle-menu')
     },
